@@ -1,6 +1,6 @@
 {
   "name": "ansie",
-  "version": "0.2.0",
+  "version": "0.2.1-0",
   "module": "dist/node/index.js",
   "type": "module",
   "homepage": "https://github.com/kshehadeh/ansie/blob/main/README.md",
@@ -60,7 +60,10 @@
   "peerDependencies": {
     "typescript": "^5.0.0"
   },
-  "dependencies": { "lefthook": "^1.6.0", "yargs": "^17.7.2" },
+  "dependencies": {
+    "lefthook": "^1.6.0",
+    "yargs": "^17.7.2"
+  },
   "eslintIgnore": [
     "generated-parser.js"
   ]
