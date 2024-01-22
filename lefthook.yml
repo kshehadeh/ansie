@@ -14,7 +14,7 @@ pre-commit:
     commands:
         prettier:
             glob: '*.{js,ts,jsx,tsx,css,scss,md,json,yml,yaml}'
-            run: bunx prettier -w {staged_files}
+            run: bunx prettier -w {staged_files} && git add {staged_files}
         eslint:
             glob: '*.{js,ts,jsx,tsx}'
             run: bunx eslint {staged_files}
