@@ -1,7 +1,7 @@
-EXAMPLE USAGE:
+# EXAMPLE USAGE:
 
-  Refer for explanation to following link:
-  https://github.com/evilmartians/lefthook/blob/master/docs/configuration.md
+#   Refer for explanation to following link:
+#   https://github.com/evilmartians/lefthook/blob/master/docs/configuration.md
 
 pre-push:
   commands:
@@ -15,3 +15,6 @@ pre-commit:
     eslint:
       glob: "*.{js,ts,jsx,tsx}"
       run: bunx eslint {staged_files}
+    tsc:
+      glob: "*.{ts,tsx}"
+      run: bunx tsc --noEmit
