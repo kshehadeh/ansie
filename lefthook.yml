@@ -4,17 +4,20 @@
 #   https://github.com/evilmartians/lefthook/blob/master/docs/configuration.md
 
 pre-push:
-  commands:
-    update-build:
-      tags: build
-      run: bun run bld
+    commands:
+        update-build:
+            tags: build
+            run: bun run bld
 
 pre-commit:
-  parallel: true
-  commands:
-    eslint:
-      glob: "*.{js,ts,jsx,tsx}"
-      run: bunx eslint {staged_files}
-    tsc:
-      glob: "*.{ts,tsx}"
-      run: bunx tsc --noEmit
+    parallel: true
+    commands:
+        prettier:
+            glob: '*.{js,ts,jsx,tsx,css,scss,md,json,yml,yaml}'
+            run: bunx prettier -w {staged_files}
+        eslint:
+            glob: '*.{js,ts,jsx,tsx}'
+            run: bunx eslint {staged_files}
+        tsc:
+            glob: '*.{ts,tsx}'
+            run: bunx tsc --noEmit

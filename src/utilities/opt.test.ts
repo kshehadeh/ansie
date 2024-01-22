@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'bun:test';
-import { opt } from "./opt";
+import { opt } from './opt';
 
 describe('opt', () => {
     it('should return an empty object when called without arguments', () => {
@@ -32,8 +32,8 @@ describe('opt', () => {
 
     it('should return an object containing the correct properties and values when merged with a base object', () => {
         const input = { a: 1, b: undefined, c: null, d: 4 };
-        const base = { a: 2, b: "hello" }
-        const result: unknown = {...base, ...opt(input)};
-        expect(result).toEqual({ a: 1, b: "hello", c: null, d: 4 });
+        const base = { a: 2, b: 'hello' };
+        const result: unknown = { ...base, ...opt(input) };
+        expect(result).toEqual({ a: 1, b: 'hello', c: null, d: 4 });
     });
 });

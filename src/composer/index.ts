@@ -24,10 +24,10 @@ export class Composer {
         this._body = new BodyComposerNode({ theme });
     }
 
-    public add(node: ComposerNode | ComposerNode[]) {        
+    public add(node: ComposerNode | ComposerNode[]) {
         const nodeArr = Array.isArray(node) ? node : [node];
         nodeArr.forEach(n => {
-            n.theme = this._theme
+            n.theme = this._theme;
             this._body.add(n);
         });
     }
@@ -49,8 +49,9 @@ export class Composer {
     }
 }
 
-
-function generateNodeFromAnyCompatibleType(node: ComposerNodeCompatible): ComposerNode {
+function generateNodeFromAnyCompatibleType(
+    node: ComposerNodeCompatible,
+): ComposerNode {
     if (typeof node === 'string') {
         return text(node);
     } else if (typeof node === 'number') {
@@ -60,7 +61,7 @@ function generateNodeFromAnyCompatibleType(node: ComposerNodeCompatible): Compos
     } else if (node instanceof ComposerNode) {
         return node;
     } else {
-        return text(`${node}`);        
+        return text(`${node}`);
     }
 }
 
@@ -71,58 +72,106 @@ export function br() {
 }
 
 export function markup(markup: string) {
-    return new MarkupComponentNode({content: markup});
+    return new MarkupComponentNode({ content: markup });
 }
 
 export function text(text: string, style?: AnsieStyle) {
     return new RawTextComposerNode({ text, style });
 }
 
-export function li(nodes: ComposerNodeCompatible | ComposerNodeCompatible[], style?: AnsieStyle) {
+export function li(
+    nodes: ComposerNodeCompatible | ComposerNodeCompatible[],
+    style?: AnsieStyle,
+) {
     const n = Array.isArray(nodes) ? nodes : [nodes];
-    return new ListItemComposerNode({ nodes: n.map(generateNodeFromAnyCompatibleType), style });
+    return new ListItemComposerNode({
+        nodes: n.map(generateNodeFromAnyCompatibleType),
+        style,
+    });
 }
 
-export function p(nodes: ComposerNodeCompatible | ComposerNodeCompatible[], style?: AnsieStyle) {
+export function p(
+    nodes: ComposerNodeCompatible | ComposerNodeCompatible[],
+    style?: AnsieStyle,
+) {
     const n = Array.isArray(nodes) ? nodes : [nodes];
-    return new ParagraphComposerNode({ nodes: n.map(generateNodeFromAnyCompatibleType), style });
+    return new ParagraphComposerNode({
+        nodes: n.map(generateNodeFromAnyCompatibleType),
+        style,
+    });
 }
 
-export function h1(nodes: ComposerNodeCompatible | ComposerNodeCompatible[], style?: AnsieStyle) {
+export function h1(
+    nodes: ComposerNodeCompatible | ComposerNodeCompatible[],
+    style?: AnsieStyle,
+) {
     const n = Array.isArray(nodes) ? nodes : [nodes];
-    return new H1ComposerNode({ nodes: n.map(generateNodeFromAnyCompatibleType), style });
+    return new H1ComposerNode({
+        nodes: n.map(generateNodeFromAnyCompatibleType),
+        style,
+    });
 }
 
-export function h2(nodes: ComposerNodeCompatible | ComposerNodeCompatible[], style?: AnsieStyle) {
+export function h2(
+    nodes: ComposerNodeCompatible | ComposerNodeCompatible[],
+    style?: AnsieStyle,
+) {
     const n = Array.isArray(nodes) ? nodes : [nodes];
-    return new H2ComposerNode({ nodes: n.map(generateNodeFromAnyCompatibleType), style });
+    return new H2ComposerNode({
+        nodes: n.map(generateNodeFromAnyCompatibleType),
+        style,
+    });
 }
 
-export function h3(nodes: ComposerNodeCompatible | ComposerNodeCompatible[], style?: AnsieStyle) {
+export function h3(
+    nodes: ComposerNodeCompatible | ComposerNodeCompatible[],
+    style?: AnsieStyle,
+) {
     const n = Array.isArray(nodes) ? nodes : [nodes];
-    return new H3ComposerNode({ nodes: n.map(generateNodeFromAnyCompatibleType), style });
+    return new H3ComposerNode({
+        nodes: n.map(generateNodeFromAnyCompatibleType),
+        style,
+    });
 }
 
-export function body(nodes: ComposerNodeCompatible | ComposerNodeCompatible[], style?: AnsieStyle) {
+export function body(
+    nodes: ComposerNodeCompatible | ComposerNodeCompatible[],
+    style?: AnsieStyle,
+) {
     const n = Array.isArray(nodes) ? nodes : [nodes];
-    return new BodyComposerNode({ nodes: n.map(generateNodeFromAnyCompatibleType), style });
+    return new BodyComposerNode({
+        nodes: n.map(generateNodeFromAnyCompatibleType),
+        style,
+    });
 }
 
-export function div(nodes: ComposerNodeCompatible | ComposerNodeCompatible[], style?: AnsieStyle) {
+export function div(
+    nodes: ComposerNodeCompatible | ComposerNodeCompatible[],
+    style?: AnsieStyle,
+) {
     const n = Array.isArray(nodes) ? nodes : [nodes];
-    return new DivComposerNode({ nodes: n.map(generateNodeFromAnyCompatibleType), style });
+    return new DivComposerNode({
+        nodes: n.map(generateNodeFromAnyCompatibleType),
+        style,
+    });
 }
 
-export function span(nodes: ComposerNodeCompatible | ComposerNodeCompatible[], style?: AnsieStyle) {
+export function span(
+    nodes: ComposerNodeCompatible | ComposerNodeCompatible[],
+    style?: AnsieStyle,
+) {
     const n = Array.isArray(nodes) ? nodes : [nodes];
-    return new SpanComposerNode({ nodes: n.map(generateNodeFromAnyCompatibleType), style });
+    return new SpanComposerNode({
+        nodes: n.map(generateNodeFromAnyCompatibleType),
+        style,
+    });
 }
 
 /**
  * Build a composer object out of a set of nodes and a theme.
- * @param composition 
- * @param theme 
- * @returns 
+ * @param composition
+ * @param theme
+ * @returns
  */
 export function compose(
     composition: ComposerNode[] = [],
@@ -148,7 +197,9 @@ if (process.argv[1].includes('composer')) {
     // ]).toString()
 
     // console.log(compose(([h1('Title'), h2('A subtitle'), p('Paragraph')])).toString())
-    console.log(compose(([h1('Title'), h2('A subtitle'), p('Paragraph')])).toString())
+    console.log(
+        compose([h1('Title'), h2('A subtitle'), p('Paragraph')]).toString(),
+    );
     // console.log(compose([
     //     h1('Title'),
     //     h2('A subtitle'),

@@ -9,9 +9,14 @@ export class BreakNodeImpl extends AnsieNodeImpl implements AnsieNode {
             return '\n';
         } else if (format === 'markup') {
             return '<br/>';
-        } 
+        }
 
-        throw new CompilerError(`Invalid format: ${format}`, this._raw, stack, false);
+        throw new CompilerError(
+            `Invalid format: ${format}`,
+            this._raw,
+            stack,
+            false,
+        );
     }
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars

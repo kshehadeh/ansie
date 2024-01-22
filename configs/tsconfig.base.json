@@ -25,7 +25,6 @@
         "useUnknownInCatchVariables": true,
         "noPropertyAccessFromIndexSignature": true,
 
-
         // Other
         "esModuleInterop": true
     },

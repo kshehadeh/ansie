@@ -1,4 +1,3 @@
-
 export function toKebabCase(str: string) {
     return str
         .replace(new RegExp(/[A-Z]/, 'g'), match => '-' + match.toLowerCase()) // Insert a hyphen before uppercase letters and convert them to lowercase

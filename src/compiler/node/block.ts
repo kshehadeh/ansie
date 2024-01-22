@@ -19,7 +19,6 @@ import {
     renderNodeAsMarkupEnd,
 } from '../../utilities/render-node-as-markup';
 
-
 export class BlockTextNodeImpl
     extends AnsieNodeImpl
     implements TextNodeBase, SpaceNodeBase
@@ -27,8 +26,9 @@ export class BlockTextNodeImpl
     renderStart(stack: AnsieNode[], format: CompilerFormat = 'ansi') {
         if (format === 'ansi') {
             return (
-                renderSpaceAttributesStart(this._raw, format, { isBlock: true }) +
-                renderTextAttributesStart(this._raw, format)
+                renderSpaceAttributesStart(this._raw, format, {
+                    isBlock: true,
+                }) + renderTextAttributesStart(this._raw, format)
             );
         } else if (format === 'markup') {
             return renderNodeAsMarkupStart(this._raw);

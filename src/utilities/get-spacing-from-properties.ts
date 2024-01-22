@@ -1,7 +1,10 @@
-import type { SpaceNodeBase } from "../compiler/types";
-import { num } from "./num";
+import type { SpaceNodeBase } from '../compiler/types';
+import { num } from './num';
 
-export function getSpacingFromProperties(node: SpaceNodeBase): { on: string, off: string } {
+export function getSpacingFromProperties(node: SpaceNodeBase): {
+    on: string;
+    off: string;
+} {
     const left = num(node.marginLeft ?? node.margin ?? 0);
     const right = num(node.marginRight ?? node.margin ?? 0);
     const top = num(node.marginTop ?? node.margin ?? 0);
@@ -15,5 +18,5 @@ export function getSpacingFromProperties(node: SpaceNodeBase): { on: string, off
     return {
         on: `${vpre}${hpre}`,
         off: `${hpost}${vpost}`,
-    }
+    };
 }

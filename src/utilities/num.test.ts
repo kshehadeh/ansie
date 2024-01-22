@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'bun:test';
-import { num } from "./num";
+import { num } from './num';
 
 describe('num', () => {
     it('should return the number if input is already a number', () => {

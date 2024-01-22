@@ -25,7 +25,7 @@ function readStdinWithTimeout(timeout: number): Promise<string> {
             resolve('');
         }, timeout);
 
-        process.stdin.on('data', (data) => {
+        process.stdin.on('data', data => {
             inputData += data;
         });
 
@@ -34,7 +34,7 @@ function readStdinWithTimeout(timeout: number): Promise<string> {
             resolve(inputData);
         });
 
-        process.stdin.on('error', (err) => {
+        process.stdin.on('error', err => {
             clearTimeout(timer);
             reject(err);
         });
@@ -68,7 +68,7 @@ const y = yargs(hideBin(process.argv))
         type: 'boolean',
         description: 'Output the AST instead of the compiled text',
     })
-    .check(argv => {        
+    .check(argv => {
         const markup = argv._.join(' ');
         if (argv.input && markup.length > 0) {
             throw new Error(
@@ -87,7 +87,7 @@ const y = yargs(hideBin(process.argv))
                 throw new Error(`The input file ${argv.input} does not exist`);
             }
         }
-    
+
         return true;
     });
 

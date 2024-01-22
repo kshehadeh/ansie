@@ -7,7 +7,7 @@
         "emitDeclarationOnly": true,
         "composite": true,
         "outDir": "../dist/types",
-        "rootDir": "../src",
+        "rootDir": "../src"
     },
 
     "include": ["../src/compiler/index.ts", "../src/composer/index.ts"]

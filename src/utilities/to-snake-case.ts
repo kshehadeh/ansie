@@ -1,4 +1,3 @@
-
 export function toSnakeCase(str: string) {
     return str
         .replace(new RegExp(/[A-Z]/, 'g'), match => '_' + match.toLowerCase()) // Insert an underscore before uppercase letters and convert them to lowercase

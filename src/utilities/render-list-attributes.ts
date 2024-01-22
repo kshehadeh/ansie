@@ -1,10 +1,10 @@
 import type { CompilerFormat } from '../compiler/types';
-import { ListAttributes, type ListItemNodeBase } from "../compiler/types";
-import { getListItemFromProperties } from "./get-list-prefix-from-properties";
+import { ListAttributes, type ListItemNodeBase } from '../compiler/types';
+import { getListItemFromProperties } from './get-list-prefix-from-properties';
 
 export function renderListAttributesStart(
     node: ListItemNodeBase,
-    format: CompilerFormat = 'ansi'
+    format: CompilerFormat = 'ansi',
 ): string {
     if (format === 'ansi') {
         return getListItemFromProperties(node).on;
@@ -20,7 +20,7 @@ export function renderListAttributesStart(
 
 export function renderListAttributesEnd(
     node: ListItemNodeBase,
-    format: CompilerFormat = 'ansi'
+    format: CompilerFormat = 'ansi',
 ): string {
     if (format === 'ansi') {
         return getListItemFromProperties(node).off;

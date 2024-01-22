@@ -1,4 +1,3 @@
-
 export function num(n: unknown) {
     if (typeof n === 'number') {
         return n;

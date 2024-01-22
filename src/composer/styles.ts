@@ -1,15 +1,15 @@
-import type { ValidTags } from "../compiler/types";
+import type { ValidTags } from '../compiler/types';
 
 export interface AnsieStyle {
     font?: {
         color?: {
             fg?: string;
-            bg?: string;    
-        };    
+            bg?: string;
+        };
         bold?: boolean;
         underline?: 'single' | 'double' | 'none' | boolean;
-        italics?: boolean;        
-    },
+        italics?: boolean;
+    };
 
     spacing?: {
         margin?: number;
@@ -17,24 +17,23 @@ export interface AnsieStyle {
         marginRight?: number;
         marginTop?: number;
         marginBottom?: number;
-    }
+    };
 
     list?: {
         bullet?: string;
         indent?: number;
-    },
-
+    };
 }
 
 export const body: AnsieStyle = {
     font: {
         color: {
             fg: 'default',
-            bg: 'default'
+            bg: 'default',
         },
         bold: false,
         underline: 'none',
-        italics: false,        
+        italics: false,
     },
     spacing: {
         margin: 0,
@@ -64,7 +63,7 @@ export const h1: AnsieStyle = {
         },
         bold: true,
         underline: 'double',
-        italics: false,        
+        italics: false,
     },
     spacing: {
         margin: 0,
@@ -72,7 +71,7 @@ export const h1: AnsieStyle = {
         marginRight: 0,
         marginTop: 1,
         marginBottom: 0,
-    }
+    },
 };
 
 export const h2: AnsieStyle = {
@@ -82,7 +81,7 @@ export const h2: AnsieStyle = {
         },
         bold: true,
         underline: 'single',
-        italics: false,        
+        italics: false,
     },
     spacing: {
         margin: 0,
@@ -90,7 +89,7 @@ export const h2: AnsieStyle = {
         marginRight: 0,
         marginTop: 1,
         marginBottom: 0,
-    }
+    },
 };
 
 export const h3: AnsieStyle = {
@@ -100,7 +99,7 @@ export const h3: AnsieStyle = {
         },
         bold: true,
         underline: 'none',
-        italics: false,        
+        italics: false,
     },
     spacing: {
         margin: 0,
@@ -108,7 +107,7 @@ export const h3: AnsieStyle = {
         marginRight: 0,
         marginTop: 1,
         marginBottom: 0,
-    }
+    },
 };
 
 export const p: AnsieStyle = {
@@ -118,11 +117,10 @@ export const p: AnsieStyle = {
         marginRight: 0,
         marginTop: 1,
         marginBottom: 0,
-    }
+    },
 };
 
-export const span: AnsieStyle = {
-};
+export const span: AnsieStyle = {};
 
 export const li: AnsieStyle = {
     list: {
@@ -135,7 +133,7 @@ export const li: AnsieStyle = {
         marginRight: 0,
         marginTop: 1,
         marginBottom: 0,
-    }
+    },
 };
 
 export const div: AnsieStyle = {
@@ -145,7 +143,7 @@ export const div: AnsieStyle = {
         marginRight: 0,
         marginTop: 1,
         marginBottom: 0,
-    }
+    },
 };
 
 export interface AnsieTheme {
@@ -156,7 +154,7 @@ export interface AnsieTheme {
     [ValidTags.div]: AnsieStyle;
     [ValidTags.span]: AnsieStyle;
     [ValidTags.li]: AnsieStyle;
-    [ValidTags.p]: AnsieStyle
+    [ValidTags.p]: AnsieStyle;
     [ValidTags.text]: AnsieStyle;
     [ValidTags.br]: AnsieStyle;
 }
@@ -171,5 +169,5 @@ export const defaultTheme: AnsieTheme = {
     span,
     div,
     br,
-    text
+    text,
 };

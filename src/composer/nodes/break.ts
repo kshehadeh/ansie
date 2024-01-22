@@ -1,5 +1,5 @@
-import { type NodeParams, ComposerNode } from ".";
-import { ValidTags } from "../../compiler/types";
+import { type NodeParams, ComposerNode } from '.';
+import { ValidTags } from '../../compiler/types';
 
 export type BreakNodeParams = NodeParams;
 export class BreakComposerNode extends ComposerNode {

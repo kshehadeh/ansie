@@ -3,11 +3,11 @@ import fs from 'fs';
 import { build, type BuildArtifact, type Target } from 'bun';
 
 const projectDir = resolve(import.meta.dir, '../..');
-const targets: Target[] = ['node', /*'bun'*/];
+const targets: Target[] = ['node' /*'bun'*/];
 
 for (const target of targets) {
-    console.log("Building for target:", target)
-    console.log("Output dir:", resolve(projectDir, `./dist/${target}`))
+    console.log('Building for target:', target);
+    console.log('Output dir:', resolve(projectDir, `./dist/${target}`));
 
     const outputs = await build({
         entrypoints: [
@@ -24,14 +24,14 @@ for (const target of targets) {
     // Set the cli files as executable
     outputs.outputs.forEach((out: BuildArtifact) => {
         if (basename(out.path) === 'cli.js') {
-            fs.chmodSync(out.path, '711')
+            fs.chmodSync(out.path, '711');
         }
-    })
+    });
 
     if (outputs.success) {
-        console.info("Successfully built package");
+        console.info('Successfully built package');
     } else {
-        console.error("Failed to build package:");
-        console.error(outputs.logs.join('\n'))
+        console.error('Failed to build package:');
+        console.error(outputs.logs.join('\n'));
     }
 }

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'bun:test';
-import { condStr } from "./cond-str";
+import { condStr } from './cond-str';
 
 describe('condStr', () => {
     it('should return the string when the condition is true', () => {

@@ -1,8 +1,9 @@
 import { type CompilerFormat } from '../compiler/types';
 import { getSpacingFromProperties } from './get-spacing-from-properties';
 import {
-    type AnsieNode, type SpaceNodeBase,    
-    SpaceAttributes
+    type AnsieNode,
+    type SpaceNodeBase,
+    SpaceAttributes,
 } from '../compiler/types';
 
 /**
@@ -15,11 +16,13 @@ export function renderSpaceAttributesStart(
     node: SpaceNodeBase,
     format: CompilerFormat,
     options: {
-        isBlock?: boolean
-    }
+        isBlock?: boolean;
+    },
 ): string {
     if (format === 'ansi') {
-        return (options.isBlock ? '\n' : '') + getSpacingFromProperties(node).on;
+        return (
+            (options.isBlock ? '\n' : '') + getSpacingFromProperties(node).on
+        );
     } else if (format === 'markup') {
         return Object.entries(node)
             .filter(([key]) => Object.keys(SpaceAttributes).includes(key))
@@ -40,8 +43,8 @@ export function renderSpaceAttributesEnd(
     format: CompilerFormat,
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     _options: {
-        isBlock?: boolean
-    }
+        isBlock?: boolean;
+    },
 ) {
     if (format === 'ansi') {
         return getSpacingFromProperties(attributes).off;
@@ -51,4 +54,3 @@ export function renderSpaceAttributesEnd(
         return '';
     }
 }
-

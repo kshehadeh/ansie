@@ -24,7 +24,7 @@ class Compiler {
      * The compile function takes the AST and compiles it into a string.
      * @returns A string that is the compiled markup.
      */
-    public compile(format: CompilerFormat= 'ansi') {
+    public compile(format: CompilerFormat = 'ansi') {
         return this._ast.reduce((finalString, node) => {
             finalString += this._compileNode(node, format);
             return finalString;
@@ -49,7 +49,12 @@ class Compiler {
             case ValidTags.li:
                 return new ListItemNodeImpl(raw);
             default:
-                throw new CompilerError(`Invalid node type: ${raw.node}`, raw, this._stack, true);
+                throw new CompilerError(
+                    `Invalid node type: ${raw.node}`,
+                    raw,
+                    this._stack,
+                    true,
+                );
         }
     }
 
@@ -61,10 +66,13 @@ class Compiler {
 
     private _pop(format: CompilerFormat = 'ansi') {
         const old = this._stack.pop();
-        return old?.renderEnd(this._stack, format)
+        return old?.renderEnd(this._stack, format);
     }
 
-    private _compileNode(node: AnsieNode, format: CompilerFormat = 'ansi'): string {
+    private _compileNode(
+        node: AnsieNode,
+        format: CompilerFormat = 'ansi',
+    ): string {
         const strings = [];
 
         try {
@@ -91,24 +99,21 @@ class Compiler {
             }
         }
 
-        return ''
+        return '';
     }
 }
 
-
-
 export function compile(markup: string, format: CompilerFormat = 'ansi') {
-    const ast = parseString(markup);    
+    const ast = parseString(markup);
     if (ast) {
         const compiler = new Compiler(ast);
         return compiler.compile(format);
     } else {
-        return ''
+        return '';
     }
 }
 
 if (process.argv[1].includes('compiler')) {
-
     // console.log(compile(`<body>
     // <h1 fg="red" marginBottom="1">H1 RED FOREGROUND</h1>
     //     <h2 fg="red" bg="blue" margin="5">RED FOREGROUND AND BLUE BACKGROUND</h2>
@@ -127,7 +132,8 @@ if (process.argv[1].includes('compiler')) {
     //     <li bullet="*" marginBottom="1"> etc...</li>
     // </p>
 
-    console.log(compile(`    
+    console.log(
+        compile(`    
     <h1 bold fg="blue" underline="double">My Console App</h1>
     <h2 bold fg="gray">A little something I wrote</h2>
     <br/>
@@ -137,6 +143,6 @@ if (process.argv[1].includes('compiler')) {
         <li>Run the utility with the -h flag</li>
         <li>etc...</li>
     </p>
-    `))
-
+    `),
+    );
 }

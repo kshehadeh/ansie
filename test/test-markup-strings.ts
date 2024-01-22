@@ -29,7 +29,7 @@ export default [
     '<h1 fg="magenta">title with magenta foreground</h1>',
     '<h1 fg="black">title with black foreground</h1>',
     '<h1 fg="white">title with white foreground</h1>',
-    '<h1 fg="gray">title with gray foreground</h1>',    
+    '<h1 fg="gray">title with gray foreground</h1>',
     '<h1 fg="brightred">title with bright-red foreground</h1>',
     '<h1 fg="brightblue">title with bright-blue foreground</h1>',
     '<h1 fg="brightgreen">title with bright-green foreground</h1>',
@@ -57,7 +57,7 @@ export default [
     '<h1 fg="blue" bg="red">title with blue foreground and red background</h1>',
 
     '<h1 margin="1">title with margin</h1>',
-    
+
     '<h1 margin="1" marginTop="2">title with margin</h1>',
     '<h1 margin="1" marginBottom="2">title with margin</h1>',
     '<h1 margin="1" marginLeft="2">title with margin</h1>',
@@ -93,5 +93,5 @@ export default [
                 <span fg="blue">Paragraph with <span>span</span> and <div>div</div></span>
             </p>
         </body>
-    `
+    `,
 ];

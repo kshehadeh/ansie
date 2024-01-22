@@ -18,8 +18,6 @@ if (process.argv[1].includes('parser')) {
     // console.log(JSON.stringify(parseString('<body bold italics underline fg="red" bg="white">Hello</body>'), null, 2))
     // console.log(JSON.stringify(parseString('<h1 margin="12" fg="red">HELLO</h1>'), null, 2))
     // console.log(JSON.stringify(parseString('<body bold=true>Hello</body>'), null, 2))
-    
-
     // console.log(JSON.stringify(parseString('<color name="red">Hello</color>'), null, 2))
     // console.log(JSON.stringify(parseString('<bold>Hello</bold>'), null, 2))
     // console.log(JSON.stringify(parseString('Hello'), null, 2))

@@ -1,15 +1,15 @@
 import { describe, expect, it } from 'bun:test';
-import { buildAttributesFromStyle } from "./build-attributes-from-style";
+import { buildAttributesFromStyle } from './build-attributes-from-style';
 
 describe('buildAttributesFromStyle', () => {
     it('should build attributes object with italics', () => {
         const style = {
             font: {
-                italics: true
-            }
+                italics: true,
+            },
         };
         const expectedOutput = {
-            italics: true
+            italics: true,
         };
         expect(buildAttributesFromStyle(style)).toEqual(expectedOutput);
     });
@@ -17,11 +17,11 @@ describe('buildAttributesFromStyle', () => {
     it('should build attributes object with underline', () => {
         const style = {
             font: {
-                underline: true
-            }
+                underline: true,
+            },
         };
         const expectedOutput = {
-            underline: true
+            underline: true,
         };
         expect(buildAttributesFromStyle(style)).toEqual(expectedOutput);
     });
@@ -29,11 +29,11 @@ describe('buildAttributesFromStyle', () => {
     it('should build attributes object with bold', () => {
         const style = {
             font: {
-                bold: true
-            }
+                bold: true,
+            },
         };
         const expectedOutput = {
-            bold: true
+            bold: true,
         };
         expect(buildAttributesFromStyle(style)).toEqual(expectedOutput);
     });
@@ -42,12 +42,12 @@ describe('buildAttributesFromStyle', () => {
         const style = {
             font: {
                 color: {
-                    fg: 'red'
-                }
-            }
+                    fg: 'red',
+                },
+            },
         };
         const expectedOutput = {
-            fg: 'red'
+            fg: 'red',
         };
         expect(buildAttributesFromStyle(style)).toEqual(expectedOutput);
     });
@@ -56,12 +56,12 @@ describe('buildAttributesFromStyle', () => {
         const style = {
             font: {
                 color: {
-                    bg: 'blue'
-                }
-            }
+                    bg: 'blue',
+                },
+            },
         };
         const expectedOutput = {
-            bg: 'blue'
+            bg: 'blue',
         };
         expect(buildAttributesFromStyle(style)).toEqual(expectedOutput);
     });
@@ -69,11 +69,11 @@ describe('buildAttributesFromStyle', () => {
     it('should build attributes object with margin', () => {
         const style = {
             spacing: {
-                margin: 10
-            }
+                margin: 10,
+            },
         };
         const expectedOutput = {
-            margin: 10
+            margin: 10,
         };
         expect(buildAttributesFromStyle(style)).toEqual(expectedOutput);
     });
@@ -81,11 +81,11 @@ describe('buildAttributesFromStyle', () => {
     it('should build attributes object with left margin', () => {
         const style = {
             spacing: {
-                marginLeft: 5
-            }
+                marginLeft: 5,
+            },
         };
         const expectedOutput = {
-            marginLeft: 5
+            marginLeft: 5,
         };
         expect(buildAttributesFromStyle(style)).toEqual(expectedOutput);
     });
@@ -93,11 +93,11 @@ describe('buildAttributesFromStyle', () => {
     it('should build attributes object with right margin', () => {
         const style = {
             spacing: {
-                marginRight: 5
-            }
+                marginRight: 5,
+            },
         };
         const expectedOutput = {
-            marginRight: 5
+            marginRight: 5,
         };
         expect(buildAttributesFromStyle(style)).toEqual(expectedOutput);
     });
@@ -105,11 +105,11 @@ describe('buildAttributesFromStyle', () => {
     it('should build attributes object with top margin', () => {
         const style = {
             spacing: {
-                marginTop: 5
-            }
+                marginTop: 5,
+            },
         };
         const expectedOutput = {
-            marginTop: 5
+            marginTop: 5,
         };
         expect(buildAttributesFromStyle(style)).toEqual(expectedOutput);
     });
@@ -117,11 +117,11 @@ describe('buildAttributesFromStyle', () => {
     it('should build attributes object with bottom margin', () => {
         const style = {
             spacing: {
-                marginBottom: 5
-            }
+                marginBottom: 5,
+            },
         };
         const expectedOutput = {
-            marginBottom: 5
+            marginBottom: 5,
         };
         expect(buildAttributesFromStyle(style)).toEqual(expectedOutput);
     });
@@ -129,11 +129,11 @@ describe('buildAttributesFromStyle', () => {
     it('should build attributes object with bullet', () => {
         const style = {
             list: {
-                bullet: '-'
-            }
+                bullet: '-',
+            },
         };
         const expectedOutput = {
-            bullet: '-'
+            bullet: '-',
         };
         expect(buildAttributesFromStyle(style)).toEqual(expectedOutput);
     });
@@ -141,11 +141,11 @@ describe('buildAttributesFromStyle', () => {
     it('should build attributes object with indent', () => {
         const style = {
             list: {
-                indent: 2
-            }
+                indent: 2,
+            },
         };
         const expectedOutput = {
-            indent: 2
+            indent: 2,
         };
         expect(buildAttributesFromStyle(style)).toEqual(expectedOutput);
     });

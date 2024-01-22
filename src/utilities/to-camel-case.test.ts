@@ -1,5 +1,5 @@
-import { describe, expect, it } from "bun:test";
-import { toCamelCase } from "./to-camel-case";
+import { describe, expect, it } from 'bun:test';
+import { toCamelCase } from './to-camel-case';
 
 describe('toCamelCase', () => {
     it('should convert a string to camel case', () => {

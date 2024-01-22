@@ -8,7 +8,7 @@ For example,
 <h1 fg="green">Title</h1>
 <h2 fg="blue">Subtitle goes here</h2>
 <p>
-    A description using the default text will appear here.  
+    A description using the default text will appear here.
     But you can also include <span bold>embedded markup</span>
 </p>
 <div underline="single" fg="gray">Footnote</div>
@@ -16,9 +16,9 @@ For example,
 
 The library contains three components:
 
-1. *Parser* - this is used to convert a string to an Abstract Syntax Tree.  You probably won't need to use this as it represents an incremental state
-2. *Compiler* - Converts the abstract syntax tree to renderer terminal text.  You can use this if you want to just pass in markup to get your terminal string.
-3. *Composer* - A convenient set of methods to build markup through a functional syntax.  You can use this if you want a nicer, functional way of building your markup.
+1. _Parser_ - this is used to convert a string to an Abstract Syntax Tree. You probably won't need to use this as it represents an incremental state
+2. _Compiler_ - Converts the abstract syntax tree to renderer terminal text. You can use this if you want to just pass in markup to get your terminal string.
+3. _Composer_ - A convenient set of methods to build markup through a functional syntax. You can use this if you want a nicer, functional way of building your markup.
 
 ## Installation
 
@@ -34,7 +34,7 @@ The quickest way to get started is through the `compile` function:
 
 ```typescript
 import { compile } from 'ansie';
-console.log(compile('<h1 bold italics>Hello there</h1>'))
+console.log(compile('<h1 bold italics>Hello there</h1>'));
 
 // Output: ^[[1;3mHello there^[[22;23m
 ```
@@ -45,13 +45,9 @@ A slightly more advanced way of doing it is to use the composer:
 
 ```typescript
 import { compose } from 'ansie';
-console.log(compose([
-    h1('Title'),
-    h2('A subtitle'),
-    p('Paragraph'),
-]).compile())
+console.log(compose([h1('Title'), h2('A subtitle'), p('Paragraph')]).compile());
 
-// Output: 
+// Output:
 //
 // ^[[34;1;21mTitle^[[39;22;24m
 //
@@ -107,47 +103,47 @@ The markup language follows XML rules in that it uses a declarative tag-based sy
 
 | Name      | Value                                                               | Description                                                                                 |
 | --------- | ------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| bold      | "false", "true", "yes", "no", undefined                             | Makes text bold - if `bold` specified but not value then it will assume *true*              |
-| italics   | "false", "true", "yes", "no", undefined                             | Makes text italicized - if `italics` specified but not value then it will assume *true*     |
-| underline | "single", "double", "none", "false", "true", "yes", "no", undefined | Makes text underlined - if `underline` specified but not value then it will assume *single* |
+| bold      | "false", "true", "yes", "no", undefined                             | Makes text bold - if `bold` specified but not value then it will assume _true_              |
+| italics   | "false", "true", "yes", "no", undefined                             | Makes text italicized - if `italics` specified but not value then it will assume _true_     |
+| underline | "single", "double", "none", "false", "true", "yes", "no", undefined | Makes text underlined - if `underline` specified but not value then it will assume _single_ |
 | fg        | { fg color }                                                        | Changes the foreground color of the text                                                    |
 | bg        | { bg color }                                                        | Changes the background color of the text                                                    |
 
 Tags that accept spacing attributes include:
 
-* h1 
-* h2
-* h3
-* body
-* p
-* div
-* span
-* li
+-   h1
+-   h2
+-   h3
+-   body
+-   p
+-   div
+-   span
+-   li
 
 ### Spacing Attributes
 
-| Name         | Value      | Description                                                                                                                                |
-| ------------ | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| margin       | "[number]" | Zero or more.  Indicates the number of new lines (vertical spacing) or spaces (horizontal spacing) to inject before and after the content. |
-| marginLeft   | "[number]" | Zero or more.  Indicates the number of spaces to inject before the content.                                                                |
-| marginRight  | "[number]" | Zero or more.  Indicates the number of spaces to inject after the content.                                                                 |
-| marginTop    | "[number]" | Zero or more.  Indicates the number of new lines to inject before the content.                                                             |
-| marginBottom | "[number]" | Zero or more.  Indicates the number of new lines to inject after the content.                                                              |
+| Name         | Value      | Description                                                                                                                               |
+| ------------ | ---------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| margin       | "[number]" | Zero or more. Indicates the number of new lines (vertical spacing) or spaces (horizontal spacing) to inject before and after the content. |
+| marginLeft   | "[number]" | Zero or more. Indicates the number of spaces to inject before the content.                                                                |
+| marginRight  | "[number]" | Zero or more. Indicates the number of spaces to inject after the content.                                                                 |
+| marginTop    | "[number]" | Zero or more. Indicates the number of new lines to inject before the content.                                                             |
+| marginBottom | "[number]" | Zero or more. Indicates the number of new lines to inject after the content.                                                              |
 
 Tags that accept spacing attributes include:
 
-* h1 
-* h2
-* h3
-* body
-* p
-* div
-* br
-* li
+-   h1
+-   h2
+-   h3
+-   body
+-   p
+-   div
+-   br
+-   li
 
 ### Free (Raw) Text
 
-Additionally you can have regular text that is not enclosed in a tag.  For example, you can have:
+Additionally you can have regular text that is not enclosed in a tag. For example, you can have:
 
 ```xml
 <h1>Title</h1>
@@ -186,23 +182,23 @@ Tags can be nested and will render the way you would expect. So, for example,
 
 ### Emoji
 
-Text can include emoji either through unicode or through *Slack* style formatting as in `:fire:`.  Supported emoji include:
+Text can include emoji either through unicode or through _Slack_ style formatting as in `:fire:`. Supported emoji include:
 
-| Code                        | Emoji  |
-| --------------------------- | ------ |
-| `:exclamation:`             | ❗     |
-| `:warning:`                 | ⚠️   |
-| `:no_entry:`                | ⛔     |
-| `:heavy_check_mark:`        | ✔️   |
-| `:x:`                       | ❌     |
+| Code                        | Emoji |
+| --------------------------- | ----- |
+| `:exclamation:`             | ❗    |
+| `:warning:`                 | ⚠️    |
+| `:no_entry:`                | ⛔    |
+| `:heavy_check_mark:`        | ✔️    |
+| `:x:`                       | ❌    |
 | `:bangbang:`                | ‼️    |
 | `:triangular_flag_on_post:` | 🚩    |
 | `:fire:`                    | 🔥    |
-| `:sos:`                     | 🆘     |
+| `:sos:`                     | 🆘    |
 | `:lock:`                    | 🔒    |
 | `:key:`                     | 🔑    |
 | `:broken_heart:`            | 💔    |
-| `:skull_and_crossbones:`    | ☠️   |
+| `:skull_and_crossbones:`    | ☠️    |
 | `:grinning:`                | 😀    |
 | `:grin:`                    | 😁    |
 | `:joy:`                     | 😂    |
@@ -216,32 +212,32 @@ Text can include emoji either through unicode or through *Slack* style formattin
 | `:cry:`                     | 😢    |
 | `:sob:`                     | 😭    |
 | `:rocket:`                  | 🚀    |
-| `:sunny:`                   | ☀️   |
-| `:umbrella:`                | ☔     |
+| `:sunny:`                   | ☀️    |
+| `:umbrella:`                | ☔    |
 | `:camera:`                  | 📷    |
 | `:book:`                    | 📖    |
 | `:moneybag:`                | 💰    |
 | `:gift:`                    | 🎁    |
 | `:bell:`                    | 🔔    |
 | `:hammer:`                  | 🔨    |
-| `:thumbsup-skin-tone-1:`    | 👍🏻 |
-| `:thumbsup-skin-tone-2:`    | 👍🏻 |
-| `:thumbsup-skin-tone-3:`    | 👍🏼 |
-| `:thumbsup-skin-tone-4:`    | 👍🏽 |
-| `:thumbsup-skin-tone-5:`    | 👍🏾 |
-| `:thumbsup-skin-tone-6:`    | 👍🏿 |
+| `:thumbsup-skin-tone-1:`    | 👍🏻    |
+| `:thumbsup-skin-tone-2:`    | 👍🏻    |
+| `:thumbsup-skin-tone-3:`    | 👍🏼    |
+| `:thumbsup-skin-tone-4:`    | 👍🏽    |
+| `:thumbsup-skin-tone-5:`    | 👍🏾    |
+| `:thumbsup-skin-tone-6:`    | 👍🏿    |
 
 ## Composition
 
-The library includes a Composer that allows for easy composition through a programmatic interface and includes the concept of *themes*.  A
-theme is a method with which you can easily apply a consistent look and feel across outputted content.  Themes operate at the markup level,
+The library includes a Composer that allows for easy composition through a programmatic interface and includes the concept of _themes_. A
+theme is a method with which you can easily apply a consistent look and feel across outputted content. Themes operate at the markup level,
 not at the compilation level meaning that themes cannot do anything that is not possible through the standard markup grammar.
 
 ### Using the Composer
 
-The composer allows you to associate a theme with a set of nodes all at once.  It takes an array of nodes and a theme.  If no theme is given then it will use the default theme.  
+The composer allows you to associate a theme with a set of nodes all at once. It takes an array of nodes and a theme. If no theme is given then it will use the default theme.
 
-The `compose` function takes an array of nodes which can take array of other nodes themselves to create a hierarchy of nodes.  For example:
+The `compose` function takes an array of nodes which can take array of other nodes themselves to create a hierarchy of nodes. For example:
 
 ```typescript
 const result = compose([
@@ -250,33 +246,32 @@ const result = compose([
     p('Paragraph'),
     text('This is some text that is not formatted'),
     bundle(['Text', span('injected'), 'more text']),
-    markup('<h1>Raw Markup</h1>')
-]).toString()
+    markup('<h1>Raw Markup</h1>'),
+]).toString();
 
 console.log(markup);
-console.log(compile(markup))
-
+console.log(compile(markup));
 ```
 
-The order in which these nodes are rendered match the order they appear in the array.  Each one can take an array of nodes or, in most cases, a string which is automatically converted to a raw text node.  You can mix and match raw text and nodes as you can see in the *bundle* call above.  The same approach would work with most of the other node building functions.  For a full list of node creation functions, see `Node Creation` below.
+The order in which these nodes are rendered match the order they appear in the array. Each one can take an array of nodes or, in most cases, a string which is automatically converted to a raw text node. You can mix and match raw text and nodes as you can see in the _bundle_ call above. The same approach would work with most of the other node building functions. For a full list of node creation functions, see `Node Creation` below.
 
 ### Node Creation
 
 | Function | Params                            | Description                                                                                     |
 | -------- | --------------------------------- | ----------------------------------------------------------------------------------------------- |
-| `h1`     | Text or *Child Nodes*, [*styles*] | Represents a top level header                                                                   |
-| `h2`     | Text or *Child Nodes*, [*styles*] | Represents a secondary header                                                                   |
-| `h3`     | Text or *Child Nodes*, [*styles*] | Represents a tertiary header                                                                    |
-| `span`   | Text or *Child Nodes*, [*styles*] | Represents inline text (usually only needed if doing alternate styling)                         |
-| `div`    | Text or *Child Nodes*, [*styles*] | Allows you to combine raw markup with composed items from above                                 |
+| `h1`     | Text or _Child Nodes_, [*styles*] | Represents a top level header                                                                   |
+| `h2`     | Text or _Child Nodes_, [*styles*] | Represents a secondary header                                                                   |
+| `h3`     | Text or _Child Nodes_, [*styles*] | Represents a tertiary header                                                                    |
+| `span`   | Text or _Child Nodes_, [*styles*] | Represents inline text (usually only needed if doing alternate styling)                         |
+| `div`    | Text or _Child Nodes_, [*styles*] | Allows you to combine raw markup with composed items from above                                 |
 | `text`   | Text, [*styles*]                  | Inserts text as-is (but will replace `:emoji:`)                                                 |
-| `p`      | Text or *Child Nodes*, [*styles*] | Contained items are surrounded with `<color>`                                                   |
-| `list`   | *Child Nodes*, [*styles*]         | Adds a bulleted list item for each item in the passed array of nodes                            |
+| `p`      | Text or _Child Nodes_, [*styles*] | Contained items are surrounded with `<color>`                                                   |
+| `list`   | _Child Nodes_, [*styles*]         | Adds a bulleted list item for each item in the passed array of nodes                            |
 | `br`     | [*styles*]                        | Inserts a `<br/>`                                                                               |
-| `bundle` | *Sibling Nodes*                   | Outputs a set of sibling nodes - useful when passing to other functions that need a single node |
-| `markup` | *Valid Markup*                    | Allows you to combine raw markup with composed items from above                                 |
+| `bundle` | _Sibling Nodes_                   | Outputs a set of sibling nodes - useful when passing to other functions that need a single node |
+| `markup` | _Valid Markup_                    | Allows you to combine raw markup with composed items from above                                 |
 
-Most of these functions take a style object which can be used to override the theme associated with compose function.  This is useful in cases where you want to diverge of the overall look and feel of the output.
+Most of these functions take a style object which can be used to override the theme associated with compose function. This is useful in cases where you want to diverge of the overall look and feel of the output.
 
 ### The `compose` function
 
@@ -303,7 +298,7 @@ The theme is made up of the following sections:
 
 ## Developing
 
-This package is developed using bun to make the building and packaging of Typescript easier.  If you have an interest in making this `npm` compatible please submit a PR.
+This package is developed using bun to make the building and packaging of Typescript easier. If you have an interest in making this `npm` compatible please submit a PR.
 
 To install dependencies:
 
@@ -335,8 +330,8 @@ The parser code in this context is generated from a grammar file (terminal-marku
 
 ## Testing
 
-Test files are colocated with the files that they are testing using the format `<filename>.test.ts`.  For composition and
-markup tests, we automatically generate fixture files from an array of test string and commands.  
+Test files are colocated with the files that they are testing using the format `<filename>.test.ts`. For composition and
+markup tests, we automatically generate fixture files from an array of test string and commands.
 
 Many of the tests are built off of fixtures that can be re-recorded at any time using the `tests:record` script.
 
@@ -345,6 +340,6 @@ When you run `bun run tests:record` each of these functions is executed and the 
 which is then run as part of the package's tests.
 
 `test-markup-strings` is an array of valid markup strings that are used during the `bun run tests:record` script to
-generate the `compiler-fixtures.json` file which contains the inputs and expected outputs.  
+generate the `compiler-fixtures.json` file which contains the inputs and expected outputs.
 
 **Note: You should only rerecord the fixtures if you are confident that they will generate correct output**

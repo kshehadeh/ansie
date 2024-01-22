@@ -75,11 +75,11 @@ export enum TerminalStyle {
 }
 
 // Given a name or array of names, return the ANSI escape code for that name.
-export function escapeCodeFromName(names: number[]): string {    
+export function escapeCodeFromName(names: number[]): string {
     if (names.length === 0) {
         return '';
     }
-    
+
     const codeString = names.join(';');
     return `\x1b[${codeString}m`;
 }

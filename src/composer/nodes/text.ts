@@ -1,8 +1,12 @@
-import { ComposerNode, type NodeParams, type SpaceNodeParams, type TextNodeParams } from ".";
-import { ValidTags } from "../../compiler/types";
-import { opt } from "../../utilities/opt";
-import { buildAttributesFromStyle } from "../../utilities/build-attributes-from-style";
-
+import {
+    ComposerNode,
+    type NodeParams,
+    type SpaceNodeParams,
+    type TextNodeParams,
+} from '.';
+import { ValidTags } from '../../compiler/types';
+import { opt } from '../../utilities/opt';
+import { buildAttributesFromStyle } from '../../utilities/build-attributes-from-style';
 
 export abstract class TextComposerNode extends ComposerNode {
     constructor(params: TextNodeParams & SpaceNodeParams) {
@@ -16,44 +20,44 @@ export abstract class TextComposerNode extends ComposerNode {
                 ...opt({
                     italics: params.italics,
                     underline: params.underline,
-                    bold: params.bold,    
+                    bold: params.bold,
                 }),
                 color: {
                     ...this.style.font?.color,
                     ...opt({
                         fg: params.fg,
-                        bg: params.bg    
-                    })
-                }
+                        bg: params.bg,
+                    }),
+                },
             },
 
             spacing: {
                 ...this.style.spacing,
                 ...opt({
-                    margin: params["margin"],
-                    marginLeft: params["marginLeft"],
-                    marginRight: params["marginRight"],
-                    marginTop: params["marginTop"],
-                    marginBottom: params["marginBottom"],
-                })
-            }
-        }
+                    margin: params['margin'],
+                    marginLeft: params['marginLeft'],
+                    marginRight: params['marginRight'],
+                    marginTop: params['marginTop'],
+                    marginBottom: params['marginBottom'],
+                }),
+            },
+        };
     }
 
     toString() {
         const attributes = buildAttributesFromStyle(this.attrib) || {};
-        const attributesString = Object.entries(attributes).map(([key, value]) => `${key}${value ? `="${value}` : ''}"`).join(' ')
+        const attributesString = Object.entries(attributes)
+            .map(([key, value]) => `${key}${value ? `="${value}` : ''}"`)
+            .join(' ');
         return `<${this.node} ${attributesString}>${super.toString()}</${this.node}>`;
     }
 }
 
-
 // NODE: BODY
 
-export class BodyComposerNode extends TextComposerNode  {
+export class BodyComposerNode extends TextComposerNode {
     node = ValidTags.body;
 }
-
 
 // NODE: H1
 export class H1ComposerNode extends TextComposerNode {
@@ -91,11 +95,11 @@ export class DivComposerNode extends TextComposerNode {
 }
 
 // NODE: RAW TEXT
-export interface RawTextNodeParams extends NodeParams {    
+export interface RawTextNodeParams extends NodeParams {
     text: string;
 }
 
-export class RawTextComposerNode extends ComposerNode  {
+export class RawTextComposerNode extends ComposerNode {
     node = ValidTags.text;
     value: string;
 

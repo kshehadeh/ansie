@@ -1,5 +1,3 @@
-
-
 export function toCamelCase(str: string) {
     return str
         .replace(/\s(.)/g, function (a) {

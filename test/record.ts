@@ -16,8 +16,8 @@ export function recordCompilation(input: string): {
     console.log('Recording compilation: ', input);
     const ast = parse(input);
     const output = compile(input);
-    console.log("Result: ", output);
-    console.log("--------------------");
+    console.log('Result: ', output);
+    console.log('--------------------');
 
     return {
         input,
@@ -32,31 +32,31 @@ export function recordComposition(cmd: () => string) {
 
     // Validate that the markup is valid
     const result = compile(markup);
-    console.log("Result: ", result);
-    console.log("--------------------");
+    console.log('Result: ', result);
+    console.log('--------------------');
 
     return {
         cmd: cmd.toString(),
         markup,
-    }
+    };
 }
-
 
 // Query the user to ensure that they actually want to overrwrite their fixtures
 const rl = readline.createInterface({
     input: process.stdin,
-    output: process.stdout
+    output: process.stdout,
 });
 
 const currentDir = import.meta.url
     .replace('file://', '')
     .replace('/record.ts', '');
 
-
-rl.question('Do you want to overwrite your fixtures? (y/n) ', (answer) => {
+rl.question('Do you want to overwrite your fixtures? (y/n) ', answer => {
     if (answer.toLowerCase() === 'y' || answer.toLowerCase() === 'yes') {
         // Write compiler recorded results to a file
-        const compilationResults = compilationFixtures.map(f => recordCompilation(f));
+        const compilationResults = compilationFixtures.map(f =>
+            recordCompilation(f),
+        );
         writeFileSync(
             resolve(currentDir, 'compiler-fixtures.json'),
             JSON.stringify(compilationResults, null, 2),
@@ -64,15 +64,19 @@ rl.question('Do you want to overwrite your fixtures? (y/n) ', (answer) => {
         );
 
         // Write composer recorded results to a file
-        const compositionResults = compositionFixtures.map(f => recordComposition(f));
+        const compositionResults = compositionFixtures.map(f =>
+            recordComposition(f),
+        );
         writeFileSync(
             resolve(currentDir, 'composer-fixtures.js'),
             `// AUTOMATICALLY GENERATED FILE - DO NOT EDIT - RUN bun run fixture:generate TO UPDATE
 import {compose, h1, h2, h3, span, div, p, body, text, markup, li} from '../src/composer'
-export default [\n${
-                compositionResults.map(r => {
-                return `    { cmd: ${r.cmd}, markup: "${r.markup.replaceAll('"', '\\"')}" }`}).join(',\n')}
-]`,            
+export default [\n${compositionResults
+                .map(r => {
+                    return `    { cmd: ${r.cmd}, markup: "${r.markup.replaceAll('"', '\\"')}" }`;
+                })
+                .join(',\n')}
+]`,
             'utf8',
         );
     } else {

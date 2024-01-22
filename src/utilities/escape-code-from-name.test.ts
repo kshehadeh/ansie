@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'bun:test';
-import { escapeCodeFromName } from "./escape-code-from-name";
+import { escapeCodeFromName } from './escape-code-from-name';
 
 describe('escapeCodeFromName', () => {
     it('should return the escape code for a single name', () => {

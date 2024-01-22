@@ -10,7 +10,7 @@ import { type AnsieNode, isAttribute } from '../compiler/types';
  */
 export function renderTextAttributesStart(
     attributes: AnsieNode,
-    format: CompilerFormat = 'ansi'
+    format: CompilerFormat = 'ansi',
 ) {
     if (format === 'ansi') {
         return getTextEscapeCodesFromProperties(attributes).on;

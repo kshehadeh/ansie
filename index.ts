@@ -1,7 +1,7 @@
 export { compile } from './src/compiler';
 export { parseString } from './src/parser';
-export { 
-    compose,    
+export {
+    compose,
     br,
     text,
     li,
@@ -12,5 +12,5 @@ export {
     body,
     div,
     span,
-    markup
- } from './src/composer';
+    markup,
+} from './src/composer';

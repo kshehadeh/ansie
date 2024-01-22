@@ -1,1293 +1,1293 @@
 [
-  {
-    "input": "<h1>title</h1>",
-    "ast": [
-      {
-        "node": "h1",
-        "content": [
-          {
-            "node": "text",
-            "value": "title"
-          }
-        ]
-      }
-    ],
-    "output": "\ntitle"
-  },
-  {
-    "input": "<h1 bold>title with bold - inferred</h1>",
-    "ast": [
-      {
-        "node": "h1",
-        "bold": "true",
-        "content": [
-          {
-            "node": "text",
-            "value": "title with bold - inferred"
-          }
-        ]
-      }
-    ],
-    "output": "\n\u001b[1mtitle with bold - inferred\u001b[22m"
-  },
-  {
-    "input": "<h1 bold=\"true\">title with bold - true</h1>",
-    "ast": [
-      {
-        "node": "h1",
-        "bold": "true",
-        "content": [
-          {
-            "node": "text",
-            "value": "title with bold - true"
-          }
-        ]
-      }
-    ],
-    "output": "\n\u001b[1mtitle with bold - true\u001b[22m"
-  },
-  {
-    "input": "<h1 bold=\"yes\">title with bold - yes</h1>",
-    "ast": [
-      {
-        "node": "h1",
-        "bold": "yes",
-        "content": [
-          {
-            "node": "text",
-            "value": "title with bold - yes"
-          }
-        ]
-      }
-    ],
-    "output": "\n\u001b[1mtitle with bold - yes\u001b[22m"
-  },
-  {
-    "input": "<h1 bold=\"false\">title without bold - false</h1>",
-    "ast": [
-      {
-        "node": "h1",
-        "bold": "false",
-        "content": [
-          {
-            "node": "text",
-            "value": "title without bold - false"
-          }
-        ]
-      }
-    ],
-    "output": "\n\u001b[1mtitle without bold - false\u001b[22m"
-  },
-  {
-    "input": "<h1 bold=\"no\">title without bold - no</h1>",
-    "ast": [
-      {
-        "node": "h1",
-        "bold": "no",
-        "content": [
-          {
-            "node": "text",
-            "value": "title without bold - no"
-          }
-        ]
-      }
-    ],
-    "output": "\n\u001b[1mtitle without bold - no\u001b[22m"
-  },
-  {
-    "input": "<h1 underline>title with underline - inferred</h1>",
-    "ast": [
-      {
-        "node": "h1",
-        "underline": "true",
-        "content": [
-          {
-            "node": "text",
-            "value": "title with underline - inferred"
-          }
-        ]
-      }
-    ],
-    "output": "\ntitle with underline - inferred\u001b[24m"
-  },
-  {
-    "input": "<h1 underline=\"true\">title with underline - true</h1>",
-    "ast": [
-      {
-        "node": "h1",
-        "underline": "true",
-        "content": [
-          {
-            "node": "text",
-            "value": "title with underline - true"
-          }
-        ]
-      }
-    ],
-    "output": "\ntitle with underline - true\u001b[24m"
-  },
-  {
-    "input": "<h1 underline=\"yes\">title with underline - yes</h1>",
-    "ast": [
-      {
-        "node": "h1",
-        "underline": "yes",
-        "content": [
-          {
-            "node": "text",
-            "value": "title with underline - yes"
-          }
-        ]
-      }
-    ],
-    "output": "\ntitle with underline - yes\u001b[24m"
-  },
-  {
-    "input": "<h1 underline=\"single\">title with single underline</h1>",
-    "ast": [
-      {
-        "node": "h1",
-        "underline": "single",
-        "content": [
-          {
-            "node": "text",
-            "value": "title with single underline"
-          }
-        ]
-      }
-    ],
-    "output": "\n\u001b[4mtitle with single underline\u001b[24m"
-  },
-  {
-    "input": "<h1 underline=\"double\">title with double underline</h1>",
-    "ast": [
-      {
-        "node": "h1",
-        "underline": "double",
-        "content": [
-          {
-            "node": "text",
-            "value": "title with double underline"
-          }
-        ]
-      }
-    ],
-    "output": "\n\u001b[21mtitle with double underline\u001b[24m"
-  },
-  {
-    "input": "<h1 underline=\"false\">title without underline - false</h1>",
-    "ast": [
-      {
-        "node": "h1",
-        "underline": "false",
-        "content": [
-          {
-            "node": "text",
-            "value": "title without underline - false"
-          }
-        ]
-      }
-    ],
-    "output": "\ntitle without underline - false\u001b[24m"
-  },
-  {
-    "input": "<h1 underline=\"no\">title without underline - no</h1>",
-    "ast": [
-      {
-        "node": "h1",
-        "underline": "no",
-        "content": [
-          {
-            "node": "text",
-            "value": "title without underline - no"
-          }
-        ]
-      }
-    ],
-    "output": "\ntitle without underline - no\u001b[24m"
-  },
-  {
-    "input": "<h1 underline=\"none\">title without underline - none</h1>",
-    "ast": [
-      {
-        "node": "h1",
-        "underline": "none",
-        "content": [
-          {
-            "node": "text",
-            "value": "title without underline - none"
-          }
-        ]
-      }
-    ],
-    "output": "\ntitle without underline - none\u001b[24m"
-  },
-  {
-    "input": "<h1 italics>title with italics</h1>",
-    "ast": [
-      {
-        "node": "h1",
-        "italics": "true",
-        "content": [
-          {
-            "node": "text",
-            "value": "title with italics"
-          }
-        ]
-      }
-    ],
-    "output": "\n\u001b[3mtitle with italics\u001b[23m"
-  },
-  {
-    "input": "<h1 italics=\"true\">title with italics</h1>",
-    "ast": [
-      {
-        "node": "h1",
-        "italics": "true",
-        "content": [
-          {
-            "node": "text",
-            "value": "title with italics"
-          }
-        ]
-      }
-    ],
-    "output": "\n\u001b[3mtitle with italics\u001b[23m"
-  },
-  {
-    "input": "<h1 italics=\"yes\">title with italics</h1>",
-    "ast": [
-      {
-        "node": "h1",
-        "italics": "yes",
-        "content": [
-          {
-            "node": "text",
-            "value": "title with italics"
-          }
-        ]
-      }
-    ],
-    "output": "\n\u001b[3mtitle with italics\u001b[23m"
-  },
-  {
-    "input": "<h1 italics=\"false\">title without italics</h1>",
-    "ast": [
-      {
-        "node": "h1",
-        "italics": "false",
-        "content": [
-          {
-            "node": "text",
-            "value": "title without italics"
-          }
-        ]
-      }
-    ],
-    "output": "\n\u001b[3mtitle without italics\u001b[23m"
-  },
-  {
-    "input": "<h1 italics=\"no\">title without italics</h1>",
-    "ast": [
-      {
-        "node": "h1",
-        "italics": "no",
-        "content": [
-          {
-            "node": "text",
-            "value": "title without italics"
-          }
-        ]
-      }
-    ],
-    "output": "\n\u001b[3mtitle without italics\u001b[23m"
-  },
-  {
-    "input": "<h1 fg=\"red\">title with red foreground</h1>",
-    "ast": [
-      {
-        "node": "h1",
-        "fg": "red",
-        "content": [
-          {
-            "node": "text",
-            "value": "title with red foreground"
-          }
-        ]
-      }
-    ],
-    "output": "\n\u001b[31mtitle with red foreground\u001b[39m"
-  },
-  {
-    "input": "<h1 fg=\"blue\">title with blue foreground</h1>",
-    "ast": [
-      {
-        "node": "h1",
-        "fg": "blue",
-        "content": [
-          {
-            "node": "text",
-            "value": "title with blue foreground"
-          }
-        ]
-      }
-    ],
-    "output": "\n\u001b[34mtitle with blue foreground\u001b[39m"
-  },
-  {
-    "input": "<h1 fg=\"green\">title with green foreground</h1>",
-    "ast": [
-      {
-        "node": "h1",
-        "fg": "green",
-        "content": [
-          {
-            "node": "text",
-            "value": "title with green foreground"
-          }
-        ]
-      }
-    ],
-    "output": "\n\u001b[32mtitle with green foreground\u001b[39m"
-  },
-  {
-    "input": "<h1 fg=\"yellow\">title with yellow foreground</h1>",
-    "ast": [
-      {
-        "node": "h1",
-        "fg": "yellow",
-        "content": [
-          {
-            "node": "text",
-            "value": "title with yellow foreground"
-          }
-        ]
-      }
-    ],
-    "output": "\n\u001b[33mtitle with yellow foreground\u001b[39m"
-  },
-  {
-    "input": "<h1 fg=\"cyan\">title with cyan foreground</h1>",
-    "ast": [
-      {
-        "node": "h1",
-        "fg": "cyan",
-        "content": [
-          {
-            "node": "text",
-            "value": "title with cyan foreground"
-          }
-        ]
-      }
-    ],
-    "output": "\n\u001b[36mtitle with cyan foreground\u001b[39m"
-  },
-  {
-    "input": "<h1 fg=\"magenta\">title with magenta foreground</h1>",
-    "ast": [
-      {
-        "node": "h1",
-        "fg": "magenta",
-        "content": [
-          {
-            "node": "text",
-            "value": "title with magenta foreground"
-          }
-        ]
-      }
-    ],
-    "output": "\n\u001b[35mtitle with magenta foreground\u001b[39m"
-  },
-  {
-    "input": "<h1 fg=\"black\">title with black foreground</h1>",
-    "ast": [
-      {
-        "node": "h1",
-        "fg": "black",
-        "content": [
-          {
-            "node": "text",
-            "value": "title with black foreground"
-          }
-        ]
-      }
-    ],
-    "output": "\n\u001b[30mtitle with black foreground\u001b[39m"
-  },
-  {
-    "input": "<h1 fg=\"white\">title with white foreground</h1>",
-    "ast": [
-      {
-        "node": "h1",
-        "fg": "white",
-        "content": [
-          {
-            "node": "text",
-            "value": "title with white foreground"
-          }
-        ]
-      }
-    ],
-    "output": "\n\u001b[37mtitle with white foreground\u001b[39m"
-  },
-  {
-    "input": "<h1 fg=\"gray\">title with gray foreground</h1>",
-    "ast": [
-      {
-        "node": "h1",
-        "fg": "gray",
-        "content": [
-          {
-            "node": "text",
-            "value": "title with gray foreground"
-          }
-        ]
-      }
-    ],
-    "output": "\n\u001b[90mtitle with gray foreground\u001b[39m"
-  },
-  {
-    "input": "<h1 fg=\"brightred\">title with bright-red foreground</h1>",
-    "ast": [
-      {
-        "node": "h1",
-        "fg": "brightred",
-        "content": [
-          {
-            "node": "text",
-            "value": "title with bright-red foreground"
-          }
-        ]
-      }
-    ],
-    "output": "\n\u001b[mtitle with bright-red foreground\u001b[39m"
-  },
-  {
-    "input": "<h1 fg=\"brightblue\">title with bright-blue foreground</h1>",
-    "ast": [
-      {
-        "node": "h1",
-        "fg": "brightblue",
-        "content": [
-          {
-            "node": "text",
-            "value": "title with bright-blue foreground"
-          }
-        ]
-      }
-    ],
-    "output": "\n\u001b[mtitle with bright-blue foreground\u001b[39m"
-  },
-  {
-    "input": "<h1 fg=\"brightgreen\">title with bright-green foreground</h1>",
-    "ast": [
-      {
-        "node": "h1",
-        "fg": "brightgreen",
-        "content": [
-          {
-            "node": "text",
-            "value": "title with bright-green foreground"
-          }
-        ]
-      }
-    ],
-    "output": "\n\u001b[mtitle with bright-green foreground\u001b[39m"
-  },
-  {
-    "input": "<h1 fg=\"brightyellow\">title with bright-yellow foreground</h1>",
-    "ast": [
-      {
-        "node": "h1",
-        "fg": "brightyellow",
-        "content": [
-          {
-            "node": "text",
-            "value": "title with bright-yellow foreground"
-          }
-        ]
-      }
-    ],
-    "output": "\n\u001b[mtitle with bright-yellow foreground\u001b[39m"
-  },
-  {
-    "input": "<h1 fg=\"brightcyan\">title with bright-cyan foreground</h1>",
-    "ast": [
-      {
-        "node": "h1",
-        "fg": "brightcyan",
-        "content": [
-          {
-            "node": "text",
-            "value": "title with bright-cyan foreground"
-          }
-        ]
-      }
-    ],
-    "output": "\n\u001b[mtitle with bright-cyan foreground\u001b[39m"
-  },
-  {
-    "input": "<h1 fg=\"brightmagenta\">title with bright-magenta foreground</h1>",
-    "ast": [
-      {
-        "node": "h1",
-        "fg": "brightmagenta",
-        "content": [
-          {
-            "node": "text",
-            "value": "title with bright-magenta foreground"
-          }
-        ]
-      }
-    ],
-    "output": "\n\u001b[mtitle with bright-magenta foreground\u001b[39m"
-  },
-  {
-    "input": "<h1 bg=\"red\">title with red background</h1>",
-    "ast": [
-      {
-        "node": "h1",
-        "bg": "red",
-        "content": [
-          {
-            "node": "text",
-            "value": "title with red background"
-          }
-        ]
-      }
-    ],
-    "output": "\n\u001b[41mtitle with red background\u001b[49m"
-  },
-  {
-    "input": "<h1 bg=\"blue\">title with blue background</h1>",
-    "ast": [
-      {
-        "node": "h1",
-        "bg": "blue",
-        "content": [
-          {
-            "node": "text",
-            "value": "title with blue background"
-          }
-        ]
-      }
-    ],
-    "output": "\n\u001b[44mtitle with blue background\u001b[49m"
-  },
-  {
-    "input": "<h1 bg=\"green\">title with green background</h1>",
-    "ast": [
-      {
-        "node": "h1",
-        "bg": "green",
-        "content": [
-          {
-            "node": "text",
-            "value": "title with green background"
-          }
-        ]
-      }
-    ],
-    "output": "\n\u001b[42mtitle with green background\u001b[49m"
-  },
-  {
-    "input": "<h1 bg=\"yellow\">title with yellow background</h1>",
-    "ast": [
-      {
-        "node": "h1",
-        "bg": "yellow",
-        "content": [
-          {
-            "node": "text",
-            "value": "title with yellow background"
-          }
-        ]
-      }
-    ],
-    "output": "\n\u001b[43mtitle with yellow background\u001b[49m"
-  },
-  {
-    "input": "<h1 bg=\"cyan\">title with cyan background</h1>",
-    "ast": [
-      {
-        "node": "h1",
-        "bg": "cyan",
-        "content": [
-          {
-            "node": "text",
-            "value": "title with cyan background"
-          }
-        ]
-      }
-    ],
-    "output": "\n\u001b[46mtitle with cyan background\u001b[49m"
-  },
-  {
-    "input": "<h1 bg=\"magenta\">title with magenta background</h1>",
-    "ast": [
-      {
-        "node": "h1",
-        "bg": "magenta",
-        "content": [
-          {
-            "node": "text",
-            "value": "title with magenta background"
-          }
-        ]
-      }
-    ],
-    "output": "\n\u001b[45mtitle with magenta background\u001b[49m"
-  },
-  {
-    "input": "<h1 bg=\"black\">title with black background</h1>",
-    "ast": [
-      {
-        "node": "h1",
-        "bg": "black",
-        "content": [
-          {
-            "node": "text",
-            "value": "title with black background"
-          }
-        ]
-      }
-    ],
-    "output": "\n\u001b[40mtitle with black background\u001b[49m"
-  },
-  {
-    "input": "<h1 bg=\"white\">title with white background</h1>",
-    "ast": [
-      {
-        "node": "h1",
-        "bg": "white",
-        "content": [
-          {
-            "node": "text",
-            "value": "title with white background"
-          }
-        ]
-      }
-    ],
-    "output": "\n\u001b[47mtitle with white background\u001b[49m"
-  },
-  {
-    "input": "<h1 bg=\"gray\">title with gray background</h1>",
-    "ast": [
-      {
-        "node": "h1",
-        "bg": "gray",
-        "content": [
-          {
-            "node": "text",
-            "value": "title with gray background"
-          }
-        ]
-      }
-    ],
-    "output": "\n\u001b[100mtitle with gray background\u001b[49m"
-  },
-  {
-    "input": "<h1 bg=\"brightred\">title with bright-red background</h1>",
-    "ast": [
-      {
-        "node": "h1",
-        "bg": "brightred",
-        "content": [
-          {
-            "node": "text",
-            "value": "title with bright-red background"
-          }
-        ]
-      }
-    ],
-    "output": "\n\u001b[mtitle with bright-red background\u001b[49m"
-  },
-  {
-    "input": "<h1 bg=\"brightblue\">title with bright-blue background</h1>",
-    "ast": [
-      {
-        "node": "h1",
-        "bg": "brightblue",
-        "content": [
-          {
-            "node": "text",
-            "value": "title with bright-blue background"
-          }
-        ]
-      }
-    ],
-    "output": "\n\u001b[mtitle with bright-blue background\u001b[49m"
-  },
-  {
-    "input": "<h1 bg=\"brightgreen\">title with bright-green background</h1>",
-    "ast": [
-      {
-        "node": "h1",
-        "bg": "brightgreen",
-        "content": [
-          {
-            "node": "text",
-            "value": "title with bright-green background"
-          }
-        ]
-      }
-    ],
-    "output": "\n\u001b[mtitle with bright-green background\u001b[49m"
-  },
-  {
-    "input": "<h1 bg=\"brightyellow\">title with bright-yellow background</h1>",
-    "ast": [
-      {
-        "node": "h1",
-        "bg": "brightyellow",
-        "content": [
-          {
-            "node": "text",
-            "value": "title with bright-yellow background"
-          }
-        ]
-      }
-    ],
-    "output": "\n\u001b[mtitle with bright-yellow background\u001b[49m"
-  },
-  {
-    "input": "<h1 bg=\"brightcyan\">title with bright-cyan background</h1>",
-    "ast": [
-      {
-        "node": "h1",
-        "bg": "brightcyan",
-        "content": [
-          {
-            "node": "text",
-            "value": "title with bright-cyan background"
-          }
-        ]
-      }
-    ],
-    "output": "\n\u001b[mtitle with bright-cyan background\u001b[49m"
-  },
-  {
-    "input": "<h1 bg=\"brightmagenta\">title with bright-magenta background</h1>",
-    "ast": [
-      {
-        "node": "h1",
-        "bg": "brightmagenta",
-        "content": [
-          {
-            "node": "text",
-            "value": "title with bright-magenta background"
-          }
-        ]
-      }
-    ],
-    "output": "\n\u001b[mtitle with bright-magenta background\u001b[49m"
-  },
-  {
-    "input": "<h1 fg=\"red\" bg=\"blue\">title with red foreground and blue background</h1>",
-    "ast": [
-      {
-        "node": "h1",
-        "fg": "red",
-        "bg": "blue",
-        "content": [
-          {
-            "node": "text",
-            "value": "title with red foreground and blue background"
-          }
-        ]
-      }
-    ],
-    "output": "\n\u001b[31;44mtitle with red foreground and blue background\u001b[39;49m"
-  },
-  {
-    "input": "<h1 fg=\"blue\" bg=\"red\">title with blue foreground and red background</h1>",
-    "ast": [
-      {
-        "node": "h1",
-        "fg": "blue",
-        "bg": "red",
-        "content": [
-          {
-            "node": "text",
-            "value": "title with blue foreground and red background"
-          }
-        ]
-      }
-    ],
-    "output": "\n\u001b[34;41mtitle with blue foreground and red background\u001b[39;49m"
-  },
-  {
-    "input": "<h1 margin=\"1\">title with margin</h1>",
-    "ast": [
-      {
-        "node": "h1",
-        "margin": "1",
-        "content": [
-          {
-            "node": "text",
-            "value": "title with margin"
-          }
-        ]
-      }
-    ],
-    "output": "\n\n title with margin \n"
-  },
-  {
-    "input": "<h1 margin=\"1\" marginTop=\"2\">title with margin</h1>",
-    "ast": [
-      {
-        "node": "h1",
-        "margin": "1",
-        "marginTop": "2",
-        "content": [
-          {
-            "node": "text",
-            "value": "title with margin"
-          }
-        ]
-      }
-    ],
-    "output": "\n\n\n title with margin \n"
-  },
-  {
-    "input": "<h1 margin=\"1\" marginBottom=\"2\">title with margin</h1>",
-    "ast": [
-      {
-        "node": "h1",
-        "margin": "1",
-        "marginBottom": "2",
-        "content": [
-          {
-            "node": "text",
-            "value": "title with margin"
-          }
-        ]
-      }
-    ],
-    "output": "\n\n title with margin \n\n"
-  },
-  {
-    "input": "<h1 margin=\"1\" marginLeft=\"2\">title with margin</h1>",
-    "ast": [
-      {
-        "node": "h1",
-        "margin": "1",
-        "marginLeft": "2",
-        "content": [
-          {
-            "node": "text",
-            "value": "title with margin"
-          }
-        ]
-      }
-    ],
-    "output": "\n\n  title with margin \n"
-  },
-  {
-    "input": "<h1 margin=\"1\" marginRight=\"2\">title with margin</h1>",
-    "ast": [
-      {
-        "node": "h1",
-        "margin": "1",
-        "marginRight": "2",
-        "content": [
-          {
-            "node": "text",
-            "value": "title with margin"
-          }
-        ]
-      }
-    ],
-    "output": "\n\n title with margin  \n"
-  },
-  {
-    "input": "<h1 margin=\"1\" marginTop=\"2\" marginBottom=\"3\" marginLeft=\"4\" marginRight=\"5\">title with margin</h1>",
-    "ast": [
-      {
-        "node": "h1",
-        "margin": "1",
-        "marginTop": "2",
-        "marginBottom": "3",
-        "marginLeft": "4",
-        "marginRight": "5",
-        "content": [
-          {
-            "node": "text",
-            "value": "title with margin"
-          }
-        ]
-      }
-    ],
-    "output": "\n\n\n    title with margin     \n\n\n"
-  },
-  {
-    "input": "<h1 margin=\"1\" marginTop=\"2\" marginBottom=\"3\" marginLeft=\"4\" marginRight=\"5\" fg=\"red\">title with margin</h1>",
-    "ast": [
-      {
-        "node": "h1",
-        "margin": "1",
-        "marginTop": "2",
-        "marginBottom": "3",
-        "marginLeft": "4",
-        "marginRight": "5",
-        "fg": "red",
-        "content": [
-          {
-            "node": "text",
-            "value": "title with margin"
-          }
-        ]
-      }
-    ],
-    "output": "\n\n\n    \u001b[31mtitle with margin\u001b[39m     \n\n\n"
-  },
-  {
-    "input": "<h1 margin=\"1\" marginTop=\"2\" marginBottom=\"3\" marginLeft=\"4\" marginRight=\"5\" bg=\"red\">title with margin</h1>",
-    "ast": [
-      {
-        "node": "h1",
-        "margin": "1",
-        "marginTop": "2",
-        "marginBottom": "3",
-        "marginLeft": "4",
-        "marginRight": "5",
-        "bg": "red",
-        "content": [
-          {
-            "node": "text",
-            "value": "title with margin"
-          }
-        ]
-      }
-    ],
-    "output": "\n\n\n    \u001b[41mtitle with margin\u001b[49m     \n\n\n"
-  },
-  {
-    "input": "<h1 margin=\"1\" marginTop=\"2\" marginBottom=\"3\" marginLeft=\"4\" marginRight=\"5\" fg=\"red\" bg=\"blue\">title with margin</h1>",
-    "ast": [
-      {
-        "node": "h1",
-        "margin": "1",
-        "marginTop": "2",
-        "marginBottom": "3",
-        "marginLeft": "4",
-        "marginRight": "5",
-        "fg": "red",
-        "bg": "blue",
-        "content": [
-          {
-            "node": "text",
-            "value": "title with margin"
-          }
-        ]
-      }
-    ],
-    "output": "\n\n\n    \u001b[31;44mtitle with margin\u001b[39;49m     \n\n\n"
-  },
-  {
-    "input": "<h1 margin=\"1\" marginTop=\"2\" marginBottom=\"3\" marginLeft=\"4\" marginRight=\"5\" fg=\"red\" bg=\"blue\" bold>title with margin</h1>",
-    "ast": [
-      {
-        "node": "h1",
-        "margin": "1",
-        "marginTop": "2",
-        "marginBottom": "3",
-        "marginLeft": "4",
-        "marginRight": "5",
-        "fg": "red",
-        "bg": "blue",
-        "bold": "true",
-        "content": [
-          {
-            "node": "text",
-            "value": "title with margin"
-          }
-        ]
-      }
-    ],
-    "output": "\n\n\n    \u001b[31;44;1mtitle with margin\u001b[39;49;22m     \n\n\n"
-  },
-  {
-    "input": "<body><h1>title</h1></body>",
-    "ast": [
-      {
-        "node": "body",
-        "content": [
-          {
-            "node": "h1",
-            "content": [
-              {
-                "node": "text",
-                "value": "title"
-              }
-            ]
-          }
-        ]
-      }
-    ],
-    "output": "\n\ntitle"
-  },
-  {
-    "input": "<body><h1>title</h1><h2>subtitle</h2><p>Paragraph with <span>span</span> and <div>div</div></p></body>",
-    "ast": [
-      {
-        "node": "body",
-        "content": [
-          {
-            "node": "h1",
-            "content": [
-              {
-                "node": "text",
-                "value": "title"
-              }
-            ]
-          },
-          {
-            "node": "h2",
-            "content": [
-              {
-                "node": "text",
-                "value": "subtitle"
-              }
-            ]
-          },
-          {
-            "node": "p",
-            "content": [
-              {
-                "node": "text",
-                "value": "Paragraph with "
-              },
-              {
-                "node": "span",
+    {
+        "input": "<h1>title</h1>",
+        "ast": [
+            {
+                "node": "h1",
                 "content": [
-                  {
-                    "node": "text",
-                    "value": "span"
-                  }
+                    {
+                        "node": "text",
+                        "value": "title"
+                    }
                 ]
-              },
-              {
-                "node": "text",
-                "value": "and "
-              },
-              {
-                "node": "div",
+            }
+        ],
+        "output": "\ntitle"
+    },
+    {
+        "input": "<h1 bold>title with bold - inferred</h1>",
+        "ast": [
+            {
+                "node": "h1",
+                "bold": "true",
                 "content": [
-                  {
-                    "node": "text",
-                    "value": "div"
-                  }
+                    {
+                        "node": "text",
+                        "value": "title with bold - inferred"
+                    }
                 ]
-              }
-            ]
-          }
-        ]
-      }
-    ],
-    "output": "\n\ntitle\nsubtitle\nParagraph withspanand\ndiv"
-  },
-  {
-    "input": "<h1>Multiple top-level elements</h1><h2>subtitle</h2><p>Paragraph with <span>span</span> and <div>div</div></p>",
-    "ast": [
-      {
-        "node": "h1",
-        "content": [
-          {
-            "node": "text",
-            "value": "Multiple top-level elements"
-          }
-        ]
-      },
-      {
-        "node": "h2",
-        "content": [
-          {
-            "node": "text",
-            "value": "subtitle"
-          }
-        ]
-      },
-      {
-        "node": "p",
-        "content": [
-          {
-            "node": "text",
-            "value": "Paragraph with "
-          },
-          {
-            "node": "span",
-            "content": [
-              {
-                "node": "text",
-                "value": "span"
-              }
-            ]
-          },
-          {
-            "node": "text",
-            "value": "and "
-          },
-          {
-            "node": "div",
-            "content": [
-              {
-                "node": "text",
-                "value": "div"
-              }
-            ]
-          }
-        ]
-      }
-    ],
-    "output": "\nMultiple top-level elements\nsubtitle\nParagraph withspanand\ndiv"
-  },
-  {
-    "input": "\n        <h1 bold marginBottom=\"1\">My Console App</h1>\n        <h2 fg=\"gray\" marginBottom=\"1\">A little something I wrote</h2>\n        <p marginBottom=\"1\">\n            In order to used this app, do the following:\n            <li bullet=\"*\" marginBottom=\"1\"> Create a config file</li>\n            <li bullet=\"*\" marginBottom=\"1\"> Run the utility with the -h flag</li>\n            <li bullet=\"*\" marginBottom=\"1\"> etc...</li>\n        </p>\n    ",
-    "ast": [
-      {
-        "node": "h1",
-        "bold": "true",
-        "marginBottom": "1",
-        "content": [
-          {
-            "node": "text",
-            "value": "My Console App"
-          }
-        ]
-      },
-      {
-        "node": "h2",
-        "fg": "gray",
-        "marginBottom": "1",
-        "content": [
-          {
-            "node": "text",
-            "value": "A little something I wrote"
-          }
-        ]
-      },
-      {
-        "node": "p",
-        "marginBottom": "1",
-        "content": [
-          {
-            "node": "text",
-            "value": "\n            In order to used this app, do the following:\n            "
-          },
-          {
-            "node": "li",
-            "bullet": "*",
-            "marginBottom": "1",
-            "content": [
-              {
-                "node": "text",
-                "value": " Create a config file"
-              }
-            ]
-          },
-          {
-            "node": "li",
-            "bullet": "*",
-            "marginBottom": "1",
-            "content": [
-              {
-                "node": "text",
-                "value": " Run the utility with the -h flag"
-              }
-            ]
-          },
-          {
-            "node": "li",
-            "bullet": "*",
-            "marginBottom": "1",
-            "content": [
-              {
-                "node": "text",
-                "value": " etc..."
-              }
-            ]
-          }
-        ]
-      }
-    ],
-    "output": "\n\u001b[1mMy Console App\u001b[22m\n\n\u001b[90mA little something I wrote\u001b[39m\n\nIn order to used this app, do the following:\n* Create a config file\n\n* Run the utility with the -h flag\n\n* etc...\n\n"
-  },
-  {
-    "input": "\n        <body>\n            <h1 marginBottom=\"1\">\n                <span fg=\"red\">title</span>\n            </h1>\n            <p marginBottom=\"1\">\n                <span fg=\"blue\">Paragraph with <span>span</span> and <div>div</div></span>\n            </p>\n        </body>\n    ",
-    "ast": [
-      {
-        "node": "body",
-        "content": [
-          {
-            "node": "text",
-            "value": "\n            "
-          },
-          {
-            "node": "h1",
-            "marginBottom": "1",
-            "content": [
-              {
-                "node": "text",
-                "value": "\n                "
-              },
-              {
-                "node": "span",
+            }
+        ],
+        "output": "\n\u001b[1mtitle with bold - inferred\u001b[22m"
+    },
+    {
+        "input": "<h1 bold=\"true\">title with bold - true</h1>",
+        "ast": [
+            {
+                "node": "h1",
+                "bold": "true",
+                "content": [
+                    {
+                        "node": "text",
+                        "value": "title with bold - true"
+                    }
+                ]
+            }
+        ],
+        "output": "\n\u001b[1mtitle with bold - true\u001b[22m"
+    },
+    {
+        "input": "<h1 bold=\"yes\">title with bold - yes</h1>",
+        "ast": [
+            {
+                "node": "h1",
+                "bold": "yes",
+                "content": [
+                    {
+                        "node": "text",
+                        "value": "title with bold - yes"
+                    }
+                ]
+            }
+        ],
+        "output": "\n\u001b[1mtitle with bold - yes\u001b[22m"
+    },
+    {
+        "input": "<h1 bold=\"false\">title without bold - false</h1>",
+        "ast": [
+            {
+                "node": "h1",
+                "bold": "false",
+                "content": [
+                    {
+                        "node": "text",
+                        "value": "title without bold - false"
+                    }
+                ]
+            }
+        ],
+        "output": "\n\u001b[1mtitle without bold - false\u001b[22m"
+    },
+    {
+        "input": "<h1 bold=\"no\">title without bold - no</h1>",
+        "ast": [
+            {
+                "node": "h1",
+                "bold": "no",
+                "content": [
+                    {
+                        "node": "text",
+                        "value": "title without bold - no"
+                    }
+                ]
+            }
+        ],
+        "output": "\n\u001b[1mtitle without bold - no\u001b[22m"
+    },
+    {
+        "input": "<h1 underline>title with underline - inferred</h1>",
+        "ast": [
+            {
+                "node": "h1",
+                "underline": "true",
+                "content": [
+                    {
+                        "node": "text",
+                        "value": "title with underline - inferred"
+                    }
+                ]
+            }
+        ],
+        "output": "\ntitle with underline - inferred\u001b[24m"
+    },
+    {
+        "input": "<h1 underline=\"true\">title with underline - true</h1>",
+        "ast": [
+            {
+                "node": "h1",
+                "underline": "true",
+                "content": [
+                    {
+                        "node": "text",
+                        "value": "title with underline - true"
+                    }
+                ]
+            }
+        ],
+        "output": "\ntitle with underline - true\u001b[24m"
+    },
+    {
+        "input": "<h1 underline=\"yes\">title with underline - yes</h1>",
+        "ast": [
+            {
+                "node": "h1",
+                "underline": "yes",
+                "content": [
+                    {
+                        "node": "text",
+                        "value": "title with underline - yes"
+                    }
+                ]
+            }
+        ],
+        "output": "\ntitle with underline - yes\u001b[24m"
+    },
+    {
+        "input": "<h1 underline=\"single\">title with single underline</h1>",
+        "ast": [
+            {
+                "node": "h1",
+                "underline": "single",
+                "content": [
+                    {
+                        "node": "text",
+                        "value": "title with single underline"
+                    }
+                ]
+            }
+        ],
+        "output": "\n\u001b[4mtitle with single underline\u001b[24m"
+    },
+    {
+        "input": "<h1 underline=\"double\">title with double underline</h1>",
+        "ast": [
+            {
+                "node": "h1",
+                "underline": "double",
+                "content": [
+                    {
+                        "node": "text",
+                        "value": "title with double underline"
+                    }
+                ]
+            }
+        ],
+        "output": "\n\u001b[21mtitle with double underline\u001b[24m"
+    },
+    {
+        "input": "<h1 underline=\"false\">title without underline - false</h1>",
+        "ast": [
+            {
+                "node": "h1",
+                "underline": "false",
+                "content": [
+                    {
+                        "node": "text",
+                        "value": "title without underline - false"
+                    }
+                ]
+            }
+        ],
+        "output": "\ntitle without underline - false\u001b[24m"
+    },
+    {
+        "input": "<h1 underline=\"no\">title without underline - no</h1>",
+        "ast": [
+            {
+                "node": "h1",
+                "underline": "no",
+                "content": [
+                    {
+                        "node": "text",
+                        "value": "title without underline - no"
+                    }
+                ]
+            }
+        ],
+        "output": "\ntitle without underline - no\u001b[24m"
+    },
+    {
+        "input": "<h1 underline=\"none\">title without underline - none</h1>",
+        "ast": [
+            {
+                "node": "h1",
+                "underline": "none",
+                "content": [
+                    {
+                        "node": "text",
+                        "value": "title without underline - none"
+                    }
+                ]
+            }
+        ],
+        "output": "\ntitle without underline - none\u001b[24m"
+    },
+    {
+        "input": "<h1 italics>title with italics</h1>",
+        "ast": [
+            {
+                "node": "h1",
+                "italics": "true",
+                "content": [
+                    {
+                        "node": "text",
+                        "value": "title with italics"
+                    }
+                ]
+            }
+        ],
+        "output": "\n\u001b[3mtitle with italics\u001b[23m"
+    },
+    {
+        "input": "<h1 italics=\"true\">title with italics</h1>",
+        "ast": [
+            {
+                "node": "h1",
+                "italics": "true",
+                "content": [
+                    {
+                        "node": "text",
+                        "value": "title with italics"
+                    }
+                ]
+            }
+        ],
+        "output": "\n\u001b[3mtitle with italics\u001b[23m"
+    },
+    {
+        "input": "<h1 italics=\"yes\">title with italics</h1>",
+        "ast": [
+            {
+                "node": "h1",
+                "italics": "yes",
+                "content": [
+                    {
+                        "node": "text",
+                        "value": "title with italics"
+                    }
+                ]
+            }
+        ],
+        "output": "\n\u001b[3mtitle with italics\u001b[23m"
+    },
+    {
+        "input": "<h1 italics=\"false\">title without italics</h1>",
+        "ast": [
+            {
+                "node": "h1",
+                "italics": "false",
+                "content": [
+                    {
+                        "node": "text",
+                        "value": "title without italics"
+                    }
+                ]
+            }
+        ],
+        "output": "\n\u001b[3mtitle without italics\u001b[23m"
+    },
+    {
+        "input": "<h1 italics=\"no\">title without italics</h1>",
+        "ast": [
+            {
+                "node": "h1",
+                "italics": "no",
+                "content": [
+                    {
+                        "node": "text",
+                        "value": "title without italics"
+                    }
+                ]
+            }
+        ],
+        "output": "\n\u001b[3mtitle without italics\u001b[23m"
+    },
+    {
+        "input": "<h1 fg=\"red\">title with red foreground</h1>",
+        "ast": [
+            {
+                "node": "h1",
                 "fg": "red",
                 "content": [
-                  {
-                    "node": "text",
-                    "value": "title"
-                  }
+                    {
+                        "node": "text",
+                        "value": "title with red foreground"
+                    }
                 ]
-              }
-            ]
-          },
-          {
-            "node": "p",
-            "marginBottom": "1",
-            "content": [
-              {
-                "node": "text",
-                "value": "\n                "
-              },
-              {
-                "node": "span",
+            }
+        ],
+        "output": "\n\u001b[31mtitle with red foreground\u001b[39m"
+    },
+    {
+        "input": "<h1 fg=\"blue\">title with blue foreground</h1>",
+        "ast": [
+            {
+                "node": "h1",
                 "fg": "blue",
                 "content": [
-                  {
-                    "node": "text",
-                    "value": "Paragraph with "
-                  },
-                  {
-                    "node": "span",
-                    "content": [
-                      {
+                    {
                         "node": "text",
-                        "value": "span"
-                      }
-                    ]
-                  },
-                  {
-                    "node": "text",
-                    "value": "and "
-                  },
-                  {
-                    "node": "div",
-                    "content": [
-                      {
-                        "node": "text",
-                        "value": "div"
-                      }
-                    ]
-                  }
+                        "value": "title with blue foreground"
+                    }
                 ]
-              }
-            ]
-          }
-        ]
-      }
-    ],
-    "output": "\n\n\u001b[31mtitle\u001b[39m\n\n\u001b[34mParagraph withspanand\ndiv\u001b[39m\n"
-  }
+            }
+        ],
+        "output": "\n\u001b[34mtitle with blue foreground\u001b[39m"
+    },
+    {
+        "input": "<h1 fg=\"green\">title with green foreground</h1>",
+        "ast": [
+            {
+                "node": "h1",
+                "fg": "green",
+                "content": [
+                    {
+                        "node": "text",
+                        "value": "title with green foreground"
+                    }
+                ]
+            }
+        ],
+        "output": "\n\u001b[32mtitle with green foreground\u001b[39m"
+    },
+    {
+        "input": "<h1 fg=\"yellow\">title with yellow foreground</h1>",
+        "ast": [
+            {
+                "node": "h1",
+                "fg": "yellow",
+                "content": [
+                    {
+                        "node": "text",
+                        "value": "title with yellow foreground"
+                    }
+                ]
+            }
+        ],
+        "output": "\n\u001b[33mtitle with yellow foreground\u001b[39m"
+    },
+    {
+        "input": "<h1 fg=\"cyan\">title with cyan foreground</h1>",
+        "ast": [
+            {
+                "node": "h1",
+                "fg": "cyan",
+                "content": [
+                    {
+                        "node": "text",
+                        "value": "title with cyan foreground"
+                    }
+                ]
+            }
+        ],
+        "output": "\n\u001b[36mtitle with cyan foreground\u001b[39m"
+    },
+    {
+        "input": "<h1 fg=\"magenta\">title with magenta foreground</h1>",
+        "ast": [
+            {
+                "node": "h1",
+                "fg": "magenta",
+                "content": [
+                    {
+                        "node": "text",
+                        "value": "title with magenta foreground"
+                    }
+                ]
+            }
+        ],
+        "output": "\n\u001b[35mtitle with magenta foreground\u001b[39m"
+    },
+    {
+        "input": "<h1 fg=\"black\">title with black foreground</h1>",
+        "ast": [
+            {
+                "node": "h1",
+                "fg": "black",
+                "content": [
+                    {
+                        "node": "text",
+                        "value": "title with black foreground"
+                    }
+                ]
+            }
+        ],
+        "output": "\n\u001b[30mtitle with black foreground\u001b[39m"
+    },
+    {
+        "input": "<h1 fg=\"white\">title with white foreground</h1>",
+        "ast": [
+            {
+                "node": "h1",
+                "fg": "white",
+                "content": [
+                    {
+                        "node": "text",
+                        "value": "title with white foreground"
+                    }
+                ]
+            }
+        ],
+        "output": "\n\u001b[37mtitle with white foreground\u001b[39m"
+    },
+    {
+        "input": "<h1 fg=\"gray\">title with gray foreground</h1>",
+        "ast": [
+            {
+                "node": "h1",
+                "fg": "gray",
+                "content": [
+                    {
+                        "node": "text",
+                        "value": "title with gray foreground"
+                    }
+                ]
+            }
+        ],
+        "output": "\n\u001b[90mtitle with gray foreground\u001b[39m"
+    },
+    {
+        "input": "<h1 fg=\"brightred\">title with bright-red foreground</h1>",
+        "ast": [
+            {
+                "node": "h1",
+                "fg": "brightred",
+                "content": [
+                    {
+                        "node": "text",
+                        "value": "title with bright-red foreground"
+                    }
+                ]
+            }
+        ],
+        "output": "\n\u001b[mtitle with bright-red foreground\u001b[39m"
+    },
+    {
+        "input": "<h1 fg=\"brightblue\">title with bright-blue foreground</h1>",
+        "ast": [
+            {
+                "node": "h1",
+                "fg": "brightblue",
+                "content": [
+                    {
+                        "node": "text",
+                        "value": "title with bright-blue foreground"
+                    }
+                ]
+            }
+        ],
+        "output": "\n\u001b[mtitle with bright-blue foreground\u001b[39m"
+    },
+    {
+        "input": "<h1 fg=\"brightgreen\">title with bright-green foreground</h1>",
+        "ast": [
+            {
+                "node": "h1",
+                "fg": "brightgreen",
+                "content": [
+                    {
+                        "node": "text",
+                        "value": "title with bright-green foreground"
+                    }
+                ]
+            }
+        ],
+        "output": "\n\u001b[mtitle with bright-green foreground\u001b[39m"
+    },
+    {
+        "input": "<h1 fg=\"brightyellow\">title with bright-yellow foreground</h1>",
+        "ast": [
+            {
+                "node": "h1",
+                "fg": "brightyellow",
+                "content": [
+                    {
+                        "node": "text",
+                        "value": "title with bright-yellow foreground"
+                    }
+                ]
+            }
+        ],
+        "output": "\n\u001b[mtitle with bright-yellow foreground\u001b[39m"
+    },
+    {
+        "input": "<h1 fg=\"brightcyan\">title with bright-cyan foreground</h1>",
+        "ast": [
+            {
+                "node": "h1",
+                "fg": "brightcyan",
+                "content": [
+                    {
+                        "node": "text",
+                        "value": "title with bright-cyan foreground"
+                    }
+                ]
+            }
+        ],
+        "output": "\n\u001b[mtitle with bright-cyan foreground\u001b[39m"
+    },
+    {
+        "input": "<h1 fg=\"brightmagenta\">title with bright-magenta foreground</h1>",
+        "ast": [
+            {
+                "node": "h1",
+                "fg": "brightmagenta",
+                "content": [
+                    {
+                        "node": "text",
+                        "value": "title with bright-magenta foreground"
+                    }
+                ]
+            }
+        ],
+        "output": "\n\u001b[mtitle with bright-magenta foreground\u001b[39m"
+    },
+    {
+        "input": "<h1 bg=\"red\">title with red background</h1>",
+        "ast": [
+            {
+                "node": "h1",
+                "bg": "red",
+                "content": [
+                    {
+                        "node": "text",
+                        "value": "title with red background"
+                    }
+                ]
+            }
+        ],
+        "output": "\n\u001b[41mtitle with red background\u001b[49m"
+    },
+    {
+        "input": "<h1 bg=\"blue\">title with blue background</h1>",
+        "ast": [
+            {
+                "node": "h1",
+                "bg": "blue",
+                "content": [
+                    {
+                        "node": "text",
+                        "value": "title with blue background"
+                    }
+                ]
+            }
+        ],
+        "output": "\n\u001b[44mtitle with blue background\u001b[49m"
+    },
+    {
+        "input": "<h1 bg=\"green\">title with green background</h1>",
+        "ast": [
+            {
+                "node": "h1",
+                "bg": "green",
+                "content": [
+                    {
+                        "node": "text",
+                        "value": "title with green background"
+                    }
+                ]
+            }
+        ],
+        "output": "\n\u001b[42mtitle with green background\u001b[49m"
+    },
+    {
+        "input": "<h1 bg=\"yellow\">title with yellow background</h1>",
+        "ast": [
+            {
+                "node": "h1",
+                "bg": "yellow",
+                "content": [
+                    {
+                        "node": "text",
+                        "value": "title with yellow background"
+                    }
+                ]
+            }
+        ],
+        "output": "\n\u001b[43mtitle with yellow background\u001b[49m"
+    },
+    {
+        "input": "<h1 bg=\"cyan\">title with cyan background</h1>",
+        "ast": [
+            {
+                "node": "h1",
+                "bg": "cyan",
+                "content": [
+                    {
+                        "node": "text",
+                        "value": "title with cyan background"
+                    }
+                ]
+            }
+        ],
+        "output": "\n\u001b[46mtitle with cyan background\u001b[49m"
+    },
+    {
+        "input": "<h1 bg=\"magenta\">title with magenta background</h1>",
+        "ast": [
+            {
+                "node": "h1",
+                "bg": "magenta",
+                "content": [
+                    {
+                        "node": "text",
+                        "value": "title with magenta background"
+                    }
+                ]
+            }
+        ],
+        "output": "\n\u001b[45mtitle with magenta background\u001b[49m"
+    },
+    {
+        "input": "<h1 bg=\"black\">title with black background</h1>",
+        "ast": [
+            {
+                "node": "h1",
+                "bg": "black",
+                "content": [
+                    {
+                        "node": "text",
+                        "value": "title with black background"
+                    }
+                ]
+            }
+        ],
+        "output": "\n\u001b[40mtitle with black background\u001b[49m"
+    },
+    {
+        "input": "<h1 bg=\"white\">title with white background</h1>",
+        "ast": [
+            {
+                "node": "h1",
+                "bg": "white",
+                "content": [
+                    {
+                        "node": "text",
+                        "value": "title with white background"
+                    }
+                ]
+            }
+        ],
+        "output": "\n\u001b[47mtitle with white background\u001b[49m"
+    },
+    {
+        "input": "<h1 bg=\"gray\">title with gray background</h1>",
+        "ast": [
+            {
+                "node": "h1",
+                "bg": "gray",
+                "content": [
+                    {
+                        "node": "text",
+                        "value": "title with gray background"
+                    }
+                ]
+            }
+        ],
+        "output": "\n\u001b[100mtitle with gray background\u001b[49m"
+    },
+    {
+        "input": "<h1 bg=\"brightred\">title with bright-red background</h1>",
+        "ast": [
+            {
+                "node": "h1",
+                "bg": "brightred",
+                "content": [
+                    {
+                        "node": "text",
+                        "value": "title with bright-red background"
+                    }
+                ]
+            }
+        ],
+        "output": "\n\u001b[mtitle with bright-red background\u001b[49m"
+    },
+    {
+        "input": "<h1 bg=\"brightblue\">title with bright-blue background</h1>",
+        "ast": [
+            {
+                "node": "h1",
+                "bg": "brightblue",
+                "content": [
+                    {
+                        "node": "text",
+                        "value": "title with bright-blue background"
+                    }
+                ]
+            }
+        ],
+        "output": "\n\u001b[mtitle with bright-blue background\u001b[49m"
+    },
+    {
+        "input": "<h1 bg=\"brightgreen\">title with bright-green background</h1>",
+        "ast": [
+            {
+                "node": "h1",
+                "bg": "brightgreen",
+                "content": [
+                    {
+                        "node": "text",
+                        "value": "title with bright-green background"
+                    }
+                ]
+            }
+        ],
+        "output": "\n\u001b[mtitle with bright-green background\u001b[49m"
+    },
+    {
+        "input": "<h1 bg=\"brightyellow\">title with bright-yellow background</h1>",
+        "ast": [
+            {
+                "node": "h1",
+                "bg": "brightyellow",
+                "content": [
+                    {
+                        "node": "text",
+                        "value": "title with bright-yellow background"
+                    }
+                ]
+            }
+        ],
+        "output": "\n\u001b[mtitle with bright-yellow background\u001b[49m"
+    },
+    {
+        "input": "<h1 bg=\"brightcyan\">title with bright-cyan background</h1>",
+        "ast": [
+            {
+                "node": "h1",
+                "bg": "brightcyan",
+                "content": [
+                    {
+                        "node": "text",
+                        "value": "title with bright-cyan background"
+                    }
+                ]
+            }
+        ],
+        "output": "\n\u001b[mtitle with bright-cyan background\u001b[49m"
+    },
+    {
+        "input": "<h1 bg=\"brightmagenta\">title with bright-magenta background</h1>",
+        "ast": [
+            {
+                "node": "h1",
+                "bg": "brightmagenta",
+                "content": [
+                    {
+                        "node": "text",
+                        "value": "title with bright-magenta background"
+                    }
+                ]
+            }
+        ],
+        "output": "\n\u001b[mtitle with bright-magenta background\u001b[49m"
+    },
+    {
+        "input": "<h1 fg=\"red\" bg=\"blue\">title with red foreground and blue background</h1>",
+        "ast": [
+            {
+                "node": "h1",
+                "fg": "red",
+                "bg": "blue",
+                "content": [
+                    {
+                        "node": "text",
+                        "value": "title with red foreground and blue background"
+                    }
+                ]
+            }
+        ],
+        "output": "\n\u001b[31;44mtitle with red foreground and blue background\u001b[39;49m"
+    },
+    {
+        "input": "<h1 fg=\"blue\" bg=\"red\">title with blue foreground and red background</h1>",
+        "ast": [
+            {
+                "node": "h1",
+                "fg": "blue",
+                "bg": "red",
+                "content": [
+                    {
+                        "node": "text",
+                        "value": "title with blue foreground and red background"
+                    }
+                ]
+            }
+        ],
+        "output": "\n\u001b[34;41mtitle with blue foreground and red background\u001b[39;49m"
+    },
+    {
+        "input": "<h1 margin=\"1\">title with margin</h1>",
+        "ast": [
+            {
+                "node": "h1",
+                "margin": "1",
+                "content": [
+                    {
+                        "node": "text",
+                        "value": "title with margin"
+                    }
+                ]
+            }
+        ],
+        "output": "\n\n title with margin \n"
+    },
+    {
+        "input": "<h1 margin=\"1\" marginTop=\"2\">title with margin</h1>",
+        "ast": [
+            {
+                "node": "h1",
+                "margin": "1",
+                "marginTop": "2",
+                "content": [
+                    {
+                        "node": "text",
+                        "value": "title with margin"
+                    }
+                ]
+            }
+        ],
+        "output": "\n\n\n title with margin \n"
+    },
+    {
+        "input": "<h1 margin=\"1\" marginBottom=\"2\">title with margin</h1>",
+        "ast": [
+            {
+                "node": "h1",
+                "margin": "1",
+                "marginBottom": "2",
+                "content": [
+                    {
+                        "node": "text",
+                        "value": "title with margin"
+                    }
+                ]
+            }
+        ],
+        "output": "\n\n title with margin \n\n"
+    },
+    {
+        "input": "<h1 margin=\"1\" marginLeft=\"2\">title with margin</h1>",
+        "ast": [
+            {
+                "node": "h1",
+                "margin": "1",
+                "marginLeft": "2",
+                "content": [
+                    {
+                        "node": "text",
+                        "value": "title with margin"
+                    }
+                ]
+            }
+        ],
+        "output": "\n\n  title with margin \n"
+    },
+    {
+        "input": "<h1 margin=\"1\" marginRight=\"2\">title with margin</h1>",
+        "ast": [
+            {
+                "node": "h1",
+                "margin": "1",
+                "marginRight": "2",
+                "content": [
+                    {
+                        "node": "text",
+                        "value": "title with margin"
+                    }
+                ]
+            }
+        ],
+        "output": "\n\n title with margin  \n"
+    },
+    {
+        "input": "<h1 margin=\"1\" marginTop=\"2\" marginBottom=\"3\" marginLeft=\"4\" marginRight=\"5\">title with margin</h1>",
+        "ast": [
+            {
+                "node": "h1",
+                "margin": "1",
+                "marginTop": "2",
+                "marginBottom": "3",
+                "marginLeft": "4",
+                "marginRight": "5",
+                "content": [
+                    {
+                        "node": "text",
+                        "value": "title with margin"
+                    }
+                ]
+            }
+        ],
+        "output": "\n\n\n    title with margin     \n\n\n"
+    },
+    {
+        "input": "<h1 margin=\"1\" marginTop=\"2\" marginBottom=\"3\" marginLeft=\"4\" marginRight=\"5\" fg=\"red\">title with margin</h1>",
+        "ast": [
+            {
+                "node": "h1",
+                "margin": "1",
+                "marginTop": "2",
+                "marginBottom": "3",
+                "marginLeft": "4",
+                "marginRight": "5",
+                "fg": "red",
+                "content": [
+                    {
+                        "node": "text",
+                        "value": "title with margin"
+                    }
+                ]
+            }
+        ],
+        "output": "\n\n\n    \u001b[31mtitle with margin\u001b[39m     \n\n\n"
+    },
+    {
+        "input": "<h1 margin=\"1\" marginTop=\"2\" marginBottom=\"3\" marginLeft=\"4\" marginRight=\"5\" bg=\"red\">title with margin</h1>",
+        "ast": [
+            {
+                "node": "h1",
+                "margin": "1",
+                "marginTop": "2",
+                "marginBottom": "3",
+                "marginLeft": "4",
+                "marginRight": "5",
+                "bg": "red",
+                "content": [
+                    {
+                        "node": "text",
+                        "value": "title with margin"
+                    }
+                ]
+            }
+        ],
+        "output": "\n\n\n    \u001b[41mtitle with margin\u001b[49m     \n\n\n"
+    },
+    {
+        "input": "<h1 margin=\"1\" marginTop=\"2\" marginBottom=\"3\" marginLeft=\"4\" marginRight=\"5\" fg=\"red\" bg=\"blue\">title with margin</h1>",
+        "ast": [
+            {
+                "node": "h1",
+                "margin": "1",
+                "marginTop": "2",
+                "marginBottom": "3",
+                "marginLeft": "4",
+                "marginRight": "5",
+                "fg": "red",
+                "bg": "blue",
+                "content": [
+                    {
+                        "node": "text",
+                        "value": "title with margin"
+                    }
+                ]
+            }
+        ],
+        "output": "\n\n\n    \u001b[31;44mtitle with margin\u001b[39;49m     \n\n\n"
+    },
+    {
+        "input": "<h1 margin=\"1\" marginTop=\"2\" marginBottom=\"3\" marginLeft=\"4\" marginRight=\"5\" fg=\"red\" bg=\"blue\" bold>title with margin</h1>",
+        "ast": [
+            {
+                "node": "h1",
+                "margin": "1",
+                "marginTop": "2",
+                "marginBottom": "3",
+                "marginLeft": "4",
+                "marginRight": "5",
+                "fg": "red",
+                "bg": "blue",
+                "bold": "true",
+                "content": [
+                    {
+                        "node": "text",
+                        "value": "title with margin"
+                    }
+                ]
+            }
+        ],
+        "output": "\n\n\n    \u001b[31;44;1mtitle with margin\u001b[39;49;22m     \n\n\n"
+    },
+    {
+        "input": "<body><h1>title</h1></body>",
+        "ast": [
+            {
+                "node": "body",
+                "content": [
+                    {
+                        "node": "h1",
+                        "content": [
+                            {
+                                "node": "text",
+                                "value": "title"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "output": "\n\ntitle"
+    },
+    {
+        "input": "<body><h1>title</h1><h2>subtitle</h2><p>Paragraph with <span>span</span> and <div>div</div></p></body>",
+        "ast": [
+            {
+                "node": "body",
+                "content": [
+                    {
+                        "node": "h1",
+                        "content": [
+                            {
+                                "node": "text",
+                                "value": "title"
+                            }
+                        ]
+                    },
+                    {
+                        "node": "h2",
+                        "content": [
+                            {
+                                "node": "text",
+                                "value": "subtitle"
+                            }
+                        ]
+                    },
+                    {
+                        "node": "p",
+                        "content": [
+                            {
+                                "node": "text",
+                                "value": "Paragraph with "
+                            },
+                            {
+                                "node": "span",
+                                "content": [
+                                    {
+                                        "node": "text",
+                                        "value": "span"
+                                    }
+                                ]
+                            },
+                            {
+                                "node": "text",
+                                "value": "and "
+                            },
+                            {
+                                "node": "div",
+                                "content": [
+                                    {
+                                        "node": "text",
+                                        "value": "div"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "output": "\n\ntitle\nsubtitle\nParagraph withspanand\ndiv"
+    },
+    {
+        "input": "<h1>Multiple top-level elements</h1><h2>subtitle</h2><p>Paragraph with <span>span</span> and <div>div</div></p>",
+        "ast": [
+            {
+                "node": "h1",
+                "content": [
+                    {
+                        "node": "text",
+                        "value": "Multiple top-level elements"
+                    }
+                ]
+            },
+            {
+                "node": "h2",
+                "content": [
+                    {
+                        "node": "text",
+                        "value": "subtitle"
+                    }
+                ]
+            },
+            {
+                "node": "p",
+                "content": [
+                    {
+                        "node": "text",
+                        "value": "Paragraph with "
+                    },
+                    {
+                        "node": "span",
+                        "content": [
+                            {
+                                "node": "text",
+                                "value": "span"
+                            }
+                        ]
+                    },
+                    {
+                        "node": "text",
+                        "value": "and "
+                    },
+                    {
+                        "node": "div",
+                        "content": [
+                            {
+                                "node": "text",
+                                "value": "div"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "output": "\nMultiple top-level elements\nsubtitle\nParagraph withspanand\ndiv"
+    },
+    {
+        "input": "\n        <h1 bold marginBottom=\"1\">My Console App</h1>\n        <h2 fg=\"gray\" marginBottom=\"1\">A little something I wrote</h2>\n        <p marginBottom=\"1\">\n            In order to used this app, do the following:\n            <li bullet=\"*\" marginBottom=\"1\"> Create a config file</li>\n            <li bullet=\"*\" marginBottom=\"1\"> Run the utility with the -h flag</li>\n            <li bullet=\"*\" marginBottom=\"1\"> etc...</li>\n        </p>\n    ",
+        "ast": [
+            {
+                "node": "h1",
+                "bold": "true",
+                "marginBottom": "1",
+                "content": [
+                    {
+                        "node": "text",
+                        "value": "My Console App"
+                    }
+                ]
+            },
+            {
+                "node": "h2",
+                "fg": "gray",
+                "marginBottom": "1",
+                "content": [
+                    {
+                        "node": "text",
+                        "value": "A little something I wrote"
+                    }
+                ]
+            },
+            {
+                "node": "p",
+                "marginBottom": "1",
+                "content": [
+                    {
+                        "node": "text",
+                        "value": "\n            In order to used this app, do the following:\n            "
+                    },
+                    {
+                        "node": "li",
+                        "bullet": "*",
+                        "marginBottom": "1",
+                        "content": [
+                            {
+                                "node": "text",
+                                "value": " Create a config file"
+                            }
+                        ]
+                    },
+                    {
+                        "node": "li",
+                        "bullet": "*",
+                        "marginBottom": "1",
+                        "content": [
+                            {
+                                "node": "text",
+                                "value": " Run the utility with the -h flag"
+                            }
+                        ]
+                    },
+                    {
+                        "node": "li",
+                        "bullet": "*",
+                        "marginBottom": "1",
+                        "content": [
+                            {
+                                "node": "text",
+                                "value": " etc..."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "output": "\n\u001b[1mMy Console App\u001b[22m\n\n\u001b[90mA little something I wrote\u001b[39m\n\nIn order to used this app, do the following:\n* Create a config file\n\n* Run the utility with the -h flag\n\n* etc...\n\n"
+    },
+    {
+        "input": "\n        <body>\n            <h1 marginBottom=\"1\">\n                <span fg=\"red\">title</span>\n            </h1>\n            <p marginBottom=\"1\">\n                <span fg=\"blue\">Paragraph with <span>span</span> and <div>div</div></span>\n            </p>\n        </body>\n    ",
+        "ast": [
+            {
+                "node": "body",
+                "content": [
+                    {
+                        "node": "text",
+                        "value": "\n            "
+                    },
+                    {
+                        "node": "h1",
+                        "marginBottom": "1",
+                        "content": [
+                            {
+                                "node": "text",
+                                "value": "\n                "
+                            },
+                            {
+                                "node": "span",
+                                "fg": "red",
+                                "content": [
+                                    {
+                                        "node": "text",
+                                        "value": "title"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "node": "p",
+                        "marginBottom": "1",
+                        "content": [
+                            {
+                                "node": "text",
+                                "value": "\n                "
+                            },
+                            {
+                                "node": "span",
+                                "fg": "blue",
+                                "content": [
+                                    {
+                                        "node": "text",
+                                        "value": "Paragraph with "
+                                    },
+                                    {
+                                        "node": "span",
+                                        "content": [
+                                            {
+                                                "node": "text",
+                                                "value": "span"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "node": "text",
+                                        "value": "and "
+                                    },
+                                    {
+                                        "node": "div",
+                                        "content": [
+                                            {
+                                                "node": "text",
+                                                "value": "div"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "output": "\n\n\u001b[31mtitle\u001b[39m\n\n\u001b[34mParagraph withspanand\ndiv\u001b[39m\n"
+    }
 ]

@@ -1,6 +1,9 @@
 import { describe, expect, it } from 'bun:test';
-import { TerminalStyle, escapeCodeFromName } from "./escape-code-from-name";
-import { colorToTerminalStyle, getTextEscapeCodesFromProperties } from './get-text-escape-codes-from-properties';
+import { TerminalStyle, escapeCodeFromName } from './escape-code-from-name';
+import {
+    colorToTerminalStyle,
+    getTextEscapeCodesFromProperties,
+} from './get-text-escape-codes-from-properties';
 import { ValidTags, type TextNodeBase } from '../compiler/types';
 
 describe('colorToTerminalStyle', () => {
@@ -25,13 +28,25 @@ describe('getTextEscapeCodesFromProperties', () => {
             node: ValidTags.h1,
             fg: 'red' as const,
             bg: 'blue' as const,
-            bold: "true",
+            bold: 'true',
             underline: 'single',
-            italics: "true",
+            italics: 'true',
         };
         const expectedOutput = {
-            on: escapeCodeFromName([TerminalStyle.fgRed, TerminalStyle.bgBlue, TerminalStyle.bold, TerminalStyle.underline, TerminalStyle.italic]),
-            off: escapeCodeFromName([TerminalStyle.fgDefault, TerminalStyle.bgDefault, TerminalStyle.boldOff, TerminalStyle.underlineOff, TerminalStyle.italicOff]),
+            on: escapeCodeFromName([
+                TerminalStyle.fgRed,
+                TerminalStyle.bgBlue,
+                TerminalStyle.bold,
+                TerminalStyle.underline,
+                TerminalStyle.italic,
+            ]),
+            off: escapeCodeFromName([
+                TerminalStyle.fgDefault,
+                TerminalStyle.bgDefault,
+                TerminalStyle.boldOff,
+                TerminalStyle.underlineOff,
+                TerminalStyle.italicOff,
+            ]),
         };
         expect(getTextEscapeCodesFromProperties(node)).toEqual(expectedOutput);
     });
@@ -40,11 +55,14 @@ describe('getTextEscapeCodesFromProperties', () => {
         const node: TextNodeBase = {
             node: ValidTags.h1,
             fg: 'green' as const,
-            bold: "true",
+            bold: 'true',
         };
         const expectedOutput = {
             on: escapeCodeFromName([TerminalStyle.fgGreen, TerminalStyle.bold]),
-            off: escapeCodeFromName([TerminalStyle.fgDefault, TerminalStyle.boldOff]),
+            off: escapeCodeFromName([
+                TerminalStyle.fgDefault,
+                TerminalStyle.boldOff,
+            ]),
         };
         expect(getTextEscapeCodesFromProperties(node)).toEqual(expectedOutput);
     });
