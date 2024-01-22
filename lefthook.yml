@@ -5,9 +5,9 @@
 
 pre-push:
   commands:
-    packages-audit:
-      tags: frontend security
-      run: npm audit
+    update-build:
+      tags: build
+      run: bun run bld
 
 pre-commit:
   parallel: true
