@@ -17,7 +17,7 @@ for (const target of targets) {
         outdir: resolve(projectDir, `./dist/${target}`),
         minify: false,
         sourcemap: 'external',
-        splitting: true,
+        splitting: false,
         target,
     });
 
