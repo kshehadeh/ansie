@@ -60,7 +60,7 @@
   "peerDependencies": {
     "typescript": "^5.0.0"
   },
-  "dependencies": {},
+  "dependencies": { "yargs": "^17.7.2" },
   "eslintIgnore": [
     "generated-parser.js"
   ]

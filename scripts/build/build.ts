@@ -7,6 +7,8 @@ const targets: Target[] = ['node', /*'bun'*/];
 
 for (const target of targets) {
     console.log("Building for target:", target)
+    console.log("Output dir:", resolve(projectDir, `./dist/${target}`))
+
     const outputs = await build({
         entrypoints: [
             join(projectDir, './index.ts'),
@@ -25,4 +27,11 @@ for (const target of targets) {
             fs.chmodSync(out.path, '711')
         }
     })
+
+    if (outputs.success) {
+        console.info("Successfully built package");
+    } else {
+        console.error("Failed to build package:");
+        console.error(outputs.logs.join('\n'))
+    }
 }
