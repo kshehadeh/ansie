@@ -23,7 +23,11 @@
 
         // Some stricter flags
         "useUnknownInCatchVariables": true,
-        "noPropertyAccessFromIndexSignature": true
+        "noPropertyAccessFromIndexSignature": true,
+
+
+        // Other
+        "esModuleInterop": true
     },
 
     "include": ["../src/**/*.ts"]

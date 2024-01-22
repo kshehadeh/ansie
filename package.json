@@ -51,7 +51,10 @@
   },
   "devDependencies": {
     "@types/bun": "^1.0.2",
+    "@types/yargs": "^17.0.32",
+    "@typescript-eslint/eslint-plugin": "^6.19.0",
     "eslint": "^8.56.0",
+    "lefthook": "^1.6.0",
     "peggy": "^3.0.2",
     "prettier": "^3.2.2",
     "rimraf": "^5.0.5",
@@ -61,7 +64,6 @@
     "typescript": "^5.0.0"
   },
   "dependencies": {
-    "lefthook": "^1.6.0",
     "yargs": "^17.7.2"
   },
   "eslintIgnore": [

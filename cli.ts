@@ -42,7 +42,7 @@ function readStdinWithTimeout(timeout: number): Promise<string> {
         process.stdin.resume();
     });
 }
-const stdInput = await readStdinWithTimeout(1);
+const stdInput = await readStdinWithTimeout(10);
 
 const y = yargs(hideBin(process.argv))
     .scriptName('ansie')
