@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'bun:test';
-import fixtures from '../../test/compiler-fixtures.json';
+import fixtures from '../../test/generated/compiler-fixtures.json';
 import { compile } from '.';
 
 describe('Compiler', () => {

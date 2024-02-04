@@ -57,32 +57,6 @@ console.log(compose([h1('Title'), h2('A subtitle'), p('Paragraph')]).compile());
 //
 ```
 
-## Usage the CLI
-
-**⚠️ This is a very early release so the CLI and the markup may change**
-
-You can access the functionality in ansie through a CLI as in:
-
-```bash
-> ansie "<h1 bold>This is bold</h1>"
-```
-
-This will output:
-
-> **This is bold**
-
-You can also pipe in the markup to produce the output:
-
-```bash
-> echo "<h1 bold>This is bold</h1>" | ansie
-```
-
-> **This is bold**
-
-## Using the API
-
-**⚠️ This is a very early release so the API and the markup may change**
-
 ## Ansie Markup
 
 The markup language follows XML rules in that it uses a declarative tag-based system of angle brackets and attributes. The supported tags available today are:
@@ -227,6 +201,25 @@ Text can include emoji either through unicode or through _Slack_ style formattin
 | `:thumbsup-skin-tone-5:`    | 👍🏾    |
 | `:thumbsup-skin-tone-6:`    | 👍🏿    |
 
+## Using the API
+
+Once the package is installed, you can quickly get up and running by using the `compile` function which takes an ansie markup string and returns rich text using ansi codes.
+
+```typescript
+import { compile } from 'ansie';
+compile('<body>Hello, world</body>');
+```
+
+### Using Template Tags
+
+Ansie supports template tags allowing you to build string templates using tagged templates.
+
+```typescript
+import { ansie } from 'ansie';
+const person = 'world';
+console.log(ansie`<body>Hello, ${person}`);
+```
+
 ## Composition
 
 The library includes a Composer that allows for easy composition through a programmatic interface and includes the concept of _themes_. A
@@ -259,15 +252,15 @@ The order in which these nodes are rendered match the order they appear in the a
 
 | Function | Params                            | Description                                                                                     |
 | -------- | --------------------------------- | ----------------------------------------------------------------------------------------------- |
-| `h1`     | Text or _Child Nodes_, [*styles*] | Represents a top level header                                                                   |
-| `h2`     | Text or _Child Nodes_, [*styles*] | Represents a secondary header                                                                   |
-| `h3`     | Text or _Child Nodes_, [*styles*] | Represents a tertiary header                                                                    |
-| `span`   | Text or _Child Nodes_, [*styles*] | Represents inline text (usually only needed if doing alternate styling)                         |
-| `div`    | Text or _Child Nodes_, [*styles*] | Allows you to combine raw markup with composed items from above                                 |
-| `text`   | Text, [*styles*]                  | Inserts text as-is (but will replace `:emoji:`)                                                 |
-| `p`      | Text or _Child Nodes_, [*styles*] | Contained items are surrounded with `<color>`                                                   |
-| `list`   | _Child Nodes_, [*styles*]         | Adds a bulleted list item for each item in the passed array of nodes                            |
-| `br`     | [*styles*]                        | Inserts a `<br/>`                                                                               |
+| `h1`     | Text or _Child Nodes_, [_styles_] | Represents a top level header                                                                   |
+| `h2`     | Text or _Child Nodes_, [_styles_] | Represents a secondary header                                                                   |
+| `h3`     | Text or _Child Nodes_, [_styles_] | Represents a tertiary header                                                                    |
+| `span`   | Text or _Child Nodes_, [_styles_] | Represents inline text (usually only needed if doing alternate styling)                         |
+| `div`    | Text or _Child Nodes_, [_styles_] | Allows you to combine raw markup with composed items from above                                 |
+| `text`   | Text, [_styles_]                  | Inserts text as-is (but will replace `:emoji:`)                                                 |
+| `p`      | Text or _Child Nodes_, [_styles_] | Contained items are surrounded with `<color>`                                                   |
+| `list`   | _Child Nodes_, [_styles_]         | Adds a bulleted list item for each item in the passed array of nodes                            |
+| `br`     | [_styles_]                        | Inserts a `<br/>`                                                                               |
 | `bundle` | _Sibling Nodes_                   | Outputs a set of sibling nodes - useful when passing to other functions that need a single node |
 | `markup` | _Valid Markup_                    | Allows you to combine raw markup with composed items from above                                 |
 
@@ -295,6 +288,28 @@ The theme is made up of the following sections:
 | div     | Used to style generic blocks of text          |
 | list    | Used to indicate how lists should be styled   |
 | span    | Used to style generic inline elements of text |
+
+## Using the CLI
+
+**⚠️ This is a very early release so the CLI and the markup may change**
+
+You can access the functionality in ansie through a CLI as in:
+
+```bash
+> ansie "<h1 bold>This is bold</h1>"
+```
+
+This will output:
+
+> **This is bold**
+
+You can also pipe in the markup to produce the output:
+
+```bash
+> echo "<h1 bold>This is bold</h1>" | ansie
+```
+
+> **This is bold**
 
 ## Developing
 

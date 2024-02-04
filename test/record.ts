@@ -58,7 +58,7 @@ rl.question('Do you want to overwrite your fixtures? (y/n) ', answer => {
             recordCompilation(f),
         );
         writeFileSync(
-            resolve(currentDir, 'compiler-fixtures.json'),
+            resolve(currentDir, 'generated/compiler-fixtures.json'),
             JSON.stringify(compilationResults, null, 2),
             'utf8',
         );
@@ -68,7 +68,7 @@ rl.question('Do you want to overwrite your fixtures? (y/n) ', answer => {
             recordComposition(f),
         );
         writeFileSync(
-            resolve(currentDir, 'composer-fixtures.js'),
+            resolve(currentDir, 'generated/composer-fixtures.js'),
             `// AUTOMATICALLY GENERATED FILE - DO NOT EDIT - RUN bun run fixture:generate TO UPDATE
 import {compose, h1, h2, h3, span, div, p, body, text, markup, li} from '../src/composer'
 export default [\n${compositionResults

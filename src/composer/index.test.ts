@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'bun:test';
-import composerFixtures from '../../test/composer-fixtures';
+import composerFixtures from '../../test/generated/composer-fixtures';
 
 describe('Composer >', () => {
     for (const command of composerFixtures) {
