@@ -1,4 +1,4 @@
-import { parseString } from '../parser';
+import { parseAnsieMarkdown } from '../parser';
 
 import { AnsieNodeImpl, type AnsieNode, type Ast, ValidTags } from './types';
 import { CompilerError, type CompilerFormat } from './types';
@@ -103,11 +103,11 @@ class Compiler {
     }
 }
 
-export function compile(markup: string, format: CompilerFormat = 'ansi') {
-    const ast = parseString(markup);
+export function compile(markup: string, output: CompilerFormat = 'ansi') {
+    const ast = parseAnsieMarkdown(markup);
     if (ast) {
         const compiler = new Compiler(ast);
-        return compiler.compile(format);
+        return compiler.compile(output);
     } else {
         return '';
     }

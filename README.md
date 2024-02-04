@@ -1,6 +1,6 @@
 # Ansie
 
-A library used to render a simplified html-like declarative language to rich terminal text.
+A library used to render a simplified markdown+html like markup to rich terminal text.
 
 For example,
 
@@ -14,11 +14,18 @@ For example,
 <div underline="single" fg="gray">Footnote</div>
 ```
 
-The library contains three components:
+This is a fully markup-based example. But for simpler output constraints you can use a variation of markdown mixed with ansie markup:
 
-1. _Parser_ - this is used to convert a string to an Abstract Syntax Tree. You probably won't need to use this as it represents an incremental state
-2. _Compiler_ - Converts the abstract syntax tree to renderer terminal text. You can use this if you want to just pass in markup to get your terminal string.
-3. _Composer_ - A convenient set of methods to build markup through a functional syntax. You can use this if you want a nicer, functional way of building your markup.
+```markdown
+# Title
+
+## [c=blue]Subtitle goes here[/c]
+
+A description use the default text will appear here. But you can
+also include **embedded markup**
+
+<span underline="single">Footnote</span>
+```
 
 ## Installation
 
@@ -132,6 +139,12 @@ Tags can be nested and will render the way you would expect. So, for example,
 </body>
 ```
 
+You can mix free text with tags to create more readable strings like this:
+
+```xml
+This is a quick <span fg="blue">blue</span> test
+```
+
 ### Color Table
 
 | Color Names   |
@@ -200,6 +213,19 @@ Text can include emoji either through unicode or through _Slack_ style formattin
 | `:thumbsup-skin-tone-4:`    | 👍🏽    |
 | `:thumbsup-skin-tone-5:`    | 👍🏾    |
 | `:thumbsup-skin-tone-6:`    | 👍🏿    |
+
+### Markdown
+
+Ansie supports simpler markdown constructs to create more readable input. Support markdown includes:
+
+-   h1: `# Headline 1` translates to `<h1>Headline 1</h1>`
+-   h2: `# Headline 2` translates to `<h2>Headline 2</h2>`
+-   h3: `# Headline 3` translates to `<h3>Headline 3</h3>`
+-   bold: `**bold**` translates to `<span bold>bold</span>`
+-   italics: `**italics**` translates to `<span italics>italics</span>`
+-   color: `[c=blue]blue[/c]` translates to `<span fg="blue">blue</span>`
+
+But you can also mix both markdown and markup in the same input. The markdown will first converted to the analogous markup before being compiled to the final output.
 
 ## Using the API
 
@@ -332,6 +358,12 @@ If you added new tests to `test-strings.ts` you will need to generate a new `fix
 ```bash
 bun run test:record
 ```
+
+The library contains three components:
+
+1. _Parser_ - this is used to convert a string to an Abstract Syntax Tree. You probably won't need to use this as it represents an incremental state
+2. _Compiler_ - Converts the abstract syntax tree to renderer terminal text. You can use this if you want to just pass in markup to get your terminal string.
+3. _Composer_ - A convenient set of methods to build markup through a functional syntax. You can use this if you want a nicer, functional way of building your markup.
 
 ### Updating the Grammar
 

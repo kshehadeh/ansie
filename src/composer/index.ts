@@ -197,9 +197,10 @@ if (process.argv[1].includes('composer')) {
     // ]).toString()
 
     // console.log(compose(([h1('Title'), h2('A subtitle'), p('Paragraph')])).toString())
-    console.log(
-        compose([h1('Title'), h2('A subtitle'), p('Paragraph')]).toString(),
-    );
+    // console.log(
+    //     compose([h1('Title'), h2('A subtitle'), p('Paragraph')]).toString(),
+    // );
+    console.log(compose([markup('<h1>Hello</h1>')]).toString());
     // console.log(compose([
     //     h1('Title'),
     //     h2('A subtitle'),

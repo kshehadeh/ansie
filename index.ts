@@ -1,5 +1,5 @@
 export { compile } from './src/compiler';
-export { parseString } from './src/parser';
+export { parseAnsieMarkup, parseAnsieMarkdown } from './src/parser';
 export { ansie } from './src/template';
 export {
     compose,

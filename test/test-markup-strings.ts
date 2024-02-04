@@ -94,4 +94,18 @@ export default [
             </p>
         </body>
     `,
+
+    `
+# Title 1
+## Title 2
+### Title 3
+**bold** *italics* [c=red]red[/c]
+Just some plain text
+    `,
+    `
+# Title 1
+<span>Just some plain text</span>
+<li>Test</li>
+<li>Test2</li>
+`,
 ];

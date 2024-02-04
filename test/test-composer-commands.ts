@@ -10,7 +10,6 @@ export default [
     () => compose([li('Test')]).toString(),
     () => compose([markup('<h1>Hello</h1>')]).toString(),
     () => compose([span('<h1>Hello</h1>')]).toString(),
-
     () => compose([h1('H1'), h2('H2'), h3('H3'), body('BODY')]).toString(),
     () => compose([body([h1('H1'), h2('H2'), h3('H3'), p('p')])]).toString(),
     () =>

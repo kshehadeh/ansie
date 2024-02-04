@@ -121,7 +121,7 @@ function convertAttr(attr) {
 }
 
 // Document
-document = element*
+document = content / element*
 
 // Character Range
 Char

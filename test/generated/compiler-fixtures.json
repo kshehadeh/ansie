@@ -1173,7 +1173,7 @@
                 "content": [
                     {
                         "node": "text",
-                        "value": "\n            In order to used this app, do the following:\n            "
+                        "value": "\nIn order to used this app, do the following:\n"
                     },
                     {
                         "node": "li",
@@ -1221,7 +1221,7 @@
                 "content": [
                     {
                         "node": "text",
-                        "value": "\n            "
+                        "value": "\n"
                     },
                     {
                         "node": "h1",
@@ -1229,7 +1229,7 @@
                         "content": [
                             {
                                 "node": "text",
-                                "value": "\n                "
+                                "value": "\n"
                             },
                             {
                                 "node": "span",
@@ -1249,7 +1249,7 @@
                         "content": [
                             {
                                 "node": "text",
-                                "value": "\n                "
+                                "value": "\n"
                             },
                             {
                                 "node": "span",
@@ -1289,5 +1289,114 @@
             }
         ],
         "output": "\n\n\u001b[31mtitle\u001b[39m\n\n\u001b[34mParagraph withspanand\ndiv\u001b[39m\n"
+    },
+    {
+        "input": "\n# Title 1\n## Title 2\n### Title 3\n**bold** *italics* [c=red]red[/c]\nJust some plain text\n    ",
+        "ast": [
+            {
+                "node": "h1",
+                "content": [
+                    {
+                        "node": "text",
+                        "value": "Title 1"
+                    }
+                ]
+            },
+            {
+                "node": "h2",
+                "content": [
+                    {
+                        "node": "text",
+                        "value": "Title 2"
+                    }
+                ]
+            },
+            {
+                "node": "h3",
+                "content": [
+                    {
+                        "node": "text",
+                        "value": "Title 3"
+                    }
+                ]
+            },
+            {
+                "node": "span",
+                "bold": "true",
+                "content": [
+                    {
+                        "node": "text",
+                        "value": "bold"
+                    }
+                ]
+            },
+            {
+                "node": "span",
+                "italics": "true",
+                "content": [
+                    {
+                        "node": "text",
+                        "value": "italics"
+                    }
+                ]
+            },
+            {
+                "node": "span",
+                "fg": "red",
+                "content": [
+                    {
+                        "node": "text",
+                        "value": "red"
+                    }
+                ]
+            },
+            {
+                "node": "text",
+                "value": "Just some plain text"
+            }
+        ],
+        "output": "\nTitle 1\nTitle 2\nTitle 3\u001b[1mbold\u001b[22m\u001b[3mitalics\u001b[23m\u001b[31mred\u001b[39mJust some plain text"
+    },
+    {
+        "input": "\n# Title 1\n<span>Just some plain text</span>\n<li>Test</li>\n<li>Test2</li>\n",
+        "ast": [
+            {
+                "node": "h1",
+                "content": [
+                    {
+                        "node": "text",
+                        "value": "Title 1"
+                    }
+                ]
+            },
+            {
+                "node": "span",
+                "content": [
+                    {
+                        "node": "text",
+                        "value": "Just some plain text"
+                    }
+                ]
+            },
+            {
+                "node": "li",
+                "content": [
+                    {
+                        "node": "text",
+                        "value": "Test"
+                    }
+                ]
+            },
+            {
+                "node": "li",
+                "content": [
+                    {
+                        "node": "text",
+                        "value": "Test2"
+                    }
+                ]
+            }
+        ],
+        "output": "\nTitle 1Just some plain text\n* Test\n* Test2"
     }
 ]

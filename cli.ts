@@ -13,7 +13,7 @@ import fs from 'fs';
 import { hideBin } from 'yargs/helpers';
 import { compile } from './src/compiler';
 import pkg from './package.json';
-import { parseString } from './src/parser';
+import { parseAnsieMarkdown } from './src/parser';
 
 function readStdinWithTimeout(timeout: number): Promise<string> {
     return new Promise((resolve, reject) => {
@@ -110,7 +110,7 @@ if (argv.help) {
     if (input) {
         let output = '';
         if (argv.ast) {
-            output = JSON.stringify(parseString(input), null, 4);
+            output = JSON.stringify(parseAnsieMarkdown(input), null, 4);
         } else {
             output = compile(input) || '';
         }
