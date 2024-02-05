@@ -317,8 +317,6 @@ The theme is made up of the following sections:
 
 ## Using the CLI
 
-**⚠️ This is a very early release so the CLI and the markup may change**
-
 You can access the functionality in ansie through a CLI as in:
 
 ```bash
@@ -389,4 +387,4 @@ which is then run as part of the package's tests.
 `test-markup-strings` is an array of valid markup strings that are used during the `bun run tests:record` script to
 generate the `compiler-fixtures.json` file which contains the inputs and expected outputs.
 
-**Note: You should only rerecord the fixtures if you are confident that they will generate correct output**
+> **Note: You should only rerecord the fixtures if you are confident that they will generate correct output**
