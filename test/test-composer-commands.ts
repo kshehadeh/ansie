@@ -1,4 +1,16 @@
-import { body, compose, div, h1, h2, h3, p, text, markup, span, li } from '..';
+import {
+    body,
+    compose,
+    div,
+    h1,
+    h2,
+    h3,
+    p,
+    text,
+    markup,
+    span,
+    li,
+} from '../src';
 
 export default [
     () => compose([h1('Hello')]).toString(),
