@@ -11,9 +11,9 @@
 import yargs from 'yargs';
 import fs from 'fs';
 import { hideBin } from 'yargs/helpers';
-import { compile } from './src/compiler';
-import pkg from './package.json';
-import { parseAnsieMarkdown } from './src/parser';
+import { compile } from './compiler';
+import pkg from '../package.json';
+import { parseAnsieMarkdown } from './parser';
 
 function readStdinWithTimeout(timeout: number): Promise<string> {
     return new Promise((resolve, reject) => {
@@ -92,9 +92,9 @@ const y = yargs(hideBin(process.argv))
     });
 
 const argv = await y.argv;
-if (argv.help) {
+if (argv['help']) {
     y.showHelp();
-} else if (argv.version) {
+} else if (argv['version']) {
     console.log(pkg.version);
 } else {
     let input = '';

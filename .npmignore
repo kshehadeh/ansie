@@ -1,3 +1,7 @@
-src/**/*
 test/**/*
 scripts/**/*
+*.yml
+*.toml
+bun.lockb
+tsconfig.json
+configs/**/*
