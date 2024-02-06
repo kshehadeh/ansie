@@ -1,5 +1,5 @@
-import { ComposerNode, type NodeParams } from '.';
-import { compile } from '../../compiler';
+import { ComposerNode, type NodeParams } from './ComposerNode';
+import { compile } from '../../compiler/compile';
 import { CompilerError } from '../../compiler/types';
 import { ValidTags } from '../../compiler/types';
 

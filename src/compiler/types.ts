@@ -7,10 +7,12 @@
  * This file is used by the parser and compiler.  It should not be dependent on any other
  * files in the project.  This is to avoid circular dependencies and any complexities that
  * may arise from them.
+ * 
+/**
+ * The canonical list of supported tags.  We should never be referring
+ * to tags as raw strings.  Instead, we should be using this enum.  This
+ * will help us avoid typos and make it easier to refactor later.
  */
-// The canonical list of supported tags.  We should never be referring
-//  to tags as raw strings.  Instead, we should be using this enum.  This
-//  will help us avoid typos and make it easier to refactor later.
 export enum ValidTags {
     'h1' = 'h1',
     'h2' = 'h2',
@@ -24,10 +26,24 @@ export enum ValidTags {
     'br' = 'br',
 }
 
+/**
+ * A list of all the valid tags.  This is used by the parser to validate
+ * the tags before returning the AST.
+ * @internal
+ */
 export const ValidTagsList = Object.keys(ValidTags);
 
+/**
+ * A type guard to determine if a given tag is a valid tag.
+ * @param tag
+ * @returns
+ * @internal
+ */
 export type ValidTagsType = keyof typeof ValidTags;
 
+/**
+ * @internal
+ */
 export const ColorAttributeValues = [
     'black',
     'red',
@@ -48,9 +64,16 @@ export const ColorAttributeValues = [
     'gray',
 ];
 
+/**
+ * A list of all the valid boolean attribute values.  This is used by the parser to validate
+ * the attributes for each tag before returning the AST.
+ * @internal
+ */
 const booleanValues = ['true', 'false', 'yes', 'no', 'y', 'n', '1', '0'];
 
-////// A base node in the AST
+/**
+ * @internal
+ */
 export type BaseAnsieNode = {
     node: ValidTags;
     content?: AnsieNode | AnsieNode[];
@@ -58,6 +81,9 @@ export type BaseAnsieNode = {
 
 ////// Space Attributes - These are the attributes that can be associated with semantic elements that have a concept of spacing such as <div> and <p>
 
+/**
+ * @internal
+ */
 export const SpaceAttributes = {
     margin: ['number'],
     marginTop: ['number'],
@@ -66,10 +92,16 @@ export const SpaceAttributes = {
     marginRight: ['number'],
 };
 
+/**
+ * @internal
+ */
 export type SpaceAttributesInterface = {
     [key in keyof typeof SpaceAttributes]?: string;
 };
 
+/**
+ * @internal
+ */
 export type SpaceNodeBase = BaseAnsieNode & SpaceAttributesInterface;
 
 ///// Text Attributes - These are the attributes that can be associated with text-based semantic elements such as <span> and <p>
@@ -81,36 +113,63 @@ export const TextAttributes = {
     underline: [...booleanValues, 'single', 'double', 'none'],
 };
 
+/**
+ * @internal
+ */
 export type TextAttributesInterface = {
     [key in keyof typeof TextAttributes]?: string;
 };
 
+/**
+ * @internal
+ */
 export type TextNodeBase = BaseAnsieNode & TextAttributesInterface;
 
 ///////
 
 ///// List Attributes - These are the attributes that can be associated with text-based semantic elements such as <span> and <p>
+/**
+ * @internal
+ */
 export const ListAttributes = {
     bullet: ['*', '-', '+'],
     indent: ['number'],
 };
 
+/**
+ * @internal
+ */
 export type ListAttributesKeysType = keyof typeof ListAttributes;
 
+/**
+ * @internal
+ */
 export type ListAttributesInterface = {
     [key in ListAttributesKeysType]?: string;
 };
 
+/**
+ * @internal
+ */
 export type ListItemNodeBase = BaseAnsieNode & ListAttributesInterface;
 ///////
 
 ///// Raw Attributes - These are the attributes that can be associated with text-based semantic elements such as <span> and <p>
+/**
+ * @internal
+ */
 export const RawTextAttributes = {
     value: ['string'],
 };
 
+/**
+ * @internal
+ */
 export type RawTextAttributesKeysType = keyof typeof RawTextAttributes;
 
+/**
+ * @internal
+ */
 export type RawTextAttributesInterface = {
     [key in RawTextAttributesKeysType]?: string;
 };
@@ -118,6 +177,7 @@ export type RawTextAttributesInterface = {
 
 /**
  * A union of all the valid attribute keys.
+ * @internal
  */
 export type AllAttributeKeys =
     | keyof typeof TextAttributes
@@ -130,6 +190,7 @@ export type AllAttributeKeys =
 /**
  * A list of all the valid attribute keys.  This is used by the parser to validate
  * the attributes for each tag before returning the AST.
+ * @internal
  */
 export const AllAttributeKeysList = [
     ...Object.keys(SpaceAttributes),
@@ -142,6 +203,7 @@ export const AllAttributeKeysList = [
  * A type guard to determine if a given key is a valid attribute.
  * @param key
  * @returns
+ * @internal
  */
 export function isAttribute(key: string): key is AllAttributeKeys {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -151,6 +213,7 @@ export function isAttribute(key: string): key is AllAttributeKeys {
 /**
  * This is a map of all the valid attributes for each tag.  This is used by the parser to
  * validate the attributes for each tag before returning the AST.
+ * @internal
  */
 export const TagAttributeMap = {
     [ValidTags.h1]: {
@@ -191,6 +254,10 @@ export const TagAttributeMap = {
     },
 };
 
+/**
+ * A union of all the valid attribute values.
+ * @internal
+ */
 export type AnsieNode = BaseAnsieNode &
     SpaceAttributesInterface &
     TextAttributesInterface &
@@ -206,7 +273,7 @@ export type Ast = AnsieNode[];
  * node type.  For example, a <p> tag will render differently than a <span> tag.
  *
  * The _raw property is the original AST node.  It also provides
- *
+ * @internal
  */
 export abstract class AnsieNodeImpl {
     _raw: AnsieNode;
@@ -251,8 +318,8 @@ export abstract class AnsieNodeImpl {
 
 /**
  * Represents a compiler error.
+ * @internal
  */
-
 export class CompilerError implements Error {
     name: string = 'CompilerError';
     message: string;
@@ -296,4 +363,5 @@ export class CompilerError implements Error {
         return !this.fatal;
     }
 }
+
 export type CompilerFormat = 'ansi' | 'markup';

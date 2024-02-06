@@ -1,8 +1,13 @@
 {
     "name": "ansie",
     "version": "0.3.1",
-    "module": "dist/node/index.js",
     "type": "module",
+    "types": "dist/node/index.d.ts",
+    "exports": {
+        ".": {
+            "import": "./dist/node/index.js"
+        }
+    },
     "homepage": "https://github.com/kshehadeh/ansie/blob/main/README.md",
     "repository": {
         "type": "git",
@@ -43,16 +48,17 @@
         "ver:pat": "npm version patch",
         "ver:min": "npm version minor",
         "ver:maj": "npm version major",
-        "bld": "bun test && bun clean && bun bld:quick",
-        "bld:quick": "bun ./scripts/build/build.ts",
-        "bld:types": "tsc -p ./configs/tsconfig.types.json",
+        "bld": "bun test && bun clean && bun ./scripts/build/build.ts && bun bld:types",
+        "bld:types": "npx dts-bundle-generator ./src/index.ts -o ./dist/node/index.d.ts --export-referenced-types=false",
         "pub": "bun run bld && npm publish",
         "pub:dry": "bun run bld && npm publish --dry-run"
     },
     "devDependencies": {
-        "@types/bun": "^1.0.2",
+        "@types/node": "^20.11.16",
+        "@types/jest": "^29.5.12",
         "@types/yargs": "^17.0.32",
         "@typescript-eslint/eslint-plugin": "^6.19.0",
+        "dts-bundle-generator": "^9.3.1",
         "eslint": "^8.56.0",
         "lefthook": "^1.6.0",
         "peggy": "^3.0.2",

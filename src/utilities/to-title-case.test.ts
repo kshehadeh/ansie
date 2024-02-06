@@ -1,4 +1,3 @@
-import { it, expect, describe } from 'bun:test';
 import { toTitleCase } from './to-title-case';
 
 describe('toTitleCase', () => {

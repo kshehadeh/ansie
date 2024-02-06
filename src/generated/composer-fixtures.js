@@ -11,7 +11,7 @@ import {
     text,
     markup,
     li,
-} from '../../src/composer/compose';
+} from '../composer/compose';
 export default [
     {
         cmd: () => compose([h1('Hello')]).toString(),

@@ -1,53 +1,17 @@
-import { compile } from '../compiler';
-import type { CompilerFormat } from '../compiler/types';
-import { ComposerNode } from './nodes';
-import { BreakComposerNode } from './nodes/break';
-import { ListItemComposerNode } from './nodes/li';
-import { MarkupComponentNode } from './nodes/markup';
-import {
-    ParagraphComposerNode,
-    H1ComposerNode,
-    H2ComposerNode,
-    H3ComposerNode,
-    BodyComposerNode,
-    RawTextComposerNode,
-    SpanComposerNode,
-    DivComposerNode,
-} from './nodes/text';
-import { defaultTheme, type AnsieTheme, type AnsieStyle } from './styles';
-export class Composer {
-    private _body: BodyComposerNode;
-    private _theme: AnsieTheme;
-
-    constructor(theme: AnsieTheme) {
-        this._theme = theme;
-        this._body = new BodyComposerNode({ theme });
-    }
-
-    public add(node: ComposerNode | ComposerNode[]) {
-        const nodeArr = Array.isArray(node) ? node : [node];
-        nodeArr.forEach(n => {
-            n.theme = this._theme;
-            this._body.add(n);
-        });
-    }
-
-    toString() {
-        return this._body.toString();
-    }
-
-    get theme() {
-        return this._theme;
-    }
-
-    compile() {
-        return this.compileTo('ansi');
-    }
-
-    compileTo(format: CompilerFormat) {
-        return compile(this.toString(), format);
-    }
-}
+import { Composer, type ComposerNodeCompatible } from './Composer';
+import { ComposerNode } from './nodes/ComposerNode';
+import { BreakComposerNode } from './nodes/BreakComposerNode';
+import { ListItemComposerNode } from './nodes/ListItemComposerNode';
+import { MarkupComponentNode } from './nodes/MarkupComponentNode';
+import { defaultTheme, type AnsieStyle, type AnsieTheme } from './styles';
+import { BodyComposerNode } from './nodes/BodyComposerNode';
+import { DivComposerNode } from './nodes/DivComposerNode';
+import { H1ComposerNode } from './nodes/H1ComposerNode';
+import { H2ComposerNode } from './nodes/H2ComposerNode';
+import { H3ComposerNode } from './nodes/H3ComposerNode';
+import { ParagraphComposerNode } from './nodes/ParagraphComposerNode';
+import { RawTextComposerNode } from './nodes/RawTextComposerNode';
+import { SpanComposerNode } from './nodes/SpanComposerNode';
 
 function generateNodeFromAnyCompatibleType(
     node: ComposerNodeCompatible,
@@ -64,8 +28,6 @@ function generateNodeFromAnyCompatibleType(
         return text(`${node}`);
     }
 }
-
-type ComposerNodeCompatible = ComposerNode | string | number | boolean;
 
 export function br() {
     return new BreakComposerNode();
@@ -180,42 +142,4 @@ export function compose(
     const c = new Composer(theme);
     c.add(composition);
     return c;
-}
-
-/////////////// FOR TESTING ONLY ///////////////
-
-if (process.argv[1].includes('composer')) {
-    // const result = compose([div('Hello World')]);
-
-    // const result = compose([
-    //     h1('Title'),
-    //     h2('A subtitle'),
-    //     p('Paragraph'),
-    //     text('This is some text that is not formatted'),
-    //     bundle(['Text', span('injected'), 'more text']),
-    //     markup('<h1>Raw Markup</h1>')
-    // ]).toString()
-
-    // console.log(compose(([h1('Title'), h2('A subtitle'), p('Paragraph')])).toString())
-    // console.log(
-    //     compose([h1('Title'), h2('A subtitle'), p('Paragraph')]).toString(),
-    // );
-    console.log(compose([markup('<h1>Hello</h1>')]).toString());
-    // console.log(compose([
-    //     h1('Title'),
-    //     h2('A subtitle'),
-    //     p('Paragraph'),
-    // ]).compile())
-
-    // const result = compose([
-    //     bold(['Title', br()]),
-    //     italics(['Subtitle', br()]),
-    //     text('This is some text that is not formatted'),
-    //     color('red', undefined, 'Some red text'),
-    //     list('* ', ['One', 'Two', 'Three']),
-    // ])
-
-    // console.log(compile(result.toString()));
-
-    // <color fg=red bg=green><bold>Hello World</bold></color>
 }

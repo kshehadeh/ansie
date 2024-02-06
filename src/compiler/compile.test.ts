@@ -1,6 +1,5 @@
-import { describe, it, expect } from 'bun:test';
 import fixtures from '../../test/generated/compiler-fixtures.json';
-import { compile } from '.';
+import { compile } from './compile';
 
 describe('Compiler', () => {
     fixtures.forEach(

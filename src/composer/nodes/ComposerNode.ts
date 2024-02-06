@@ -51,14 +51,14 @@ export interface ListNodeParams extends NodeParams {
  *
  * Content can be added to a node by calling the `add` method.  This method will handle the creation
  * of a node from a node, string or an array of either.
- *
  */
 export abstract class ComposerNode {
     abstract node: ValidTags;
 
-    _theme: AnsieTheme;
-    _content: ComposerNode[];
-    _style: AnsieStyle;
+    private _theme: AnsieTheme;
+    private _content: ComposerNode[];
+    private _style: AnsieStyle;
+
     constructor(params: NodeParams = {}) {
         this._content = params.nodes ? ComposerNode.create(params.nodes) : [];
         this._theme = params.theme ?? defaultTheme;
@@ -101,7 +101,7 @@ export abstract class ComposerNode {
      * Add a node or array of nodes to the content of this node.
      * @param node
      */
-    add(node: ComposerNodeCompatible) {
+    add(node: ComposerNode | ComposerNode[]) {
         this._content = this._content.concat(ComposerNode.create(node));
     }
 
@@ -110,7 +110,7 @@ export abstract class ComposerNode {
      * @param node
      * @returns
      */
-    static create(node: ComposerNodeCompatible): ComposerNode[] {
+    static create(node: ComposerNode | ComposerNode[]): ComposerNode[] {
         if (Array.isArray(node)) {
             // If we got an array then call this function recursively
             return node
@@ -125,45 +125,3 @@ export abstract class ComposerNode {
         }
     }
 }
-
-export type ComposerNodeCompatible = ComposerNode | ComposerNode[];
-
-///// HIGHER LEVEL NODES /////
-// These nodes are used to create higher level constructs that are composed of other nodes.
-//  For example, the `list` node is composed of sub-nodes and the raw node is composed of
-//  a string that is compiled into a node.
-/////////////////////////////
-
-/**
- * Nest the nodes in the stack to create a hierarchical structure.
- * The first node in the stack will be the root node, and each subsequent node will be added as a child of the previous node.
- * @param stack - An array of ComposerNode objects representing the nodes to be nested.
- * @returns The root node of the nested structure.
- */
-// function nest(stack: ComposerNode[]) {
-//     const root = stack[0];
-//     while (stack.length > 0) {
-//         const node = stack.shift();
-//         if (node && stack.length > 0) {
-//             // Add the next node as a child of the current node
-//             const nextNode = stack[0];
-//             node.add(nextNode);
-//         }
-//     }
-//     return root;
-// }
-
-// <doc theme="default">
-//     <h1>Heading 1</h1>
-//     <h2>Heading 2</h2>
-//     <h3>Heading 3</h3>
-//     <body>
-//         <p>Paragraph 1</p>
-//         <p>Paragraph 2</p>
-//         <list bullet="-">
-//             <text>Item 1</text>
-//             <text>Item 2</text>
-//             <text>Item 3</text>
-//         </list>
-//     </body>
-// </doc>

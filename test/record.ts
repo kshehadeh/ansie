@@ -1,4 +1,4 @@
-import { compile } from '../src/compiler';
+import { compile } from '../src/compiler/compile';
 import compilationFixtures from './test-markup-strings';
 import compositionFixtures from './test-composer-commands';
 import * as readline from 'readline';
@@ -68,11 +68,12 @@ rl.question('Do you want to overwrite your fixtures? (y/n) ', answer => {
             recordComposition(f),
         );
         writeFileSync(
-            resolve(currentDir, 'generated/composer-fixtures.js'),
+            resolve(currentDir, '../src/generated/composer-fixtures.js'),
             `// AUTOMATICALLY GENERATED FILE - DO NOT EDIT - RUN bun run fixture:generate TO UPDATE
-import {compose, h1, h2, h3, span, div, p, body, text, markup, li} from '../../src/composer'
+import {compose, h1, h2, h3, span, div, p, body, text, markup, li} from '../composer/compose'
 export default [\n${compositionResults
                 .map(r => {
+                    // @ts-expect-error - I know this is a function but there's a configuration issue I can't resolve
                     return `    { cmd: ${r.cmd}, markup: "${r.markup.replaceAll('"', '\\"')}" }`;
                 })
                 .join(',\n')}

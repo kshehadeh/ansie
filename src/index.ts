@@ -1,5 +1,4 @@
-export { compile } from './compiler';
-export { parseAnsieMarkup, parseAnsieMarkdown } from './parser';
+export { compile } from './compiler/compile';
 export { ansie } from './template';
 export {
     compose,
@@ -14,4 +13,4 @@ export {
     div,
     span,
     markup,
-} from './composer';
+} from './composer/compose';

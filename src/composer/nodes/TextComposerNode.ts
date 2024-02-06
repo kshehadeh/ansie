@@ -1,34 +1,18 @@
 import {
     ComposerNode,
-    type ListNodeParams,
     type SpaceNodeParams,
     type TextNodeParams,
-} from '.';
-import { ValidTags } from '../../compiler/types';
+} from './ComposerNode';
 import { opt } from '../../utilities/opt';
 import { buildAttributesFromStyle } from '../../utilities/build-attributes-from-style';
-import { DivComposerNode } from './text';
 
-export class ListItemComposerNode extends ComposerNode {
-    node = ValidTags.li;
-    _bullet: string | undefined;
-    _indent: number | undefined;
+export abstract class TextComposerNode extends ComposerNode {
+    constructor(params: TextNodeParams & SpaceNodeParams) {
+        super(params);
 
-    constructor(params: TextNodeParams & SpaceNodeParams & ListNodeParams) {
-        const finalNodes =
-            params?.nodes?.map(n => new DivComposerNode({ nodes: [n] })) ?? [];
-        super({ ...params, nodes: finalNodes });
-
-        // Override the style bullet with the passed in bullet.
+        // Override the built-in style with the given params
         this.style = {
             ...this.style,
-            list: {
-                ...this.style.list,
-                ...opt({
-                    bullet: params.bullet,
-                    indent: params.indent,
-                }),
-            },
             font: {
                 ...this.style.font,
                 ...opt({
@@ -44,6 +28,7 @@ export class ListItemComposerNode extends ComposerNode {
                     }),
                 },
             },
+
             spacing: {
                 ...this.style.spacing,
                 ...opt({

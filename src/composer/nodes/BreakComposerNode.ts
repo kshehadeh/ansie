@@ -1,4 +1,4 @@
-import { type NodeParams, ComposerNode } from '.';
+import { type NodeParams, ComposerNode } from './ComposerNode';
 import { ValidTags } from '../../compiler/types';
 
 export type BreakNodeParams = NodeParams;

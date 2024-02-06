@@ -11,7 +11,7 @@
 import yargs from 'yargs';
 import fs from 'fs';
 import { hideBin } from 'yargs/helpers';
-import { compile } from './compiler';
+import { compile } from './compiler/compile';
 import pkg from '../package.json';
 import { parseAnsieMarkdown } from './parser';
 
@@ -42,87 +42,99 @@ function readStdinWithTimeout(timeout: number): Promise<string> {
         process.stdin.resume();
     });
 }
-const stdInput = await readStdinWithTimeout(10);
 
-const y = yargs(hideBin(process.argv))
-    .scriptName('ansie')
-    .version(pkg.version)
-    .usage('Usage: ansie [markup] -i [input] -o [output]')
-    .positional('markup', {
-        alias: 'm',
-        type: 'string',
-        description: 'Specify the markup text (instead of a file)',
-    })
-    .option('input', {
-        alias: 'i',
-        type: 'string',
-        description: 'Specify the input file',
-    })
-    .option('output', {
-        alias: 'o',
-        type: 'string',
-        description: 'Specify the output file',
-    })
-    .option('ast', {
-        alias: 'a',
-        type: 'boolean',
-        description: 'Output the AST instead of the compiled text',
-    })
-    .check(argv => {
-        const markup = argv._.join(' ');
-        if (argv.input && markup.length > 0) {
-            throw new Error(
-                'You must specify either --input or markup as a positional argument, not both',
-            );
-        }
+async function handleInput() {
+    const stdInput = await readStdinWithTimeout(10);
 
-        if (!argv.input && !markup && !stdInput) {
-            throw new Error(
-                'You must specify either --input or --markup so that the compiler knows what to compile',
-            );
-        }
+    const y = yargs(hideBin(process.argv))
+        .scriptName('ansie')
+        .version(pkg.version)
+        .usage('Usage: ansie [markup] -i [input] -o [output]')
+        .positional('markup', {
+            alias: 'm',
+            type: 'string',
+            description: 'Specify the markup text (instead of a file)',
+        })
+        .option('input', {
+            alias: 'i',
+            type: 'string',
+            description: 'Specify the input file',
+        })
+        .option('output', {
+            alias: 'o',
+            type: 'string',
+            description: 'Specify the output file',
+        })
+        .option('ast', {
+            alias: 'a',
+            type: 'boolean',
+            description: 'Output the AST instead of the compiled text',
+        })
+        .check(argv => {
+            const markup = argv._.join(' ');
+            if (argv.input && markup.length > 0) {
+                throw new Error(
+                    'You must specify either --input or markup as a positional argument, not both',
+                );
+            }
 
+            if (!argv.input && !markup && !stdInput) {
+                throw new Error(
+                    'You must specify either --input or --markup so that the compiler knows what to compile',
+                );
+            }
+
+            if (argv.input) {
+                if (!fs.existsSync(argv.input)) {
+                    throw new Error(
+                        `The input file ${argv.input} does not exist`,
+                    );
+                }
+            }
+
+            return true;
+        });
+
+    const argv = await y.argv;
+    if (argv['help']) {
+        y.showHelp();
+    } else if (argv['version']) {
+        console.log(pkg.version);
+    } else {
+        let input = '';
         if (argv.input) {
-            if (!fs.existsSync(argv.input)) {
-                throw new Error(`The input file ${argv.input} does not exist`);
-            }
+            // Read the input file into the string `input`
+            input = fs.readFileSync(argv.input, 'utf8');
+        } else if (argv._.length > 0) {
+            input = argv._.join(' ');
+        } else if (stdInput) {
+            input = stdInput;
         }
 
-        return true;
-    });
-
-const argv = await y.argv;
-if (argv['help']) {
-    y.showHelp();
-} else if (argv['version']) {
-    console.log(pkg.version);
-} else {
-    let input = '';
-    if (argv.input) {
-        // Read the input file into the string `input`
-        input = fs.readFileSync(argv.input, 'utf8');
-    } else if (argv._.length > 0) {
-        input = argv._.join(' ');
-    } else if (stdInput) {
-        input = stdInput;
-    }
-
-    if (input) {
-        let output = '';
-        if (argv.ast) {
-            output = JSON.stringify(parseAnsieMarkdown(input), null, 4);
-        } else {
-            output = compile(input) || '';
-        }
-
-        if (output) {
-            if (argv.output) {
-                fs.writeFileSync(argv.output, output);
+        if (input) {
+            let output = '';
+            if (argv.ast) {
+                output = JSON.stringify(parseAnsieMarkdown(input), null, 4);
             } else {
-                console.log(output);
+                output = compile(input) || '';
             }
-        } else {
-            throw new Error('No output was generated');
+
+            if (output) {
+                if (argv.output) {
+                    fs.writeFileSync(argv.output, output);
+                } else {
+                    console.log(output);
+                }
+            } else {
+                throw new Error('No output was generated');
+            }
         }
     }
 }
+
+handleInput()
+    .then(() => process.exit(0))
+    .catch(e => {
+        console.error(e);
+        process.exit(1);
+    });

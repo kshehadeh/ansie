@@ -1,20 +1,34 @@
 import {
     ComposerNode,
-    type NodeParams,
+    type ListNodeParams,
     type SpaceNodeParams,
     type TextNodeParams,
-} from '.';
+} from './ComposerNode';
 import { ValidTags } from '../../compiler/types';
 import { opt } from '../../utilities/opt';
 import { buildAttributesFromStyle } from '../../utilities/build-attributes-from-style';
+import { DivComposerNode } from './DivComposerNode';
 
-export abstract class TextComposerNode extends ComposerNode {
-    constructor(params: TextNodeParams & SpaceNodeParams) {
-        super(params);
+export class ListItemComposerNode extends ComposerNode {
+    node = ValidTags.li;
+    _bullet: string | undefined;
+    _indent: number | undefined;
 
-        // Override the built-in style with the given params
+    constructor(params: TextNodeParams & SpaceNodeParams & ListNodeParams) {
+        const finalNodes =
+            params?.nodes?.map(n => new DivComposerNode({ nodes: [n] })) ?? [];
+        super({ ...params, nodes: finalNodes });
+
+        // Override the style bullet with the passed in bullet.
         this.style = {
             ...this.style,
+            list: {
+                ...this.style.list,
+                ...opt({
+                    bullet: params.bullet,
+                    indent: params.indent,
+                }),
+            },
             font: {
                 ...this.style.font,
                 ...opt({
@@ -30,7 +44,6 @@ export abstract class TextComposerNode extends ComposerNode {
                     }),
                 },
             },
-
             spacing: {
                 ...this.style.spacing,
                 ...opt({
@@ -50,65 +63,5 @@ export abstract class TextComposerNode extends ComposerNode {
             .map(([key, value]) => `${key}${value ? `="${value}` : ''}"`)
             .join(' ');
         return `<${this.node} ${attributesString}>${super.toString()}</${this.node}>`;
-    }
-}
-
-// NODE: BODY
-
-export class BodyComposerNode extends TextComposerNode {
-    node = ValidTags.body;
-}
-
-// NODE: H1
-export class H1ComposerNode extends TextComposerNode {
-    node = ValidTags.h1;
-}
-
-// NODE: H2
-
-export class H2ComposerNode extends TextComposerNode {
-    node = ValidTags.h2;
-}
-
-// NODE: H3
-
-export class H3ComposerNode extends TextComposerNode {
-    node = ValidTags.h3;
-}
-
-// NODE: P
-
-export class ParagraphComposerNode extends TextComposerNode {
-    node = ValidTags.p;
-}
-
-// NODE: SPAN
-
-export class SpanComposerNode extends TextComposerNode {
-    node = ValidTags.span;
-}
-
-// NODE: DIV
-
-export class DivComposerNode extends TextComposerNode {
-    node = ValidTags.div;
-}
-
-// NODE: RAW TEXT
-export interface RawTextNodeParams extends NodeParams {
-    text: string;
-}
-
-export class RawTextComposerNode extends ComposerNode {
-    node = ValidTags.text;
-    value: string;
-
-    constructor(params: RawTextNodeParams) {
-        super(params);
-        this.value = params.text;
-    }
-
-    toString() {
-        return this.value;
     }
 }

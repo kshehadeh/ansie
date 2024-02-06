@@ -1,4 +1,4 @@
-import { compile } from '../compiler';
+import { compile } from '../compiler/compile';
 
 /**
  * This is a template tag function that will compile the template string into ansi code from

@@ -1,4 +1,3 @@
-import { describe, expect, it } from 'bun:test';
 import { buildAttributesFromStyle } from './build-attributes-from-style';
 
 describe('buildAttributesFromStyle', () => {
