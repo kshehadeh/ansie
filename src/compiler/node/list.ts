@@ -18,9 +18,31 @@ import {
 } from '../../utilities/render-text-attributes';
 
 export class ListItemNodeImpl extends AnsieNodeImpl implements AnsieNode {
-    renderStart(stack: AnsieNode[], format: CompilerFormat = 'ansi') {
+    renderStart({
+        stack,
+        format,
+    }: {
+        stack: AnsieNode[];
+        format: CompilerFormat;
+    }) {
         if (format === 'ansi') {
-            return `${renderSpaceAttributesStart(this._raw, format, { isBlock: true })}${renderListAttributesStart(this._raw, format)}${renderTextAttributesStart(this._raw, format)}`;
+            return (
+                renderSpaceAttributesStart({
+                    node: this._raw,
+                    format,
+                    style: this._style,
+                }) +
+                renderListAttributesStart({
+                    node: this._raw,
+                    format,
+                    style: this._style,
+                }) +
+                renderTextAttributesStart({
+                    attributes: this._raw,
+                    format,
+                    style: this._style,
+                })
+            );
         } else if (format === 'markup') {
             return renderNodeAsMarkupStart(this._raw);
         }
@@ -33,9 +55,30 @@ export class ListItemNodeImpl extends AnsieNodeImpl implements AnsieNode {
         );
     }
 
-    renderEnd(_stack: AnsieNode[], format: CompilerFormat = 'ansi') {
+    renderEnd({
+        format = 'ansi',
+    }: {
+        stack: AnsieNode[];
+        format: CompilerFormat;
+    }) {
         if (format === 'ansi') {
-            return `${renderTextAttributesEnd(this._raw, format)}${renderListAttributesEnd(this._raw, format)}${renderSpaceAttributesEnd(this._raw, format, { isBlock: true })}`;
+            return (
+                renderTextAttributesEnd({
+                    style: this._style,
+                    attributes: this._raw,
+                    format,
+                }) +
+                renderListAttributesEnd({
+                    node: this._raw,
+                    format,
+                    style: this._style,
+                }) +
+                renderSpaceAttributesEnd({
+                    attributes: this._raw,
+                    format,
+                    style: this._style,
+                })
+            );
         } else if (format === 'markup') {
             return renderNodeAsMarkupEnd(this._raw);
         } else {

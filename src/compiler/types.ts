@@ -1,3 +1,5 @@
+import type { AnsieStyle } from '../themes';
+
 /**
  * This file contains all the types used by the parser and compiler.
  *
@@ -277,9 +279,11 @@ export type Ast = AnsieNode[];
  */
 export abstract class AnsieNodeImpl {
     _raw: AnsieNode;
+    _style: AnsieStyle;
 
-    constructor(node: AnsieNode) {
+    constructor(node: AnsieNode, style: AnsieStyle) {
         this._raw = node;
+        this._style = style;
     }
 
     get node(): ValidTags {
@@ -312,8 +316,20 @@ export abstract class AnsieNodeImpl {
         return this._raw[key];
     }
 
-    abstract renderStart(stack: AnsieNode[], format: CompilerFormat): string;
-    abstract renderEnd(stack: AnsieNode[], format: CompilerFormat): string;
+    abstract renderStart({
+        stack,
+        format,
+    }: {
+        stack: AnsieNode[];
+        format: CompilerFormat;
+    }): string;
+    abstract renderEnd({
+        stack,
+        format,
+    }: {
+        stack: AnsieNode[];
+        format: CompilerFormat;
+    }): string;
 }
 
 /**

@@ -1,4 +1,4 @@
-import type { ValidTags } from '../compiler/types';
+import type { ValidTags } from './compiler/types';
 
 export interface AnsieStyle {
     font?: {
@@ -24,6 +24,29 @@ export interface AnsieStyle {
         indent?: number;
     };
 }
+
+const cleanStyle: AnsieStyle = {
+    font: {
+        color: {
+            fg: 'default',
+            bg: 'default',
+        },
+        bold: false,
+        underline: 'none',
+        italics: false,
+    },
+    list: {
+        bullet: '* ',
+        indent: 1,
+    },
+    spacing: {
+        margin: 0,
+        marginLeft: 0,
+        marginRight: 0,
+        marginTop: 0,
+        marginBottom: 0,
+    },
+};
 
 export const body: AnsieStyle = {
     font: {
@@ -160,14 +183,27 @@ export interface AnsieTheme {
 }
 
 export const defaultTheme: AnsieTheme = {
-    h1,
-    h2,
-    h3,
-    body,
-    p,
-    li,
-    span,
-    div,
-    br,
-    text,
+    h1: { ...cleanStyle, ...h1 },
+    h2: { ...cleanStyle, ...h2 },
+    h3: { ...cleanStyle, ...h3 },
+    body: { ...cleanStyle, ...body },
+    p: { ...cleanStyle, ...p },
+    li: { ...cleanStyle, ...li },
+    span: { ...cleanStyle, ...span },
+    div: { ...cleanStyle, ...div },
+    br: { ...cleanStyle, ...br },
+    text: { ...cleanStyle, ...text },
+};
+
+export const cleanTheme: AnsieTheme = {
+    h1: cleanStyle,
+    h2: cleanStyle,
+    h3: cleanStyle,
+    body: cleanStyle,
+    p: cleanStyle,
+    li: cleanStyle,
+    span: cleanStyle,
+    div: cleanStyle,
+    br: cleanStyle,
+    text: cleanStyle,
 };

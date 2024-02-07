@@ -116,7 +116,7 @@ async function handleInput() {
             if (argv.ast) {
                 output = JSON.stringify(parseAnsieMarkdown(input), null, 4);
             } else {
-                output = compile(input) || '';
+                output = compile({ markup: input }) || '';
             }
 
             if (output) {

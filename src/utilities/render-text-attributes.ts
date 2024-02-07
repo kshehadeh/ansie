@@ -1,6 +1,7 @@
 import { type CompilerFormat } from '../compiler/types';
 import { getTextEscapeCodesFromProperties } from './get-text-escape-codes-from-properties';
 import { type AnsieNode, isAttribute } from '../compiler/types';
+import type { AnsieStyle } from '../themes';
 
 /**
  * Renders the text attributes for a node prepending the appropriate text escape codes.
@@ -8,12 +9,17 @@ import { type AnsieNode, isAttribute } from '../compiler/types';
  * @param format
  * @returns
  */
-export function renderTextAttributesStart(
-    attributes: AnsieNode,
-    format: CompilerFormat = 'ansi',
-) {
+export function renderTextAttributesStart({
+    style,
+    attributes,
+    format = 'ansi',
+}: {
+    style?: AnsieStyle;
+    attributes: AnsieNode;
+    format?: CompilerFormat;
+}) {
     if (format === 'ansi') {
-        return getTextEscapeCodesFromProperties(attributes).on;
+        return getTextEscapeCodesFromProperties(attributes, style).on;
     } else if (format === 'markup') {
         return Object.entries(attributes)
             .filter(([key]) => isAttribute(key))
@@ -27,12 +33,17 @@ export function renderTextAttributesStart(
  * @param format
  * @returns
  */
-export function renderTextAttributesEnd(
-    attributes: AnsieNode,
-    format: CompilerFormat = 'ansi',
-) {
+export function renderTextAttributesEnd({
+    style,
+    attributes,
+    format = 'ansi',
+}: {
+    style?: AnsieStyle;
+    attributes: AnsieNode;
+    format?: CompilerFormat;
+}) {
     if (format === 'ansi') {
-        return getTextEscapeCodesFromProperties(attributes).off;
+        return getTextEscapeCodesFromProperties(attributes, style).off;
     } else if (format === 'markup') {
         return '';
     }

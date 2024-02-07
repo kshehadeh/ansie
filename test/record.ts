@@ -15,7 +15,7 @@ export function recordCompilation(input: string): {
 } {
     console.log('Recording compilation: ', input);
     const ast = parseAnsieMarkdown(input);
-    const output = compile(input);
+    const output = compile({ markup: input, output: 'ansi' });
     console.log('Result: ', output);
     console.log('--------------------');
 
@@ -31,7 +31,7 @@ export function recordComposition(cmd: () => string) {
     const markup = cmd();
 
     // Validate that the markup is valid
-    const result = compile(markup);
+    const result = compile({ markup, output: 'ansi' });
     console.log('Result: ', result);
     console.log('--------------------');
 

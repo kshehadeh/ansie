@@ -5,6 +5,7 @@ import {
     type SpaceNodeBase,
     SpaceAttributes,
 } from '../compiler/types';
+import type { AnsieStyle } from '../themes';
 
 /**
  * Renders the space attributes for a node prepending the appropriate spacing escape codes.
@@ -12,17 +13,17 @@ import {
  * @param format
  * @returns
  */
-export function renderSpaceAttributesStart(
-    node: SpaceNodeBase,
-    format: CompilerFormat,
-    options: {
-        isBlock?: boolean;
-    },
-): string {
+export function renderSpaceAttributesStart({
+    node,
+    format,
+    style,
+}: {
+    node: SpaceNodeBase;
+    format: CompilerFormat;
+    style?: AnsieStyle;
+}): string {
     if (format === 'ansi') {
-        return (
-            (options.isBlock ? '\n' : '') + getSpacingFromProperties(node).on
-        );
+        return getSpacingFromProperties(node, style).on;
     } else if (format === 'markup') {
         return Object.entries(node)
             .filter(([key]) => Object.keys(SpaceAttributes).includes(key))
@@ -38,16 +39,17 @@ export function renderSpaceAttributesStart(
  * @param format
  * @returns
  */
-export function renderSpaceAttributesEnd(
-    attributes: AnsieNode,
-    format: CompilerFormat,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    _options: {
-        isBlock?: boolean;
-    },
-) {
+export function renderSpaceAttributesEnd({
+    style,
+    attributes,
+    format,
+}: {
+    attributes: AnsieNode;
+    style?: AnsieStyle;
+    format: CompilerFormat;
+}) {
     if (format === 'ansi') {
-        return getSpacingFromProperties(attributes).off;
+        return getSpacingFromProperties(attributes, style).off;
     } else if (format === 'markup') {
         return '';
     } else {

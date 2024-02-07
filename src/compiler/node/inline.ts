@@ -22,12 +22,25 @@ export class InlineTextNodeImpl
     extends AnsieNodeImpl
     implements TextNodeBase, SpaceNodeBase
 {
-    renderStart(stack: AnsieNode[], format: CompilerFormat = 'ansi') {
+    renderStart({
+        stack,
+        format,
+    }: {
+        stack: AnsieNode[];
+        format: CompilerFormat;
+    }) {
         if (format === 'ansi') {
             return (
-                renderSpaceAttributesStart(this._raw, format, {
-                    isBlock: false,
-                }) + renderTextAttributesStart(this._raw, format)
+                renderSpaceAttributesStart({
+                    node: this._raw,
+                    format,
+                    style: this._style,
+                }) +
+                renderTextAttributesStart({
+                    style: this._style,
+                    attributes: this._raw,
+                    format,
+                })
             );
         } else if (format === 'markup') {
             return renderNodeAsMarkupStart(this._raw);
@@ -41,9 +54,15 @@ export class InlineTextNodeImpl
         }
     }
 
-    renderEnd(stack: AnsieNode[], format: CompilerFormat = 'ansi') {
+    renderEnd({
+        stack,
+        format = 'ansi',
+    }: {
+        stack: AnsieNode[];
+        format: CompilerFormat;
+    }) {
         if (format === 'ansi') {
-            return `${renderTextAttributesEnd(this._raw, format)}${renderSpaceAttributesEnd(this._raw, format, { isBlock: false })}`;
+            return `${renderTextAttributesEnd({ style: this._style, attributes: this._raw, format })}${renderSpaceAttributesEnd({ attributes: this._raw, format, style: this._style })}`;
         } else if (format === 'markup') {
             return renderNodeAsMarkupEnd(this._raw);
         } else {

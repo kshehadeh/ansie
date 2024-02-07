@@ -243,8 +243,28 @@ Ansie supports template tags allowing you to build string templates using tagged
 ```typescript
 import { ansie } from 'ansie';
 const person = 'world';
-console.log(ansie`<body>Hello, ${person}`);
+
+// supports markup
+console.log(ansie`<body>Hello</body>, ${person}`);
+
+// support markdown also
+console.log(ansie`# Hello, ${person}!`);
+
+// supports a combination
+console.log(ansie`# Hello <span fg="blue" underline="single">${person}</span>`);
 ```
+
+## Themes
+
+You can use themes in Ansie to establish a common set of attributes to associate with each type of tag. A default theme is applied automatically but this can be overridden using the theme property in the `compile` and `compose` functions.
+
+A theme is made up of `tags` each of which has its own `style`. The styles available are:
+
+| Style Type | Properties                                                                                 | Applicable Tags                          |
+| ---------- | ------------------------------------------------------------------------------------------ | ---------------------------------------- |
+| font       | color (see color properties), bold, underline [single, double, none, true, false], italics | h1, h2, h3, div, span, body, text, p, li |
+| spacing    | margin, marginLeft, marginRight, marginTop, marginBottom                                   | h1, h2, h3, body, div, p, li             |
+| list       | bullet (a string like ` *`), indent (number)                                               | li                                       |
 
 ## Composition
 

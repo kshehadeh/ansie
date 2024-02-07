@@ -1,5 +1,5 @@
 import type { ValidTags } from '../../compiler/types';
-import { defaultTheme, type AnsieTheme, type AnsieStyle } from '../styles';
+import { type AnsieTheme, type AnsieStyle } from '../../themes';
 
 export interface NodeParams {
     nodes?: ComposerNode[];
@@ -54,27 +54,16 @@ export interface ListNodeParams extends NodeParams {
  */
 export abstract class ComposerNode {
     abstract node: ValidTags;
-
-    private _theme: AnsieTheme;
     private _content: ComposerNode[];
     private _style: AnsieStyle;
 
     constructor(params: NodeParams = {}) {
         this._content = params.nodes ? ComposerNode.create(params.nodes) : [];
-        this._theme = params.theme ?? defaultTheme;
         this._style = params.style ?? {};
     }
 
     toString(): string {
         return this._content?.map(c => c.toString()).join('') || '';
-    }
-
-    set theme(theme: AnsieTheme) {
-        this._theme = theme;
-    }
-
-    get theme() {
-        return this._theme;
     }
 
     set style(style: AnsieStyle) {
@@ -92,7 +81,6 @@ export abstract class ComposerNode {
      */
     get attrib() {
         return {
-            ...(this._theme[this.node] ? this._theme[this.node] : {}),
             ...(this._style ? this._style : {}),
         };
     }

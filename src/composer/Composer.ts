@@ -1,7 +1,7 @@
 import { compile } from '../compiler/compile';
 import type { CompilerFormat } from '../compiler/types';
 import { ComposerNode } from './nodes/ComposerNode';
-import { type AnsieTheme } from './styles';
+import { type AnsieTheme } from '../themes';
 import { BodyComposerNode } from './nodes/BodyComposerNode';
 
 /**
@@ -19,8 +19,19 @@ export class Composer {
     public add(node: ComposerNode | ComposerNode[]) {
         const nodeArr = Array.isArray(node) ? node : [node];
         nodeArr.forEach(n => {
-            n.theme = this._theme;
             this._body.add(n);
+        });
+    }
+
+    compile() {
+        return this.compileTo('ansi');
+    }
+
+    compileTo(format: CompilerFormat) {
+        return compile({
+            markup: this.toString(),
+            output: format,
+            theme: this.theme,
         });
     }
 
@@ -30,14 +41,6 @@ export class Composer {
 
     get theme() {
         return this._theme;
-    }
-
-    compile() {
-        return this.compileTo('ansi');
-    }
-
-    compileTo(format: CompilerFormat) {
-        return compile(this.toString(), format);
     }
 }
 

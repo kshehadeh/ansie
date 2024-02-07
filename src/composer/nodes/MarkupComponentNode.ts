@@ -26,7 +26,7 @@ export class MarkupComponentNode extends ComposerNode {
         super(params);
 
         try {
-            this.markup = compile(params.content, 'markup');
+            this.markup = compile({ markup: params.content, output: 'markup' });
         } catch (e) {
             if (e instanceof CompilerError) {
                 console.error(e.toString());

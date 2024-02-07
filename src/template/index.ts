@@ -17,5 +17,5 @@ export function ansie(
         return result + string + value;
     }, '');
 
-    return compile(final);
+    return compile({ markup: final });
 }

@@ -3,7 +3,7 @@ import { AnsieNodeImpl, type AnsieNode } from '../types';
 import { RawTextMutator } from '../../utilities/raw-text-mutator';
 
 export class RawTextNodeImpl extends AnsieNodeImpl implements AnsieNode {
-    renderStart(_stack: AnsieNode[], format: CompilerFormat = 'ansi') {
+    renderStart({ format }: { stack: AnsieNode[]; format: CompilerFormat }) {
         const text = this.attr('value') ?? '';
         if (format === 'markup') {
             return text;
@@ -14,7 +14,7 @@ export class RawTextNodeImpl extends AnsieNodeImpl implements AnsieNode {
                     left: true,
                     right: true,
                     allowNewLines: false,
-                    replaceWithSingleSpace: false,
+                    replaceWithSingleSpace: true,
                 })
                 .toString();
         }

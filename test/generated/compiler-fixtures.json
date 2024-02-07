@@ -12,7 +12,7 @@
                 ]
             }
         ],
-        "output": "\ntitle"
+        "output": "\n\u001b[34;1;21mtitle\u001b[39;22;24m"
     },
     {
         "input": "<h1 bold>title with bold - inferred</h1>",
@@ -28,7 +28,7 @@
                 ]
             }
         ],
-        "output": "\n\u001b[1mtitle with bold - inferred\u001b[22m"
+        "output": "\n\u001b[34;1;21mtitle with bold - inferred\u001b[39;22;24m"
     },
     {
         "input": "<h1 bold=\"true\">title with bold - true</h1>",
@@ -44,7 +44,7 @@
                 ]
             }
         ],
-        "output": "\n\u001b[1mtitle with bold - true\u001b[22m"
+        "output": "\n\u001b[34;1;21mtitle with bold - true\u001b[39;22;24m"
     },
     {
         "input": "<h1 bold=\"yes\">title with bold - yes</h1>",
@@ -60,7 +60,7 @@
                 ]
             }
         ],
-        "output": "\n\u001b[1mtitle with bold - yes\u001b[22m"
+        "output": "\n\u001b[34;1;21mtitle with bold - yes\u001b[39;22;24m"
     },
     {
         "input": "<h1 bold=\"false\">title without bold - false</h1>",
@@ -76,7 +76,7 @@
                 ]
             }
         ],
-        "output": "\n\u001b[1mtitle without bold - false\u001b[22m"
+        "output": "\n\u001b[34;1;21mtitle without bold - false\u001b[39;22;24m"
     },
     {
         "input": "<h1 bold=\"no\">title without bold - no</h1>",
@@ -92,7 +92,7 @@
                 ]
             }
         ],
-        "output": "\n\u001b[1mtitle without bold - no\u001b[22m"
+        "output": "\n\u001b[34;1;21mtitle without bold - no\u001b[39;22;24m"
     },
     {
         "input": "<h1 underline>title with underline - inferred</h1>",
@@ -108,7 +108,7 @@
                 ]
             }
         ],
-        "output": "\ntitle with underline - inferred\u001b[24m"
+        "output": "\n\u001b[34;1mtitle with underline - inferred\u001b[39;22;24m"
     },
     {
         "input": "<h1 underline=\"true\">title with underline - true</h1>",
@@ -124,7 +124,7 @@
                 ]
             }
         ],
-        "output": "\ntitle with underline - true\u001b[24m"
+        "output": "\n\u001b[34;1mtitle with underline - true\u001b[39;22;24m"
     },
     {
         "input": "<h1 underline=\"yes\">title with underline - yes</h1>",
@@ -140,7 +140,7 @@
                 ]
             }
         ],
-        "output": "\ntitle with underline - yes\u001b[24m"
+        "output": "\n\u001b[34;1mtitle with underline - yes\u001b[39;22;24m"
     },
     {
         "input": "<h1 underline=\"single\">title with single underline</h1>",
@@ -156,7 +156,7 @@
                 ]
             }
         ],
-        "output": "\n\u001b[4mtitle with single underline\u001b[24m"
+        "output": "\n\u001b[34;1;4mtitle with single underline\u001b[39;22;24m"
     },
     {
         "input": "<h1 underline=\"double\">title with double underline</h1>",
@@ -172,7 +172,7 @@
                 ]
             }
         ],
-        "output": "\n\u001b[21mtitle with double underline\u001b[24m"
+        "output": "\n\u001b[34;1;21mtitle with double underline\u001b[39;22;24m"
     },
     {
         "input": "<h1 underline=\"false\">title without underline - false</h1>",
@@ -188,7 +188,7 @@
                 ]
             }
         ],
-        "output": "\ntitle without underline - false\u001b[24m"
+        "output": "\n\u001b[34;1mtitle without underline - false\u001b[39;22;24m"
     },
     {
         "input": "<h1 underline=\"no\">title without underline - no</h1>",
@@ -204,7 +204,7 @@
                 ]
             }
         ],
-        "output": "\ntitle without underline - no\u001b[24m"
+        "output": "\n\u001b[34;1mtitle without underline - no\u001b[39;22;24m"
     },
     {
         "input": "<h1 underline=\"none\">title without underline - none</h1>",
@@ -220,7 +220,7 @@
                 ]
             }
         ],
-        "output": "\ntitle without underline - none\u001b[24m"
+        "output": "\n\u001b[34;1mtitle without underline - none\u001b[39;22;24m"
     },
     {
         "input": "<h1 italics>title with italics</h1>",
@@ -236,7 +236,7 @@
                 ]
             }
         ],
-        "output": "\n\u001b[3mtitle with italics\u001b[23m"
+        "output": "\n\u001b[34;1;21;3mtitle with italics\u001b[39;22;24;23m"
     },
     {
         "input": "<h1 italics=\"true\">title with italics</h1>",
@@ -252,7 +252,7 @@
                 ]
             }
         ],
-        "output": "\n\u001b[3mtitle with italics\u001b[23m"
+        "output": "\n\u001b[34;1;21;3mtitle with italics\u001b[39;22;24;23m"
     },
     {
         "input": "<h1 italics=\"yes\">title with italics</h1>",
@@ -268,7 +268,7 @@
                 ]
             }
         ],
-        "output": "\n\u001b[3mtitle with italics\u001b[23m"
+        "output": "\n\u001b[34;1;21;3mtitle with italics\u001b[39;22;24;23m"
     },
     {
         "input": "<h1 italics=\"false\">title without italics</h1>",
@@ -284,7 +284,7 @@
                 ]
             }
         ],
-        "output": "\n\u001b[3mtitle without italics\u001b[23m"
+        "output": "\n\u001b[34;1;21;3mtitle without italics\u001b[39;22;24;23m"
     },
     {
         "input": "<h1 italics=\"no\">title without italics</h1>",
@@ -300,7 +300,7 @@
                 ]
             }
         ],
-        "output": "\n\u001b[3mtitle without italics\u001b[23m"
+        "output": "\n\u001b[34;1;21;3mtitle without italics\u001b[39;22;24;23m"
     },
     {
         "input": "<h1 fg=\"red\">title with red foreground</h1>",
@@ -316,7 +316,7 @@
                 ]
             }
         ],
-        "output": "\n\u001b[31mtitle with red foreground\u001b[39m"
+        "output": "\n\u001b[31;1;21mtitle with red foreground\u001b[39;22;24m"
     },
     {
         "input": "<h1 fg=\"blue\">title with blue foreground</h1>",
@@ -332,7 +332,7 @@
                 ]
             }
         ],
-        "output": "\n\u001b[34mtitle with blue foreground\u001b[39m"
+        "output": "\n\u001b[34;1;21mtitle with blue foreground\u001b[39;22;24m"
     },
     {
         "input": "<h1 fg=\"green\">title with green foreground</h1>",
@@ -348,7 +348,7 @@
                 ]
             }
         ],
-        "output": "\n\u001b[32mtitle with green foreground\u001b[39m"
+        "output": "\n\u001b[32;1;21mtitle with green foreground\u001b[39;22;24m"
     },
     {
         "input": "<h1 fg=\"yellow\">title with yellow foreground</h1>",
@@ -364,7 +364,7 @@
                 ]
             }
         ],
-        "output": "\n\u001b[33mtitle with yellow foreground\u001b[39m"
+        "output": "\n\u001b[33;1;21mtitle with yellow foreground\u001b[39;22;24m"
     },
     {
         "input": "<h1 fg=\"cyan\">title with cyan foreground</h1>",
@@ -380,7 +380,7 @@
                 ]
             }
         ],
-        "output": "\n\u001b[36mtitle with cyan foreground\u001b[39m"
+        "output": "\n\u001b[36;1;21mtitle with cyan foreground\u001b[39;22;24m"
     },
     {
         "input": "<h1 fg=\"magenta\">title with magenta foreground</h1>",
@@ -396,7 +396,7 @@
                 ]
             }
         ],
-        "output": "\n\u001b[35mtitle with magenta foreground\u001b[39m"
+        "output": "\n\u001b[35;1;21mtitle with magenta foreground\u001b[39;22;24m"
     },
     {
         "input": "<h1 fg=\"black\">title with black foreground</h1>",
@@ -412,7 +412,7 @@
                 ]
             }
         ],
-        "output": "\n\u001b[30mtitle with black foreground\u001b[39m"
+        "output": "\n\u001b[30;1;21mtitle with black foreground\u001b[39;22;24m"
     },
     {
         "input": "<h1 fg=\"white\">title with white foreground</h1>",
@@ -428,7 +428,7 @@
                 ]
             }
         ],
-        "output": "\n\u001b[37mtitle with white foreground\u001b[39m"
+        "output": "\n\u001b[37;1;21mtitle with white foreground\u001b[39;22;24m"
     },
     {
         "input": "<h1 fg=\"gray\">title with gray foreground</h1>",
@@ -444,7 +444,7 @@
                 ]
             }
         ],
-        "output": "\n\u001b[90mtitle with gray foreground\u001b[39m"
+        "output": "\n\u001b[90;1;21mtitle with gray foreground\u001b[39;22;24m"
     },
     {
         "input": "<h1 fg=\"brightred\">title with bright-red foreground</h1>",
@@ -460,7 +460,7 @@
                 ]
             }
         ],
-        "output": "\n\u001b[mtitle with bright-red foreground\u001b[39m"
+        "output": "\n\u001b[91;1;21mtitle with bright-red foreground\u001b[39;22;24m"
     },
     {
         "input": "<h1 fg=\"brightblue\">title with bright-blue foreground</h1>",
@@ -476,7 +476,7 @@
                 ]
             }
         ],
-        "output": "\n\u001b[mtitle with bright-blue foreground\u001b[39m"
+        "output": "\n\u001b[94;1;21mtitle with bright-blue foreground\u001b[39;22;24m"
     },
     {
         "input": "<h1 fg=\"brightgreen\">title with bright-green foreground</h1>",
@@ -492,7 +492,7 @@
                 ]
             }
         ],
-        "output": "\n\u001b[mtitle with bright-green foreground\u001b[39m"
+        "output": "\n\u001b[92;1;21mtitle with bright-green foreground\u001b[39;22;24m"
     },
     {
         "input": "<h1 fg=\"brightyellow\">title with bright-yellow foreground</h1>",
@@ -508,7 +508,7 @@
                 ]
             }
         ],
-        "output": "\n\u001b[mtitle with bright-yellow foreground\u001b[39m"
+        "output": "\n\u001b[93;1;21mtitle with bright-yellow foreground\u001b[39;22;24m"
     },
     {
         "input": "<h1 fg=\"brightcyan\">title with bright-cyan foreground</h1>",
@@ -524,7 +524,7 @@
                 ]
             }
         ],
-        "output": "\n\u001b[mtitle with bright-cyan foreground\u001b[39m"
+        "output": "\n\u001b[96;1;21mtitle with bright-cyan foreground\u001b[39;22;24m"
     },
     {
         "input": "<h1 fg=\"brightmagenta\">title with bright-magenta foreground</h1>",
@@ -540,7 +540,7 @@
                 ]
             }
         ],
-        "output": "\n\u001b[mtitle with bright-magenta foreground\u001b[39m"
+        "output": "\n\u001b[95;1;21mtitle with bright-magenta foreground\u001b[39;22;24m"
     },
     {
         "input": "<h1 bg=\"red\">title with red background</h1>",
@@ -556,7 +556,7 @@
                 ]
             }
         ],
-        "output": "\n\u001b[41mtitle with red background\u001b[49m"
+        "output": "\n\u001b[34;41;1;21mtitle with red background\u001b[39;49;22;24m"
     },
     {
         "input": "<h1 bg=\"blue\">title with blue background</h1>",
@@ -572,7 +572,7 @@
                 ]
             }
         ],
-        "output": "\n\u001b[44mtitle with blue background\u001b[49m"
+        "output": "\n\u001b[34;44;1;21mtitle with blue background\u001b[39;49;22;24m"
     },
     {
         "input": "<h1 bg=\"green\">title with green background</h1>",
@@ -588,7 +588,7 @@
                 ]
             }
         ],
-        "output": "\n\u001b[42mtitle with green background\u001b[49m"
+        "output": "\n\u001b[34;42;1;21mtitle with green background\u001b[39;49;22;24m"
     },
     {
         "input": "<h1 bg=\"yellow\">title with yellow background</h1>",
@@ -604,7 +604,7 @@
                 ]
             }
         ],
-        "output": "\n\u001b[43mtitle with yellow background\u001b[49m"
+        "output": "\n\u001b[34;43;1;21mtitle with yellow background\u001b[39;49;22;24m"
     },
     {
         "input": "<h1 bg=\"cyan\">title with cyan background</h1>",
@@ -620,7 +620,7 @@
                 ]
             }
         ],
-        "output": "\n\u001b[46mtitle with cyan background\u001b[49m"
+        "output": "\n\u001b[34;46;1;21mtitle with cyan background\u001b[39;49;22;24m"
     },
     {
         "input": "<h1 bg=\"magenta\">title with magenta background</h1>",
@@ -636,7 +636,7 @@
                 ]
             }
         ],
-        "output": "\n\u001b[45mtitle with magenta background\u001b[49m"
+        "output": "\n\u001b[34;45;1;21mtitle with magenta background\u001b[39;49;22;24m"
     },
     {
         "input": "<h1 bg=\"black\">title with black background</h1>",
@@ -652,7 +652,7 @@
                 ]
             }
         ],
-        "output": "\n\u001b[40mtitle with black background\u001b[49m"
+        "output": "\n\u001b[34;40;1;21mtitle with black background\u001b[39;49;22;24m"
     },
     {
         "input": "<h1 bg=\"white\">title with white background</h1>",
@@ -668,7 +668,7 @@
                 ]
             }
         ],
-        "output": "\n\u001b[47mtitle with white background\u001b[49m"
+        "output": "\n\u001b[34;47;1;21mtitle with white background\u001b[39;49;22;24m"
     },
     {
         "input": "<h1 bg=\"gray\">title with gray background</h1>",
@@ -684,7 +684,7 @@
                 ]
             }
         ],
-        "output": "\n\u001b[100mtitle with gray background\u001b[49m"
+        "output": "\n\u001b[34;100;1;21mtitle with gray background\u001b[39;49;22;24m"
     },
     {
         "input": "<h1 bg=\"brightred\">title with bright-red background</h1>",
@@ -700,7 +700,7 @@
                 ]
             }
         ],
-        "output": "\n\u001b[mtitle with bright-red background\u001b[49m"
+        "output": "\n\u001b[34;101;1;21mtitle with bright-red background\u001b[39;49;22;24m"
     },
     {
         "input": "<h1 bg=\"brightblue\">title with bright-blue background</h1>",
@@ -716,7 +716,7 @@
                 ]
             }
         ],
-        "output": "\n\u001b[mtitle with bright-blue background\u001b[49m"
+        "output": "\n\u001b[34;104;1;21mtitle with bright-blue background\u001b[39;49;22;24m"
     },
     {
         "input": "<h1 bg=\"brightgreen\">title with bright-green background</h1>",
@@ -732,7 +732,7 @@
                 ]
             }
         ],
-        "output": "\n\u001b[mtitle with bright-green background\u001b[49m"
+        "output": "\n\u001b[34;102;1;21mtitle with bright-green background\u001b[39;49;22;24m"
     },
     {
         "input": "<h1 bg=\"brightyellow\">title with bright-yellow background</h1>",
@@ -748,7 +748,7 @@
                 ]
             }
         ],
-        "output": "\n\u001b[mtitle with bright-yellow background\u001b[49m"
+        "output": "\n\u001b[34;103;1;21mtitle with bright-yellow background\u001b[39;49;22;24m"
     },
     {
         "input": "<h1 bg=\"brightcyan\">title with bright-cyan background</h1>",
@@ -764,7 +764,7 @@
                 ]
             }
         ],
-        "output": "\n\u001b[mtitle with bright-cyan background\u001b[49m"
+        "output": "\n\u001b[34;106;1;21mtitle with bright-cyan background\u001b[39;49;22;24m"
     },
     {
         "input": "<h1 bg=\"brightmagenta\">title with bright-magenta background</h1>",
@@ -780,7 +780,7 @@
                 ]
             }
         ],
-        "output": "\n\u001b[mtitle with bright-magenta background\u001b[49m"
+        "output": "\n\u001b[34;105;1;21mtitle with bright-magenta background\u001b[39;49;22;24m"
     },
     {
         "input": "<h1 fg=\"red\" bg=\"blue\">title with red foreground and blue background</h1>",
@@ -797,7 +797,7 @@
                 ]
             }
         ],
-        "output": "\n\u001b[31;44mtitle with red foreground and blue background\u001b[39;49m"
+        "output": "\n\u001b[31;44;1;21mtitle with red foreground and blue background\u001b[39;49;22;24m"
     },
     {
         "input": "<h1 fg=\"blue\" bg=\"red\">title with blue foreground and red background</h1>",
@@ -814,7 +814,7 @@
                 ]
             }
         ],
-        "output": "\n\u001b[34;41mtitle with blue foreground and red background\u001b[39;49m"
+        "output": "\n\u001b[34;41;1;21mtitle with blue foreground and red background\u001b[39;49;22;24m"
     },
     {
         "input": "<h1 margin=\"1\">title with margin</h1>",
@@ -830,7 +830,7 @@
                 ]
             }
         ],
-        "output": "\n\n title with margin \n"
+        "output": "\n \u001b[34;1;21mtitle with margin\u001b[39;22;24m \n"
     },
     {
         "input": "<h1 margin=\"1\" marginTop=\"2\">title with margin</h1>",
@@ -847,7 +847,7 @@
                 ]
             }
         ],
-        "output": "\n\n\n title with margin \n"
+        "output": "\n\n \u001b[34;1;21mtitle with margin\u001b[39;22;24m \n"
     },
     {
         "input": "<h1 margin=\"1\" marginBottom=\"2\">title with margin</h1>",
@@ -864,7 +864,7 @@
                 ]
             }
         ],
-        "output": "\n\n title with margin \n\n"
+        "output": "\n \u001b[34;1;21mtitle with margin\u001b[39;22;24m \n\n"
     },
     {
         "input": "<h1 margin=\"1\" marginLeft=\"2\">title with margin</h1>",
@@ -881,7 +881,7 @@
                 ]
             }
         ],
-        "output": "\n\n  title with margin \n"
+        "output": "\n  \u001b[34;1;21mtitle with margin\u001b[39;22;24m \n"
     },
     {
         "input": "<h1 margin=\"1\" marginRight=\"2\">title with margin</h1>",
@@ -898,7 +898,7 @@
                 ]
             }
         ],
-        "output": "\n\n title with margin  \n"
+        "output": "\n \u001b[34;1;21mtitle with margin\u001b[39;22;24m  \n"
     },
     {
         "input": "<h1 margin=\"1\" marginTop=\"2\" marginBottom=\"3\" marginLeft=\"4\" marginRight=\"5\">title with margin</h1>",
@@ -918,7 +918,7 @@
                 ]
             }
         ],
-        "output": "\n\n\n    title with margin     \n\n\n"
+        "output": "\n\n    \u001b[34;1;21mtitle with margin\u001b[39;22;24m     \n\n\n"
     },
     {
         "input": "<h1 margin=\"1\" marginTop=\"2\" marginBottom=\"3\" marginLeft=\"4\" marginRight=\"5\" fg=\"red\">title with margin</h1>",
@@ -939,7 +939,7 @@
                 ]
             }
         ],
-        "output": "\n\n\n    \u001b[31mtitle with margin\u001b[39m     \n\n\n"
+        "output": "\n\n    \u001b[31;1;21mtitle with margin\u001b[39;22;24m     \n\n\n"
     },
     {
         "input": "<h1 margin=\"1\" marginTop=\"2\" marginBottom=\"3\" marginLeft=\"4\" marginRight=\"5\" bg=\"red\">title with margin</h1>",
@@ -960,7 +960,7 @@
                 ]
             }
         ],
-        "output": "\n\n\n    \u001b[41mtitle with margin\u001b[49m     \n\n\n"
+        "output": "\n\n    \u001b[34;41;1;21mtitle with margin\u001b[39;49;22;24m     \n\n\n"
     },
     {
         "input": "<h1 margin=\"1\" marginTop=\"2\" marginBottom=\"3\" marginLeft=\"4\" marginRight=\"5\" fg=\"red\" bg=\"blue\">title with margin</h1>",
@@ -982,7 +982,7 @@
                 ]
             }
         ],
-        "output": "\n\n\n    \u001b[31;44mtitle with margin\u001b[39;49m     \n\n\n"
+        "output": "\n\n    \u001b[31;44;1;21mtitle with margin\u001b[39;49;22;24m     \n\n\n"
     },
     {
         "input": "<h1 margin=\"1\" marginTop=\"2\" marginBottom=\"3\" marginLeft=\"4\" marginRight=\"5\" fg=\"red\" bg=\"blue\" bold>title with margin</h1>",
@@ -1005,7 +1005,7 @@
                 ]
             }
         ],
-        "output": "\n\n\n    \u001b[31;44;1mtitle with margin\u001b[39;49;22m     \n\n\n"
+        "output": "\n\n    \u001b[31;44;1;21mtitle with margin\u001b[39;49;22;24m     \n\n\n"
     },
     {
         "input": "<body><h1>title</h1></body>",
@@ -1025,7 +1025,7 @@
                 ]
             }
         ],
-        "output": "\n\ntitle"
+        "output": "\u001b[39;49m\n\u001b[34;1;21mtitle\u001b[39;22;24m\u001b[39;49;24m"
     },
     {
         "input": "<body><h1>title</h1><h2>subtitle</h2><p>Paragraph with <span>span</span> and <div>div</div></p></body>",
@@ -1085,7 +1085,7 @@
                 ]
             }
         ],
-        "output": "\n\ntitle\nsubtitle\nParagraph withspanand\ndiv"
+        "output": "\u001b[39;49m\n\u001b[34;1;21mtitle\u001b[39;22;24m\n\u001b[39;1;4msubtitle\u001b[39;22;24m\n\u001b[39;49mParagraph with \u001b[39;49mspan\u001b[39;49;24mand \n\u001b[39;49mdiv\u001b[39;49;24m\u001b[39;49;24m\u001b[39;49;24m"
     },
     {
         "input": "<h1>Multiple top-level elements</h1><h2>subtitle</h2><p>Paragraph with <span>span</span> and <div>div</div></p>",
@@ -1140,7 +1140,7 @@
                 ]
             }
         ],
-        "output": "\nMultiple top-level elements\nsubtitle\nParagraph withspanand\ndiv"
+        "output": "\n\u001b[34;1;21mMultiple top-level elements\u001b[39;22;24m\n\u001b[39;1;4msubtitle\u001b[39;22;24m\n\u001b[39;49mParagraph with \u001b[39;49mspan\u001b[39;49;24mand \n\u001b[39;49mdiv\u001b[39;49;24m\u001b[39;49;24m"
     },
     {
         "input": "\n        <h1 bold marginBottom=\"1\">My Console App</h1>\n        <h2 fg=\"gray\" marginBottom=\"1\">A little something I wrote</h2>\n        <p marginBottom=\"1\">\n            In order to used this app, do the following:\n            <li bullet=\"*\" marginBottom=\"1\"> Create a config file</li>\n            <li bullet=\"*\" marginBottom=\"1\"> Run the utility with the -h flag</li>\n            <li bullet=\"*\" marginBottom=\"1\"> etc...</li>\n        </p>\n    ",
@@ -1211,7 +1211,7 @@
                 ]
             }
         ],
-        "output": "\n\u001b[1mMy Console App\u001b[22m\n\n\u001b[90mA little something I wrote\u001b[39m\n\nIn order to used this app, do the following:\n* Create a config file\n\n* Run the utility with the -h flag\n\n* etc...\n\n"
+        "output": "\n\u001b[34;1;21mMy Console App\u001b[39;22;24m\n\n\u001b[90;1;4mA little something I wrote\u001b[39;22;24m\n\n\u001b[39;49m In order to used this app, do the following: \n* \u001b[39;49m Create a config file\u001b[39;49;24m\n\n* \u001b[39;49m Run the utility with the -h flag\u001b[39;49;24m\n\n* \u001b[39;49m etc...\u001b[39;49;24m\n\u001b[39;49;24m\n"
     },
     {
         "input": "\n        <body>\n            <h1 marginBottom=\"1\">\n                <span fg=\"red\">title</span>\n            </h1>\n            <p marginBottom=\"1\">\n                <span fg=\"blue\">Paragraph with <span>span</span> and <div>div</div></span>\n            </p>\n        </body>\n    ",
@@ -1288,7 +1288,7 @@
                 ]
             }
         ],
-        "output": "\n\n\u001b[31mtitle\u001b[39m\n\n\u001b[34mParagraph withspanand\ndiv\u001b[39m\n"
+        "output": "\u001b[39;49m \n\u001b[34;1;21m \u001b[31;49mtitle\u001b[39;49;24m\u001b[39;22;24m\n\n\u001b[39;49m \u001b[34;49mParagraph with \u001b[39;49mspan\u001b[39;49;24mand \n\u001b[39;49mdiv\u001b[39;49;24m\u001b[39;49;24m\u001b[39;49;24m\n\u001b[39;49;24m"
     },
     {
         "input": "\n# Title 1\n## Title 2\n### Title 3\n**bold** *italics* [c=red]red[/c]\nJust some plain text\n    ",
@@ -1355,7 +1355,7 @@
                 "value": "Just some plain text"
             }
         ],
-        "output": "\nTitle 1\nTitle 2\nTitle 3\u001b[1mbold\u001b[22m\u001b[3mitalics\u001b[23m\u001b[31mred\u001b[39mJust some plain text"
+        "output": "\n\u001b[34;1;21mTitle 1\u001b[39;22;24m\n\u001b[39;1;4mTitle 2\u001b[39;22;24m\n\u001b[90;1mTitle 3\u001b[39;22;24m\u001b[39;49;1mbold\u001b[39;49;22;24m\u001b[39;49;3mitalics\u001b[39;49;24;23m\u001b[31;49mred\u001b[39;49;24mJust some plain text"
     },
     {
         "input": "\n# Title 1\n<span>Just some plain text</span>\n<li>Test</li>\n<li>Test2</li>\n",
@@ -1397,6 +1397,6 @@
                 ]
             }
         ],
-        "output": "\nTitle 1Just some plain text\n* Test\n* Test2"
+        "output": "\n\u001b[34;1;21mTitle 1\u001b[39;22;24m\u001b[39;49mJust some plain text\u001b[39;49;24m\n*  \u001b[39;49mTest\u001b[39;49;24m\n*  \u001b[39;49mTest2\u001b[39;49;24m"
     }
 ]

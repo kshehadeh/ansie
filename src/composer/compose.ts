@@ -3,7 +3,7 @@ import { ComposerNode } from './nodes/ComposerNode';
 import { BreakComposerNode } from './nodes/BreakComposerNode';
 import { ListItemComposerNode } from './nodes/ListItemComposerNode';
 import { MarkupComponentNode } from './nodes/MarkupComponentNode';
-import { defaultTheme, type AnsieStyle, type AnsieTheme } from './styles';
+import { defaultTheme, type AnsieStyle, type AnsieTheme } from '../themes';
 import { BodyComposerNode } from './nodes/BodyComposerNode';
 import { DivComposerNode } from './nodes/DivComposerNode';
 import { H1ComposerNode } from './nodes/H1ComposerNode';
