@@ -5,7 +5,7 @@ import {
     type SpaceNodeBase,
     SpaceAttributes,
 } from '../compiler/types';
-import type { AnsieStyle } from '../themes';
+import type { AnsieStyle } from '../themes/themes';
 
 /**
  * Renders the space attributes for a node prepending the appropriate spacing escape codes.

@@ -1,4 +1,4 @@
-import type { ValidTags } from './compiler/types';
+import type { ValidTags } from '../compiler/types';
 
 export interface AnsieStyle {
     font?: {
@@ -207,3 +207,27 @@ export const cleanTheme: AnsieTheme = {
     br: cleanStyle,
     text: cleanStyle,
 };
+
+let _globalTheme: AnsieTheme = defaultTheme;
+
+/**
+ * This will set the global theme which is used whenever a theme is
+ * not given explicitly.
+ * @param theme
+ */
+export function setGlobalTheme(theme: AnsieTheme) {
+    _globalTheme = theme;
+}
+
+/**
+ * Gets the globally set theme.
+ * @returns
+ */
+export function getGlobalTheme() {
+    return _globalTheme;
+}
+
+/**
+ * Sets the global theme to the default theme.
+ */
+setGlobalTheme(defaultTheme);

@@ -11,7 +11,7 @@ import { BreakNodeImpl } from './node/break';
 import { RawTextNodeImpl } from './node/raw';
 import { ListItemNodeImpl } from './node/list';
 import { InlineTextNodeImpl } from './node/inline';
-import type { AnsieTheme } from '../themes';
+import type { AnsieTheme } from '../themes/themes';
 
 /**
  * The compiler takes the AST from the parser and compiles it into a string

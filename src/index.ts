@@ -1,16 +1,12 @@
-export { compile } from './compiler/compile';
-export { ansie } from './template';
-export {
-    compose,
-    br,
-    text,
-    li,
-    p,
-    h1,
-    h2,
-    h3,
-    body,
-    div,
-    span,
-    markup,
-} from './composer/compose';
+import { compile } from './compiler/compile';
+import { tpl } from './template';
+import { ansieConsole } from './console/console';
+import { getGlobalTheme, setGlobalTheme } from './themes/themes';
+
+export default {
+    compile,
+    tpl,
+    console: ansieConsole,
+    setGlobalTheme,
+    getGlobalTheme,
+};

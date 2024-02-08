@@ -1,6 +1,5 @@
 import { compile } from '../src/compiler/compile';
 import compilationFixtures from './test-markup-strings';
-import compositionFixtures from './test-composer-commands';
 import * as readline from 'readline';
 
 import { writeFileSync } from 'fs';
@@ -26,21 +25,6 @@ export function recordCompilation(input: string): {
     };
 }
 
-export function recordComposition(cmd: () => string) {
-    console.log('Recording composition: ', cmd.toString());
-    const markup = cmd();
-
-    // Validate that the markup is valid
-    const result = compile({ markup, output: 'ansi' });
-    console.log('Result: ', result);
-    console.log('--------------------');
-
-    return {
-        cmd: cmd.toString(),
-        markup,
-    };
-}
-
 // Query the user to ensure that they actually want to overrwrite their fixtures
 const rl = readline.createInterface({
     input: process.stdin,
@@ -60,24 +44,6 @@ rl.question('Do you want to overwrite your fixtures? (y/n) ', answer => {
         writeFileSync(
             resolve(currentDir, 'generated/compiler-fixtures.json'),
             JSON.stringify(compilationResults, null, 2),
-            'utf8',
-        );
-
-        // Write composer recorded results to a file
-        const compositionResults = compositionFixtures.map(f =>
-            recordComposition(f),
-        );
-        writeFileSync(
-            resolve(currentDir, '../src/generated/composer-fixtures.js'),
-            `// AUTOMATICALLY GENERATED FILE - DO NOT EDIT - RUN bun run fixture:generate TO UPDATE
-import {compose, h1, h2, h3, span, div, p, body, text, markup, li} from '../composer/compose'
-export default [\n${compositionResults
-                .map(r => {
-                    // @ts-expect-error - I know this is a function but there's a configuration issue I can't resolve
-                    return `    { cmd: ${r.cmd}, markup: "${r.markup.replaceAll('"', '\\"')}" }`;
-                })
-                .join(',\n')}
-]`,
             'utf8',
         );
     } else {

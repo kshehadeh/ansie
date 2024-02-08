@@ -1,20 +1,20 @@
 {
     "compilerOptions": {
         // enable latest features
-        "lib": ["ESNext", "ESNext.String"],
-        "types": ["jest", "node"],
+        "lib": ["ESNext"],
+        "types": ["bun-types"],
         "target": "ESNext",
         "moduleDetection": "force",
         "jsx": "react-jsx", // support JSX
         "allowJs": true, // allow importing `.js` from `.ts`
-        "noEmit": true,
 
         // Bundler mode
-        "moduleResolution": "Bundler",
+        "moduleResolution": "bundler",
         "allowImportingTsExtensions": true,
         "verbatimModuleSyntax": true,
         "declaration": true,
         "resolveJsonModule": true,
+        "noEmit": true,
 
         // Best practices
         "strict": true,

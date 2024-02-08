@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'bun:test';
 import { CompilerError } from './types';
 import { ValidTags, type AnsieNode } from './types';
 

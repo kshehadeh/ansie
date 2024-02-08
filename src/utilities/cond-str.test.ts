@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'bun:test';
 import { condStr } from './cond-str';
 
 describe('condStr', () => {

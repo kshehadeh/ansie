@@ -1,5 +1,5 @@
 import type { ListItemNodeBase } from '../compiler/types';
-import type { AnsieStyle } from '../themes';
+import type { AnsieStyle } from '../themes/themes';
 import { num } from './num';
 
 export function getListItemFromProperties(

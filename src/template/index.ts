@@ -5,7 +5,7 @@ import { compile } from '../compiler/compile';
  * a template string that uses ansie markup.
  * @returns A string of ansi-compatible text.
  */
-export function ansie(
+export function tpl(
     strings: TemplateStringsArray,
     ...keys: (number | string)[]
 ) {

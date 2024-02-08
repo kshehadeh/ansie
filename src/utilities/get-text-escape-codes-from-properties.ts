@@ -1,5 +1,5 @@
 import type { TextNodeBase } from '../compiler/types';
-import type { AnsieStyle } from '../themes';
+import type { AnsieStyle } from '../themes/themes';
 import { TerminalStyle, escapeCodeFromName } from './escape-code-from-name';
 import { toTitleCase } from './to-title-case';
 

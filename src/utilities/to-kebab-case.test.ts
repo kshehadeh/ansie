@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'bun:test';
 import { toKebabCase } from './to-kebab-case';
 
 describe('toKebabeCase', () => {

@@ -27,6 +27,12 @@ also include **embedded markup**
 <span underline="single">Footnote</span>
 ```
 
+Using the CLI, you can generate rich text by piping in your markup/down to the utility:
+
+```bash
+echo "# Hello **world**" | ansie
+```
+
 ## Installation
 
 `bun add ansie`
@@ -37,31 +43,49 @@ or
 
 ## Getting Started
 
-The quickest way to get started is through the `compile` function:
+If you're integrating the library into a javascript/typescript application, you can get started with the `compile` function which, at its simplest, takes the markup to translate into ansi codes.
 
 ```typescript
-import { compile } from 'ansie';
-console.log(compile('<h1 bold italics>Hello there</h1>'));
+import ansie from 'ansie';
+console.log(ansie.compile('<h1 bold italics>Hello there</h1>'));
 
 // Output: ^[[1;3mHello there^[[22;23m
 ```
 
-This directly takes markup and produces a terminal string you can output to the terminal to get rich text.
-
-A slightly more advanced way of doing it is to use the composer:
+The above will render the string using a default theme that uses some sensible defaults to style the ouptput, but you can override that by passing in your own theme:
 
 ```typescript
-import { compose } from 'ansie';
-console.log(compose([h1('Title'), h2('A subtitle'), p('Paragraph')]).compile());
+import ansie from 'ansie';
+const theme = {
+    h1: {
+        font: {
+            color: {
+                fg: 'red',
+            },
+            bold: true,
+            italics: false,
+            underline: 'none',
+        },
+    },
+};
 
-// Output:
-//
-// ^[[34;1;21mTitle^[[39;22;24m
-//
-// ^[[39;1;4mA subtitle^[[39;22;24m
-//
-// Paragraph
-//
+console.log(
+    ansie.compile({ markup: '<h1 bold italics>Hello there</h1>', theme }),
+);
+```
+
+You can also use template tags to render your output:
+
+```typescript
+import ansie from 'ansie';
+console.log(ansie.tpl`<h1 bold italics>Hello ${fella}</h1>`);
+```
+
+Finally, you can use console logging replacements to avoid having to add a compile step:
+
+```typescript
+import ansie from 'ansie';
+ansie.console.log('# Title\n## Subtitle\nSome content');
 ```
 
 ## Ansie Markup
@@ -232,8 +256,8 @@ But you can also mix both markdown and markup in the same input. The markdown wi
 Once the package is installed, you can quickly get up and running by using the `compile` function which takes an ansie markup string and returns rich text using ansi codes.
 
 ```typescript
-import { compile } from 'ansie';
-compile('<body>Hello, world</body>');
+import ansie from 'ansie';
+ansie.compile('<body>Hello, world</body>');
 ```
 
 ### Using Template Tags
@@ -241,17 +265,19 @@ compile('<body>Hello, world</body>');
 Ansie supports template tags allowing you to build string templates using tagged templates.
 
 ```typescript
-import { ansie } from 'ansie';
+import ansie from 'ansie';
 const person = 'world';
 
 // supports markup
-console.log(ansie`<body>Hello</body>, ${person}`);
+console.log(ansie.tpl`<body>Hello</body>, ${person}`);
 
 // support markdown also
-console.log(ansie`# Hello, ${person}!`);
+console.log(ansie.tpl`# Hello, ${person}!`);
 
 // supports a combination
-console.log(ansie`# Hello <span fg="blue" underline="single">${person}</span>`);
+console.log(
+    ansie.tpl`# Hello <span fg="blue" underline="single">${person}</span>`,
+);
 ```
 
 ## Themes
@@ -264,62 +290,13 @@ A theme is made up of `tags` each of which has its own `style`. The styles avail
 | ---------- | ------------------------------------------------------------------------------------------ | ---------------------------------------- |
 | font       | color (see color properties), bold, underline [single, double, none, true, false], italics | h1, h2, h3, div, span, body, text, p, li |
 | spacing    | margin, marginLeft, marginRight, marginTop, marginBottom                                   | h1, h2, h3, body, div, p, li             |
-| list       | bullet (a string like ` *`), indent (number)                                               | li                                       |
+| list       | bullet (a string like `*`), indent (number)                                                | li                                       |
 
-## Composition
-
-The library includes a Composer that allows for easy composition through a programmatic interface and includes the concept of _themes_. A
-theme is a method with which you can easily apply a consistent look and feel across outputted content. Themes operate at the markup level,
-not at the compilation level meaning that themes cannot do anything that is not possible through the standard markup grammar.
-
-### Using the Composer
-
-The composer allows you to associate a theme with a set of nodes all at once. It takes an array of nodes and a theme. If no theme is given then it will use the default theme.
-
-The `compose` function takes an array of nodes which can take array of other nodes themselves to create a hierarchy of nodes. For example:
+The default theme has the following attributes:
 
 ```typescript
-const result = compose([
-    h1('Title'),
-    h2('A subtitle'),
-    p('Paragraph'),
-    text('This is some text that is not formatted'),
-    bundle(['Text', span('injected'), 'more text']),
-    markup('<h1>Raw Markup</h1>'),
-]).toString();
 
-console.log(markup);
-console.log(compile(markup));
 ```
-
-The order in which these nodes are rendered match the order they appear in the array. Each one can take an array of nodes or, in most cases, a string which is automatically converted to a raw text node. You can mix and match raw text and nodes as you can see in the _bundle_ call above. The same approach would work with most of the other node building functions. For a full list of node creation functions, see `Node Creation` below.
-
-### Node Creation
-
-| Function | Params                            | Description                                                                                     |
-| -------- | --------------------------------- | ----------------------------------------------------------------------------------------------- |
-| `h1`     | Text or _Child Nodes_, [_styles_] | Represents a top level header                                                                   |
-| `h2`     | Text or _Child Nodes_, [_styles_] | Represents a secondary header                                                                   |
-| `h3`     | Text or _Child Nodes_, [_styles_] | Represents a tertiary header                                                                    |
-| `span`   | Text or _Child Nodes_, [_styles_] | Represents inline text (usually only needed if doing alternate styling)                         |
-| `div`    | Text or _Child Nodes_, [_styles_] | Allows you to combine raw markup with composed items from above                                 |
-| `text`   | Text, [_styles_]                  | Inserts text as-is (but will replace `:emoji:`)                                                 |
-| `p`      | Text or _Child Nodes_, [_styles_] | Contained items are surrounded with `<color>`                                                   |
-| `list`   | _Child Nodes_, [_styles_]         | Adds a bulleted list item for each item in the passed array of nodes                            |
-| `br`     | [_styles_]                        | Inserts a `<br/>`                                                                               |
-| `bundle` | _Sibling Nodes_                   | Outputs a set of sibling nodes - useful when passing to other functions that need a single node |
-| `markup` | _Valid Markup_                    | Allows you to combine raw markup with composed items from above                                 |
-
-Most of these functions take a style object which can be used to override the theme associated with compose function. This is useful in cases where you want to diverge of the overall look and feel of the output.
-
-### The `compose` function
-
-`compose( composition: ComposerNode[] = [],  theme: AnsieTheme = defaultTheme,) => string`
-
-#### Parameters
-
-`composition` - An array of nodes that will be iterated over to generate the final markup
-`theme` - An object that defines the styles to use for the various semantic tags that the markup supports.
 
 ### Themes
 

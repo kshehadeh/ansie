@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'bun:test';
 import { RawTextMutator } from './raw-text-mutator';
 
 describe('RawTextMutator', () => {

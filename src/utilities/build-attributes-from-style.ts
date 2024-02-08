@@ -1,4 +1,4 @@
-import type { AnsieStyle } from '../themes';
+import type { AnsieStyle } from '../themes/themes';
 
 /**
  * Builds a set of attributes from a style object.  This is used to build the attributes for a node tag.  It will

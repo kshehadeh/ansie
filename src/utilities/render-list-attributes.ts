@@ -1,6 +1,6 @@
 import type { CompilerFormat } from '../compiler/types';
 import { ListAttributes, type ListItemNodeBase } from '../compiler/types';
-import type { AnsieStyle } from '../themes';
+import type { AnsieStyle } from '../themes/themes';
 import { getListItemFromProperties } from './get-list-prefix-from-properties';
 
 export function renderListAttributesStart({

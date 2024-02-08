@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'bun:test';
 import { toCamelCase } from './to-camel-case';
 
 describe('toCamelCase', () => {
