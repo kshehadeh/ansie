@@ -52,25 +52,25 @@ export class Compiler {
     private makeNodeImplementation(raw: AnsieNode): AnsieNodeImpl {
         switch (raw.node) {
             case ValidTags.body:
-                return new BlockTextNodeImpl(raw, this._theme.body);
+                return new BlockTextNodeImpl(raw, this._theme.body || {});
             case ValidTags.h1:
-                return new BlockTextNodeImpl(raw, this._theme.h1);
+                return new BlockTextNodeImpl(raw, this._theme.h1 || {});
             case ValidTags.h2:
-                return new BlockTextNodeImpl(raw, this._theme.h2);
+                return new BlockTextNodeImpl(raw, this._theme.h2 || {});
             case ValidTags.h3:
-                return new BlockTextNodeImpl(raw, this._theme.h3);
+                return new BlockTextNodeImpl(raw, this._theme.h3 || {});
             case ValidTags.div:
-                return new BlockTextNodeImpl(raw, this._theme.div);
+                return new BlockTextNodeImpl(raw, this._theme.div || {});
             case ValidTags.p:
-                return new BlockTextNodeImpl(raw, this._theme.p);
+                return new BlockTextNodeImpl(raw, this._theme.p || {});
             case ValidTags.text:
-                return new RawTextNodeImpl(raw, this._theme.text);
+                return new RawTextNodeImpl(raw, this._theme.text || {});
             case ValidTags.br:
-                return new BreakNodeImpl(raw, this._theme.br);
+                return new BreakNodeImpl(raw, this._theme.br || {});
             case ValidTags.span:
-                return new InlineTextNodeImpl(raw, this._theme.span);
+                return new InlineTextNodeImpl(raw, this._theme.span || {});
             case ValidTags.li:
-                return new ListItemNodeImpl(raw, this._theme.li);
+                return new ListItemNodeImpl(raw, this._theme.li || {});
             default:
                 throw new CompilerError(
                     `Invalid node type: ${raw.node}`,

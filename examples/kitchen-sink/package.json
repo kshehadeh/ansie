@@ -1,0 +1,15 @@
+{
+    "name": "ansie-kitchen-sink",
+    "version": "1.0.0",
+    "description": "A kitchen sink for the ansie library.",
+    "type": "module",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "ansie": "file:../.."
+    }
+}

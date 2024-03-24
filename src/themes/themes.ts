@@ -1,4 +1,4 @@
-import type { ValidTags } from '../compiler/types';
+import { merge } from 'ts-deepmerge';
 
 export interface AnsieStyle {
     font?: {
@@ -170,16 +170,16 @@ export const div: AnsieStyle = {
 };
 
 export interface AnsieTheme {
-    [ValidTags.h1]: AnsieStyle;
-    [ValidTags.h2]: AnsieStyle;
-    [ValidTags.h3]: AnsieStyle;
-    [ValidTags.body]: AnsieStyle;
-    [ValidTags.div]: AnsieStyle;
-    [ValidTags.span]: AnsieStyle;
-    [ValidTags.li]: AnsieStyle;
-    [ValidTags.p]: AnsieStyle;
-    [ValidTags.text]: AnsieStyle;
-    [ValidTags.br]: AnsieStyle;
+    h1?: AnsieStyle;
+    h2?: AnsieStyle;
+    h3?: AnsieStyle;
+    body?: AnsieStyle;
+    div?: AnsieStyle;
+    span?: AnsieStyle;
+    li?: AnsieStyle;
+    p?: AnsieStyle;
+    text?: AnsieStyle;
+    br?: AnsieStyle;
 }
 
 export const defaultTheme: AnsieTheme = {
@@ -231,3 +231,10 @@ export function getGlobalTheme() {
  * Sets the global theme to the default theme.
  */
 setGlobalTheme(defaultTheme);
+
+export function buildTheme(
+    themeFragment: Partial<AnsieTheme>,
+    originTheme: AnsieTheme,
+): AnsieTheme {
+    return merge<AnsieTheme[]>(originTheme, themeFragment);
+}
