@@ -1,4 +1,13 @@
 {
     "packageManager": "npm@7.24.0",
-    "workspaces": ["packages/*", "apps/*"]
+    "workspaces": [
+        "packages/*",
+        "apps/*"
+    ],
+    "scripts": {
+        "publish-packages": "turbo run build lint test && changeset version && changeset publish"
+    },
+    "devDependencies": {
+        "@changesets/cli": "^2.27.1"
+    }
 }

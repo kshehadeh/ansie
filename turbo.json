@@ -11,14 +11,7 @@
                 ".dist/**"
             ]
         },
-        "version": {
-            // A package's `version` script depends on the `build` script
-            // of the same package being completed. It also has no filesystem outputs.
-            "dependsOn": [
-                "build"
-            ]
-        },
-        "publish": {
+        "release": {
             // A package's `deploy` script depends on the `build`,
             // `test`, and `lint` scripts of the same package
             // being completed. It also has no filesystem outputs.

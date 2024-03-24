@@ -1,7 +1,7 @@
 {
     "name": "ansie",
     "description": "A simple rendering engine for rich text terminal output with its own markup language.",
-    "version": "0.4.0",    
+    "version": "0.5.0",
     "type": "module",
     "main": "./dist/index.js",
     "types": "./dist/esm/index.d.ts",
@@ -37,20 +37,13 @@
         "color",
         "colour",
         "form"
-    ],    
+    ],
     "scripts": {
-        "clean": "rimraf dist",
         "test": "bun test",
-        "fixture:generate": "bun test/record.ts",
-        "parser:generate": "bun scripts/parser/generate.ts",
-        "ver:pre": "npm version prerelease",
-        "ver:pat": "npm version patch",
-        "ver:min": "npm version minor",
-        "ver:maj": "npm version major",
         "lint": "eslint .",
         "build": "rollup -c",
-        "publish": "npm publish",
-        "pub:dry": "npm run build && npm publish --dry-run"
+        "fixture:generate": "bun test/record.ts",
+        "parser:generate": "bun scripts/parser/generate.ts"
     },
     "devDependencies": {
         "@rollup/plugin-typescript": "^11.1.6",
