@@ -1,0 +1,26 @@
+{
+  "name": "ansie-cli",
+  "description": "A simple CLI for the ansie library.",
+  "version": "0.4.0",
+  "type": "module",
+  "main": "./dist/index.js",
+  "bin": {
+    "ansie-cli": "dist/index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint .",
+    "build": "rollup -c"
+  },
+  "dependencies": {
+    "ansie": "../../packages/ansie",
+    "yargs": "^17.7.2"
+  },
+  "devDependencies": {
+    "@rollup/plugin-json": "^6.1.0",
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  }
+}

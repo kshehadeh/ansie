@@ -1,0 +1,12 @@
+
+> ansie@0.4.0 build
+> rollup -c
+
+[36m
+[1m./src/index.ts[22m → [1mdist/cjs/index.js, dist/esm/index.js[22m...[39m
+[1m[33m(!) Unresolved dependencies[39m[22m
+[90mhttps://rollupjs.org/troubleshooting/#warning-treating-module-as-external-dependency[39m
+[1mutil[22m (imported by "src/console/console.ts")
+[1mts-deepmerge[22m (imported by "src/themes/themes.ts")
+[1m[33m(!) [plugin typescript] @rollup/plugin-typescript TS5096: Option 'allowImportingTsExtensions' can only be used when either 'noEmit' or 'emitDeclarationOnly' is set.[39m[22m
+[32mcreated [1mdist/cjs/index.js, dist/esm/index.js[22m in [1m1s[22m[39m
