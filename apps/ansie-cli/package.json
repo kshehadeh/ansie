@@ -1,14 +1,14 @@
 {
   "name": "ansie-cli",
   "description": "A simple CLI for the ansie library.",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "type": "module",
   "main": "./dist/index.js",
   "bin": {
     "ansie": "dist/index.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "echo \"Error: no tests for this module yet\"",
     "lint": "eslint .",
     "build": "rollup -c"
   },

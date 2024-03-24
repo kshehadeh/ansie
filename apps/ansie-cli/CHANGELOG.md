@@ -1,5 +1,11 @@
 # ansie-cli
 
+## 0.5.1
+
+### Patch Changes
+
+- Change the name of the binary that you run on the command line
+
 ## 0.5.0
 
 ### Minor Changes
