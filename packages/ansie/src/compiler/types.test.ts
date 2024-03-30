@@ -13,7 +13,7 @@ describe('CompilerError', () => {
             message,
             markupNode,
             markupStack,
-            fatal,
+            fatal
         );
 
         expect(error.name).toBe('CompilerError');
@@ -33,7 +33,7 @@ describe('CompilerError', () => {
             message,
             markupNode,
             markupStack,
-            fatal,
+            fatal
         );
         const expectedString =
             'CompilerError: Test error message (div, body, div)';
@@ -51,7 +51,7 @@ describe('CompilerError', () => {
             message,
             markupNode,
             markupStack,
-            fatal,
+            fatal
         );
 
         expect(error.continue()).toBe(true);
@@ -67,7 +67,7 @@ describe('CompilerError', () => {
             message,
             markupNode,
             markupStack,
-            fatal,
+            fatal
         );
 
         expect(error.continue()).toBe(false);

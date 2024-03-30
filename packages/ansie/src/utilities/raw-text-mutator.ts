@@ -42,7 +42,7 @@ export class RawTextMutator {
         ':thumbsup::skin-tone-3:': '👍🏼',
         ':thumbsup::skin-tone-4:': '👍🏽',
         ':thumbsup::skin-tone-5:': '👍🏾',
-        ':thumbsup::skin-tone-6:': '👍🏿',
+        ':thumbsup::skin-tone-6:': '👍🏿'
     };
 
     constructor(str: string) {
@@ -57,7 +57,7 @@ export class RawTextMutator {
         const emojiMatches = this._str.match(/:[a-z_]+:/g);
         if (emojiMatches) {
             emojiMatches.forEach(match => {
-                const emoji = RawTextMutator.EmojiMap[match];                
+                const emoji = RawTextMutator.EmojiMap[match];
                 if (emoji) {
                     this._str = this._str.replace(match, emoji);
                 }
@@ -82,7 +82,7 @@ export class RawTextMutator {
         const pattern = new RegExp(`${leftPattern}|${rightPattern}`, 'g');
         this._str = this._str.replace(
             pattern,
-            options.replaceWithSingleSpace ? ' ' : '',
+            options.replaceWithSingleSpace ? ' ' : ''
         );
         return this;
     }

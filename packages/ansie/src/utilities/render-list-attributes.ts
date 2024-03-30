@@ -6,7 +6,7 @@ import { getListItemFromProperties } from './get-list-prefix-from-properties';
 export function renderListAttributesStart({
     node,
     style,
-    format = 'ansi',
+    format = 'ansi'
 }: {
     node: ListItemNodeBase;
     style?: AnsieStyle;
@@ -27,7 +27,7 @@ export function renderListAttributesStart({
 export function renderListAttributesEnd({
     node,
     style,
-    format = 'ansi',
+    format = 'ansi'
 }: {
     node: ListItemNodeBase;
     style?: AnsieStyle;

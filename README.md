@@ -1,6 +1,6 @@
 # Ansie Monorepo
 
-The Ansie Monorepo is a collection of Ansie projects that are maintained together in a single repository. This repository is managed using Turbo, a tool for managing monorepos.  It also uses changesets to manage changes across packages.
+The Ansie Monorepo is a collection of Ansie projects that are maintained together in a single repository. This repository is managed using Turbo, a tool for managing monorepos. It also uses changesets to manage changes across packages.
 
 ## Packages
 
@@ -13,10 +13,10 @@ The Ansie Monorepo is a collection of Ansie projects that are maintained togethe
 ### Setup
 
 ```bash
-npm i 
+npm i
 npx turbo build
 
-# or 
+# or
 
 npm install turbo -g
 npm i
@@ -24,12 +24,24 @@ turbo build
 
 ```
 
-### Deploying a new version
+## Releasing
+
+### Prepare Release
 
 ```bash
-npx turbo release
+npm run build
+```
 
-# or 
+> NOTE: Commit all changes before proceeding
 
-turbo release
+### Prepare Changeset
+
+```bash
+npx changeset add
+```
+
+### Publish Changes
+
+```bash
+npx changeset publish
 ```

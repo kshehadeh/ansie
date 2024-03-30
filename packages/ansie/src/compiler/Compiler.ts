@@ -3,7 +3,7 @@ import {
     type AnsieNode,
     type Ast,
     ValidTags,
-    type CompilerFormat,
+    type CompilerFormat
 } from './types';
 import { CompilerError } from './types';
 import { BlockTextNodeImpl } from './node/block';
@@ -38,7 +38,7 @@ export class Compiler {
      */
     public compile({
         format,
-        theme,
+        theme
     }: {
         format: CompilerFormat;
         theme?: AnsieTheme;
@@ -76,14 +76,14 @@ export class Compiler {
                     `Invalid node type: ${raw.node}`,
                     raw,
                     this._stack,
-                    true,
+                    true
                 );
         }
     }
 
     private _push({
         state,
-        format = 'ansi',
+        format = 'ansi'
     }: {
         state: AnsieNode;
         theme?: AnsieTheme;
@@ -95,7 +95,7 @@ export class Compiler {
     }
 
     private _pop({
-        format = 'ansi',
+        format = 'ansi'
     }: { theme?: AnsieTheme; format?: CompilerFormat } = {}) {
         const old = this._stack.pop();
         return old?.renderEnd({ stack: this._stack, format });
@@ -104,7 +104,7 @@ export class Compiler {
     private _compileNode({
         node,
         theme,
-        format = 'ansi',
+        format = 'ansi'
     }: {
         node: AnsieNode;
         theme?: AnsieTheme;
@@ -118,17 +118,15 @@ export class Compiler {
             if (node.content) {
                 if (Array.isArray(node.content)) {
                     node.content.forEach(node =>
-                        strings.push(
-                            this._compileNode({ node, theme, format }),
-                        ),
+                        strings.push(this._compileNode({ node, theme, format }))
                     );
                 } else {
                     strings.push(
                         this._compileNode({
                             node: node.content,
                             theme,
-                            format,
-                        }),
+                            format
+                        })
                     );
                 }
             }

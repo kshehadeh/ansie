@@ -1,12 +1,12 @@
 import { describe, expect, it } from 'bun:test';
 import {
     renderTextAttributesEnd,
-    renderTextAttributesStart,
+    renderTextAttributesStart
 } from './render-text-attributes';
 import { ValidTags } from '../compiler/types';
 import {
     renderSpaceAttributesStart,
-    renderSpaceAttributesEnd,
+    renderSpaceAttributesEnd
 } from './render-space-attributes';
 
 describe('renderTextAttributesEnd', () => {
@@ -15,7 +15,7 @@ describe('renderTextAttributesEnd', () => {
         const format = 'ansi';
         const expectedOutput = '\x1b[39m';
         expect(renderTextAttributesEnd({ attributes: node, format })).toBe(
-            expectedOutput,
+            expectedOutput
         );
     });
 
@@ -24,12 +24,12 @@ describe('renderTextAttributesEnd', () => {
             node: ValidTags.h1,
             fg: 'blue' as const,
             bg: 'red' as const,
-            bold: 'true',
+            bold: 'true'
         };
         const format = 'ansi';
         const expectedOutput = '\x1b[39;49;22m';
         expect(renderTextAttributesEnd({ attributes, format })).toBe(
-            expectedOutput,
+            expectedOutput
         );
     });
 
@@ -38,7 +38,7 @@ describe('renderTextAttributesEnd', () => {
         const format = 'markup';
         const expectedOutput = '';
         expect(renderTextAttributesEnd({ attributes, format })).toBe(
-            expectedOutput,
+            expectedOutput
         );
     });
 });
@@ -49,7 +49,7 @@ describe('renderTextAttributesStart', () => {
         const format = 'ansi';
         const expectedOutput = '\x1b[34m';
         expect(renderTextAttributesStart({ attributes, format })).toBe(
-            expectedOutput,
+            expectedOutput
         );
     });
 
@@ -58,7 +58,7 @@ describe('renderTextAttributesStart', () => {
         const format = 'markup';
         const expectedOutput = 'fg="blue"';
         expect(renderTextAttributesStart({ attributes, format })).toBe(
-            expectedOutput,
+            expectedOutput
         );
     });
 
@@ -67,7 +67,7 @@ describe('renderTextAttributesStart', () => {
         const format = 'markup';
         const expectedOutput = 'fg="blue"';
         expect(renderTextAttributesStart({ attributes, format })).toBe(
-            expectedOutput,
+            expectedOutput
         );
     });
 
@@ -76,12 +76,12 @@ describe('renderTextAttributesStart', () => {
             node: ValidTags.h1,
             fg: 'blue' as const,
             bg: 'red' as const,
-            bold: 'true',
+            bold: 'true'
         };
         const format = 'ansi';
         const expectedOutput = '\x1b[34;41;1m';
         expect(renderTextAttributesStart({ attributes, format })).toBe(
-            expectedOutput,
+            expectedOutput
         );
     });
 });
@@ -92,7 +92,7 @@ describe('renderSpaceAttributesStart', () => {
         const format = 'ansi';
         const expectedOutput = '\n\n  ';
         expect(renderSpaceAttributesStart({ node: attributes, format })).toBe(
-            expectedOutput,
+            expectedOutput
         );
     });
 
@@ -103,12 +103,12 @@ describe('renderSpaceAttributesStart', () => {
             marginLeft: '1',
             marginRight: '3',
             marginTop: '4',
-            marginBottom: '5',
+            marginBottom: '5'
         };
         const format = 'ansi';
         const expectedOutput = '\n\n\n\n ';
         expect(renderSpaceAttributesStart({ node: attributes, format })).toBe(
-            expectedOutput,
+            expectedOutput
         );
     });
 
@@ -117,7 +117,7 @@ describe('renderSpaceAttributesStart', () => {
         const format = 'markup';
         const expectedOutput = 'margin="2"';
         expect(renderSpaceAttributesStart({ node: attributes, format })).toBe(
-            expectedOutput,
+            expectedOutput
         );
     });
 });
@@ -128,7 +128,7 @@ describe('renderSpaceAttributesEnd', () => {
         const format = 'ansi';
         const expectedOutput = '  \n\n';
         expect(renderSpaceAttributesEnd({ attributes, format })).toBe(
-            expectedOutput,
+            expectedOutput
         );
     });
 
@@ -139,12 +139,12 @@ describe('renderSpaceAttributesEnd', () => {
             marginLeft: '1',
             marginRight: '3',
             marginTop: '4',
-            marginBottom: '5',
+            marginBottom: '5'
         };
         const format = 'ansi';
         const expectedOutput = '   \n\n\n\n\n';
         expect(renderSpaceAttributesEnd({ attributes, format })).toBe(
-            expectedOutput,
+            expectedOutput
         );
     });
 
@@ -153,7 +153,7 @@ describe('renderSpaceAttributesEnd', () => {
         const format = 'markup';
         const expectedOutput = '';
         expect(renderSpaceAttributesEnd({ attributes, format })).toBe(
-            expectedOutput,
+            expectedOutput
         );
     });
 });

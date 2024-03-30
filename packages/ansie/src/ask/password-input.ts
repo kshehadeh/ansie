@@ -1,6 +1,4 @@
-
 import readline from 'readline';
-
 
 export default function passwordInput(maskKey: string = '*') {
     const rl = readline.createInterface({
@@ -15,7 +13,10 @@ export default function passwordInput(maskKey: string = '*') {
     let password = '';
     process.stdin.on('keypress', (_str, key) => {
         // Handle exits
-        if (key.ctrl && (key.name === 'c' || key.name === 'd' || key.name === 'z')) {
+        if (
+            key.ctrl &&
+            (key.name === 'c' || key.name === 'd' || key.name === 'z')
+        ) {
             process.exit();
         }
     });
@@ -32,12 +33,12 @@ export default function passwordInput(maskKey: string = '*') {
             // Remove the last character from the password
             password = password.slice(0, -1);
             readline.moveCursor(process.stdout, -1, 0);
-            process.stdout.write(' ')
+            process.stdout.write(' ');
             readline.moveCursor(process.stdout, -1, 0);
         } else {
             // Mask password with maskKey
             password += key;
-            process.stdout.write(maskKey)
+            process.stdout.write(maskKey);
         }
     });
 

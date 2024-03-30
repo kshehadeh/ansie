@@ -7,14 +7,14 @@ export class RawTextNodeImpl extends AnsieNodeImpl implements AnsieNode {
         const text = this.attr('value') ?? '';
         if (format === 'markup') {
             return text;
-        } else {            
+        } else {
             return new RawTextMutator(text)
                 .replaceEmoji()
                 .trimSpaces({
                     left: true,
                     right: true,
                     allowNewLines: false,
-                    replaceWithSingleSpace: true,
+                    replaceWithSingleSpace: true
                 })
                 .toString();
         }

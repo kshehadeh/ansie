@@ -107,5 +107,5 @@ Just some plain text
 <span>Just some plain text</span>
 <li>Test</li>
 <li>Test2</li>
-`,
+`
 ];

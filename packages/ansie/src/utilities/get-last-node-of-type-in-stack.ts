@@ -13,7 +13,7 @@ import type { AnsieNode } from '../compiler/types';
  */
 export function getLastNodeOfTypeFromStack<T extends AnsieNode['node']>(
     nodeType: T,
-    stack: AnsieNode[],
+    stack: AnsieNode[]
 ) {
     for (let i = stack.length - 1; i >= 0; i--) {
         const stackNode = stack[i];

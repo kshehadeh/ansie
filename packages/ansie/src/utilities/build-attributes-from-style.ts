@@ -7,7 +7,7 @@ import type { AnsieStyle } from '../themes/themes';
  * @returns
  */
 export function buildAttributesFromStyle(
-    style: AnsieStyle,
+    style: AnsieStyle
 ): Record<string, string | number | boolean | undefined> {
     const attributes: Record<string, string | number | boolean | undefined> =
         {};

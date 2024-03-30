@@ -13,12 +13,12 @@ const parserSource: string =
     peggy.generate(grammar, {
         output: 'source',
         format: 'es',
-        grammarSource: 'ansie-markup.peggy',
+        grammarSource: 'ansie-markup.peggy'
     });
 
 const outFile = path.resolve(
     currentDir,
-    '../../src/parser/generated-parser.js',
+    '../../src/parser/generated-parser.js'
 );
 
 console.log('Writing parser to ', outFile);

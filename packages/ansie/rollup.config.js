@@ -6,11 +6,11 @@ export default async () => ({
     output: [
         {
             file: 'dist/cjs/index.js',
-            format: 'cjs',
+            format: 'cjs'
         },
         {
             file: 'dist/esm/index.js',
-            format: 'esm',
-        },
-    ],
+            format: 'esm'
+        }
+    ]
 });

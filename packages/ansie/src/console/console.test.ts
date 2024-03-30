@@ -11,7 +11,7 @@ spyOn(console, 'info');
 describe('ansie console', () => {
     it('should log a message', () => {
         expect(() =>
-            ansieConsole.log('Test message with %s', 'markup'),
+            ansieConsole.log('Test message with %s', 'markup')
         ).not.toThrow();
 
         expect(console.log).toHaveBeenCalledTimes(1);
@@ -19,7 +19,7 @@ describe('ansie console', () => {
 
     it('should warn a message', () => {
         expect(() =>
-            ansieConsole.warn('Test message with %s', 'markup'),
+            ansieConsole.warn('Test message with %s', 'markup')
         ).not.toThrow();
 
         expect(console.warn).toHaveBeenCalledTimes(1);
@@ -27,7 +27,7 @@ describe('ansie console', () => {
 
     it('should error a message', () => {
         expect(() =>
-            ansieConsole.error('Test message with %s', 'markup'),
+            ansieConsole.error('Test message with %s', 'markup')
         ).not.toThrow();
 
         expect(console.error).toHaveBeenCalledTimes(1);
@@ -35,7 +35,7 @@ describe('ansie console', () => {
 
     it('should info a message', () => {
         expect(() =>
-            ansieConsole.info('Test message with %s', 'markup'),
+            ansieConsole.info('Test message with %s', 'markup')
         ).not.toThrow();
 
         expect(console.info).toHaveBeenCalledTimes(1);

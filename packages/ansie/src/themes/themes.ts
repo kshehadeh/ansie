@@ -29,42 +29,42 @@ const cleanStyle: AnsieStyle = {
     font: {
         color: {
             fg: 'default',
-            bg: 'default',
+            bg: 'default'
         },
         bold: false,
         underline: 'none',
-        italics: false,
+        italics: false
     },
     list: {
         bullet: '* ',
-        indent: 1,
+        indent: 1
     },
     spacing: {
         margin: 0,
         marginLeft: 0,
         marginRight: 0,
         marginTop: 0,
-        marginBottom: 0,
-    },
+        marginBottom: 0
+    }
 };
 
 export const body: AnsieStyle = {
     font: {
         color: {
             fg: 'default',
-            bg: 'default',
+            bg: 'default'
         },
         bold: false,
         underline: 'none',
-        italics: false,
+        italics: false
     },
     spacing: {
         margin: 0,
         marginLeft: 0,
         marginRight: 0,
         marginTop: 0,
-        marginBottom: 0,
-    },
+        marginBottom: 0
+    }
 };
 
 export const text: AnsieStyle = body;
@@ -75,62 +75,62 @@ export const br: AnsieStyle = {
         marginLeft: 0,
         marginRight: 0,
         marginTop: 0,
-        marginBottom: 0,
-    },
+        marginBottom: 0
+    }
 };
 
 export const h1: AnsieStyle = {
     font: {
         color: {
-            fg: 'blue',
+            fg: 'blue'
         },
         bold: true,
         underline: 'double',
-        italics: false,
+        italics: false
     },
     spacing: {
         margin: 0,
         marginLeft: 0,
         marginRight: 0,
         marginTop: 1,
-        marginBottom: 0,
-    },
+        marginBottom: 0
+    }
 };
 
 export const h2: AnsieStyle = {
     font: {
         color: {
-            fg: 'default',
+            fg: 'default'
         },
         bold: true,
         underline: 'single',
-        italics: false,
+        italics: false
     },
     spacing: {
         margin: 0,
         marginLeft: 0,
         marginRight: 0,
         marginTop: 1,
-        marginBottom: 0,
-    },
+        marginBottom: 0
+    }
 };
 
 export const h3: AnsieStyle = {
     font: {
         color: {
-            fg: 'gray',
+            fg: 'gray'
         },
         bold: true,
         underline: 'none',
-        italics: false,
+        italics: false
     },
     spacing: {
         margin: 0,
         marginLeft: 0,
         marginRight: 0,
         marginTop: 1,
-        marginBottom: 0,
-    },
+        marginBottom: 0
+    }
 };
 
 export const p: AnsieStyle = {
@@ -139,8 +139,8 @@ export const p: AnsieStyle = {
         marginLeft: 0,
         marginRight: 0,
         marginTop: 1,
-        marginBottom: 0,
-    },
+        marginBottom: 0
+    }
 };
 
 export const span: AnsieStyle = {};
@@ -148,15 +148,15 @@ export const span: AnsieStyle = {};
 export const li: AnsieStyle = {
     list: {
         bullet: '* ',
-        indent: 1,
+        indent: 1
     },
     spacing: {
         margin: 0,
         marginLeft: 0,
         marginRight: 0,
         marginTop: 1,
-        marginBottom: 0,
-    },
+        marginBottom: 0
+    }
 };
 
 export const div: AnsieStyle = {
@@ -165,8 +165,8 @@ export const div: AnsieStyle = {
         marginLeft: 0,
         marginRight: 0,
         marginTop: 1,
-        marginBottom: 0,
-    },
+        marginBottom: 0
+    }
 };
 
 export interface AnsieTheme {
@@ -192,7 +192,7 @@ export const defaultTheme: AnsieTheme = {
     span: { ...cleanStyle, ...span },
     div: { ...cleanStyle, ...div },
     br: { ...cleanStyle, ...br },
-    text: { ...cleanStyle, ...text },
+    text: { ...cleanStyle, ...text }
 };
 
 export const cleanTheme: AnsieTheme = {
@@ -205,7 +205,7 @@ export const cleanTheme: AnsieTheme = {
     span: cleanStyle,
     div: cleanStyle,
     br: cleanStyle,
-    text: cleanStyle,
+    text: cleanStyle
 };
 
 let _globalTheme: AnsieTheme = defaultTheme;
@@ -234,7 +234,7 @@ setGlobalTheme(defaultTheme);
 
 export function buildTheme(
     themeFragment: Partial<AnsieTheme>,
-    originTheme: AnsieTheme,
+    originTheme: AnsieTheme
 ): AnsieTheme {
     return merge<AnsieTheme[]>(originTheme, themeFragment);
 }

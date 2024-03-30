@@ -25,7 +25,7 @@ export enum ValidTags {
     'div' = 'div',
     'text' = 'text',
     'li' = 'li',
-    'br' = 'br',
+    'br' = 'br'
 }
 
 /**
@@ -63,7 +63,7 @@ export const ColorAttributeValues = [
     'brightblue',
     'brightmagenta',
     'brightcyan',
-    'gray',
+    'gray'
 ];
 
 /**
@@ -91,7 +91,7 @@ export const SpaceAttributes = {
     marginTop: ['number'],
     marginBottom: ['number'],
     marginLeft: ['number'],
-    marginRight: ['number'],
+    marginRight: ['number']
 };
 
 /**
@@ -112,7 +112,7 @@ export const TextAttributes = {
     bg: ColorAttributeValues,
     bold: [...booleanValues],
     italics: [...booleanValues],
-    underline: [...booleanValues, 'single', 'double', 'none'],
+    underline: [...booleanValues, 'single', 'double', 'none']
 };
 
 /**
@@ -135,7 +135,7 @@ export type TextNodeBase = BaseAnsieNode & TextAttributesInterface;
  */
 export const ListAttributes = {
     bullet: ['*', '-', '+'],
-    indent: ['number'],
+    indent: ['number']
 };
 
 /**
@@ -161,7 +161,7 @@ export type ListItemNodeBase = BaseAnsieNode & ListAttributesInterface;
  * @internal
  */
 export const RawTextAttributes = {
-    value: ['string'],
+    value: ['string']
 };
 
 /**
@@ -198,7 +198,7 @@ export const AllAttributeKeysList = [
     ...Object.keys(SpaceAttributes),
     ...Object.keys(TextAttributes),
     ...Object.keys(ListAttributes),
-    ...Object.keys(RawTextAttributes),
+    ...Object.keys(RawTextAttributes)
 ];
 
 /**
@@ -220,40 +220,40 @@ export function isAttribute(key: string): key is AllAttributeKeys {
 export const TagAttributeMap = {
     [ValidTags.h1]: {
         ...TextAttributes,
-        ...SpaceAttributes,
+        ...SpaceAttributes
     },
     [ValidTags.h2]: {
         ...TextAttributes,
-        ...SpaceAttributes,
+        ...SpaceAttributes
     },
     [ValidTags.h3]: {
         ...TextAttributes,
-        ...SpaceAttributes,
+        ...SpaceAttributes
     },
     [ValidTags.body]: {
         ...TextAttributes,
-        ...SpaceAttributes,
+        ...SpaceAttributes
     },
     [ValidTags.span]: {
-        ...TextAttributes,
+        ...TextAttributes
     },
     [ValidTags.p]: {
         ...TextAttributes,
-        ...SpaceAttributes,
+        ...SpaceAttributes
     },
     [ValidTags.div]: {
         ...TextAttributes,
-        ...SpaceAttributes,
+        ...SpaceAttributes
     },
     [ValidTags.li]: {
         ...TextAttributes,
         ...SpaceAttributes,
-        ...ListAttributes,
+        ...ListAttributes
     },
     [ValidTags.text]: {},
     [ValidTags.br]: {
-        ...SpaceAttributes,
-    },
+        ...SpaceAttributes
+    }
 };
 
 /**
@@ -296,15 +296,12 @@ export abstract class AnsieNodeImpl {
      * "node" or "content".
      */
     get attributes(): Record<AllAttributeKeys, string> {
-        return Object.entries(this._raw).reduce(
-            (acc, [key, value]) => {
-                if (isAttribute(key) && typeof value === 'string') {
-                    acc[key] = value;
-                }
-                return acc;
-            },
-            {} as Record<AllAttributeKeys, string>,
-        );
+        return Object.entries(this._raw).reduce((acc, [key, value]) => {
+            if (isAttribute(key) && typeof value === 'string') {
+                acc[key] = value;
+            }
+            return acc;
+        }, {} as Record<AllAttributeKeys, string>);
     }
 
     /**
@@ -318,14 +315,14 @@ export abstract class AnsieNodeImpl {
 
     abstract renderStart({
         stack,
-        format,
+        format
     }: {
         stack: AnsieNode[];
         format: CompilerFormat;
     }): string;
     abstract renderEnd({
         stack,
-        format,
+        format
     }: {
         stack: AnsieNode[];
         format: CompilerFormat;
@@ -355,7 +352,7 @@ export class CompilerError implements Error {
         message: string,
         markupNode: AnsieNode,
         markupStack: AnsieNode[],
-        fatal: boolean = false,
+        fatal: boolean = false
     ) {
         this.message = message;
         this.markupNode = markupNode;
@@ -368,7 +365,9 @@ export class CompilerError implements Error {
      * @returns The string representation of the CompilerError.
      */
     toString() {
-        return `${this.name}: ${this.message} (${this.markupNode.node}, ${this.markupStack.map(node => node.node).join(', ')})`;
+        return `${this.name}: ${this.message} (${
+            this.markupNode.node
+        }, ${this.markupStack.map(node => node.node).join(', ')})`;
     }
 
     /**

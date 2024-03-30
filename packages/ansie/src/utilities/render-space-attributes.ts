@@ -3,7 +3,7 @@ import { getSpacingFromProperties } from './get-spacing-from-properties';
 import {
     type AnsieNode,
     type SpaceNodeBase,
-    SpaceAttributes,
+    SpaceAttributes
 } from '../compiler/types';
 import type { AnsieStyle } from '../themes/themes';
 
@@ -16,7 +16,7 @@ import type { AnsieStyle } from '../themes/themes';
 export function renderSpaceAttributesStart({
     node,
     format,
-    style,
+    style
 }: {
     node: SpaceNodeBase;
     format: CompilerFormat;
@@ -42,7 +42,7 @@ export function renderSpaceAttributesStart({
 export function renderSpaceAttributesEnd({
     style,
     attributes,
-    format,
+    format
 }: {
     attributes: AnsieNode;
     style?: AnsieStyle;

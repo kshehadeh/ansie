@@ -6,7 +6,7 @@ import { AnsieNodeImpl, type AnsieNode } from '../types';
 export class BreakNodeImpl extends AnsieNodeImpl implements AnsieNode {
     renderStart({
         stack,
-        format,
+        format
     }: {
         stack: AnsieNode[];
         format: CompilerFormat;
@@ -21,7 +21,7 @@ export class BreakNodeImpl extends AnsieNodeImpl implements AnsieNode {
             `Invalid format: ${format}`,
             this._raw,
             stack,
-            false,
+            false
         );
     }
 

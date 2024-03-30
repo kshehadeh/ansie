@@ -4,7 +4,7 @@ import { num } from './num';
 
 export function getListItemFromProperties(
     node: ListItemNodeBase,
-    style?: AnsieStyle,
+    style?: AnsieStyle
 ): {
     on: string;
     off: string;
@@ -16,6 +16,6 @@ export function getListItemFromProperties(
 
     return {
         on: `${bullet}${indent}`,
-        off: '',
+        off: ''
     };
 }

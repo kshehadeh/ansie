@@ -21,14 +21,14 @@ export function recordCompilation(input: string): {
     return {
         input,
         ast,
-        output,
+        output
     };
 }
 
 // Query the user to ensure that they actually want to overrwrite their fixtures
 const rl = readline.createInterface({
     input: process.stdin,
-    output: process.stdout,
+    output: process.stdout
 });
 
 const currentDir = import.meta.url
@@ -39,12 +39,12 @@ rl.question('Do you want to overwrite your fixtures? (y/n) ', answer => {
     if (answer.toLowerCase() === 'y' || answer.toLowerCase() === 'yes') {
         // Write compiler recorded results to a file
         const compilationResults = compilationFixtures.map(f =>
-            recordCompilation(f),
+            recordCompilation(f)
         );
         writeFileSync(
             resolve(currentDir, 'generated/compiler-fixtures.json'),
             JSON.stringify(compilationResults, null, 2),
-            'utf8',
+            'utf8'
         );
     } else {
         console.log('Operation cancelled.');

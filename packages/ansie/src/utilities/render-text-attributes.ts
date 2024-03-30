@@ -12,7 +12,7 @@ import type { AnsieStyle } from '../themes/themes';
 export function renderTextAttributesStart({
     style,
     attributes,
-    format = 'ansi',
+    format = 'ansi'
 }: {
     style?: AnsieStyle;
     attributes: AnsieNode;
@@ -36,7 +36,7 @@ export function renderTextAttributesStart({
 export function renderTextAttributesEnd({
     style,
     attributes,
-    format = 'ansi',
+    format = 'ansi'
 }: {
     style?: AnsieStyle;
     attributes: AnsieNode;

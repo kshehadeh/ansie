@@ -71,7 +71,7 @@ export enum TerminalStyle {
     // *** Containers
     framed = 51,
     encircled = 52,
-    overline = 53,
+    overline = 53
 }
 
 // Given a name or array of names, return the ANSI escape code for that name.

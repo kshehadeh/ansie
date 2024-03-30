@@ -24,5 +24,5 @@ export const ansieConsole = {
     warn: (message?: any, ...optionalParams: any[]) => {
         const logWithMarkup = util.format(message, ...optionalParams);
         console.warn(compile(logWithMarkup));
-    },
+    }
 };

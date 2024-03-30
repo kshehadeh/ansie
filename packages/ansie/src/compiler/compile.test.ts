@@ -9,6 +9,6 @@ describe('Compiler', () => {
                 const output = compile({ markup: fixture.input });
                 expect(output).toEqual(fixture.output);
             });
-        },
+        }
     );
 });

@@ -2,7 +2,7 @@ import { describe, expect, it } from 'bun:test';
 import { TerminalStyle, escapeCodeFromName } from './escape-code-from-name';
 import {
     colorToTerminalStyle,
-    getTextEscapeCodesFromProperties,
+    getTextEscapeCodesFromProperties
 } from './get-text-escape-codes-from-properties';
 import { ValidTags, type TextNodeBase } from '../compiler/types';
 
@@ -30,7 +30,7 @@ describe('getTextEscapeCodesFromProperties', () => {
             bg: 'blue' as const,
             bold: 'true',
             underline: 'single',
-            italics: 'true',
+            italics: 'true'
         };
         const expectedOutput = {
             on: escapeCodeFromName([
@@ -38,15 +38,15 @@ describe('getTextEscapeCodesFromProperties', () => {
                 TerminalStyle.bgBlue,
                 TerminalStyle.bold,
                 TerminalStyle.underline,
-                TerminalStyle.italic,
+                TerminalStyle.italic
             ]),
             off: escapeCodeFromName([
                 TerminalStyle.fgDefault,
                 TerminalStyle.bgDefault,
                 TerminalStyle.boldOff,
                 TerminalStyle.underlineOff,
-                TerminalStyle.italicOff,
-            ]),
+                TerminalStyle.italicOff
+            ])
         };
         expect(getTextEscapeCodesFromProperties(node)).toEqual(expectedOutput);
     });
@@ -55,14 +55,14 @@ describe('getTextEscapeCodesFromProperties', () => {
         const node: TextNodeBase = {
             node: ValidTags.h1,
             fg: 'green' as const,
-            bold: 'true',
+            bold: 'true'
         };
         const expectedOutput = {
             on: escapeCodeFromName([TerminalStyle.fgGreen, TerminalStyle.bold]),
             off: escapeCodeFromName([
                 TerminalStyle.fgDefault,
-                TerminalStyle.boldOff,
-            ]),
+                TerminalStyle.boldOff
+            ])
         };
         expect(getTextEscapeCodesFromProperties(node)).toEqual(expectedOutput);
     });
@@ -71,7 +71,7 @@ describe('getTextEscapeCodesFromProperties', () => {
         const node: TextNodeBase = {} as TextNodeBase;
         const expectedOutput = {
             on: '',
-            off: '',
+            off: ''
         };
         expect(getTextEscapeCodesFromProperties(node)).toEqual(expectedOutput);
     });

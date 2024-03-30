@@ -1,23 +1,23 @@
 {
-    "name": "ansie-kitchen-sink",
-    "description": "A kitchen sink for the ansie library.",
-    "version": "1.0.2",
-    "main": "./dist/index.js",
-    "type": "module",
-    "author": "",
-    "license": "ISC",
-    "bin": {
-        "ansie-kitchen-sink": "dist/index.js"
-    },
-    "scripts": {
-        "test": "echo \"Error: no tests for this module yet\"",
-        "lint": "eslint .",
-        "build": "rollup -c"
-    },
-    "dependencies": {
-        "ansie": "0.6.0"
-    },
-    "devDependencies": {
-        "@rollup/plugin-typescript": "^11.1.6"
-    }
+  "name": "ansie-kitchen-sink",
+  "description": "A kitchen sink for the ansie library.",
+  "version": "1.0.2",
+  "main": "./dist/index.js",
+  "type": "module",
+  "author": "",
+  "license": "ISC",
+  "bin": {
+    "ansie-kitchen-sink": "dist/index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no tests for this module yet\"",
+    "lint": "eslint .",
+    "build": "rollup -c"
+  },
+  "dependencies": {
+    "ansie": "0.6.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-typescript": "^11.1.6"
+  }
 }

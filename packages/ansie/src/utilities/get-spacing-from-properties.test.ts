@@ -10,11 +10,11 @@ describe('getSpacingFromProperties', () => {
             marginRight: '3',
             marginTop: '1',
             marginBottom: '4',
-            margin: '0',
+            margin: '0'
         };
         const expectedOutput = {
             on: '\n  ',
-            off: '   \n\n\n\n',
+            off: '   \n\n\n\n'
         };
         expect(getSpacingFromProperties(props)).toEqual(expectedOutput);
     });
@@ -22,22 +22,22 @@ describe('getSpacingFromProperties', () => {
     it('should return correct spacing when only margin property is provided', () => {
         const props = {
             node: ValidTags.div,
-            margin: '2',
+            margin: '2'
         };
         const expectedOutput = {
             on: '\n\n  ',
-            off: '  \n\n',
+            off: '  \n\n'
         };
         expect(getSpacingFromProperties(props)).toEqual(expectedOutput);
     });
 
     it('should return correct spacing when no properties are provided', () => {
         const props = {
-            node: ValidTags.div,
+            node: ValidTags.div
         };
         const expectedOutput = {
             on: '',
-            off: '',
+            off: ''
         };
         expect(getSpacingFromProperties(props)).toEqual(expectedOutput);
     });

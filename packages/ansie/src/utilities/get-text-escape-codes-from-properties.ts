@@ -11,7 +11,7 @@ import { toTitleCase } from './to-title-case';
  */
 export function getTextEscapeCodesFromProperties(
     properties: TextNodeBase,
-    style?: AnsieStyle,
+    style?: AnsieStyle
 ): {
     on: string;
     off: string;
@@ -51,13 +51,13 @@ export function getTextEscapeCodesFromProperties(
     }
     return {
         on: on.length > 0 ? escapeCodeFromName(on) : '',
-        off: off.length > 0 ? escapeCodeFromName(off) : '',
+        off: off.length > 0 ? escapeCodeFromName(off) : ''
     };
 }
 
 export function colorToTerminalStyle(
     color: string,
-    foreground: boolean,
+    foreground: boolean
 ): TerminalStyle {
     if (foreground) {
         return TerminalStyle[

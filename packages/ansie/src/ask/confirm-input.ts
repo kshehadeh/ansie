@@ -1,25 +1,35 @@
 import readline from 'readline';
 
-
-export default function confirmInput(options?: {defaultValue?: boolean, isContinue?: boolean, trueValue?: string, falseValue?: string}): Promise<boolean> {
+export default function confirmInput(options?: {
+    defaultValue?: boolean;
+    isContinue?: boolean;
+    trueValue?: string;
+    falseValue?: string;
+}): Promise<boolean> {
     const isContinue = options?.isContinue || false;
     const trueValue = options?.trueValue || 'y';
     const falseValue = options?.falseValue || 'n';
     const defaultValue = options?.defaultValue;
-    
+
     const rl = readline.createInterface({
         input: process.stdin,
         output: process.stdout,
         prompt: ''
     });
 
-    let val = false
-    const keypressHandler = (_str: string, key: {name: string, ctrl: boolean}) => {
+    let val = false;
+    const keypressHandler = (
+        _str: string,
+        key: { name: string; ctrl: boolean }
+    ) => {
         // Handle exits
-        if (key.ctrl && (key.name === 'c' || key.name === 'd' || key.name === 'z')) {
+        if (
+            key.ctrl &&
+            (key.name === 'c' || key.name === 'd' || key.name === 'z')
+        ) {
             process.exit();
         }
-    }
+    };
 
     const dataHandler = (key: Buffer) => {
         // look for escape key
@@ -34,9 +44,9 @@ export default function confirmInput(options?: {defaultValue?: boolean, isContin
             // Any key other than escape is considered a confirmation
             val = true;
             rl.close();
-            
+
             // Remove entered value by sending a delete
-            process.stdout.write('\u0008 \u0008')
+            process.stdout.write('\u0008 \u0008');
 
             return;
         }
@@ -47,8 +57,8 @@ export default function confirmInput(options?: {defaultValue?: boolean, isContin
             // default value was provided
             if (typeof defaultValue !== 'undefined') {
                 val = defaultValue;
-                rl.close();                
-            }                        
+                rl.close();
+            }
         }
 
         if (key.at(0) === trueValue.charCodeAt(0)) {
@@ -60,18 +70,17 @@ export default function confirmInput(options?: {defaultValue?: boolean, isContin
         }
 
         // Remove entered value by sending a delete
-        process.stdout.write('\u0008 \u0008')
-
-    }
+        process.stdout.write('\u0008 \u0008');
+    };
 
     process.stdin.on('data', dataHandler);
     process.stdin.on('keypress', keypressHandler);
 
     return new Promise<boolean>(resolve => {
-        rl.on('close', () => {                        
+        rl.on('close', () => {
             process.stdin.removeListener('keypress', keypressHandler);
             process.stdin.removeListener('data', dataHandler);
             resolve(val);
-        })
+        });
     });
 }

@@ -3,20 +3,20 @@ import {
     type AnsieNode,
     AnsieNodeImpl,
     type TextNodeBase,
-    type SpaceNodeBase,
+    type SpaceNodeBase
 } from '../types';
 
 import {
     renderSpaceAttributesStart,
-    renderSpaceAttributesEnd,
+    renderSpaceAttributesEnd
 } from '../../utilities/render-space-attributes';
 import {
     renderTextAttributesStart,
-    renderTextAttributesEnd,
+    renderTextAttributesEnd
 } from '../../utilities/render-text-attributes';
 import {
     renderNodeAsMarkupStart,
-    renderNodeAsMarkupEnd,
+    renderNodeAsMarkupEnd
 } from '../../utilities/render-node-as-markup';
 
 export class BlockTextNodeImpl
@@ -25,7 +25,7 @@ export class BlockTextNodeImpl
 {
     renderStart({
         stack,
-        format,
+        format
     }: {
         stack: AnsieNode[];
         format: CompilerFormat;
@@ -35,12 +35,12 @@ export class BlockTextNodeImpl
                 renderSpaceAttributesStart({
                     node: this._raw,
                     format,
-                    style: this._style,
+                    style: this._style
                 }) +
                 renderTextAttributesStart({
                     style: this._style,
                     attributes: this._raw,
-                    format,
+                    format
                 })
             );
         } else if (format === 'markup') {
@@ -50,20 +50,28 @@ export class BlockTextNodeImpl
                 `Invalid format: ${format}`,
                 this._raw,
                 stack,
-                false,
+                false
             );
         }
     }
 
     renderEnd({
         stack,
-        format = 'ansi',
+        format = 'ansi'
     }: {
         stack: AnsieNode[];
         format: CompilerFormat;
     }) {
         if (format === 'ansi') {
-            return `${renderTextAttributesEnd({ style: this._style, attributes: this._raw, format })}${renderSpaceAttributesEnd({ attributes: this._raw, format, style: this._style })}`;
+            return `${renderTextAttributesEnd({
+                style: this._style,
+                attributes: this._raw,
+                format
+            })}${renderSpaceAttributesEnd({
+                attributes: this._raw,
+                format,
+                style: this._style
+            })}`;
         } else if (format === 'markup') {
             return renderNodeAsMarkupEnd(this._raw);
         } else {
@@ -71,7 +79,7 @@ export class BlockTextNodeImpl
                 `Invalid format: ${format}`,
                 this._raw,
                 stack,
-                false,
+                false
             );
         }
     }

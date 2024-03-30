@@ -1,12 +1,8 @@
 {
     "compilerOptions": {
         // enable latest features
-        "lib": [
-            "ESNext"
-        ],
-        "types": [
-            "bun-types"
-        ],
+        "lib": ["ESNext"],
+        "types": ["bun-types"],
         "target": "ESNext",
         "moduleDetection": "force",
         "jsx": "react-jsx", // support JSX
@@ -31,16 +27,14 @@
         "noPropertyAccessFromIndexSignature": true,
         // Other
         "esModuleInterop": true,
-        "rootDir": "./src",
+        "rootDir": "./src"
     },
-    "include": [
-        "./src/**/*"
-    ],
+    "include": ["./src/**/*"],
     "exclude": [
         "./node_modules/**/*",
         "./dist/**/*",
         "./scripts/**/*",
         "./configs/**/*",
-        "./tests/**/*",
-    ],
+        "./tests/**/*"
+    ]
 }

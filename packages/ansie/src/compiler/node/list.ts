@@ -2,25 +2,25 @@ import { CompilerError, type CompilerFormat } from '../types';
 import { AnsieNodeImpl, type AnsieNode } from '../types';
 import {
     renderListAttributesEnd,
-    renderListAttributesStart,
+    renderListAttributesStart
 } from '../../utilities/render-list-attributes';
 import {
     renderNodeAsMarkupEnd,
-    renderNodeAsMarkupStart,
+    renderNodeAsMarkupStart
 } from '../../utilities/render-node-as-markup';
 import {
     renderSpaceAttributesEnd,
-    renderSpaceAttributesStart,
+    renderSpaceAttributesStart
 } from '../../utilities/render-space-attributes';
 import {
     renderTextAttributesEnd,
-    renderTextAttributesStart,
+    renderTextAttributesStart
 } from '../../utilities/render-text-attributes';
 
 export class ListItemNodeImpl extends AnsieNodeImpl implements AnsieNode {
     renderStart({
         stack,
-        format,
+        format
     }: {
         stack: AnsieNode[];
         format: CompilerFormat;
@@ -30,17 +30,17 @@ export class ListItemNodeImpl extends AnsieNodeImpl implements AnsieNode {
                 renderSpaceAttributesStart({
                     node: this._raw,
                     format,
-                    style: this._style,
+                    style: this._style
                 }) +
                 renderListAttributesStart({
                     node: this._raw,
                     format,
-                    style: this._style,
+                    style: this._style
                 }) +
                 renderTextAttributesStart({
                     attributes: this._raw,
                     format,
-                    style: this._style,
+                    style: this._style
                 })
             );
         } else if (format === 'markup') {
@@ -51,12 +51,12 @@ export class ListItemNodeImpl extends AnsieNodeImpl implements AnsieNode {
             `Invalid format: ${format}`,
             this._raw,
             stack,
-            false,
+            false
         );
     }
 
     renderEnd({
-        format = 'ansi',
+        format = 'ansi'
     }: {
         stack: AnsieNode[];
         format: CompilerFormat;
@@ -66,17 +66,17 @@ export class ListItemNodeImpl extends AnsieNodeImpl implements AnsieNode {
                 renderTextAttributesEnd({
                     style: this._style,
                     attributes: this._raw,
-                    format,
+                    format
                 }) +
                 renderListAttributesEnd({
                     node: this._raw,
                     format,
-                    style: this._style,
+                    style: this._style
                 }) +
                 renderSpaceAttributesEnd({
                     attributes: this._raw,
                     format,
-                    style: this._style,
+                    style: this._style
                 })
             );
         } else if (format === 'markup') {

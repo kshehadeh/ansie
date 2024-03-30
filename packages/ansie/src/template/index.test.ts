@@ -5,7 +5,7 @@ describe('ansie template tagging', () => {
     it('should interpolate values correctly', () => {
         const result = tpl`<h1>Hello ${'world'}! The answer is ${42}.</h1>`;
         expect(result).toBe(
-            '\n\u001B[34;1;21mHello world! The answer is 42.\u001B[39;22;24m',
+            '\n\u001B[34;1;21mHello world! The answer is 42.\u001B[39;22;24m'
         );
     });
 

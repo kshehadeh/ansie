@@ -4,7 +4,7 @@ export function toPascalCase(str: string) {
         .replace(new RegExp(/[^\w\s]/, 'g'), '') // Remove all non-word characters
         .replace(
             new RegExp(/\s+(.)(\w+)/, 'g'),
-            (_, $1, $2) => $1.toUpperCase() + $2.toLowerCase(),
+            (_, $1, $2) => $1.toUpperCase() + $2.toLowerCase()
         ) // Capitalize the first letter of each word
         .replace(new RegExp(/\s/, 'g'), '') // Remove spaces
         .replace(new RegExp(/\w/), s => s.toUpperCase()); // Capitalize the first letter of the string

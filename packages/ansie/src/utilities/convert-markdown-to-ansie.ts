@@ -14,7 +14,7 @@ export function convertMarkdownToAnsie(input: string) {
                 return `<span fg="${color}">${colorText}</span>`;
             }
             return match; // Fallback, should never reach here.
-        },
+        }
     );
 
     // Handle headers as a special case, due to the need for multiline matching

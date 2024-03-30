@@ -4,7 +4,7 @@ import { Compiler } from './Compiler';
 import {
     defaultTheme,
     type AnsieTheme,
-    getGlobalTheme,
+    getGlobalTheme
 } from '../themes/themes';
 
 /**
@@ -20,7 +20,7 @@ export function compile(
               theme?: AnsieTheme;
               inputIncludesMarkdown?: boolean;
               output?: CompilerFormat;
-          },
+          }
 ) {
     let theme = getGlobalTheme();
     let markup = '';

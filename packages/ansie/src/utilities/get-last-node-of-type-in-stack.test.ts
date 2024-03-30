@@ -9,11 +9,11 @@ describe('getLastNodeOfTypeFromStack', () => {
             { node: ValidTags.span },
             { node: ValidTags.h1 },
             { node: ValidTags.div },
-            { node: ValidTags.h2 },
+            { node: ValidTags.h2 }
         ];
         const expectedOutput = { node: ValidTags.div };
         expect(getLastNodeOfTypeFromStack(ValidTags.div, stack)).toEqual(
-            expectedOutput,
+            expectedOutput
         );
     });
 
@@ -21,11 +21,11 @@ describe('getLastNodeOfTypeFromStack', () => {
         const stack = [
             { node: ValidTags.div },
             { node: ValidTags.span },
-            { node: ValidTags.h1 },
+            { node: ValidTags.h1 }
         ];
         const expectedOutput = null;
         expect(getLastNodeOfTypeFromStack(ValidTags.h2, stack)).toEqual(
-            expectedOutput,
+            expectedOutput
         );
     });
 
@@ -33,7 +33,7 @@ describe('getLastNodeOfTypeFromStack', () => {
         const stack: AnsieNode[] = [];
         const expectedOutput = null;
         expect(getLastNodeOfTypeFromStack(ValidTags.h2, stack)).toEqual(
-            expectedOutput,
+            expectedOutput
         );
     });
 });
