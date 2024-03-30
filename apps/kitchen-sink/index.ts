@@ -70,3 +70,30 @@ console.log(ansie.tpl`Hello, **${'world'}**`);
 /// Console Logging
 ansie.console.log('# Console Logging');
 ansie.console.log(`Hello ${'world'}`);
+
+/// Ask
+ansie.console.log('# Asking Questions');
+await ansie.ask('What is your name?').then((name) => {
+    ansie.console.log(`Hello, ${name}!`);
+});
+
+await ansie.askSingleLineText('What is your name?').then((name) => {
+    ansie.console.log(`Hello, ${name}!`);
+});
+
+await ansie.askSelect('Select a color', ['red', 'green', 'blue']).then((color) => {
+    ansie.console.log(`You selected ${color}`);
+});
+
+await ansie.askPassword('Enter your password').then((password) => {
+    ansie.console.log(`Your password is ${password}`);
+});
+
+await ansie.askConfirm('Are you sure?', {
+    default: false,
+    isContinue: false,
+    trueValue: 'yes',
+    falseValue: 'no',
+}).then((response) => {
+    ansie.console.log(`You answered ${response}`);
+});

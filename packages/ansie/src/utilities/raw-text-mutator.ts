@@ -7,6 +7,8 @@ export class RawTextMutator {
         ':no_entry:': '⛔',
         ':heavy_check_mark:': '✔️',
         ':x:': '❌',
+        ':prompt:': '💬',
+        ':check:': '✅',
         ':bangbang:': '‼️',
         ':triangular_flag_on_post:': '🚩',
         ':fire:': '🔥',
@@ -55,7 +57,7 @@ export class RawTextMutator {
         const emojiMatches = this._str.match(/:[a-z_]+:/g);
         if (emojiMatches) {
             emojiMatches.forEach(match => {
-                const emoji = RawTextMutator.EmojiMap[match];
+                const emoji = RawTextMutator.EmojiMap[match];                
                 if (emoji) {
                     this._str = this._str.replace(match, emoji);
                 }

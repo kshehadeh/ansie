@@ -2,6 +2,38 @@
 
 A library used to render a simplified markdown+html like markup to rich terminal text.
 
+## Table of Contents
+
+- [Ansie](#ansie)
+  - [Table of Contents](#table-of-contents)
+  - [Quick Example](#quick-example)
+  - [Installation](#installation)
+  - [Getting Started](#getting-started)
+  - [Ansie Markup](#ansie-markup)
+    - [Text Attributes](#text-attributes)
+    - [Spacing Attributes](#spacing-attributes)
+    - [Free (Raw) Text](#free-raw-text)
+    - [Color Table](#color-table)
+    - [Emoji](#emoji)
+    - [Markdown](#markdown)
+  - [API](#api)
+    - [Compilation Function](#compilation-function)
+    - [Using Template Tags](#using-template-tags)
+  - [User Input](#user-input)
+    - [`ask`](#ask)
+    - [`askText`](#asktext)
+    - [`askSelect`](#askselect)
+    - [`askPassword`](#askpassword)
+    - [`askConfirm`](#askconfirm)
+  - [Themes](#themes)
+    - [Themes](#themes-1)
+  - [Using the CLI](#using-the-cli)
+  - [Developing](#developing)
+    - [Updating the Grammar](#updating-the-grammar)
+  - [Testing](#testing)
+
+## Quick Example
+
 For example,
 
 ```xml
@@ -116,14 +148,14 @@ The markup language follows XML rules in that it uses a declarative tag-based sy
 
 Tags that accept spacing attributes include:
 
--   h1
--   h2
--   h3
--   body
--   p
--   div
--   span
--   li
+- h1
+- h2
+- h3
+- body
+- p
+- div
+- span
+- li
 
 ### Spacing Attributes
 
@@ -137,14 +169,14 @@ Tags that accept spacing attributes include:
 
 Tags that accept spacing attributes include:
 
--   h1
--   h2
--   h3
--   body
--   p
--   div
--   br
--   li
+- h1
+- h2
+- h3
+- body
+- p
+- div
+- br
+- li
 
 ### Free (Raw) Text
 
@@ -242,18 +274,20 @@ Text can include emoji either through unicode or through _Slack_ style formattin
 
 Ansie supports simpler markdown constructs to create more readable input. Support markdown includes:
 
--   h1: `# Headline 1` translates to `<h1>Headline 1</h1>`
--   h2: `# Headline 2` translates to `<h2>Headline 2</h2>`
--   h3: `# Headline 3` translates to `<h3>Headline 3</h3>`
--   bold: `**bold**` translates to `<span bold>bold</span>`
--   italics: `**italics**` translates to `<span italics>italics</span>`
--   color: `[c=blue]blue[/c]` translates to `<span fg="blue">blue</span>`
+- h1: `# Headline 1` translates to `<h1>Headline 1</h1>`
+- h2: `# Headline 2` translates to `<h2>Headline 2</h2>`
+- h3: `# Headline 3` translates to `<h3>Headline 3</h3>`
+- bold: `**bold**` translates to `<span bold>bold</span>`
+- italics: `**italics**` translates to `<span italics>italics</span>`
+- color: `[c=blue]blue[/c]` translates to `<span fg="blue">blue</span>`
 
 But you can also mix both markdown and markup in the same input. The markdown will first converted to the analogous markup before being compiled to the final output.
 
-## Using the API
+## API
 
 Once the package is installed, you can quickly get up and running by using the `compile` function which takes an ansie markup string and returns rich text using ansi codes.
+
+### Compilation Function
 
 ```typescript
 import ansie from 'ansie';
@@ -278,6 +312,122 @@ console.log(ansie.tpl`# Hello, ${person}!`);
 console.log(
     ansie.tpl`# Hello <span fg="blue" underline="single">${person}</span>`,
 );
+```
+
+## User Input
+
+The `ask` family of utilities allows you to ask a question and get a response from the user.
+It takes a question and returns the response as a promise.
+
+```typescript
+import ansie from 'ansie';
+const response = ansie.ask('What is your name?');
+console.log(`Hello, ${response}`);
+```
+
+There are different forms of answers that can be provided:
+
+- `text` - a simple text response
+- `password` - a password response
+- `select` - a selection from a list of options
+- `confirm` - a yes/no response (with a default)
+
+### `ask`
+
+The `ask` function asks a question and returns a response.  The promise will resolve with the response.
+This is the base ask function that can be configured to return a text, password, select, or confirm response.
+It might be easier to use the more specific functions below.
+
+| Parameter | Type   | Description                                                                 |
+| --------- | ------ | --------------------------------------------------------------------------- |
+| question  | string | The question to ask the user                                                |
+| options   | object | Additional options to pass                             |
+
+```typescript
+import ansie from 'ansie';
+const response = await ansie.ask('What is your name?', {
+    format: 'ansie';
+    theme: 'default';
+    default: '';    
+    typeOptions: {
+        type: 'select';
+        choices: ['Alice', 'Bob', 'Charlie'];
+    }
+});
+console.log(`Hello, ${response}`);
+```
+
+### `askText`
+
+The `askText` function asks a question and returns a text response.  If you specify multiline then the user
+will be presented with a multiline editor to provide a response.  Once they save the response, the promise will
+resolve with the text.
+
+| Parameter | Type    | Description                                                                 |
+| --------- | ------- | --------------------------------------------------------------------------- |
+| question  | string  | The question to ask the user                                                |
+| multiline | boolean | If true, the user will be presented with a multiline editor to provide text |
+
+```typescript
+import ansie from 'ansie';
+const response = await ansie.askText('What is your name?');
+console.log(`Hello, ${response}`);
+```
+
+### `askSelect`
+
+The `askSelect` function asks a question and returns a selection from a list of options.  The options are provided
+as an array of strings.  The promise will resolve with the selected option.
+
+| Parameter | Type   | Description                                                                 |
+| --------- | ------ | --------------------------------------------------------------------------- |
+| question  | string | The question to ask the user                                                |
+| choices   | array | An array of strings representing the options to select from                |
+
+```typescript
+import ansie from 'ansie';
+const response = await ansie.askSelect('What is your name?', ['Alice', 'Bob', 'Charlie']);
+console.log(`Hello, ${response}`);
+```
+
+### `askPassword`
+
+The `askPassword` function asks a question and returns a password response.  The user's input will be hidden as they
+type.  The promise will resolve with the password.
+
+| Parameter | Type   | Description                                                                 |
+| --------- | ------ | --------------------------------------------------------------------------- |
+| question  | string | The question to ask the user                                                |
+
+```typescript
+import ansie from 'ansie';
+const response = await ansie.askPassword('What is your password?');
+console.log(`Password is ${response}`);
+```
+
+### `askConfirm`
+
+The `askConfirm` function asks a question and returns a boolean response.  The user can respond with 'y' or 'n' or
+press enter to accept the default value.  The promise will resolve with the boolean value.
+
+| Parameter | Type    | Description                                                                 |
+| --------- | ------- | --------------------------------------------------------------------------- |
+| question  | string  | The question to ask the user                                                |
+| options   | object | Options to configure the confirmation method                      |
+
+The options object can contain the following properties:
+
+| Property   | Type    | Description                                                                                                                                                                                            |
+| ---------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| default    | boolean | This should be the same as either the "trueValue" to default to true or the "falseValue" to default to false.  For example, if trueValue is "y" and you want to default to true, then set this to "y". |
+| isConfirm  | boolean | If true then treat this as a confirmation input meaning that any key other than escape will return true                                                                                                |
+| trueValue  | string  | A single character that the user must press to return true, defaults to "y"                                                                                                                            |
+| falseValue | string  | A single character that the user must press to return false, defaults to "n"                                                                                                                           |
+
+```typescript
+import ansie from 'ansie';
+const response =await ansie.askConfirm('Are you sure? [Y/n]', { default: 'y' });
+console.log(`Response is ${response}`);
 ```
 
 ## Themes

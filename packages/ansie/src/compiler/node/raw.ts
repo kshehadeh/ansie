@@ -7,7 +7,7 @@ export class RawTextNodeImpl extends AnsieNodeImpl implements AnsieNode {
         const text = this.attr('value') ?? '';
         if (format === 'markup') {
             return text;
-        } else {
+        } else {            
             return new RawTextMutator(text)
                 .replaceEmoji()
                 .trimSpaces({

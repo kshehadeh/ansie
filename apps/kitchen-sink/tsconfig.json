@@ -1,17 +1,15 @@
 {
     "compilerOptions": {
         // enable latest features
-        "lib": [
-            "ESNext"
-        ],
-        "types": [
-            "bun-types"
-        ],
+        "lib": ["ESNext"],
+        "types": ["bun-types"],
+        "module": "ESNext",
         "target": "ESNext",
         "moduleDetection": "force",
         "jsx": "react-jsx", // support JSX
         "allowJs": true, // allow importing `.js` from `.ts`
         "outDir": "./dist",
+
         // Bundler mode
         "moduleResolution": "bundler",
         "allowImportingTsExtensions": true,
@@ -19,6 +17,7 @@
         "declaration": true,
         "resolveJsonModule": true,
         "noEmit": true,
+
         // Best practices
         "strict": true,
         "stripInternal": true,
@@ -26,21 +25,12 @@
         "noUnusedLocals": true,
         "noUnusedParameters": true,
         "noFallthroughCasesInSwitch": true,
+
         // Some stricter flags
         "useUnknownInCatchVariables": true,
         "noPropertyAccessFromIndexSignature": true,
+
         // Other
         "esModuleInterop": true,
-        "rootDir": "./src",
     },
-    "include": [
-        "./src/**/*"
-    ],
-    "exclude": [
-        "./node_modules/**/*",
-        "./dist/**/*",
-        "./scripts/**/*",
-        "./configs/**/*",
-        "./tests/**/*",
-    ],
 }

@@ -5,6 +5,7 @@
         "apps/*"
     ],
     "scripts": {
+        "build": "turbo run build",        
         "publish-packages": "turbo run build lint test && changeset version && changeset publish"
     },
     "devDependencies": {
