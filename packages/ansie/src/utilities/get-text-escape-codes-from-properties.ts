@@ -38,11 +38,14 @@ export function getTextEscapeCodesFromProperties(
         off.push(TerminalStyle.boldOff);
     }
     if (underline) {
-        if (underline === 'single') {
+        if (typeof underline === 'string' && underline === 'single') {
             on.push(TerminalStyle.underline);
-        } else if (underline === 'double') {
+        } else if (typeof underline === 'string' && underline === 'double') {
             on.push(TerminalStyle.doubleunderline);
+        } else if (typeof underline === 'boolean' && underline) {
+            on.push(TerminalStyle.underline);
         }
+
         off.push(TerminalStyle.underlineOff);
     }
     if (italics) {
