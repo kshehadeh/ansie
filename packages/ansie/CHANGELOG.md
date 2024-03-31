@@ -1,5 +1,11 @@
 # ansie
 
+## 0.6.2
+
+### Patch Changes
+
+- Fixed an issue where theme underline not being honored when boolean
+
 ## 0.6.1
 
 ### Patch Changes

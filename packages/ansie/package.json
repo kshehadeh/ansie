@@ -1,7 +1,7 @@
 {
     "name": "ansie",
     "description": "A simple rendering engine for rich text terminal output with its own markup language.",
-    "version": "0.6.1",
+    "version": "0.6.2",
     "type": "module",
     "main": "./dist/index.js",
     "types": "./dist/esm/index.d.ts",
