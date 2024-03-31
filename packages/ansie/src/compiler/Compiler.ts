@@ -3,7 +3,8 @@ import {
     type AnsieNode,
     type Ast,
     ValidTags,
-    type CompilerFormat
+    type CompilerFormat,
+    type AnsieWriter
 } from './types';
 import { CompilerError } from './types';
 import { BlockTextNodeImpl } from './node/block';
@@ -37,14 +38,16 @@ export class Compiler {
      * @returns A string that is the compiled markup.
      */
     public compile({
+        out,
         format,
         theme
     }: {
+        out: AnsieWriter,
         format: CompilerFormat;
         theme?: AnsieTheme;
     }): string {
         return this._ast.reduce((finalString, node) => {
-            finalString += this._compileNode({ node, format, theme });
+            finalString += this._compileNode({ out, node, format, theme });
             return finalString;
         }, '');
     }
@@ -82,30 +85,39 @@ export class Compiler {
     }
 
     private _push({
+        out,
         state,
         format = 'ansi'
     }: {
+        out: AnsieWriter;
         state: AnsieNode;
         theme?: AnsieTheme;
         format?: CompilerFormat;
     }) {
         const node = this.makeNodeImplementation(state);
         this._stack.push(node);
-        return node.renderStart({ stack: this._stack, format });
+        return node.renderStart({ out, stack: this._stack, format });
     }
 
     private _pop({
+        out,
         format = 'ansi'
-    }: { theme?: AnsieTheme; format?: CompilerFormat } = {}) {
+    }: {
+        out: AnsieWriter;
+        theme?: AnsieTheme;
+        format?: CompilerFormat
+    }) {
         const old = this._stack.pop();
-        return old?.renderEnd({ stack: this._stack, format });
+        return old?.renderEnd({ out, stack: this._stack, format });
     }
 
     private _compileNode({
+        out,
         node,
         theme,
         format = 'ansi'
     }: {
+        out: AnsieWriter,
         node: AnsieNode;
         theme?: AnsieTheme;
         format?: CompilerFormat;
@@ -113,16 +125,17 @@ export class Compiler {
         const strings: string[] = [];
 
         try {
-            strings.push(this._push({ state: node, format }));
+            strings.push(this._push({ out, state: node, format }));
 
             if (node.content) {
                 if (Array.isArray(node.content)) {
                     node.content.forEach(node =>
-                        strings.push(this._compileNode({ node, theme, format }))
+                        strings.push(this._compileNode({ out, node, theme, format }))
                     );
                 } else {
                     strings.push(
                         this._compileNode({
+                            out,
                             node: node.content,
                             theme,
                             format
@@ -131,7 +144,7 @@ export class Compiler {
                 }
             }
 
-            const n = this._pop({ format });
+            const n = this._pop({ out, format });
             if (n) {
                 strings.push(n);
             }

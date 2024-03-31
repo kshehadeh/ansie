@@ -1,4 +1,4 @@
-import { CompilerError, type CompilerFormat } from '../types';
+import { CompilerError, type AnsieWriter, type CompilerFormat } from '../types';
 import {
     type AnsieNode,
     AnsieNodeImpl,
@@ -21,17 +21,18 @@ import {
 
 export class BlockTextNodeImpl
     extends AnsieNodeImpl
-    implements TextNodeBase, SpaceNodeBase
-{
+    implements TextNodeBase, SpaceNodeBase {
     renderStart({
+        out,
         stack,
         format
     }: {
+        out: AnsieWriter,
         stack: AnsieNode[];
         format: CompilerFormat;
-    }) {
+    }): Promise<void> {
         if (format === 'ansi') {
-            return (
+            return out.write(
                 renderSpaceAttributesStart({
                     node: this._raw,
                     format,
@@ -44,7 +45,7 @@ export class BlockTextNodeImpl
                 })
             );
         } else if (format === 'markup') {
-            return renderNodeAsMarkupStart(this._raw);
+            return out.write(renderNodeAsMarkupStart(this._raw));
         } else {
             throw new CompilerError(
                 `Invalid format: ${format}`,
@@ -56,14 +57,16 @@ export class BlockTextNodeImpl
     }
 
     renderEnd({
+        out,
         stack,
         format = 'ansi'
     }: {
+        out: AnsieWriter,
         stack: AnsieNode[];
         format: CompilerFormat;
-    }) {
+    }): Promise<void> {
         if (format === 'ansi') {
-            return `${renderTextAttributesEnd({
+            return out.write(`${renderTextAttributesEnd({
                 style: this._style,
                 attributes: this._raw,
                 format
@@ -71,9 +74,9 @@ export class BlockTextNodeImpl
                 attributes: this._raw,
                 format,
                 style: this._style
-            })}`;
+            })}`);
         } else if (format === 'markup') {
-            return renderNodeAsMarkupEnd(this._raw);
+            return out.write(renderNodeAsMarkupEnd(this._raw));
         } else {
             throw new CompilerError(
                 `Invalid format: ${format}`,

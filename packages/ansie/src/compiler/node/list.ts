@@ -1,4 +1,4 @@
-import { CompilerError, type CompilerFormat } from '../types';
+import { CompilerError, type AnsieWriter, type CompilerFormat } from '../types';
 import { AnsieNodeImpl, type AnsieNode } from '../types';
 import {
     renderListAttributesEnd,
@@ -19,14 +19,16 @@ import {
 
 export class ListItemNodeImpl extends AnsieNodeImpl implements AnsieNode {
     renderStart({
+        out,
         stack,
         format
     }: {
+        out: AnsieWriter,
         stack: AnsieNode[];
         format: CompilerFormat;
-    }) {
+    }): Promise<void> {
         if (format === 'ansi') {
-            return (
+            return out.write(
                 renderSpaceAttributesStart({
                     node: this._raw,
                     format,
@@ -44,7 +46,7 @@ export class ListItemNodeImpl extends AnsieNodeImpl implements AnsieNode {
                 })
             );
         } else if (format === 'markup') {
-            return renderNodeAsMarkupStart(this._raw);
+            return out.write(renderNodeAsMarkupStart(this._raw));
         }
 
         throw new CompilerError(
@@ -56,13 +58,16 @@ export class ListItemNodeImpl extends AnsieNodeImpl implements AnsieNode {
     }
 
     renderEnd({
+        out,
+        stack,
         format = 'ansi'
     }: {
+        out: AnsieWriter,
         stack: AnsieNode[];
         format: CompilerFormat;
-    }) {
+    }): Promise<void> {
         if (format === 'ansi') {
-            return (
+            return out.write(
                 renderTextAttributesEnd({
                     style: this._style,
                     attributes: this._raw,
@@ -80,9 +85,14 @@ export class ListItemNodeImpl extends AnsieNodeImpl implements AnsieNode {
                 })
             );
         } else if (format === 'markup') {
-            return renderNodeAsMarkupEnd(this._raw);
-        } else {
-            return '';
+            return out.write(renderNodeAsMarkupEnd(this._raw));
         }
+
+        throw new CompilerError(
+            `Invalid format: ${format}`,
+            this._raw,
+            stack,
+            false
+        );
     }
 }

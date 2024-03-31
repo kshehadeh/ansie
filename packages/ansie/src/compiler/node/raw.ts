@@ -1,14 +1,22 @@
-import type { CompilerFormat } from '../types';
+import type { AnsieWriter, CompilerFormat } from '../types';
 import { AnsieNodeImpl, type AnsieNode } from '../types';
 import { RawTextMutator } from '../../utilities/raw-text-mutator';
 
 export class RawTextNodeImpl extends AnsieNodeImpl implements AnsieNode {
-    renderStart({ format }: { stack: AnsieNode[]; format: CompilerFormat }) {
+    renderStart({
+        out,
+        stack,
+        format
+    }: {
+        out: AnsieWriter,
+        stack: AnsieNode[];
+        format: CompilerFormat;
+    }): Promise<void> {
         const text = this.attr('value') ?? '';
         if (format === 'markup') {
-            return text;
+            return out.write(text);
         } else {
-            return new RawTextMutator(text)
+            return out.write(new RawTextMutator(text)
                 .replaceEmoji()
                 .trimSpaces({
                     left: true,
@@ -16,11 +24,11 @@ export class RawTextNodeImpl extends AnsieNodeImpl implements AnsieNode {
                     allowNewLines: false,
                     replaceWithSingleSpace: true
                 })
-                .toString();
+                .toString());
         }
     }
 
-    renderEnd() {
-        return '';
+    async renderEnd(): Promise<void> {
+
     }
 }
