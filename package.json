@@ -5,7 +5,10 @@
     "apps/*"
   ],
   "scripts": {
-    "build": "turbo run build"
+    "build": "turbo run build",
+    "prep": "npm run build && changeset",
+    "ver": "changeset version",
+    "pub": "changeset publish"
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.1"

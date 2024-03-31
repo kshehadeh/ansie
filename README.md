@@ -29,19 +29,19 @@ turbo build
 ### Prepare Release
 
 ```bash
-npm run build
+npm run prep
 ```
 
 > NOTE: Commit all changes before proceeding
 
-### Prepare Changeset
+### Version Bump
 
 ```bash
-npx changeset add
+npm run ver
 ```
 
 ### Publish Changes
 
 ```bash
-npx changeset publish
+npm run pub
 ```

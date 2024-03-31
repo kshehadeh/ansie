@@ -7,12 +7,6 @@
       // (and not the monorepo root)
       "outputs": [".dist/**"]
     },
-    "release": {
-      // A package's `deploy` script depends on the `build`,
-      // `test`, and `lint` scripts of the same package
-      // being completed. It also has no filesystem outputs.
-      "dependsOn": ["build", "test", "lint"]
-    },
     "test": {
       // A package's `test` script depends on that package's
       // own `build` script being completed first.

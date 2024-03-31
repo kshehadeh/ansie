@@ -10,7 +10,7 @@
   "scripts": {
     "test": "echo \"Error: no tests for this module yet\"",
     "lint": "eslint .",
-    "build": "rollup -c"
+    "build": "rollup -c"    
   },
   "dependencies": {
     "ansie": "0.6.2",

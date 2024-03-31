@@ -41,7 +41,7 @@
     "scripts": {
         "test": "bun test",
         "lint": "eslint .",
-        "build": "rollup -c",
+        "build": "rollup -c",        
         "fixture:generate": "bun test/record.ts",
         "parser:generate": "bun scripts/parser/generate.ts"
     },
