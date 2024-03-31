@@ -9,5 +9,8 @@
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.1"
+  },
+  "dependencies": {
+    "make-synchronous": "^1.0.0"
   }
 }
