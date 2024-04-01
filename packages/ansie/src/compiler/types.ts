@@ -28,6 +28,10 @@ export enum ValidTags {
     'br' = 'br'
 }
 
+export interface AnsieWriter {
+    write(chunk: Uint8Array | string): Promise<void>
+}
+
 /**
  * A list of all the valid tags.  This is used by the parser to validate
  * the tags before returning the AST.
@@ -314,19 +318,23 @@ export abstract class AnsieNodeImpl {
     }
 
     abstract renderStart({
+        out,
         stack,
         format
     }: {
+        out: AnsieWriter,
         stack: AnsieNode[];
         format: CompilerFormat;
-    }): string;
+    }): Promise<void>;
     abstract renderEnd({
+        out,
         stack,
         format
     }: {
+        out: AnsieWriter,
         stack: AnsieNode[];
         format: CompilerFormat;
-    }): string;
+    }): Promise<void>;
 }
 
 /**
@@ -365,9 +373,8 @@ export class CompilerError implements Error {
      * @returns The string representation of the CompilerError.
      */
     toString() {
-        return `${this.name}: ${this.message} (${
-            this.markupNode.node
-        }, ${this.markupStack.map(node => node.node).join(', ')})`;
+        return `${this.name}: ${this.message} (${this.markupNode.node
+            }, ${this.markupStack.map(node => node.node).join(', ')})`;
     }
 
     /**

@@ -1,20 +1,22 @@
-import { CompilerError, type CompilerFormat } from '../types';
+import { CompilerError, type AnsieWriter, type CompilerFormat } from '../types';
 import { AnsieNodeImpl, type AnsieNode } from '../types';
 
 //// Break Node - This is a node that represents a line break
 
 export class BreakNodeImpl extends AnsieNodeImpl implements AnsieNode {
     renderStart({
+        out,
         stack,
         format
     }: {
+        out: AnsieWriter,
         stack: AnsieNode[];
         format: CompilerFormat;
-    }) {
+    }): Promise<void> {
         if (format === 'ansi') {
-            return '\n'.repeat(this._style?.spacing?.marginBottom || 1);
+            return out.write('\n'.repeat(this._style?.spacing?.marginBottom || 1));
         } else if (format === 'markup') {
-            return '<br/>';
+            return out.write('<br/>');
         }
 
         throw new CompilerError(
@@ -26,7 +28,5 @@ export class BreakNodeImpl extends AnsieNodeImpl implements AnsieNode {
     }
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    renderEnd() {
-        return '';
-    }
+    async renderEnd(): Promise<void> { }
 }

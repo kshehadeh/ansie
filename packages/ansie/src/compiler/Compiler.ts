@@ -3,7 +3,8 @@ import {
     type AnsieNode,
     type Ast,
     ValidTags,
-    type CompilerFormat
+    type CompilerFormat,
+    type AnsieWriter
 } from './types';
 import { CompilerError } from './types';
 import { BlockTextNodeImpl } from './node/block';
@@ -36,17 +37,18 @@ export class Compiler {
      * The compile function takes the AST and compiles it into a string.
      * @returns A string that is the compiled markup.
      */
-    public compile({
+    public async compile({
+        out,
         format,
         theme
     }: {
+        out: AnsieWriter,
         format: CompilerFormat;
         theme?: AnsieTheme;
-    }): string {
-        return this._ast.reduce((finalString, node) => {
-            finalString += this._compileNode({ node, format, theme });
-            return finalString;
-        }, '');
+    }) {
+        for (const node of this._ast) {
+            await this._compileNode({ out, node, format, theme });
+        }
     }
 
     private makeNodeImplementation(raw: AnsieNode): AnsieNodeImpl {
@@ -81,62 +83,62 @@ export class Compiler {
         }
     }
 
-    private _push({
+    private async _push({
+        out,
         state,
         format = 'ansi'
     }: {
+        out: AnsieWriter;
         state: AnsieNode;
         theme?: AnsieTheme;
         format?: CompilerFormat;
-    }) {
+    }): Promise<void> {
         const node = this.makeNodeImplementation(state);
         this._stack.push(node);
-        return node.renderStart({ stack: this._stack, format });
+        await node.renderStart({ out, stack: this._stack, format });
     }
 
-    private _pop({
+    private async _pop({
+        out,
         format = 'ansi'
-    }: { theme?: AnsieTheme; format?: CompilerFormat } = {}) {
+    }: {
+        out: AnsieWriter;
+        theme?: AnsieTheme;
+        format?: CompilerFormat
+    }): Promise<void> {
         const old = this._stack.pop();
-        return old?.renderEnd({ stack: this._stack, format });
+        await old?.renderEnd({ out, stack: this._stack, format });
     }
 
-    private _compileNode({
+    private async _compileNode({
+        out,
         node,
         theme,
         format = 'ansi'
     }: {
+        out: AnsieWriter,
         node: AnsieNode;
         theme?: AnsieTheme;
         format?: CompilerFormat;
-    }): string {
-        const strings: string[] = [];
-
+    }) {
         try {
-            strings.push(this._push({ state: node, format }));
-
+            await this._push({ out, state: node, format });
             if (node.content) {
                 if (Array.isArray(node.content)) {
-                    node.content.forEach(node =>
-                        strings.push(this._compileNode({ node, theme, format }))
-                    );
+                    for (const child of node.content) {
+                        await this._compileNode({ out, node: child, theme, format })
+                    }
                 } else {
-                    strings.push(
-                        this._compileNode({
-                            node: node.content,
-                            theme,
-                            format
-                        })
-                    );
+                    await this._compileNode({
+                        out,
+                        node: node.content,
+                        theme,
+                        format
+                    });
                 }
             }
 
-            const n = this._pop({ format });
-            if (n) {
-                strings.push(n);
-            }
-
-            return strings.join('');
+            await this._pop({ out, format });
         } catch (e) {
             if (e instanceof CompilerError) {
                 console.error(e.toString());
