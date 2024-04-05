@@ -7,6 +7,7 @@ export class RawTextMutator {
         ':no_entry:': '⛔',
         ':heavy_check_mark:': '✔️',
         ':x:': '❌',
+        ':question:': '❓',
         ':prompt:': '💬',
         ':check:': '✅',
         ':bangbang:': '‼️',
