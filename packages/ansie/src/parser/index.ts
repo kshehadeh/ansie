@@ -1,6 +1,6 @@
-import { parse as rawParse } from './generated-parser.js';
-import { type Ast } from '../compiler/types.js';
-import { convertMarkdownToAnsie } from '../utilities/convert-markdown-to-ansie.js';
+import { parse as rawParse } from './generated-parser';
+import { type Ast } from '../compiler/types';
+import { convertMarkdownToAnsie } from '../utilities/convert-markdown-to-ansie';
 
 /**
  * Parses a string into an AST using a simplified markdown syntax

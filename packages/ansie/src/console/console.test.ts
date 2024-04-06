@@ -1,10 +1,9 @@
-import { describe, it, expect, spyOn } from 'bun:test';
 import { ansieConsole } from './console';
 
-spyOn(console, 'log');
-spyOn(console, 'warn');
-spyOn(console, 'error');
-spyOn(console, 'info');
+jest.spyOn(console, 'log');
+jest.spyOn(console, 'warn');
+jest.spyOn(console, 'error');
+jest.spyOn(console, 'info');
 
 // NOTE: bun test's toHaveBeenCalledWith is not working properly and neither is clearAllMocks.
 

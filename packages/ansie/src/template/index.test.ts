@@ -1,4 +1,3 @@
-import { describe, expect, it } from 'bun:test';
 import { tpl } from './index';
 
 describe('ansie template tagging', () => {

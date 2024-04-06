@@ -1,4 +1,3 @@
-import { describe, expect, it } from 'bun:test';
 import { convertMarkdownToAnsie } from './convert-markdown-to-ansie';
 
 describe('convertMarkdownToAnsie', () => {
