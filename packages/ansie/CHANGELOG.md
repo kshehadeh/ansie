@@ -1,5 +1,11 @@
 # ansie
 
+## 0.6.3
+
+### Patch Changes
+
+- Removal of Bun and enhanced ask api with default injection
+
 ## 0.6.2
 
 ### Patch Changes
