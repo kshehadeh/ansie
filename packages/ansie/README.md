@@ -4,34 +4,35 @@ A library used to render a simplified markdown+html like markup to rich terminal
 
 ## Table of Contents
 
--   [Ansie](#ansie)
-    -   [Table of Contents](#table-of-contents)
-    -   [Quick Example](#quick-example)
-    -   [Installation](#installation)
-    -   [Getting Started](#getting-started)
-    -   [Ansie Markup](#ansie-markup)
-        -   [Text Attributes](#text-attributes)
-        -   [Spacing Attributes](#spacing-attributes)
-        -   [Free (Raw) Text](#free-raw-text)
-        -   [Color Table](#color-table)
-        -   [Emoji](#emoji)
-        -   [Markdown](#markdown)
-    -   [API](#api)
-        -   [Compilation Function](#compilation-function)
-        -   [Using Template Tags](#using-template-tags)
-    -   [User Input](#user-input)
-        -   [`ask`](#ask)
-        -   [`askSingleLineText`](#asksinglelinetext)
-        -   [`askMultiLineText`](#askmultilinetext)
-        -   [`askSelect`](#askselect)
-        -   [`askPassword`](#askpassword)
-        -   [`askConfirm`](#askconfirm)
-    -   [Themes](#themes)
-        -   [Themes](#themes-1)
-    -   [Using the CLI](#using-the-cli)
-    -   [Developing](#developing)
-        -   [Updating the Grammar](#updating-the-grammar)
-    -   [Testing](#testing)
+- [Ansie](#ansie)
+  - [Table of Contents](#table-of-contents)
+  - [Quick Example](#quick-example)
+  - [Installation](#installation)
+  - [Getting Started](#getting-started)
+  - [Ansie Markup](#ansie-markup)
+    - [Text Attributes](#text-attributes)
+    - [Spacing Attributes](#spacing-attributes)
+    - [Free (Raw) Text](#free-raw-text)
+    - [Color Table](#color-table)
+    - [Emoji](#emoji)
+    - [Markdown](#markdown)
+  - [API](#api)
+    - [Compilation Function](#compilation-function)
+    - [Using Template Tags](#using-template-tags)
+  - [User Input](#user-input)
+    - [`ask`](#ask)
+    - [`askSingleLineText`](#asksinglelinetext)
+    - [`askMultiLineText`](#askmultilinetext)
+    - [`askSelect`](#askselect)
+    - [`askPassword`](#askpassword)
+    - [`askConfirm`](#askconfirm)
+    - [Prompts and Defaults](#prompts-and-defaults)
+  - [Themes](#themes)
+    - [Themes](#themes-1)
+  - [Using the CLI](#using-the-cli)
+  - [Developing](#developing)
+    - [Updating the Grammar](#updating-the-grammar)
+  - [Testing](#testing)
 
 ## Quick Example
 
@@ -149,14 +150,14 @@ The markup language follows XML rules in that it uses a declarative tag-based sy
 
 Tags that accept spacing attributes include:
 
--   h1
--   h2
--   h3
--   body
--   p
--   div
--   span
--   li
+- h1
+- h2
+- h3
+- body
+- p
+- div
+- span
+- li
 
 ### Spacing Attributes
 
@@ -170,14 +171,14 @@ Tags that accept spacing attributes include:
 
 Tags that accept spacing attributes include:
 
--   h1
--   h2
--   h3
--   body
--   p
--   div
--   br
--   li
+- h1
+- h2
+- h3
+- body
+- p
+- div
+- br
+- li
 
 ### Free (Raw) Text
 
@@ -275,12 +276,12 @@ Text can include emoji either through unicode or through _Slack_ style formattin
 
 Ansie supports simpler markdown constructs to create more readable input. Support markdown includes:
 
--   h1: `# Headline 1` translates to `<h1>Headline 1</h1>`
--   h2: `# Headline 2` translates to `<h2>Headline 2</h2>`
--   h3: `# Headline 3` translates to `<h3>Headline 3</h3>`
--   bold: `**bold**` translates to `<span bold>bold</span>`
--   italics: `**italics**` translates to `<span italics>italics</span>`
--   color: `[c=blue]blue[/c]` translates to `<span fg="blue">blue</span>`
+- h1: `# Headline 1` translates to `<h1>Headline 1</h1>`
+- h2: `# Headline 2` translates to `<h2>Headline 2</h2>`
+- h3: `# Headline 3` translates to `<h3>Headline 3</h3>`
+- bold: `**bold**` translates to `<span bold>bold</span>`
+- italics: `**italics**` translates to `<span italics>italics</span>`
+- color: `[c=blue]blue[/c]` translates to `<span fg="blue">blue</span>`
 
 But you can also mix both markdown and markup in the same input. The markdown will first converted to the analogous markup before being compiled to the final output.
 
@@ -328,10 +329,10 @@ console.log(`Hello, ${response}`);
 
 There are different forms of answers that can be provided:
 
--   `text` - a simple text response
--   `password` - a password response
--   `select` - a selection from a list of options
--   `confirm` - a yes/no response (with a default)
+- `text` - a simple text response
+- `password` - a password response
+- `select` - a selection from a list of options
+- `confirm` - a yes/no response (with a default)
 
 ### `ask`
 
@@ -341,7 +342,7 @@ It might be easier to use the more specific functions below.
 
 | Parameter | Type   | Description                  |
 | --------- | ------ | ---------------------------- |
-| question  | string | The question to ask the user |
+| prompt  | string | The question to ask the user |
 | options   | object | Additional options to pass   |
 
 ```typescript
@@ -364,7 +365,7 @@ The `askSingleLineText` function asks a question and returns a text response.
 
 | Parameter | Type   | Description                                        |
 | --------- | ------ | -------------------------------------------------- |
-| question  | string | The question to ask the user                       |
+| prompt  | string | The question to ask the user                       |
 | def       | string | The default value if nothing is entered (optional) |
 
 ```typescript
@@ -383,7 +384,7 @@ resolve with the text.
 
 | Parameter | Type   | Description                  |
 | --------- | ------ | ---------------------------- |
-| question  | string | The question to ask the user |
+| prompt  | string | The question to ask the user |
 
 ### `askSelect`
 
@@ -413,7 +414,7 @@ type. The promise will resolve with the password.
 
 | Parameter | Type   | Description                                             |
 | --------- | ------ | ------------------------------------------------------- |
-| question  | string | The question to ask the user                            |
+| prompt  | string | The question to ask the user                            |
 | def       | string | The default value if the user enters nothing (optional) |
 
 ```typescript
@@ -429,7 +430,7 @@ press enter to accept the default value. The promise will resolve with the boole
 
 | Parameter | Type   | Description                                             |
 | --------- | ------ | ------------------------------------------------------- |
-| question  | string | The question to ask the user                            |
+| prompt  | string | The question to ask the user                            |
 | options   | object | Options to configure the confirmation method            |
 | def       | string | The default value if the user enters nothing (optional) |
 
@@ -449,6 +450,19 @@ const response = await ansie.askConfirm('Are you sure? [Y/n]', {
 });
 console.log(`Response is ${response}`);
 ```
+
+### Prompts and Defaults
+
+By default, if you specify a default value, that default value will be displayed after the prompt.  If you want to choose where that default value is displayed in the prompt, you can use the `[default]` placeholder in the prompt text you provide and that will be replaced with the default value text.  For example:
+
+```typescript
+import ansie from 'ansie';
+const response = await ansie.askSingleLineText('What is your name ([default])? ', 'Alice');
+console.log(`Hello, ${response}`);
+```
+
+In the above example, the prompt will be displayed as `What is your name (Alice)? ` with the default value displayed inside the question mark.
+If you didn't provide a `[default]` placeholder, the default value would be displayed after the prompt as in `What is your name? (Alice)`
 
 ## Themes
 

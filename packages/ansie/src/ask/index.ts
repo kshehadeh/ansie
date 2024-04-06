@@ -1,18 +1,13 @@
-import { ansieConsole } from '../console/console';
 import confirmInput from './confirm-input';
 import passwordInput from './password-input';
 import selectInput from './select-input';
 import textInput from './text-input';
+import { renderPrompt } from './util';
 
 function upperIfTrue(value: string, isTrue: boolean) {
     return isTrue ? value.toUpperCase() : value.toLowerCase();
 }
 
-function renderPrompt(prompt?: string, def?: string) {
-    if (prompt !== '') {
-        ansieConsole.info(`${prompt} ${def ? `[c=gray](${def})[/c]` : ''}`);
-    }
-}
 /**
  * Ask the user for a multiline text input
  * @param prompt

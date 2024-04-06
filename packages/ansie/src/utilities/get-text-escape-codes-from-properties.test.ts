@@ -1,4 +1,3 @@
-import { describe, expect, it } from 'bun:test';
 import { TerminalStyle, escapeCodeFromName } from './escape-code-from-name';
 import {
     colorToTerminalStyle,

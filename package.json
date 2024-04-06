@@ -6,6 +6,7 @@
   ],
   "scripts": {
     "build": "turbo run build",
+    "test": "turbo run test",
     "prep": "npm run build && changeset",
     "ver": "changeset version",
     "pub": "changeset publish"

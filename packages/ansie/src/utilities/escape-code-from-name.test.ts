@@ -1,4 +1,3 @@
-import { describe, expect, it } from 'bun:test';
 import { escapeCodeFromName } from './escape-code-from-name';
 
 describe('escapeCodeFromName', () => {
