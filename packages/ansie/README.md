@@ -229,21 +229,24 @@ This is a quick <span fg="blue">blue</span> test
 
 Text can include emoji either through unicode or through _Slack_ style formatting as in `:fire:`. Supported emoji include:
 
-| Code                        | Emoji |
-| --------------------------- | ----- |
-| `:exclamation:`             | ❗    |
-| `:warning:`                 | ⚠️    |
-| `:no_entry:`                | ⛔    |
-| `:heavy_check_mark:`        | ✔️    |
-| `:x:`                       | ❌    |
+| Code                        | Emoji  |
+| --------------------------- | ------ |
+| `:exclamation:`             | ❗     |
+| `:warning:`                 | ⚠️   |
+| `:no_entry:`                | ⛔     |
+| `:heavy_check_mark:`        | ✔️   |
+| `:x:`                       | ❌     |
+| `:info:`                    | ℹ️    |
+| `:question:`                | ❓     |
+| `:prompt:`                  | 💬    |
 | `:bangbang:`                | ‼️    |
 | `:triangular_flag_on_post:` | 🚩    |
 | `:fire:`                    | 🔥    |
-| `:sos:`                     | 🆘    |
+| `:sos:`                     | 🆘     |
 | `:lock:`                    | 🔒    |
 | `:key:`                     | 🔑    |
 | `:broken_heart:`            | 💔    |
-| `:skull_and_crossbones:`    | ☠️    |
+| `:skull_and_crossbones:`    | ☠️   |
 | `:grinning:`                | 😀    |
 | `:grin:`                    | 😁    |
 | `:joy:`                     | 😂    |
@@ -257,20 +260,20 @@ Text can include emoji either through unicode or through _Slack_ style formattin
 | `:cry:`                     | 😢    |
 | `:sob:`                     | 😭    |
 | `:rocket:`                  | 🚀    |
-| `:sunny:`                   | ☀️    |
-| `:umbrella:`                | ☔    |
+| `:sunny:`                   | ☀️   |
+| `:umbrella:`                | ☔     |
 | `:camera:`                  | 📷    |
 | `:book:`                    | 📖    |
 | `:moneybag:`                | 💰    |
 | `:gift:`                    | 🎁    |
 | `:bell:`                    | 🔔    |
 | `:hammer:`                  | 🔨    |
-| `:thumbsup-skin-tone-1:`    | 👍🏻    |
-| `:thumbsup-skin-tone-2:`    | 👍🏻    |
-| `:thumbsup-skin-tone-3:`    | 👍🏼    |
-| `:thumbsup-skin-tone-4:`    | 👍🏽    |
-| `:thumbsup-skin-tone-5:`    | 👍🏾    |
-| `:thumbsup-skin-tone-6:`    | 👍🏿    |
+| `:thumbsup-skin-tone-1:`    | 👍🏻 |
+| `:thumbsup-skin-tone-2:`    | 👍🏻 |
+| `:thumbsup-skin-tone-3:`    | 👍🏼 |
+| `:thumbsup-skin-tone-4:`    | 👍🏽 |
+| `:thumbsup-skin-tone-5:`    | 👍🏾 |
+| `:thumbsup-skin-tone-6:`    | 👍🏿 |
 
 ### Markdown
 
@@ -342,7 +345,7 @@ It might be easier to use the more specific functions below.
 
 | Parameter | Type   | Description                  |
 | --------- | ------ | ---------------------------- |
-| prompt  | string | The question to ask the user |
+| prompt    | string | The question to ask the user |
 | options   | object | Additional options to pass   |
 
 ```typescript
@@ -365,7 +368,7 @@ The `askSingleLineText` function asks a question and returns a text response.
 
 | Parameter | Type   | Description                                        |
 | --------- | ------ | -------------------------------------------------- |
-| prompt  | string | The question to ask the user                       |
+| prompt    | string | The question to ask the user                       |
 | def       | string | The default value if nothing is entered (optional) |
 
 ```typescript
@@ -384,7 +387,7 @@ resolve with the text.
 
 | Parameter | Type   | Description                  |
 | --------- | ------ | ---------------------------- |
-| prompt  | string | The question to ask the user |
+| prompt    | string | The question to ask the user |
 
 ### `askSelect`
 
@@ -414,7 +417,7 @@ type. The promise will resolve with the password.
 
 | Parameter | Type   | Description                                             |
 | --------- | ------ | ------------------------------------------------------- |
-| prompt  | string | The question to ask the user                            |
+| prompt    | string | The question to ask the user                            |
 | def       | string | The default value if the user enters nothing (optional) |
 
 ```typescript
@@ -430,7 +433,7 @@ press enter to accept the default value. The promise will resolve with the boole
 
 | Parameter | Type   | Description                                             |
 | --------- | ------ | ------------------------------------------------------- |
-| prompt  | string | The question to ask the user                            |
+| prompt    | string | The question to ask the user                            |
 | options   | object | Options to configure the confirmation method            |
 | def       | string | The default value if the user enters nothing (optional) |
 
