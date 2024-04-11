@@ -1,5 +1,11 @@
 # ansie
 
+## 0.6.4
+
+### Patch Changes
+
+- Fixes an issue with spacing
+
 ## 0.6.3
 
 ### Patch Changes

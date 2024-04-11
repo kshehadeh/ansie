@@ -1,5 +1,13 @@
 # ansie-kitchen-sink
 
+## 1.1.3
+
+### Patch Changes
+
+- Fixes an issue with spacing
+- Updated dependencies
+  - ansie@0.6.4
+
 ## 1.1.2
 
 ### Patch Changes

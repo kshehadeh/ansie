@@ -4,16 +4,17 @@ import ansie from "ansie";
 
 // Compile Function
 ansie.console.log("# Using Compile Function");
+
 console.log(
-  ansie.compile("<h2>Heading 2</h2><h3>Heading 3</h3><p>Paragraph</p>")
+  ansie.compile("<h2>Heading 2</h2><h3>Heading 3</h3><p>Paragraph</p>And this is a test <span bold>bold</span> and <span italics>italics</span> text.")
 );
 console.log(ansie.compile(`## Heading 2 with markdown`));
-console.log(ansie.compile(`Just plain text`));
+console.log(ansie.compile(`Just plain text with some <span bold>bold text</span>`));
 console.log(
   ansie.compile(`
 ## Heading 2 with markdown
 ### Heading 3 with markdown
-<p>Paragraph with markup</p>
+Mixing **bold** and <span italics>italics</span> with markup
 <li>List Item 1</li>
 <li>**List Item 2 Bold with markdown**</li>
 <li><span italics>List Item 3 Italics with Markup</span></li>
@@ -23,7 +24,6 @@ console.log(
 ansie.console.log("# Using Compile Function With a Custom Theme");
 
 const theme = {
-  ...ansie.getGlobalTheme(),
   h1: {
     font: {
       color: {
@@ -49,19 +49,21 @@ const theme = {
   },
 };
 
-console.log(
-  ansie.compile({
-    markup: `
-## Heading 2 with markdown
+/**
+ * Set the global theme by merging the new theme with the existing global theme
+ * The buildTheme function does a deep merge of the two taking into account the 
+ * nested objects and arrays.
+ */
+ansie.setGlobalTheme(ansie.buildTheme(theme, ansie.getGlobalTheme()));
+
+ansie.console.log(
+  `## Heading 2 with markdown
 ### Heading 3 with markdown
 <p>Paragraph with markup</p>
 <li>List Item 1</li>
 <li>**List Item 2 Bold with markdown**</li>
 <li><span italics>List Item 3 Italics with Markup</span></li>
-`,
-    theme,
-  })
-);
+`);
 
 /// Tagged template
 ansie.console.log("# Using Tagged Template Function");
