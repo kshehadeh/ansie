@@ -42,6 +42,7 @@
         "test": "jest",
         "lint": "eslint .",
         "build": "rollup -c",
+        "build:watch": "rollup -c -w",
         "fixture:generate": "bun test/record.ts",
         "parser:generate": "bun scripts/parser/generate.ts"
     },

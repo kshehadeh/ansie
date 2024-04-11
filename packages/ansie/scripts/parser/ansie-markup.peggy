@@ -213,7 +213,7 @@ element
   = EmptyElemTag
   / start:STag c:content ETag { start.content = c; return start; }
 
-STag = S* '<' name:pushName attr:(S @(Attribute/EmptyAttribute))* S? '>' { return {
+STag = '<' name:pushName attr:(S @(Attribute/EmptyAttribute))* S? '>' { return {
   node: processTag(name, attr),
   ...convertAttr(attr),
 }}
@@ -233,7 +233,7 @@ Attribute = name:Name Eq value:AttValue { return {
   value,
   loc: location(),
 }}
-ETag = '</' popName S? '>' S*
+ETag = '</' popName S? '>'
 
 // Match tags
 pushName = n:Name { names.push(n); return n }

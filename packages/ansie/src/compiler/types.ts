@@ -296,12 +296,15 @@ export abstract class AnsieNodeImpl {
      * "node" or "content".
      */
     get attributes(): Record<AllAttributeKeys, string> {
-        return Object.entries(this._raw).reduce((acc, [key, value]) => {
-            if (isAttribute(key) && typeof value === 'string') {
-                acc[key] = value;
-            }
-            return acc;
-        }, {} as Record<AllAttributeKeys, string>);
+        return Object.entries(this._raw).reduce(
+            (acc, [key, value]) => {
+                if (isAttribute(key) && typeof value === 'string') {
+                    acc[key] = value;
+                }
+                return acc;
+            },
+            {} as Record<AllAttributeKeys, string>
+        );
     }
 
     /**
