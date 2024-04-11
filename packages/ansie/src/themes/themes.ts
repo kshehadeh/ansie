@@ -71,7 +71,6 @@ export const text: AnsieStyle = body;
 
 export const br: AnsieStyle = {
     spacing: {
-        margin: 0,
         marginLeft: 0,
         marginRight: 0,
         marginTop: 0,
@@ -89,11 +88,10 @@ export const h1: AnsieStyle = {
         italics: false
     },
     spacing: {
-        margin: 0,
         marginLeft: 0,
         marginRight: 0,
         marginTop: 1,
-        marginBottom: 0
+        marginBottom: 1
     }
 };
 
@@ -107,11 +105,10 @@ export const h2: AnsieStyle = {
         italics: false
     },
     spacing: {
-        margin: 0,
         marginLeft: 0,
         marginRight: 0,
         marginTop: 1,
-        marginBottom: 0
+        marginBottom: 1
     }
 };
 
@@ -125,17 +122,15 @@ export const h3: AnsieStyle = {
         italics: false
     },
     spacing: {
-        margin: 0,
         marginLeft: 0,
         marginRight: 0,
         marginTop: 1,
-        marginBottom: 0
+        marginBottom: 1
     }
 };
 
 export const p: AnsieStyle = {
     spacing: {
-        margin: 0,
         marginLeft: 0,
         marginRight: 0,
         marginTop: 1,
@@ -151,7 +146,6 @@ export const li: AnsieStyle = {
         indent: 1
     },
     spacing: {
-        margin: 0,
         marginLeft: 0,
         marginRight: 0,
         marginTop: 1,
@@ -161,7 +155,6 @@ export const li: AnsieStyle = {
 
 export const div: AnsieStyle = {
     spacing: {
-        margin: 0,
         marginLeft: 0,
         marginRight: 0,
         marginTop: 1,

@@ -1,7 +1,7 @@
 import { compile } from './compiler/compile';
 import { tpl } from './template';
 import { ansieConsole } from './console/console';
-import { getGlobalTheme, setGlobalTheme } from './themes/themes';
+import { buildTheme, getGlobalTheme, setGlobalTheme } from './themes/themes';
 import { parseAnsieMarkdown } from './parser';
 import {
     askSingleLineText,
@@ -10,6 +10,7 @@ import {
     askPassword,
     askConfirm
 } from './ask';
+
 export default {
     // Prompts
     askSingleLineText,
@@ -26,6 +27,7 @@ export default {
     // Themes
     setGlobalTheme,
     getGlobalTheme,
+    buildTheme,
 
     // Parser
     parseAnsieMarkdown
