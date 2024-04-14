@@ -1,5 +1,16 @@
 # ansie-kitchen-sink
 
+## 1.2.0
+
+### Minor Changes
+
+- Refactored the API entirely and switched to inquirer for prompting
+
+### Patch Changes
+
+- Updated dependencies
+  - ansie@0.7.0
+
 ## 1.1.3
 
 ### Patch Changes

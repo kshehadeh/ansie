@@ -1,5 +1,16 @@
 # ansie-cli
 
+## 0.6.0
+
+### Minor Changes
+
+- Refactored the API entirely and switched to inquirer for prompting
+
+### Patch Changes
+
+- Updated dependencies
+  - ansie@0.7.0
+
 ## 0.5.6
 
 ### Patch Changes
