@@ -4,7 +4,7 @@
 // https://peggyjs.org/
 
 
-    import { TagAttributeMap } from '../compiler/types';
+    import { TagAttributeMap } from '../compile/types';
 
 function add(obj, props) {
   for (const [k, v] of Object.entries(props)) {

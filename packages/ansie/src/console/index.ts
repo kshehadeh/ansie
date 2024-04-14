@@ -1,7 +1,7 @@
 import util from 'util';
-import { compile } from '../compiler/compile';
+import compile from '../compile';
 
-export const ansieConsole = {
+export default {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     log: (message?: any, ...optionalParams: any[]) => {
         const logWithMarkup = util.format(message, ...optionalParams);

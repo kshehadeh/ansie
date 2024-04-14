@@ -1,5 +1,5 @@
 import { getLastNodeOfTypeFromStack } from './get-last-node-of-type-in-stack';
-import { ValidTags, type AnsieNode } from '../compiler/types';
+import { ValidTags, type AnsieNode } from '../compile/types';
 
 describe('getLastNodeOfTypeFromStack', () => {
     it('should return the last node of the specified type from the stack', () => {

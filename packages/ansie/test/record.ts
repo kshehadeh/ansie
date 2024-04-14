@@ -1,10 +1,10 @@
-import { compile } from '../src/compiler/compile';
+import compile from '../src/compile';
 import compilationFixtures from './test-markup-strings';
 import * as readline from 'readline';
 
 import { writeFileSync } from 'fs';
 import { resolve } from 'path';
-import { parseAnsieMarkdown } from '../src/parser';
+import parse from '../src/parse';
 
 export function recordCompilation(input: string): {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -13,7 +13,7 @@ export function recordCompilation(input: string): {
     output: string;
 } {
     console.log('Recording compilation: ', input);
-    const ast = parseAnsieMarkdown(input);
+    const ast = parse.markdown(input);
     const output = compile({ markup: input, output: 'ansi' });
     console.log('Result: ', output);
     console.log('--------------------');

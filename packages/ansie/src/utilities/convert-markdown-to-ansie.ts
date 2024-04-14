@@ -1,36 +1,80 @@
-export function convertMarkdownToAnsie(input: string) {
-    // Unified regex for bold, italics, and color. Headers are handled separately.
-    const regex = /\*\*(.*?)\*\*|\*(.*?)\*|\[c=(.*?)\](.*?)\[\/c\]/g;
+import { parse, Renderer } from 'marked';
 
-    // Replace bold, italics, and color with their respective ANSIE escape codes
-    const translated = input.replace(
-        regex,
-        (match, boldText, italicText, color, colorText) => {
-            if (boldText !== undefined) {
-                return `<span bold>${boldText}</span>`;
-            } else if (italicText !== undefined) {
-                return `<span italics>${italicText}</span>`;
-            } else if (color !== undefined) {
-                return `<span fg="${color}">${colorText}</span>`;
-            }
-            return match; // Fallback, should never reach here.
+class AnsieRenderer extends Renderer {
+    code(code: string): string {
+        return `<p marginLeft="4" fg="gray">${code}</p>`;
+    }
+    blockquote(quote: string): string {
+        return `<p marginLeft="4">${quote}</p>`;
+    }
+    html(html: string): string {
+        return html;
+    }
+    heading(text: string, level: number, raw: string): string {
+        return super.heading(text, level, raw);
+    }
+    hr(): string {
+        return '----';
+    }
+    list(body: string): string {
+        return body;
+    }
+    listitem(text: string, task: boolean, checked: boolean): string {
+        if (task) {
+            return `<li>${this.checkbox(checked)} ${text}</li>`;
         }
-    );
+        return `<li>${text}</li>`;
+    }
+    checkbox(checked: boolean): string {
+        return checked ? '[x]' : '[ ]';
+    }
+    paragraph(text: string): string {
+        return `<p>${text}</p>`;
+    }
+    table(): string {
+        return '';
+    }
+    tablerow(): string {
+        return '';
+    }
+    tablecell(): string {
+        return '';
+    }
+    /**
+     * span level renderer
+     */
+    strong(text: string): string {
+        return `<span bold>${text}</span>`;
+    }
+    em(text: string): string {
+        return `<span italics>${text}</span>`;
+    }
+    codespan(text: string): string {
+        return text;
+    }
+    br(): string {
+        return '<br>';
+    }
+    del(text: string): string {
+        return `<span>\x1B[9m${text}\x1B[0m</span>`;
+    }
+    link(href: string, title: string | null | undefined, text: string): string {
+        return `🔗 ${text || title} (${href})`;
+    }
+    image(href: string, title: string | null, text: string): string {
+        return `📷 ${title || text} (${href})`;
+    }
+    text(text: string): string {
+        return text;
+    }
+}
+export function convertMarkdownToAnsie(input: string): string {
+    const html = parse(input, {
+        async: false,
+        breaks: false,
+        gfm: true,
+        renderer: new AnsieRenderer()
+    }) as string;
 
-    // Handle headers as a special case, due to the need for multiline matching
-    return translated
-        .split('\n')
-        .map(line => line.trim()) // Remove leading/trailing whitespace
-        .filter(line => line.length > 0) // Remove empty lines
-        .map(line => {
-            if (line.trim().startsWith('###')) {
-                return line.replace(/^\s*###\s(.*?)$/, '<h3>$1</h3>');
-            } else if (line.trim().startsWith('##')) {
-                return line.replace(/^\s*##\s(.*?)$/, '<h2>$1</h2>');
-            } else if (line.trim().startsWith('#')) {
-                return line.replace(/^#\s(.*?)$/, '<h1>$1</h1>');
-            }
-            return line;
-        })
-        .join('\n'); // Rejoin the lines back into a single string
+    return html;
 }

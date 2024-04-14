@@ -3,7 +3,7 @@ import {
     colorToTerminalStyle,
     getTextEscapeCodesFromProperties
 } from './get-text-escape-codes-from-properties';
-import { ValidTags, type TextNodeBase } from '../compiler/types';
+import { ValidTags, type TextNodeBase } from '../compile/types';
 
 describe('colorToTerminalStyle', () => {
     it('should return foreground terminal style for valid color', () => {

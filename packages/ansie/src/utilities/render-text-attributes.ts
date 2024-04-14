@@ -1,7 +1,7 @@
-import { type CompilerFormat } from '../compiler/types';
+import { type CompilerFormat } from '../compile/types';
 import { getTextEscapeCodesFromProperties } from './get-text-escape-codes-from-properties';
-import { type AnsieNode, isAttribute } from '../compiler/types';
-import type { AnsieStyle } from '../themes/themes';
+import { type AnsieNode, isAttribute } from '../compile/types';
+import type { AnsieStyle } from '../themes';
 
 /**
  * Renders the text attributes for a node prepending the appropriate text escape codes.

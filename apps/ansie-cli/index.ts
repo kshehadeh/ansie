@@ -12,7 +12,7 @@ import yargs from "yargs";
 import * as fs from "fs";
 import { hideBin } from "yargs/helpers";
 import pkg from "./package.json";
-import ansie from "ansie";
+import { compile, parser } from "ansie";
 
 function readStdinWithTimeout(timeout: number): Promise<string> {
   return new Promise((resolve, reject) => {
@@ -111,9 +111,9 @@ async function handleInput() {
     if (input) {
       let output = "";
       if (argv.ast) {
-        output = JSON.stringify(ansie.parseAnsieMarkdown(input), null, 4);
+        output = JSON.stringify(parser.markdown(input), null, 4);
       } else {
-        output = ansie.compile({ markup: input }) || "";
+        output = compile({ markup: input }) || "";
       }
 
       if (output) {

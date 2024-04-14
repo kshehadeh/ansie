@@ -1,5 +1,5 @@
-import type { SpaceNodeBase } from '../compiler/types';
-import type { AnsieStyle } from '../themes/themes';
+import type { SpaceNodeBase } from '../compile/types';
+import type { AnsieStyle } from '../themes';
 import { num } from './num';
 
 export function getSpacingFromProperties(

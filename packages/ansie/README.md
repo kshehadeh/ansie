@@ -16,20 +16,22 @@ A library used to render a simplified markdown+html like markup to rich terminal
     - [Color Table](#color-table)
     - [Emoji](#emoji)
     - [Markdown](#markdown)
-  - [API](#api)
-    - [Compilation Function](#compilation-function)
-    - [Using Template Tags](#using-template-tags)
-  - [User Input](#user-input)
+  - [APIs](#apis)
+    - [`parse`](#parse)
+      - [`parse.markdown`](#parsemarkdown)
+      - [`parse.markup`](#parsemarkup)
+    - [`compile`](#compile)
     - [`ask`](#ask)
-    - [`askSingleLineText`](#asksinglelinetext)
-    - [`askMultiLineText`](#askmultilinetext)
-    - [`askSelect`](#askselect)
-    - [`askPassword`](#askpassword)
-    - [`askConfirm`](#askconfirm)
-    - [Prompts and Defaults](#prompts-and-defaults)
-  - [Themes](#themes)
-    - [Themes](#themes-1)
-  - [Using the CLI](#using-the-cli)
+      - [`ask.text`](#asktext)
+      - [`ask.multiline`](#askmultiline)
+      - [`ask.select`](#askselect)
+      - [`ask.password`](#askpassword)
+      - [`ask.confirm`](#askconfirm)
+    - [`themes`](#themes)
+      - [`themes.get`](#themesget)
+      - [`themes.set`](#themesset)
+      - [`themes.reset`](#themesreset)
+  - [Themes](#themes-1)
   - [Developing](#developing)
     - [Updating the Grammar](#updating-the-grammar)
   - [Testing](#testing)
@@ -53,7 +55,7 @@ This is a fully markup-based example. But for simpler output constraints you can
 ```markdown
 # Title
 
-## [c=blue]Subtitle goes here[/c]
+## Subtitle goes here
 
 A description use the default text will appear here. But you can
 also include **embedded markup**
@@ -61,27 +63,25 @@ also include **embedded markup**
 <span underline="single">Footnote</span>
 ```
 
-Using the CLI, you can generate rich text by piping in your markup/down to the utility:
-
-```bash
-echo "# Hello **world**" | ansie
-```
-
 ## Installation
-
-`bun add ansie`
-
-or
 
 `npm install ansie`
 
 ## Getting Started
 
+Ansie is divided into a few different APIs:
+
+- parse - Builds an AST out of a string
+- compile - Converts an Anie-style markup string to ansi codes
+- ask - A convient set of prompts that you can use to get user input in a terminal with ansie-formatted prompts.
+- themes - Modify themes to affect all rendered output without having to specify it each time
+- console - A convenience wrapper to use `console` functions with ansie formatting
+
 If you're integrating the library into a javascript/typescript application, you can get started with the `compile` function which, at its simplest, takes the markup to translate into ansi codes.
 
 ```typescript
-import ansie from 'ansie';
-console.log(ansie.compile('<h1 bold italics>Hello there</h1>'));
+import {compile} from 'ansie';
+console.log(compile('<h1 bold italics>Hello there</h1>'));
 
 // Output: ^[[1;3mHello there^[[22;23m
 ```
@@ -89,7 +89,7 @@ console.log(ansie.compile('<h1 bold italics>Hello there</h1>'));
 The above will render the string using a default theme that uses some sensible defaults to style the ouptput, but you can override that by passing in your own theme:
 
 ```typescript
-import ansie from 'ansie';
+import { compile } from 'ansie';
 const theme = {
     h1: {
         font: {
@@ -104,22 +104,22 @@ const theme = {
 };
 
 console.log(
-    ansie.compile({ markup: '<h1 bold italics>Hello there</h1>', theme })
+    compile({ markup: '<h1 bold italics>Hello there</h1>', theme })
 );
 ```
 
 You can also use template tags to render your output:
 
 ```typescript
-import ansie from 'ansie';
-console.log(ansie.tpl`<h1 bold italics>Hello ${fella}</h1>`);
+import {tpl} from 'ansie';
+console.log(tpl`<h1 bold italics>Hello ${fella}</h1>`);
 ```
 
 Finally, you can use console logging replacements to avoid having to add a compile step:
 
 ```typescript
-import ansie from 'ansie';
-ansie.console.log('# Title\n## Subtitle\nSome content');
+import {console} from 'ansie';
+console.log('# Title\n## Subtitle\nSome content');
 ```
 
 ## Ansie Markup
@@ -284,42 +284,56 @@ Ansie supports simpler markdown constructs to create more readable input. Suppor
 - h3: `# Headline 3` translates to `<h3>Headline 3</h3>`
 - bold: `**bold**` translates to `<span bold>bold</span>`
 - italics: `**italics**` translates to `<span italics>italics</span>`
-- color: `[c=blue]blue[/c]` translates to `<span fg="blue">blue</span>`
+- underline: `__underline__` translates to `<span underline="single">underline</span>`
 
 But you can also mix both markdown and markup in the same input. The markdown will first converted to the analogous markup before being compiled to the final output.
 
-## API
+## APIs
 
 Once the package is installed, you can quickly get up and running by using the `compile` function which takes an ansie markup string and returns rich text using ansi codes.
 
-### Compilation Function
+### `parse`
+
+Functions to build the AST from a string of markup.  This is useful if you want to manipulate the AST before compiling it to ansi codes.
+
+#### `parse.markdown`
+
+Unlike the `parse.markup` function, this will first parse the input string as markdown before then parsing it as markup. This is useful if you want to use markdown in your input string but adds additional processing team.  Only use this if you know that your input string includes markdown.
+
+#### `parse.markup`
+
+This function will only parse ansie-style markup.  Markdown will be ignored.
+
+The AST structure is as follows:
+
+Node:
+
+- `node` - The type of node. This can be `tag`, `text`, or `root`
+- `name` - The name of the tag
+- `attributes` - The attributes of the tag
+- `children` - The children of the node
+- `text` - The text of the node
+
+### `compile`
+
+Parameters:
+
+Pass in just a string of markup to compile or an object with options.
+
+- `markup` - The markup string to compile
+
+**OR** pass in an object with options:
+
+- `options.output` - The format to output. This can be either `ansie` or `markup`. The default is `ansie`.  If `markup` then the output will be the pre-compiled markup.
+- `options.theme` - The theme to use when compiling the markup. See themes below for more information.
+- `options.inputIncludesMarkdown` - If true then the input string is assumed to include markdown and will be converted to markup before being compiled. The default is `true`. You can save some processing time by setting this to `false` if you know that the input string does not include markdown.
 
 ```typescript
-import ansie from 'ansie';
-ansie.compile('<body>Hello, world</body>');
+import { compile } from 'ansie';
+compile('<body>Hello, world</body>');
 ```
 
-### Using Template Tags
-
-Ansie supports template tags allowing you to build string templates using tagged templates.
-
-```typescript
-import ansie from 'ansie';
-const person = 'world';
-
-// supports markup
-console.log(ansie.tpl`<body>Hello</body>, ${person}`);
-
-// support markdown also
-console.log(ansie.tpl`# Hello, ${person}!`);
-
-// supports a combination
-console.log(
-    ansie.tpl`# Hello <span fg="blue" underline="single">${person}</span>`
-);
-```
-
-## User Input
+### `ask`
 
 The `ask` family of utilities allows you to ask a question and get a response from the user.
 It takes a question and returns the response as a promise.
@@ -337,72 +351,46 @@ There are different forms of answers that can be provided:
 - `select` - a selection from a list of options
 - `confirm` - a yes/no response (with a default)
 
-### `ask`
+#### `ask.text`
 
-The `ask` function asks a question and returns a response. The promise will resolve with the response.
-This is the base ask function that can be configured to return a text, password, select, or confirm response.
-It might be easier to use the more specific functions below.
+The `text` function asks a question and returns a text response.
 
-| Parameter | Type   | Description                  |
-| --------- | ------ | ---------------------------- |
-| prompt    | string | The question to ask the user |
-| options   | object | Additional options to pass   |
+| Parameter    | Type   | Description                                        |
+| ------------ | ------ | -------------------------------------------------- |
+| prompt       | string | The question to ask the user                       |
+| defaultValue | string | The default value if nothing is entered (optional) |
 
 ```typescript
-import ansie from 'ansie';
-const response = await ansie.ask('What is your name?', {
-    format: 'ansie';
-    theme: 'default';
-    default: '';
-    typeOptions: {
-        type: 'select';
-        choices: ['Alice', 'Bob', 'Charlie'];
-    }
-});
+import { ask } from 'ansie';
+const response = await ask.text('What is your name?');
 console.log(`Hello, ${response}`);
 ```
 
-### `askSingleLineText`
+#### `ask.multiline`
 
-The `askSingleLineText` function asks a question and returns a text response.
+The `multinline` function asks a question and returns a multi-line text response.
 
-| Parameter | Type   | Description                                        |
-| --------- | ------ | -------------------------------------------------- |
-| prompt    | string | The question to ask the user                       |
-| def       | string | The default value if nothing is entered (optional) |
-
-```typescript
-import ansie from 'ansie';
-const response = await ansie.askText('What is your name?');
-console.log(`Hello, ${response}`);
-```
-
-### `askMultiLineText`
-
-The `askMultiLineText` function asks a question and returns a multi-line text response.
-
-If you specify multiline then the user
-will be presented with a multiline editor to provide a response. Once they save the response, the promise will
+If you specify multiline then the user will be presented with a multiline editor to provide a response. Once they save the response, the promise will
 resolve with the text.
 
 | Parameter | Type   | Description                  |
 | --------- | ------ | ---------------------------- |
 | prompt    | string | The question to ask the user |
+| defaultValue | string | The default value if nothing is entered (optional) |
 
-### `askSelect`
+#### `ask.select`
 
-The `askSelect` function asks a question and returns a selection from a list of options. The options are provided
-as an array of strings. The promise will resolve with the selected option.
+The `select` function asks a question and returns a selection from a list of options. The options are provided as an array of strings. The promise will resolve with the selected option.
 
-| Parameter | Type   | Description                                                 |
-| --------- | ------ | ----------------------------------------------------------- |
-| question  | string | The question to ask the user                                |
-| choices   | array  | An array of strings representing the options to select from |
-| def       | string | The default value selected (optional)                       |
+| Parameter    | Type   | Description                                                 |
+| ------------ | ------ | ----------------------------------------------------------- |
+| question     | string | The question to ask the user                                |
+| choices      | array  | An array of strings representing the options to select from |
+| defaultValue | string | The default value selected (optional)                       |
 
 ```typescript
-import ansie from 'ansie';
-const response = await ansie.askSelect('What is your name?', [
+import { ask } from 'ansie';
+const response = await ask.select('What is your name?', [
     'Alice',
     'Bob',
     'Charlie'
@@ -410,66 +398,63 @@ const response = await ansie.askSelect('What is your name?', [
 console.log(`Hello, ${response}`);
 ```
 
-### `askPassword`
+#### `ask.password`
 
-The `askPassword` function asks a question and returns a password response. The user's input will be hidden as they
+The `password` function asks a question and returns a password response. The user's input will be hidden as they
 type. The promise will resolve with the password.
 
-| Parameter | Type   | Description                                             |
-| --------- | ------ | ------------------------------------------------------- |
-| prompt    | string | The question to ask the user                            |
-| def       | string | The default value if the user enters nothing (optional) |
+| Parameter | Type   | Description                                     |
+| --------- | ------ | ----------------------------------------------- |
+| prompt    | string | The question to ask the user                    |
+| mask      | string | The character to use as a mask for the password |
 
 ```typescript
-import ansie from 'ansie';
-const response = await ansie.askPassword('What is your password?');
+import { ask } from 'ansie';
+const response = await ask.password('What is your password?');
 console.log(`Password is ${response}`);
 ```
 
-### `askConfirm`
+#### `ask.confirm`
 
-The `askConfirm` function asks a question and returns a boolean response. The user can respond with 'y' or 'n' or
-press enter to accept the default value. The promise will resolve with the boolean value.
+The `confirm` function asks a question and returns a boolean response. The user can respond with 'y' or 'n' or press enter to accept the default value. The promise will resolve with the boolean value.  You can also configure the default value and the keys that will be used to confirm or deny the question.
 
-| Parameter | Type   | Description                                             |
-| --------- | ------ | ------------------------------------------------------- |
-| prompt    | string | The question to ask the user                            |
-| options   | object | Options to configure the confirmation method            |
-| def       | string | The default value if the user enters nothing (optional) |
+| Parameter           | Type   | Description                                             |
+| ------------------- | ------ | ------------------------------------------------------- |
+| prompt              | string | The question to ask the user                            |
+| defaultValue        | string | The default value if the user enters nothing (optional) |
+| trueFalse.trueValue | string | The name of the true value (defaults to Yes)            |
+| trueFalse.falseValue | string | The name of the false value (defaults to No)            |
 
 The options object can contain the following properties:
 
-| Property   | Type    | Description                                                                                                                                                                                           |
-| ---------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| default    | boolean | This should be the same as either the "trueValue" to default to true or the "falseValue" to default to false. For example, if trueValue is "y" and you want to default to true, then set this to "y". |
-| isConfirm  | boolean | If true then treat this as a confirmation input meaning that any key other than escape will return true                                                                                               |
-| trueValue  | string  | A single character that the user must press to return true, defaults to "y"                                                                                                                           |
-| falseValue | string  | A single character that the user must press to return false, defaults to "n"                                                                                                                          |
-
 ```typescript
-import ansie from 'ansie';
-const response = await ansie.askConfirm('Are you sure? [Y/n]', {
-    default: 'y'
-});
+import { ask } from 'ansie';
+const response = await ask.confirm('Are you sure?', true, { trueValue: 'Positive', falseValue: 'Negative' });
 console.log(`Response is ${response}`);
 ```
 
-### Prompts and Defaults
+### `themes`
 
-By default, if you specify a default value, that default value will be displayed after the prompt.  If you want to choose where that default value is displayed in the prompt, you can use the `[default]` placeholder in the prompt text you provide and that will be replaced with the default value text.  For example:
+You can pass one off themes to the `compile` function to override the default theme. But you can also use the `themes` object to get or set the current global theme.
 
-```typescript
-import ansie from 'ansie';
-const response = await ansie.askSingleLineText('What is your name ([default])? ', 'Alice');
-console.log(`Hello, ${response}`);
-```
+#### `themes.get`
 
-In the above example, the prompt will be displayed as `What is your name (Alice)? ` with the default value displayed inside the question mark.
-If you didn't provide a `[default]` placeholder, the default value would be displayed after the prompt as in `What is your name? (Alice)`
+This will return the active global theme that is used whenever you call `compile` without specifying a theme.  See [themes](#themes) for more information on themes.
+
+#### `themes.set`
+
+This will set the active global theme that is used whenever you call `compile` without specifying a theme.  See [themes](#themes) for more information on themes.
+
+Note that you can pass in a partial description of a theme and it will merge with the existing global theme.
+
+
+#### `themes.reset`
+
+This will reset the global theme to the default theme.
 
 ## Themes
 
-You can use themes in Ansie to establish a common set of attributes to associate with each type of tag. A default theme is applied automatically but this can be overridden using the theme property in the `compile` and `compose` functions.
+You can use themes in Ansie to establish a common set of attributes to associate with each type of tag. A default theme is applied automatically but this can be overridden using the theme property in the `compile` function.
 
 A theme is made up of `tags` each of which has its own `style`. The styles available are:
 
@@ -481,14 +466,6 @@ A theme is made up of `tags` each of which has its own `style`. The styles avail
 
 The default theme has the following attributes:
 
-```typescript
-
-```
-
-### Themes
-
-The theme is made up of the following sections:
-
 | Section | Description                                   |
 | ------- | --------------------------------------------- |
 | h1      | Used the to style the h1 blocks               |
@@ -499,53 +476,25 @@ The theme is made up of the following sections:
 | list    | Used to indicate how lists should be styled   |
 | span    | Used to style generic inline elements of text |
 
-## Using the CLI
-
-You can access the functionality in ansie through a CLI as in:
-
-```bash
-> ansie "<h1 bold>This is bold</h1>"
-```
-
-This will output:
-
-> **This is bold**
-
-You can also pipe in the markup to produce the output:
-
-```bash
-> echo "<h1 bold>This is bold</h1>" | ansie
-```
-
-> **This is bold**
-
 ## Developing
-
-This package is developed using bun to make the building and packaging of Typescript easier. If you have an interest in making this `npm` compatible please submit a PR.
 
 To install dependencies:
 
 ```bash
-bun install
+npm install
 ```
 
 To update the parser if you made changes to the grammar:
 
 ```bash
-bun run parser:generate
+npm run parser:generate
 ```
 
-If you added new tests to `test-strings.ts` you will need to generate a new `fixtures.json` file which you can do by running:
+If you added new tests to `test-markup-strings.ts` you will need to generate a new `compiler-fixtures.json` file which you can do by running:
 
 ```bash
-bun run test:record
+npm run fixture:generate
 ```
-
-The library contains three components:
-
-1. _Parser_ - this is used to convert a string to an Abstract Syntax Tree. You probably won't need to use this as it represents an incremental state
-2. _Compiler_ - Converts the abstract syntax tree to renderer terminal text. You can use this if you want to just pass in markup to get your terminal string.
-3. _Composer_ - A convenient set of methods to build markup through a functional syntax. You can use this if you want a nicer, functional way of building your markup.
 
 ### Updating the Grammar
 
@@ -553,7 +502,7 @@ The parser code in this context is generated from a grammar file (terminal-marku
 
 1. Navigate to the terminal-markup.peggy file in your project directory.
 2. Make the necessary changes to the grammar. This could involve adding new rules, modifying existing ones, or fixing bugs.
-3. Run the generate.ts script to generate a new parser. You can do this by running `bun parser:generate`
+3. Run the generate.ts script to generate a new parser. You can do this by running `npm run  parser:generate`
 4. The updated parser will be written to `generated-parser.js`.
 5. Any new grammar that added or fixed remember to add a test to `test/test-markup-strings.json`
 
@@ -562,13 +511,9 @@ The parser code in this context is generated from a grammar file (terminal-marku
 Test files are colocated with the files that they are testing using the format `<filename>.test.ts`. For composition and
 markup tests, we automatically generate fixture files from an array of test string and commands.
 
-Many of the tests are built off of fixtures that can be re-recorded at any time using the `tests:record` script.
+Many of the tests are built off of fixtures that can be re-recorded at any time using the `fixture:generate` script.
 
-`test-composer-commands` is a file that export an array where each item in the array is a function that runs an compose command.
-When you run `bun run tests:record` each of these functions is executed and the results are stored in the `composer-fixtures.json` file
-which is then run as part of the package's tests.
-
-`test-markup-strings` is an array of valid markup strings that are used during the `bun run tests:record` script to
+`test-markup-strings` is an array of valid markup strings that are used during the `npm run fixture:generate` script to
 generate the `compiler-fixtures.json` file which contains the inputs and expected outputs.
 
 > **Note: You should only rerecord the fixtures if you are confident that they will generate correct output**

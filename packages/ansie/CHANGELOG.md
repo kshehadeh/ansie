@@ -1,5 +1,11 @@
 # ansie
 
+## 0.7.0
+
+### Minor Changes
+
+- Refactored the API entirely and switched to inquirer for prompting
+
 ## 0.6.4
 
 ### Patch Changes

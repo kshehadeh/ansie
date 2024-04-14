@@ -1146,130 +1146,43 @@
     "input": "\n        <h1 bold marginBottom=\"1\">My Console App</h1>\n        <h2 fg=\"gray\" marginBottom=\"1\">A little something I wrote</h2>\n        <p marginBottom=\"1\">\n            In order to used this app, do the following:\n            <li bullet=\"*\" marginBottom=\"1\"> Create a config file</li>\n            <li bullet=\"*\" marginBottom=\"1\"> Run the utility with the -h flag</li>\n            <li bullet=\"*\" marginBottom=\"1\"> etc...</li>\n        </p>\n    ",
     "ast": [
       {
-        "node": "h1",
-        "bold": "true",
-        "marginBottom": "1",
-        "content": [
-          {
-            "node": "text",
-            "value": "My Console App"
-          }
-        ]
-      },
-      {
-        "node": "text",
-        "value": "\n"
-      },
-      {
-        "node": "h2",
-        "fg": "gray",
-        "marginBottom": "1",
-        "content": [
-          {
-            "node": "text",
-            "value": "A little something I wrote"
-          }
-        ]
-      },
-      {
-        "node": "text",
-        "value": "\n"
-      },
-      {
         "node": "p",
-        "marginBottom": "1",
+        "marginLeft": "4",
+        "fg": "gray",
         "content": [
           {
             "node": "text",
-            "value": "\nIn order to used this app, do the following:\n"
-          },
-          {
-            "node": "li",
-            "bullet": "*",
-            "marginBottom": "1",
-            "content": [
-              {
-                "node": "text",
-                "value": " Create a config file"
-              }
-            ]
-          },
-          {
-            "node": "text",
-            "value": "\n"
-          },
-          {
-            "node": "li",
-            "bullet": "*",
-            "marginBottom": "1",
-            "content": [
-              {
-                "node": "text",
-                "value": " Run the utility with the -h flag"
-              }
-            ]
-          },
-          {
-            "node": "text",
-            "value": "\n"
-          },
-          {
-            "node": "li",
-            "bullet": "*",
-            "marginBottom": "1",
-            "content": [
-              {
-                "node": "text",
-                "value": " etc..."
-              }
-            ]
-          },
-          {
-            "node": "text",
-            "value": "\n"
-          }
-        ]
-      }
-    ],
-    "output": "\n\u001b[34;1;21mMy Console App\u001b[39;22;24m\n \n\u001b[90;1;4mA little something I wrote\u001b[39;22;24m\n \n\u001b[39;49m In order to used this app, do the following: \n* \u001b[39;49m Create a config file\u001b[39;49;24m\n \n* \u001b[39;49m Run the utility with the -h flag\u001b[39;49;24m\n \n* \u001b[39;49m etc...\u001b[39;49;24m\n \u001b[39;49;24m\n"
-  },
-  {
-    "input": "\n        <body>\n            <h1 marginBottom=\"1\">\n                <span fg=\"red\">title</span>\n            </h1>\n            <p marginBottom=\"1\">\n                <span fg=\"blue\">Paragraph with <span>span</span> and <div>div</div></span>\n            </p>\n        </body>\n    ",
-    "ast": [
-      {
-        "node": "body",
-        "content": [
-          {
-            "node": "text",
-            "value": "\n"
+            "value": "    "
           },
           {
             "node": "h1",
+            "bold": "true",
             "marginBottom": "1",
             "content": [
               {
                 "node": "text",
-                "value": "\n"
-              },
-              {
-                "node": "span",
-                "fg": "red",
-                "content": [
-                  {
-                    "node": "text",
-                    "value": "title"
-                  }
-                ]
-              },
-              {
-                "node": "text",
-                "value": "\n"
+                "value": "My Console App"
               }
             ]
           },
           {
             "node": "text",
-            "value": "\n"
+            "value": "\n    "
+          },
+          {
+            "node": "h2",
+            "fg": "gray",
+            "marginBottom": "1",
+            "content": [
+              {
+                "node": "text",
+                "value": "A little something I wrote"
+              }
+            ]
+          },
+          {
+            "node": "text",
+            "value": "\n    "
           },
           {
             "node": "p",
@@ -1277,57 +1190,166 @@
             "content": [
               {
                 "node": "text",
-                "value": "\n"
+                "value": "\n        In order to used this app, do the following:\n        "
               },
               {
-                "node": "span",
-                "fg": "blue",
+                "node": "li",
+                "bullet": "*",
+                "marginBottom": "1",
                 "content": [
                   {
                     "node": "text",
-                    "value": "Paragraph with "
-                  },
-                  {
-                    "node": "span",
-                    "content": [
-                      {
-                        "node": "text",
-                        "value": "span"
-                      }
-                    ]
-                  },
-                  {
-                    "node": "text",
-                    "value": " and "
-                  },
-                  {
-                    "node": "div",
-                    "content": [
-                      {
-                        "node": "text",
-                        "value": "div"
-                      }
-                    ]
+                    "value": " Create a config file"
                   }
                 ]
               },
               {
                 "node": "text",
-                "value": "\n"
+                "value": "\n        "
+              },
+              {
+                "node": "li",
+                "bullet": "*",
+                "marginBottom": "1",
+                "content": [
+                  {
+                    "node": "text",
+                    "value": " Run the utility with the -h flag"
+                  }
+                ]
+              },
+              {
+                "node": "text",
+                "value": "\n        "
+              },
+              {
+                "node": "li",
+                "bullet": "*",
+                "marginBottom": "1",
+                "content": [
+                  {
+                    "node": "text",
+                    "value": " etc..."
+                  }
+                ]
+              },
+              {
+                "node": "text",
+                "value": "\n    "
               }
             ]
-          },
-          {
-            "node": "text",
-            "value": "\n"
           }
         ]
       }
     ],
-    "output": "\u001b[39;49m \n\u001b[34;1;21m \u001b[31;49mtitle\u001b[39;49;24m \u001b[39;22;24m\n \n\u001b[39;49m \u001b[34;49mParagraph with \u001b[39;49mspan\u001b[39;49;24m and \n\u001b[39;49mdiv\u001b[39;49;24m\u001b[39;49;24m \u001b[39;49;24m\n \u001b[39;49;24m"
+    "output": "\n    \u001b[90;49m \n\u001b[34;1;21mMy Console App\u001b[39;22;24m\n \n\u001b[90;1;4mA little something I wrote\u001b[39;22;24m\n \n\u001b[39;49m In order to used this app, do the following: \n* \u001b[39;49m Create a config file\u001b[39;49;24m\n \n* \u001b[39;49m Run the utility with the -h flag\u001b[39;49;24m\n \n* \u001b[39;49m etc...\u001b[39;49;24m\n \u001b[39;49;24m\n\u001b[39;49;24m"
   },
   {
-    "input": "\n# Title 1\n## Title 2\n### Title 3\n**bold** *italics* [c=red]red[/c]\nJust some plain text\n    ",
+    "input": "\n        <body>\n            <h1 marginBottom=\"1\">\n                <span fg=\"red\">title</span>\n            </h1>\n            <p marginBottom=\"1\">\n                <span fg=\"blue\">Paragraph with <span>span</span> and <div>div</div></span>\n            </p>\n        </body>\n    ",
+    "ast": [
+      {
+        "node": "p",
+        "marginLeft": "4",
+        "fg": "gray",
+        "content": [
+          {
+            "node": "text",
+            "value": "    "
+          },
+          {
+            "node": "body",
+            "content": [
+              {
+                "node": "text",
+                "value": "\n        "
+              },
+              {
+                "node": "h1",
+                "marginBottom": "1",
+                "content": [
+                  {
+                    "node": "text",
+                    "value": "\n            "
+                  },
+                  {
+                    "node": "span",
+                    "fg": "red",
+                    "content": [
+                      {
+                        "node": "text",
+                        "value": "title"
+                      }
+                    ]
+                  },
+                  {
+                    "node": "text",
+                    "value": "\n        "
+                  }
+                ]
+              },
+              {
+                "node": "text",
+                "value": "\n        "
+              },
+              {
+                "node": "p",
+                "marginBottom": "1",
+                "content": [
+                  {
+                    "node": "text",
+                    "value": "\n            "
+                  },
+                  {
+                    "node": "span",
+                    "fg": "blue",
+                    "content": [
+                      {
+                        "node": "text",
+                        "value": "Paragraph with "
+                      },
+                      {
+                        "node": "span",
+                        "content": [
+                          {
+                            "node": "text",
+                            "value": "span"
+                          }
+                        ]
+                      },
+                      {
+                        "node": "text",
+                        "value": " and "
+                      },
+                      {
+                        "node": "div",
+                        "content": [
+                          {
+                            "node": "text",
+                            "value": "div"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "node": "text",
+                    "value": "\n        "
+                  }
+                ]
+              },
+              {
+                "node": "text",
+                "value": "\n    "
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "output": "\n    \u001b[90;49m \u001b[39;49m \n\u001b[34;1;21m \u001b[31;49mtitle\u001b[39;49;24m \u001b[39;22;24m\n \n\u001b[39;49m \u001b[34;49mParagraph with \u001b[39;49mspan\u001b[39;49;24m and \n\u001b[39;49mdiv\u001b[39;49;24m\u001b[39;49;24m \u001b[39;49;24m\n \u001b[39;49;24m\u001b[39;49;24m"
+  },
+  {
+    "input": "\n# Title 1\n## Title 2\n### Title 3\n**bold** *italics* red\nJust some plain text\n    ",
     "ast": [
       {
         "node": "h1",
@@ -1369,49 +1391,40 @@
         "value": "\n"
       },
       {
-        "node": "span",
-        "bold": "true",
+        "node": "p",
         "content": [
           {
-            "node": "text",
-            "value": "bold"
-          }
-        ]
-      },
-      {
-        "node": "text",
-        "value": " "
-      },
-      {
-        "node": "span",
-        "italics": "true",
-        "content": [
+            "node": "span",
+            "bold": "true",
+            "content": [
+              {
+                "node": "text",
+                "value": "bold"
+              }
+            ]
+          },
           {
             "node": "text",
-            "value": "italics"
-          }
-        ]
-      },
-      {
-        "node": "text",
-        "value": " "
-      },
-      {
-        "node": "span",
-        "fg": "red",
-        "content": [
+            "value": " "
+          },
+          {
+            "node": "span",
+            "italics": "true",
+            "content": [
+              {
+                "node": "text",
+                "value": "italics"
+              }
+            ]
+          },
           {
             "node": "text",
-            "value": "red"
+            "value": " red\nJust some plain text\n    "
           }
         ]
-      },
-      {
-        "node": "text",
-        "value": "\nJust some plain text"
       }
     ],
-    "output": "\n\u001b[34;1;21mTitle 1\u001b[39;22;24m\n \n\u001b[39;1;4mTitle 2\u001b[39;22;24m\n \n\u001b[90;1mTitle 3\u001b[39;22;24m\n \u001b[39;49;1mbold\u001b[39;49;22;24m \u001b[39;49;3mitalics\u001b[39;49;24;23m \u001b[31;49mred\u001b[39;49;24m Just some plain text"
+    "output": "\n\u001b[34;1;21mTitle 1\u001b[39;22;24m\n \n\u001b[39;1;4mTitle 2\u001b[39;22;24m\n \n\u001b[90;1mTitle 3\u001b[39;22;24m\n \n\u001b[39;49m\u001b[39;49;1mbold\u001b[39;49;22;24m \u001b[39;49;3mitalics\u001b[39;49;24;23m red\nJust some plain text \u001b[39;49;24m"
   },
   {
     "input": "\n# Title 1\n<span>Just some plain text</span>\n<li>Test</li>\n<li>Test2</li>\n",
@@ -1430,17 +1443,18 @@
         "value": "\n"
       },
       {
-        "node": "span",
+        "node": "p",
         "content": [
           {
-            "node": "text",
-            "value": "Just some plain text"
+            "node": "span",
+            "content": [
+              {
+                "node": "text",
+                "value": "Just some plain text"
+              }
+            ]
           }
         ]
-      },
-      {
-        "node": "text",
-        "value": "\n"
       },
       {
         "node": "li",
@@ -1463,8 +1477,12 @@
             "value": "Test2"
           }
         ]
+      },
+      {
+        "node": "text",
+        "value": "\n"
       }
     ],
-    "output": "\n\u001b[34;1;21mTitle 1\u001b[39;22;24m\n \u001b[39;49mJust some plain text\u001b[39;49;24m \n*  \u001b[39;49mTest\u001b[39;49;24m \n*  \u001b[39;49mTest2\u001b[39;49;24m"
+    "output": "\n\u001b[34;1;21mTitle 1\u001b[39;22;24m\n \n\u001b[39;49m\u001b[39;49mJust some plain text\u001b[39;49;24m\u001b[39;49;24m\n*  \u001b[39;49mTest\u001b[39;49;24m \n*  \u001b[39;49mTest2\u001b[39;49;24m "
   }
 ]

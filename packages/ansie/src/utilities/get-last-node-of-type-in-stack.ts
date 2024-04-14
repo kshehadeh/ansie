@@ -1,4 +1,4 @@
-import type { AnsieNode } from '../compiler/types';
+import type { AnsieNode } from '../compile/types';
 
 /**
  * This function retrieves the last node of a specific type from a stack of nodes (such as the stack of nodes in the compiler).

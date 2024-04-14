@@ -2,7 +2,7 @@ import {
     renderTextAttributesEnd,
     renderTextAttributesStart
 } from './render-text-attributes';
-import { ValidTags } from '../compiler/types';
+import { ValidTags } from '../compile/types';
 import {
     renderSpaceAttributesStart,
     renderSpaceAttributesEnd

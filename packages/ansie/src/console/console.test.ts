@@ -1,4 +1,4 @@
-import { ansieConsole } from './console';
+import ansieConsole from '.';
 
 jest.spyOn(console, 'log');
 jest.spyOn(console, 'warn');
