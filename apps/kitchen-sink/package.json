@@ -10,7 +10,7 @@
     "ansie-kitchen-sink": "dist/index.js"
   },
   "scripts": {
-    "dev": "node dist/index.js",
+    "dev": "tsx index.ts",
     "test": "echo \"Error: no tests for this module yet\"",
     "lint": "eslint .",
     "build": "rollup -c",
@@ -20,6 +20,7 @@
     "ansie": "0.7.0"
   },
   "devDependencies": {
-    "@rollup/plugin-typescript": "^11.1.6"
+    "@rollup/plugin-typescript": "^11.1.6",
+    "tsx": "^4.7.2"
   }
 }
