@@ -1,5 +1,11 @@
 # ansie
 
+## 0.7.1
+
+### Patch Changes
+
+- Minor change to the way links render
+
 ## 0.7.0
 
 ### Minor Changes
