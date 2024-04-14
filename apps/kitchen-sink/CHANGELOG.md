@@ -1,5 +1,13 @@
 # ansie-kitchen-sink
 
+## 1.2.1
+
+### Patch Changes
+
+- Minor change to the way links render
+- Updated dependencies
+  - ansie@0.7.1
+
 ## 1.2.0
 
 ### Minor Changes

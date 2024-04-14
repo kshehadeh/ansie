@@ -1,4 +1,4 @@
-import { console as ansieConsole, themes, tpl, ask } from "ansie";
+import { console as ansieConsole, themes, ask } from "ansie";
 
 // Examples
 
@@ -8,8 +8,6 @@ ansieConsole.log(`<h2>Heading 2</h2>
 And this is a test <span bold>bold</span> and <span italics>italics</span> text.
 `);
 
-console.log('------');
-
 ansieConsole.log(`
 # Heading 1: Markdown Sample
 ## Heading 2: Markdown Sample
@@ -18,7 +16,10 @@ ansieConsole.log(`
 * List Item 2
 * List Item 3
 
-[This is a link](https://www.example.com)
+[Link with text](https://www.example.com)
+https://www.example.com
+
+![Image with text](https://www.example.com/image.jpg)
 `);
 console.log('------');
 ansieConsole.log(`
@@ -83,7 +84,7 @@ console.log('------');
 /// Tagged template
 ansieConsole.log("# Using Tagged Template Function");
 
-console.log(tpl`Hello, **${"world"}**`);
+console.log(`Hello, **${"world"}**`);
 
 console.log('------');
 

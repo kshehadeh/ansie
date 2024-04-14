@@ -59,10 +59,20 @@ class AnsieRenderer extends Renderer {
         return `<span>\x1B[9m${text}\x1B[0m</span>`;
     }
     link(href: string, title: string | null | undefined, text: string): string {
-        return `🔗 ${text || title} (${href})`;
+        const titleOrText = title || text;
+        if (titleOrText === href) {
+            return `🔗 <span fg="blue" underline="single">${href}</span>`;
+        } else {
+            return `🔗 ${titleOrText} (<span fg="blue" underline="single">${href}</span>)`;
+        }
     }
     image(href: string, title: string | null, text: string): string {
-        return `📷 ${title || text} (${href})`;
+        const titleOrText = title || text;
+        if (titleOrText === href) {
+            return `📷 <span fg="blue" underline="single">${href}</span>`;
+        } else {
+            return `📷 ${titleOrText} (<span fg="blue" underline="single">${href}</span>)`;
+        }
     }
     text(text: string): string {
         return text;
