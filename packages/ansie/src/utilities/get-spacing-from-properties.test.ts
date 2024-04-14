@@ -1,5 +1,5 @@
 import { getSpacingFromProperties } from './get-spacing-from-properties';
-import { ValidTags } from '../compiler/types';
+import { ValidTags } from '../compile/types';
 
 describe('getSpacingFromProperties', () => {
     it('should return correct spacing when all properties are provided', () => {

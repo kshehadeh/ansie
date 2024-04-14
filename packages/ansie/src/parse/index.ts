@@ -1,5 +1,5 @@
 import { parse as rawParse } from './generated-parser';
-import { type Ast } from '../compiler/types';
+import { type Ast } from '../compile/types';
 import { convertMarkdownToAnsie } from '../utilities/convert-markdown-to-ansie';
 
 /**
@@ -16,7 +16,13 @@ import { convertMarkdownToAnsie } from '../utilities/convert-markdown-to-ansie';
  * @param input
  * @returns
  */
-export function parseAnsieMarkdown(input: string): Ast | null {
+
+export default {
+    markdown: parseAnsieMarkdown,
+    markup: parseAnsieMarkup
+};
+
+function parseAnsieMarkdown(input: string): Ast | null {
     if (!input) {
         return null;
     }
@@ -30,7 +36,7 @@ export function parseAnsieMarkdown(input: string): Ast | null {
  * @param input
  * @returns
  */
-export function parseAnsieMarkup(input: string): Ast | null {
+function parseAnsieMarkup(input: string): Ast | null {
     if (!input) {
         return null;
     }

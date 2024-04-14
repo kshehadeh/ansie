@@ -1,27 +1,38 @@
-import ansie from "ansie";
+import { console as ansieConsole, themes, tpl, ask } from "ansie";
 
 // Examples
 
-// Compile Function
-ansie.console.log("# Using Compile Function");
+ansieConsole.log(`<h2>Heading 2</h2>
+<h3>Heading 3</h3>
+<p>Paragraph</p>
+And this is a test <span bold>bold</span> and <span italics>italics</span> text.
+`);
 
-console.log(
-  ansie.compile("<h2>Heading 2</h2><h3>Heading 3</h3><p>Paragraph</p>And this is a test <span bold>bold</span> and <span italics>italics</span> text.")
-);
-console.log(ansie.compile(`## Heading 2 with markdown`));
-console.log(ansie.compile(`Just plain text with some <span bold>bold text</span>`));
-console.log(
-  ansie.compile(`
-## Heading 2 with markdown
-### Heading 3 with markdown
-Mixing **bold** and <span italics>italics</span> with markup
+console.log('------');
+
+ansieConsole.log(`
+# Heading 1: Markdown Sample
+## Heading 2: Markdown Sample
+### Heading 3: Markdown Sample
+* List Item 1
+* List Item 2
+* List Item 3
+
+[This is a link](https://www.example.com)
+`);
+console.log('------');
+ansieConsole.log(`
+# Heading 1 with markdown
+<h2>Heading 2 with markup</h2>
 <li>List Item 1</li>
-<li>**List Item 2 Bold with markdown**</li>
-<li><span italics>List Item 3 Italics with Markup</span></li>
-`)
-);
 
-ansie.console.log("# Using Compile Function With a Custom Theme");
+* List Item 2 with **markdown**
+
+<li><span italics>List Item 3 with markup</span></li>
+`);
+console.log('------');
+
+ansieConsole.log("# Using Compile Function With a Custom Theme");
 
 const theme = {
   h1: {
@@ -54,53 +65,44 @@ const theme = {
  * The buildTheme function does a deep merge of the two taking into account the 
  * nested objects and arrays.
  */
-ansie.setGlobalTheme(ansie.buildTheme(theme, ansie.getGlobalTheme()));
+themes.set(theme);
 
-ansie.console.log(
-  `## Heading 2 with markdown
+ansieConsole.log(`# Heading 1 with markdown 
+## Heading 2 with markdown
 ### Heading 3 with markdown
 <p>Paragraph with markup</p>
 <li>List Item 1</li>
-<li>**List Item 2 Bold with markdown**</li>
+<li>List Item 2</li>
 <li><span italics>List Item 3 Italics with Markup</span></li>
 `);
 
-/// Tagged template
-ansie.console.log("# Using Tagged Template Function");
-console.log(ansie.tpl`Hello, **${"world"}**`);
+themes.reset();
 
-/// Console Logging
-ansie.console.log("# Console Logging");
-ansie.console.log(`Hello ${"world"}`);
+console.log('------');
+
+/// Tagged template
+ansieConsole.log("# Using Tagged Template Function");
+
+console.log(tpl`Hello, **${"world"}**`);
+
+console.log('------');
 
 /// Ask
-ansie.console.log("# Asking Questions");
+ansieConsole.log("# Prompts");
 
-await ansie.askSingleLineText("What is your name?").then((name) => {
-  ansie.console.log(`Hello, ${name}!`);
+await ask.text("What is your name?").then((name) => {
+  ansieConsole.log(`Hello, ${name}!`);
 });
 
-await ansie
-  .askSelect("Select a color", ["red", "green", "blue"])
-  .then((color) => {
-    ansie.console.log(`You selected ${color}`);
-  });
+const color = await ask.select("Select a color", ["red", "green", "blue"])
+ansieConsole.log(`You selected ${color}`);
 
-await ansie.askPassword("Enter your password").then((password) => {
-  ansie.console.log(`Your password is ${password}`);
-});
+const password = await ask.password("Enter your password");
+ansieConsole.log(`Your password is ${password}`);
 
-await ansie
-  .askConfirm("Are you sure?", {
-    default: false,
-    isContinue: false,
-    trueValue: "yes",
-    falseValue: "no",
-  })
-  .then((response) => {
-    ansie.console.log(`You answered ${response}`);
-  });
+const confirm = await ask.confirm("Are you sure?", true);
+ansieConsole.log(`You answered ${confirm}`);
 
-await ansie.askMultilineText("Enter a multiline text").then((text) => {
-  ansie.console.log(`You entered: ${text}`);
-});
+const multi = await ask.multiline("Enter a multiline text");
+ansieConsole.log(`You entered: ${multi}`);
+

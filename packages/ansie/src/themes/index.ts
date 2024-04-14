@@ -1,5 +1,11 @@
 import { merge } from 'ts-deepmerge';
 
+export default {
+    set: setGlobalTheme,
+    get: getGlobalTheme,
+    reset: resetGlobalTheme
+};
+
 export interface AnsieStyle {
     font?: {
         color?: {
@@ -48,7 +54,7 @@ const cleanStyle: AnsieStyle = {
     }
 };
 
-export const body: AnsieStyle = {
+const body: AnsieStyle = {
     font: {
         color: {
             fg: 'default',
@@ -67,9 +73,9 @@ export const body: AnsieStyle = {
     }
 };
 
-export const text: AnsieStyle = body;
+const text: AnsieStyle = body;
 
-export const br: AnsieStyle = {
+const br: AnsieStyle = {
     spacing: {
         marginLeft: 0,
         marginRight: 0,
@@ -78,7 +84,7 @@ export const br: AnsieStyle = {
     }
 };
 
-export const h1: AnsieStyle = {
+const h1: AnsieStyle = {
     font: {
         color: {
             fg: 'blue'
@@ -95,7 +101,7 @@ export const h1: AnsieStyle = {
     }
 };
 
-export const h2: AnsieStyle = {
+const h2: AnsieStyle = {
     font: {
         color: {
             fg: 'default'
@@ -112,7 +118,7 @@ export const h2: AnsieStyle = {
     }
 };
 
-export const h3: AnsieStyle = {
+const h3: AnsieStyle = {
     font: {
         color: {
             fg: 'gray'
@@ -129,7 +135,7 @@ export const h3: AnsieStyle = {
     }
 };
 
-export const p: AnsieStyle = {
+const p: AnsieStyle = {
     spacing: {
         marginLeft: 0,
         marginRight: 0,
@@ -138,9 +144,9 @@ export const p: AnsieStyle = {
     }
 };
 
-export const span: AnsieStyle = {};
+const span: AnsieStyle = {};
 
-export const li: AnsieStyle = {
+const li: AnsieStyle = {
     list: {
         bullet: '* ',
         indent: 1
@@ -153,7 +159,7 @@ export const li: AnsieStyle = {
     }
 };
 
-export const div: AnsieStyle = {
+const div: AnsieStyle = {
     spacing: {
         marginLeft: 0,
         marginRight: 0,
@@ -175,7 +181,7 @@ export interface AnsieTheme {
     br?: AnsieStyle;
 }
 
-export const defaultTheme: AnsieTheme = {
+const defaultTheme: AnsieTheme = {
     h1: { ...cleanStyle, ...h1 },
     h2: { ...cleanStyle, ...h2 },
     h3: { ...cleanStyle, ...h3 },
@@ -188,19 +194,6 @@ export const defaultTheme: AnsieTheme = {
     text: { ...cleanStyle, ...text }
 };
 
-export const cleanTheme: AnsieTheme = {
-    h1: cleanStyle,
-    h2: cleanStyle,
-    h3: cleanStyle,
-    body: cleanStyle,
-    p: cleanStyle,
-    li: cleanStyle,
-    span: cleanStyle,
-    div: cleanStyle,
-    br: cleanStyle,
-    text: cleanStyle
-};
-
 let _globalTheme: AnsieTheme = defaultTheme;
 
 /**
@@ -208,26 +201,33 @@ let _globalTheme: AnsieTheme = defaultTheme;
  * not given explicitly.
  * @param theme
  */
-export function setGlobalTheme(theme: AnsieTheme) {
-    _globalTheme = theme;
+function setGlobalTheme(theme: Partial<AnsieTheme>) {
+    _globalTheme = buildTheme(theme, _globalTheme);
+}
+
+/**
+ * Resets the global theme to the default theme.
+ */
+function resetGlobalTheme() {
+    _globalTheme = defaultTheme;
 }
 
 /**
  * Gets the globally set theme.
  * @returns
  */
-export function getGlobalTheme() {
+function getGlobalTheme() {
     return _globalTheme;
+}
+
+function buildTheme(
+    themeFragment: Partial<AnsieTheme>,
+    originTheme: AnsieTheme
+): AnsieTheme {
+    return merge<AnsieTheme[]>(originTheme, themeFragment);
 }
 
 /**
  * Sets the global theme to the default theme.
  */
 setGlobalTheme(defaultTheme);
-
-export function buildTheme(
-    themeFragment: Partial<AnsieTheme>,
-    originTheme: AnsieTheme
-): AnsieTheme {
-    return merge<AnsieTheme[]>(originTheme, themeFragment);
-}

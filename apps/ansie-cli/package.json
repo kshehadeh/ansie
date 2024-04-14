@@ -5,12 +5,14 @@
   "type": "module",
   "main": "./dist/index.js",
   "bin": {
-    "ansie": "dist/index.js"
+    "ansie": "./dist/index.js"
   },
   "scripts": {
+    "dev": "node dist/index.js --",
     "test": "echo \"Error: no tests for this module yet\"",
     "lint": "eslint .",
-    "build": "rollup -c"
+    "build": "rollup -c",
+    "build:watch": "rollup -c -w"
   },
   "dependencies": {
     "ansie": "0.6.4",

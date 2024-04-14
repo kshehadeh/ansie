@@ -1,5 +1,5 @@
 import fixtures from '../../test/generated/compiler-fixtures.json';
-import { compile } from './compile';
+import compile from '.';
 
 describe('Compiler', () => {
     fixtures.forEach(

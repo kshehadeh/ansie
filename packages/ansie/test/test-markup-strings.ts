@@ -99,7 +99,7 @@ export default [
 # Title 1
 ## Title 2
 ### Title 3
-**bold** *italics* [c=red]red[/c]
+**bold** *italics* red
 Just some plain text
     `,
     `

@@ -1,11 +1,11 @@
-import { type CompilerFormat } from '../compiler/types';
+import { type CompilerFormat } from '../compile/types';
 import { getSpacingFromProperties } from './get-spacing-from-properties';
 import {
     type AnsieNode,
     type SpaceNodeBase,
     SpaceAttributes
-} from '../compiler/types';
-import type { AnsieStyle } from '../themes/themes';
+} from '../compile/types';
+import type { AnsieStyle } from '../themes';
 
 /**
  * Renders the space attributes for a node prepending the appropriate spacing escape codes.

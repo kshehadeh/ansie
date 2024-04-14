@@ -1,34 +1,7 @@
-import { compile } from './compiler/compile';
-import { tpl } from './template';
-import { ansieConsole } from './console/console';
-import { buildTheme, getGlobalTheme, setGlobalTheme } from './themes/themes';
-import { parseAnsieMarkdown } from './parser';
-import {
-    askSingleLineText,
-    askMultilineText,
-    askSelect,
-    askPassword,
-    askConfirm
-} from './ask';
+import parser from './parse';
+import compile from './compile';
+import themes from './themes';
+import console from './console';
+import ask from './ask';
 
-export default {
-    // Prompts
-    askSingleLineText,
-    askMultilineText,
-    askSelect,
-    askPassword,
-    askConfirm,
-
-    // Compiler
-    compile,
-    tpl,
-    console: ansieConsole,
-
-    // Themes
-    setGlobalTheme,
-    getGlobalTheme,
-    buildTheme,
-
-    // Parser
-    parseAnsieMarkdown
-};
+export { ask, compile, console, themes, parser };

@@ -1,18 +1,14 @@
-import { parseAnsieMarkdown, parseAnsieMarkup } from '../parser';
+import parser from '../parse';
 import type { CompilerFormat } from './types';
 import { Compiler } from './Compiler';
-import {
-    defaultTheme,
-    type AnsieTheme,
-    getGlobalTheme
-} from '../themes/themes';
+import themes, { AnsieTheme } from '../themes';
 
 /**
  * Compiles the markup into a string.
  * @param optionsOrMarkup Options or the markup to compile (with default options)
  * @returns
  */
-export function compile(
+export default (
     optionsOrMarkup:
         | string
         | {
@@ -21,8 +17,8 @@ export function compile(
               inputIncludesMarkdown?: boolean;
               output?: CompilerFormat;
           }
-) {
-    let theme = getGlobalTheme();
+) => {
+    let theme = themes.get();
     let markup = '';
     let output: CompilerFormat = 'ansi';
     let inputIncludesMarkdown = true;
@@ -36,12 +32,12 @@ export function compile(
     }
 
     const ast = inputIncludesMarkdown
-        ? parseAnsieMarkdown(markup)
-        : parseAnsieMarkup(markup);
+        ? parser.markdown(markup)
+        : parser.markup(markup);
     if (ast) {
-        const compiler = new Compiler(ast, theme || defaultTheme);
+        const compiler = new Compiler(ast, theme);
         return compiler.compile({ format: output, theme });
     } else {
         return '';
     }
-}
+};
