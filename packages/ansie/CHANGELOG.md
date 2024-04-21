@@ -1,5 +1,11 @@
 # ansie
 
+## 0.8.0
+
+### Minor Changes
+
+- Use Acorn for parsing of HTML instead of hand-rolled grammar
+
 ## 0.7.1
 
 ### Patch Changes
