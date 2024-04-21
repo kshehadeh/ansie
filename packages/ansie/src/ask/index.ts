@@ -2,6 +2,7 @@ import { input, password, select } from '@inquirer/prompts';
 import editor from './ansie-editor';
 import confirm from './ansie-confirm';
 import compile from '@/compile';
+import themes from '@/themes';
 
 export default {
     text: askSingleLineText,
@@ -11,8 +12,23 @@ export default {
     multiline: askMultilineText
 };
 
+const promptTheme = themes.build(
+    {
+        p: {
+            spacing: {
+                margin: 0,
+                marginTop: 0,
+                marginBottom: 0,
+                marginLeft: 0,
+                marginRight: 0
+            }
+        }
+    },
+    themes.get()
+);
+
 function compileForPrompt(prompt: string): string {
-    const compiledPrompt = compile(prompt);
+    const compiledPrompt = compile({ markup: prompt, theme: promptTheme });
     // Remove any newlines at the beginning and end
     return compiledPrompt.replaceAll(/^\n+|\n+$/g, '');
 }

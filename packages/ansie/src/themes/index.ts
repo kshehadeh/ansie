@@ -3,7 +3,8 @@ import { merge } from 'ts-deepmerge';
 export default {
     set: setGlobalTheme,
     get: getGlobalTheme,
-    reset: resetGlobalTheme
+    reset: resetGlobalTheme,
+    build: buildTheme
 };
 
 export interface AnsieStyle {

@@ -13,7 +13,7 @@ export function recordCompilation(input: string): {
     output: string;
 } {
     console.log('Recording compilation: ', input);
-    const ast = parse.markdown(input);
+    const ast = parse(input);
     const output = compile({ markup: input, output: 'ansi' });
     console.log('Result: ', output);
     console.log('--------------------');

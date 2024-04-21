@@ -86,5 +86,11 @@ export function convertMarkdownToAnsie(input: string): string {
         renderer: new AnsieRenderer()
     }) as string;
 
+    // If the input is not surrounded with a tag then surround with a
+    //  span tag to ensure that the output is a valid ANSIE document
+    if (/^<[^>]+>/.test(html)) {
+        return `<span>${html}</span>`;
+    }
+
     return html;
 }
