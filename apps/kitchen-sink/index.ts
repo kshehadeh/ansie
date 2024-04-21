@@ -1,6 +1,8 @@
-import { console as ansieConsole, themes, ask } from "ansie";
+import { console as ansieConsole, themes, ask, compile, parser } from "ansie";
 
 // Examples
+
+console.log(JSON.stringify(parser('This is a test')));
 
 ansieConsole.log(`<h2>Heading 2</h2>
 <h3>Heading 3</h3>
