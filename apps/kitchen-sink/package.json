@@ -1,7 +1,7 @@
 {
   "name": "ansie-kitchen-sink",
   "description": "A kitchen sink for the ansie library.",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "main": "./dist/index.js",
   "type": "module",
   "author": "",
@@ -17,7 +17,7 @@
     "build:watch": "rollup -c -w"
   },
   "dependencies": {
-    "ansie": "0.8.0"
+    "ansie": "0.8.1"
   },
   "devDependencies": {
     "@rollup/plugin-typescript": "^11.1.6",

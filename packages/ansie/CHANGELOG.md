@@ -1,5 +1,11 @@
 # ansie
 
+## 0.8.1
+
+### Patch Changes
+
+- Updated distribution files
+
 ## 0.8.0
 
 ### Minor Changes
