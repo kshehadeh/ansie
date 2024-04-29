@@ -1,5 +1,38 @@
 [
   {
+    "input": "This is a test of <h1>strings</h1> that do not start with a tag",
+    "ast": [
+      {
+        "node": "span",
+        "content": [
+          {
+            "node": "p",
+            "content": [
+              {
+                "node": "text",
+                "value": "This is a test of "
+              },
+              {
+                "node": "h1",
+                "content": [
+                  {
+                    "node": "text",
+                    "value": "strings"
+                  }
+                ]
+              },
+              {
+                "node": "text",
+                "value": " that do not start with a tag"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "output": "\u001b[39;49m\n\u001b[39;49mThis is a test of \n\u001b[34;1;21mstrings\u001b[39;22;24m\n that do not start with a tag\u001b[39;49;24m\u001b[39;49;24m"
+  },
+  {
     "input": "<h1>title</h1>",
     "ast": [
       {

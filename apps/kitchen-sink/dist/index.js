@@ -1,7 +1,6 @@
-import { parser, console as console$1, themes, ask } from 'ansie';
+import { console as console$1, themes, ask } from 'ansie';
 
 // Examples
-console.log(JSON.stringify(parser('This is a test')));
 console$1.log(`<h2>Heading 2</h2>
 <h3>Heading 3</h3>
 <p>Paragraph</p>
@@ -75,7 +74,7 @@ themes.reset();
 console.log('------');
 /// Tagged template
 console$1.log("# Using Tagged Template Function");
-console.log(`Hello, **${"world"}**`);
+console$1.log(`Hello, **${"world"}**`);
 console.log('------');
 /// Ask
 console$1.log("# Prompts");

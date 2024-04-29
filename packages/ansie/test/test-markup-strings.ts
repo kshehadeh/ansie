@@ -1,4 +1,5 @@
 export default [
+    'This is a test of <h1>strings</h1> that do not start with a tag',    
     '<h1>title</h1>',
     '<h1 bold>title with bold - inferred</h1>',
     '<h1 bold="true">title with bold - true</h1>',
