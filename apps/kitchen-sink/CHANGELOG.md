@@ -1,5 +1,12 @@
 # ansie-kitchen-sink
 
+## 1.2.4
+
+### Patch Changes
+
+- Updated dependencies
+  - ansie@0.8.2
+
 ## 1.2.3
 
 ### Patch Changes

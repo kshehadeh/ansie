@@ -1,5 +1,11 @@
 # ansie
 
+## 0.8.2
+
+### Patch Changes
+
+- Added tests to main ansie package
+
 ## 0.8.1
 
 ### Patch Changes
