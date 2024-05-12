@@ -85,17 +85,13 @@ describe('resetTheme', () => {
 
         const modifiedTheme = themes.get();
 
-        console.log(JSON.stringify(modifiedTheme.h3, null, 2));
-
         expect(modifiedTheme.h3?.font?.color?.fg).toEqual('blue');
         expect(modifiedTheme.h3?.font?.color?.bg).toEqual('green');
 
         const compileResult1 = compile('<h3>test</h3>');
         expect(compileResult1).toEqual(
-            `\x1b[39;49m\x1b[34;42;1mtest\x1b[39;49;22;24m\x1b[39;49;24m`
+            `\u001b[34;42;1mtest\u001b[39;49;22;24m`
         );
-
-        console.log(compileResult1);
 
         themes.reset();
 
@@ -108,8 +104,6 @@ describe('resetTheme', () => {
         );
 
         const compileResult2 = compile('<h3>test</h3>');
-        expect(compileResult2).toEqual(`\x1b[39;49m
-\x1b[90;1mtest\x1b[39;22;24m
-\x1b[39;49;24m`);
+        expect(compileResult2).toEqual(`\n\u001B[90;1mtest\u001B[39;22;24m\n`);
     });
 });

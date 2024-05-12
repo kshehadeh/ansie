@@ -86,3 +86,49 @@ export class ListItemNodeImpl extends AnsieNodeImpl implements AnsieNode {
         }
     }
 }
+
+export class ListNodeImpl extends AnsieNodeImpl implements AnsieNode {
+    renderStart({
+        stack,
+        format
+    }: {
+        stack: AnsieNode[];
+        format: CompilerFormat;
+    }) {
+        if (format === 'ansi') {
+            return renderSpaceAttributesStart({
+                node: this._raw,
+                format,
+                style: this._style
+            });
+        } else if (format === 'markup') {
+            return renderNodeAsMarkupStart(this._raw);
+        }
+
+        throw new CompilerError(
+            `Invalid format: ${format}`,
+            this._raw,
+            stack,
+            false
+        );
+    }
+
+    renderEnd({
+        format = 'ansi'
+    }: {
+        stack: AnsieNode[];
+        format: CompilerFormat;
+    }) {
+        if (format === 'ansi') {
+            return renderSpaceAttributesEnd({
+                attributes: this._raw,
+                format,
+                style: this._style
+            });
+        } else if (format === 'markup') {
+            return renderNodeAsMarkupEnd(this._raw);
+        } else {
+            return '';
+        }
+    }
+}

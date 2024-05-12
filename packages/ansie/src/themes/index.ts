@@ -155,12 +155,21 @@ const li: AnsieStyle = {
     spacing: {
         marginLeft: 0,
         marginRight: 0,
+        marginTop: 0,
+        marginBottom: 1
+    }
+};
+
+const div: AnsieStyle = {
+    spacing: {
+        marginLeft: 0,
+        marginRight: 0,
         marginTop: 1,
         marginBottom: 0
     }
 };
 
-const div: AnsieStyle = {
+const ul: AnsieStyle = {
     spacing: {
         marginLeft: 0,
         marginRight: 0,
@@ -180,6 +189,7 @@ export interface AnsieTheme {
     p?: AnsieStyle;
     text?: AnsieStyle;
     br?: AnsieStyle;
+    ul?: AnsieStyle;
 }
 
 const defaultTheme: AnsieTheme = {
@@ -189,6 +199,7 @@ const defaultTheme: AnsieTheme = {
     body: { ...cleanStyle, ...body },
     p: { ...cleanStyle, ...p },
     li: { ...cleanStyle, ...li },
+    ul: { ...cleanStyle, ...ul },
     span: { ...cleanStyle, ...span },
     div: { ...cleanStyle, ...div },
     br: { ...cleanStyle, ...br },

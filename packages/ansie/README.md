@@ -18,8 +18,6 @@ A library used to render a simplified markdown+html like markup to rich terminal
     - [Markdown](#markdown)
   - [APIs](#apis)
     - [`parse`](#parse)
-      - [`parse.markdown`](#parsemarkdown)
-      - [`parse.markup`](#parsemarkup)
     - [`compile`](#compile)
     - [`ask`](#ask)
       - [`ask.text`](#asktext)
@@ -286,7 +284,7 @@ Ansie supports simpler markdown constructs to create more readable input. Suppor
 - italics: `**italics**` translates to `<span italics>italics</span>`
 - underline: `__underline__` translates to `<span underline="single">underline</span>`
 
-But you can also mix both markdown and markup in the same input. The markdown will first converted to the analogous markup before being compiled to the final output.
+Note: You cannot mix markup and markdown in the same string.  If there are any HTML tags in the string, it will bypass the markdown processing.  This is because markdown newlines have special meaning whereas HTML markup explicitly does not (in most cases).  
 
 ## APIs
 
@@ -295,14 +293,6 @@ Once the package is installed, you can quickly get up and running by using the `
 ### `parse`
 
 Functions to build the AST from a string of markup.  This is useful if you want to manipulate the AST before compiling it to ansi codes.
-
-#### `parse.markdown`
-
-Unlike the `parse.markup` function, this will first parse the input string as markdown before then parsing it as markup. This is useful if you want to use markdown in your input string but adds additional processing team.  Only use this if you know that your input string includes markdown.
-
-#### `parse.markup`
-
-This function will only parse ansie-style markup.  Markdown will be ignored.
 
 The AST structure is as follows:
 
@@ -324,9 +314,9 @@ Pass in just a string of markup to compile or an object with options.
 
 **OR** pass in an object with options:
 
+- `options.markup` - The markup string to compile
 - `options.output` - The format to output. This can be either `ansie` or `markup`. The default is `ansie`.  If `markup` then the output will be the pre-compiled markup.
 - `options.theme` - The theme to use when compiling the markup. See themes below for more information.
-- `options.inputIncludesMarkdown` - If true then the input string is assumed to include markdown and will be converted to markup before being compiled. The default is `true`. You can save some processing time by setting this to `false` if you know that the input string does not include markdown.
 
 ```typescript
 import { compile } from 'ansie';

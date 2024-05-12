@@ -1,6 +1,13 @@
 import { parse, Renderer } from 'marked';
 
 class AnsieRenderer extends Renderer {
+    simplified: boolean;
+
+    constructor(simplified: boolean = false) {
+        super();
+        this.simplified = simplified;
+    }
+
     code(code: string): string {
         return `<p marginLeft="4" fg="gray">${code}</p>`;
     }
@@ -8,7 +15,28 @@ class AnsieRenderer extends Renderer {
         return `<p marginLeft="4">${quote}</p>`;
     }
     html(html: string): string {
-        return html;
+        // This html might contain markdown itself so split into lines, parse each line and then join
+        //  back together
+        const result = html
+            .split('\n')
+            .map(line => {
+                // Remove surrounding html tags and then parse the contents of the inner text between the tags
+                const withoutHtml = line
+                    .replace(/^<[^>]+>/, '')
+                    .replace(/<\/[^>]+>$/, '');
+
+                const parsedContent = parse(withoutHtml, {
+                    async: false,
+                    breaks: false,
+                    gfm: true,
+                    renderer: new AnsieRenderer(true)
+                }) as string;
+
+                return line.replace(withoutHtml, parsedContent);
+            })
+            .join('\n');
+
+        return result;
     }
     heading(text: string, level: number, raw: string): string {
         return super.heading(text, level, raw);
@@ -29,7 +57,7 @@ class AnsieRenderer extends Renderer {
         return checked ? '[x]' : '[ ]';
     }
     paragraph(text: string): string {
-        return `<p>${text}</p>`;
+        return this.simplified ? text : `<p>${text}</p>`;
     }
     table(): string {
         return '';
@@ -78,19 +106,40 @@ class AnsieRenderer extends Renderer {
         return text;
     }
 }
+
+export function containsMultipleTopLevelTags(htmlString: string): boolean {
+    // Match all tags that don't appear nested
+    const topLevelTagPattern =
+        /<(\w+)[^>]*>(?:(?!<\/\1>).)*<\/\1>|<(\w+)[^>]*\/>/g;
+    const matches = htmlString.match(topLevelTagPattern);
+
+    // Check if there are multiple top-level tags
+    return !!matches && matches.length > 1;
+}
+
 export function convertMarkdownToAnsie(input: string): string {
-    const html = parse(input, {
-        async: false,
-        breaks: false,
-        gfm: true,
-        renderer: new AnsieRenderer()
-    }) as string;
+    // Check to see if this uses HTML tags.  If it does, then opt out of 
+    //  doing the markdown parsing as there are too many conflicts with the
+    //  markdown parsing and the HTML parsing
+    let markup = input;
+    if (!/<[^>]+>/.test(input)) {
+        markup = parse(input, {
+            async: false,
+            breaks: false,
+            gfm: true,
+            renderer: new AnsieRenderer()
+        }) as string;
+    }
 
     // If the input is not surrounded with a tag then surround with a
     //  span tag to ensure that the output is a valid ANSIE document
-    if (/^<[^>]+>/.test(html)) {
-        return `<span>${html}</span>`;
+    if (/^<[^>]+>/.test(markup) === false) {
+        return `<span>${markup}</span>`;
     }
 
-    return html;
+    if (containsMultipleTopLevelTags(markup)) {
+        return `<body>${markup}</body>`;
+    }
+
+    return markup;
 }
