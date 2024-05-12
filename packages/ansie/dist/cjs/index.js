@@ -55,6 +55,7 @@ var ValidTags;
     ValidTags["div"] = "div";
     ValidTags["text"] = "text";
     ValidTags["li"] = "li";
+    ValidTags["ul"] = "ul";
     ValidTags["br"] = "br";
 })(ValidTags || (ValidTags = {}));
 /**
@@ -184,6 +185,9 @@ const TagAttributeMap = {
     [ValidTags.text]: {},
     [ValidTags.br]: {
         ...SpaceAttributes
+    },
+    [ValidTags.ul]: {
+        ...SpaceAttributes
     }
 };
 /**
@@ -281,7 +285,7 @@ class AnsieRenderer extends marked.Renderer {
     html(html) {
         // This html might contain markdown itself so split into lines, parse each line and then join
         //  back together
-        return html
+        const result = html
             .split('\n')
             .map(line => {
             // Remove surrounding html tags and then parse the contents of the inner text between the tags
@@ -297,6 +301,7 @@ class AnsieRenderer extends marked.Renderer {
             return line.replace(withoutHtml, parsedContent);
         })
             .join('\n');
+        return result;
     }
     heading(text, level, raw) {
         return super.heading(text, level, raw);
@@ -368,22 +373,36 @@ class AnsieRenderer extends marked.Renderer {
         return text;
     }
 }
+function containsMultipleTopLevelTags(htmlString) {
+    // Match all tags that don't appear nested
+    const topLevelTagPattern = /<(\w+)[^>]*>(?:(?!<\/\1>).)*<\/\1>|<(\w+)[^>]*\/>/g;
+    const matches = htmlString.match(topLevelTagPattern);
+    // Check if there are multiple top-level tags
+    return !!matches && matches.length > 1;
+}
 function convertMarkdownToAnsie(input) {
-    const html = marked.parse(input, {
-        async: false,
-        breaks: false,
-        gfm: true,
-        renderer: new AnsieRenderer()
-    });
+    // Check to see if this uses HTML tags.  If it does, then opt out of 
+    //  doing the markdown parsing as there are too many conflicts with the
+    //  markdown parsing and the HTML parsing
+    let markup = input;
+    if (!/<[^>]+>/.test(input)) {
+        markup = marked.parse(input, {
+            async: false,
+            breaks: false,
+            gfm: true,
+            renderer: new AnsieRenderer()
+        });
+    }
     // If the input is not surrounded with a tag then surround with a
     //  span tag to ensure that the output is a valid ANSIE document
-    if (/^<[^>]+>/.test(html) === false) {
-        return `<span>${html}</span>`;
+    if (/^<[^>]+>/.test(markup) === false) {
+        return `<span>${markup}</span>`;
     }
-    return html;
+    if (containsMultipleTopLevelTags(markup)) {
+        return `<body>${markup}</body>`;
+    }
+    return markup;
 }
-console.log(convertMarkdownToAnsie(`<h2>Heading **with italics**</h2>`));
-console.log(convertMarkdownToAnsie(`<p>Test <h1>Header *with italics*</h1></p>`));
 
 /**
  * Parses a string into an AST using a simplified markdown syntax
@@ -989,6 +1008,36 @@ class ListItemNodeImpl extends AnsieNodeImpl {
         }
     }
 }
+class ListNodeImpl extends AnsieNodeImpl {
+    renderStart({ stack, format }) {
+        if (format === 'ansi') {
+            return renderSpaceAttributesStart({
+                node: this._raw,
+                format,
+                style: this._style
+            });
+        }
+        else if (format === 'markup') {
+            return renderNodeAsMarkupStart(this._raw);
+        }
+        throw new CompilerError(`Invalid format: ${format}`, this._raw, stack, false);
+    }
+    renderEnd({ format = 'ansi' }) {
+        if (format === 'ansi') {
+            return renderSpaceAttributesEnd({
+                attributes: this._raw,
+                format,
+                style: this._style
+            });
+        }
+        else if (format === 'markup') {
+            return renderNodeAsMarkupEnd(this._raw);
+        }
+        else {
+            return '';
+        }
+    }
+}
 
 class InlineTextNodeImpl extends AnsieNodeImpl {
     renderStart({ stack, format }) {
@@ -1081,6 +1130,8 @@ class Compiler {
                 return new InlineTextNodeImpl(raw, this._theme.span || {});
             case ValidTags.li:
                 return new ListItemNodeImpl(raw, this._theme.li || {});
+            case ValidTags.ul:
+                return new ListNodeImpl(raw, this._theme.ul || {});
             default:
                 throw new CompilerError(`Invalid node type: ${raw.node}`, raw, this._stack, true);
         }
@@ -1260,6 +1311,14 @@ const div = {
         marginBottom: 0
     }
 };
+const ul = {
+    spacing: {
+        marginLeft: 0,
+        marginRight: 0,
+        marginTop: 1,
+        marginBottom: 0
+    }
+};
 const defaultTheme = {
     h1: { ...cleanStyle, ...h1 },
     h2: { ...cleanStyle, ...h2 },
@@ -1267,6 +1326,7 @@ const defaultTheme = {
     body: { ...cleanStyle, ...body },
     p: { ...cleanStyle, ...p },
     li: { ...cleanStyle, ...li },
+    ul: { ...cleanStyle, ...ul },
     span: { ...cleanStyle, ...span },
     div: { ...cleanStyle, ...div },
     br: { ...cleanStyle, ...br },

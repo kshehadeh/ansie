@@ -1,5 +1,13 @@
 # ansie-kitchen-sink
 
+## 1.2.5
+
+### Patch Changes
+
+- Fixed some parsing issues with markdown and markup
+- Updated dependencies
+  - ansie@0.8.3
+
 ## 1.2.4
 
 ### Patch Changes

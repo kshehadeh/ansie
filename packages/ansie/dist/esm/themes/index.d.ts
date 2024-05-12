@@ -38,6 +38,7 @@ export interface AnsieTheme {
     p?: AnsieStyle;
     text?: AnsieStyle;
     br?: AnsieStyle;
+    ul?: AnsieStyle;
 }
 /**
  * This will set the global theme which is used whenever a theme is

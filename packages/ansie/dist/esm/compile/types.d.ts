@@ -23,6 +23,7 @@ export declare enum ValidTags {
     'div' = "div",
     'text' = "text",
     'li' = "li",
+    'ul' = "ul",
     'br' = "br"
 }
 export declare const TextAttributes: {

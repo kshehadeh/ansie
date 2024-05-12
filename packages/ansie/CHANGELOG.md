@@ -1,5 +1,11 @@
 # ansie
 
+## 0.8.3
+
+### Patch Changes
+
+- Fixed some parsing issues with markdown and markup
+
 ## 0.8.2
 
 ### Patch Changes

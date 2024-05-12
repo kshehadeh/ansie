@@ -1,5 +1,13 @@
 # ansie-cli
 
+## 0.6.5
+
+### Patch Changes
+
+- Fixed some parsing issues with markdown and markup
+- Updated dependencies
+  - ansie@0.8.3
+
 ## 0.6.4
 
 ### Patch Changes
