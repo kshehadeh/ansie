@@ -1,11 +1,13 @@
 export default [
-    'This is a test of <h1>strings</h1> that do not start with a tag',    
+    'This is a test of <h1>strings</h1> that do not start with a tag',
     '<h1>title</h1>',
     '<h1 bold>title with bold - inferred</h1>',
     '<h1 bold="true">title with bold - true</h1>',
     '<h1 bold="yes">title with bold - yes</h1>',
     '<h1 bold="false">title without bold - false</h1>',
     '<h1 bold="no">title without bold - no</h1>',
+    '<h2>Heading **with italics**</h2>',
+    '<p>Test <h1>Header *with italics*</h1></p>',
 
     '<h1 underline>title with underline - inferred</h1>',
     '<h1 underline="true">title with underline - true</h1>',
@@ -80,9 +82,11 @@ export default [
         <h2 fg="gray" marginBottom="1">A little something I wrote</h2>
         <p marginBottom="1">
             In order to used this app, do the following:
+            <ul>
             <li bullet="*" marginBottom="1"> Create a config file</li>
             <li bullet="*" marginBottom="1"> Run the utility with the -h flag</li>
             <li bullet="*" marginBottom="1"> etc...</li>
+            </ul>
         </p>
     `,
     `
@@ -102,11 +106,5 @@ export default [
 ### Title 3
 **bold** *italics* red
 Just some plain text
-    `,
     `
-# Title 1
-<span>Just some plain text</span>
-<li>Test</li>
-<li>Test2</li>
-`
 ];

@@ -9,7 +9,7 @@ import { CompilerError } from './types';
 import { BlockTextNodeImpl } from './node/block';
 import { BreakNodeImpl } from './node/break';
 import { RawTextNodeImpl } from './node/raw';
-import { ListItemNodeImpl } from './node/list';
+import { ListItemNodeImpl, ListNodeImpl } from './node/list';
 import { InlineTextNodeImpl } from './node/inline';
 import type { AnsieTheme } from '../themes';
 
@@ -71,6 +71,8 @@ export class Compiler {
                 return new InlineTextNodeImpl(raw, this._theme.span || {});
             case ValidTags.li:
                 return new ListItemNodeImpl(raw, this._theme.li || {});
+            case ValidTags.ul:
+                return new ListNodeImpl(raw, this._theme.ul || {});
             default:
                 throw new CompilerError(
                     `Invalid node type: ${raw.node}`,

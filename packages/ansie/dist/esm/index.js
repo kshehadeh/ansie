@@ -246,6 +246,11 @@ class CompilerError {
 }
 
 class AnsieRenderer extends Renderer {
+    simplified;
+    constructor(simplified = false) {
+        super();
+        this.simplified = simplified;
+    }
     code(code) {
         return `<p marginLeft="4" fg="gray">${code}</p>`;
     }
@@ -253,7 +258,24 @@ class AnsieRenderer extends Renderer {
         return `<p marginLeft="4">${quote}</p>`;
     }
     html(html) {
-        return html;
+        // This html might contain markdown itself so split into lines, parse each line and then join
+        //  back together
+        return html
+            .split('\n')
+            .map(line => {
+            // Remove surrounding html tags and then parse the contents of the inner text between the tags
+            const withoutHtml = line
+                .replace(/^<[^>]+>/, '')
+                .replace(/<\/[^>]+>$/, '');
+            const parsedContent = parse$1(withoutHtml, {
+                async: false,
+                breaks: false,
+                gfm: true,
+                renderer: new AnsieRenderer(true)
+            });
+            return line.replace(withoutHtml, parsedContent);
+        })
+            .join('\n');
     }
     heading(text, level, raw) {
         return super.heading(text, level, raw);
@@ -274,7 +296,7 @@ class AnsieRenderer extends Renderer {
         return checked ? '[x]' : '[ ]';
     }
     paragraph(text) {
-        return `<p>${text}</p>`;
+        return this.simplified ? text : `<p>${text}</p>`;
     }
     table() {
         return '';
@@ -334,11 +356,13 @@ function convertMarkdownToAnsie(input) {
     });
     // If the input is not surrounded with a tag then surround with a
     //  span tag to ensure that the output is a valid ANSIE document
-    if (/^<[^>]+>/.test(html)) {
+    if (/^<[^>]+>/.test(html) === false) {
         return `<span>${html}</span>`;
     }
     return html;
 }
+console.log(convertMarkdownToAnsie(`<h2>Heading **with italics**</h2>`));
+console.log(convertMarkdownToAnsie(`<p>Test <h1>Header *with italics*</h1></p>`));
 
 /**
  * Parses a string into an AST using a simplified markdown syntax
@@ -1203,8 +1227,8 @@ const li = {
     spacing: {
         marginLeft: 0,
         marginRight: 0,
-        marginTop: 1,
-        marginBottom: 0
+        marginTop: 0,
+        marginBottom: 1
     }
 };
 const div = {
