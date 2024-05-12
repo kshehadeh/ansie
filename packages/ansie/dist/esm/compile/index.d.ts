@@ -5,9 +5,13 @@ import { AnsieTheme } from '../themes';
  * @param optionsOrMarkup Options or the markup to compile (with default options)
  * @returns
  */
-declare const _default: (optionsOrMarkup: string | {
-    markup: string;
-    theme?: AnsieTheme;
-    output?: CompilerFormat;
-}) => string;
+declare const _default: (
+    optionsOrMarkup:
+        | string
+        | {
+              markup: string;
+              theme?: AnsieTheme;
+              output?: CompilerFormat;
+          }
+) => string;
 export default _default;

@@ -4,35 +4,35 @@ A library used to render a simplified markdown+html like markup to rich terminal
 
 ## Table of Contents
 
-- [Ansie](#ansie)
-  - [Table of Contents](#table-of-contents)
-  - [Quick Example](#quick-example)
-  - [Installation](#installation)
-  - [Getting Started](#getting-started)
-  - [Ansie Markup](#ansie-markup)
-    - [Text Attributes](#text-attributes)
-    - [Spacing Attributes](#spacing-attributes)
-    - [Free (Raw) Text](#free-raw-text)
-    - [Color Table](#color-table)
-    - [Emoji](#emoji)
-    - [Markdown](#markdown)
-  - [APIs](#apis)
-    - [`parse`](#parse)
-    - [`compile`](#compile)
-    - [`ask`](#ask)
-      - [`ask.text`](#asktext)
-      - [`ask.multiline`](#askmultiline)
-      - [`ask.select`](#askselect)
-      - [`ask.password`](#askpassword)
-      - [`ask.confirm`](#askconfirm)
-    - [`themes`](#themes)
-      - [`themes.get`](#themesget)
-      - [`themes.set`](#themesset)
-      - [`themes.reset`](#themesreset)
-  - [Themes](#themes-1)
-  - [Developing](#developing)
-    - [Updating the Grammar](#updating-the-grammar)
-  - [Testing](#testing)
+-   [Ansie](#ansie)
+    -   [Table of Contents](#table-of-contents)
+    -   [Quick Example](#quick-example)
+    -   [Installation](#installation)
+    -   [Getting Started](#getting-started)
+    -   [Ansie Markup](#ansie-markup)
+        -   [Text Attributes](#text-attributes)
+        -   [Spacing Attributes](#spacing-attributes)
+        -   [Free (Raw) Text](#free-raw-text)
+        -   [Color Table](#color-table)
+        -   [Emoji](#emoji)
+        -   [Markdown](#markdown)
+    -   [APIs](#apis)
+        -   [`parse`](#parse)
+        -   [`compile`](#compile)
+        -   [`ask`](#ask)
+            -   [`ask.text`](#asktext)
+            -   [`ask.multiline`](#askmultiline)
+            -   [`ask.select`](#askselect)
+            -   [`ask.password`](#askpassword)
+            -   [`ask.confirm`](#askconfirm)
+        -   [`themes`](#themes)
+            -   [`themes.get`](#themesget)
+            -   [`themes.set`](#themesset)
+            -   [`themes.reset`](#themesreset)
+    -   [Themes](#themes-1)
+    -   [Developing](#developing)
+        -   [Updating the Grammar](#updating-the-grammar)
+    -   [Testing](#testing)
 
 ## Quick Example
 
@@ -69,16 +69,16 @@ also include **embedded markup**
 
 Ansie is divided into a few different APIs:
 
-- parse - Builds an AST out of a string
-- compile - Converts an Anie-style markup string to ansi codes
-- ask - A convient set of prompts that you can use to get user input in a terminal with ansie-formatted prompts.
-- themes - Modify themes to affect all rendered output without having to specify it each time
-- console - A convenience wrapper to use `console` functions with ansie formatting
+-   parse - Builds an AST out of a string
+-   compile - Converts an Anie-style markup string to ansi codes
+-   ask - A convient set of prompts that you can use to get user input in a terminal with ansie-formatted prompts.
+-   themes - Modify themes to affect all rendered output without having to specify it each time
+-   console - A convenience wrapper to use `console` functions with ansie formatting
 
 If you're integrating the library into a javascript/typescript application, you can get started with the `compile` function which, at its simplest, takes the markup to translate into ansi codes.
 
 ```typescript
-import {compile} from 'ansie';
+import { compile } from 'ansie';
 console.log(compile('<h1 bold italics>Hello there</h1>'));
 
 // Output: ^[[1;3mHello there^[[22;23m
@@ -101,22 +101,20 @@ const theme = {
     }
 };
 
-console.log(
-    compile({ markup: '<h1 bold italics>Hello there</h1>', theme })
-);
+console.log(compile({ markup: '<h1 bold italics>Hello there</h1>', theme }));
 ```
 
 You can also use template tags to render your output:
 
 ```typescript
-import {tpl} from 'ansie';
+import { tpl } from 'ansie';
 console.log(tpl`<h1 bold italics>Hello ${fella}</h1>`);
 ```
 
 Finally, you can use console logging replacements to avoid having to add a compile step:
 
 ```typescript
-import {console} from 'ansie';
+import { console } from 'ansie';
 console.log('# Title\n## Subtitle\nSome content');
 ```
 
@@ -148,14 +146,14 @@ The markup language follows XML rules in that it uses a declarative tag-based sy
 
 Tags that accept spacing attributes include:
 
-- h1
-- h2
-- h3
-- body
-- p
-- div
-- span
-- li
+-   h1
+-   h2
+-   h3
+-   body
+-   p
+-   div
+-   span
+-   li
 
 ### Spacing Attributes
 
@@ -169,14 +167,14 @@ Tags that accept spacing attributes include:
 
 Tags that accept spacing attributes include:
 
-- h1
-- h2
-- h3
-- body
-- p
-- div
-- br
-- li
+-   h1
+-   h2
+-   h3
+-   body
+-   p
+-   div
+-   br
+-   li
 
 ### Free (Raw) Text
 
@@ -227,24 +225,24 @@ This is a quick <span fg="blue">blue</span> test
 
 Text can include emoji either through unicode or through _Slack_ style formatting as in `:fire:`. Supported emoji include:
 
-| Code                        | Emoji  |
-| --------------------------- | ------ |
-| `:exclamation:`             | ❗     |
-| `:warning:`                 | ⚠️   |
-| `:no_entry:`                | ⛔     |
-| `:heavy_check_mark:`        | ✔️   |
-| `:x:`                       | ❌     |
+| Code                        | Emoji |
+| --------------------------- | ----- |
+| `:exclamation:`             | ❗    |
+| `:warning:`                 | ⚠️    |
+| `:no_entry:`                | ⛔    |
+| `:heavy_check_mark:`        | ✔️    |
+| `:x:`                       | ❌    |
 | `:info:`                    | ℹ️    |
-| `:question:`                | ❓     |
+| `:question:`                | ❓    |
 | `:prompt:`                  | 💬    |
 | `:bangbang:`                | ‼️    |
 | `:triangular_flag_on_post:` | 🚩    |
 | `:fire:`                    | 🔥    |
-| `:sos:`                     | 🆘     |
+| `:sos:`                     | 🆘    |
 | `:lock:`                    | 🔒    |
 | `:key:`                     | 🔑    |
 | `:broken_heart:`            | 💔    |
-| `:skull_and_crossbones:`    | ☠️   |
+| `:skull_and_crossbones:`    | ☠️    |
 | `:grinning:`                | 😀    |
 | `:grin:`                    | 😁    |
 | `:joy:`                     | 😂    |
@@ -258,33 +256,33 @@ Text can include emoji either through unicode or through _Slack_ style formattin
 | `:cry:`                     | 😢    |
 | `:sob:`                     | 😭    |
 | `:rocket:`                  | 🚀    |
-| `:sunny:`                   | ☀️   |
-| `:umbrella:`                | ☔     |
+| `:sunny:`                   | ☀️    |
+| `:umbrella:`                | ☔    |
 | `:camera:`                  | 📷    |
 | `:book:`                    | 📖    |
 | `:moneybag:`                | 💰    |
 | `:gift:`                    | 🎁    |
 | `:bell:`                    | 🔔    |
 | `:hammer:`                  | 🔨    |
-| `:thumbsup-skin-tone-1:`    | 👍🏻 |
-| `:thumbsup-skin-tone-2:`    | 👍🏻 |
-| `:thumbsup-skin-tone-3:`    | 👍🏼 |
-| `:thumbsup-skin-tone-4:`    | 👍🏽 |
-| `:thumbsup-skin-tone-5:`    | 👍🏾 |
-| `:thumbsup-skin-tone-6:`    | 👍🏿 |
+| `:thumbsup-skin-tone-1:`    | 👍🏻    |
+| `:thumbsup-skin-tone-2:`    | 👍🏻    |
+| `:thumbsup-skin-tone-3:`    | 👍🏼    |
+| `:thumbsup-skin-tone-4:`    | 👍🏽    |
+| `:thumbsup-skin-tone-5:`    | 👍🏾    |
+| `:thumbsup-skin-tone-6:`    | 👍🏿    |
 
 ### Markdown
 
 Ansie supports simpler markdown constructs to create more readable input. Support markdown includes:
 
-- h1: `# Headline 1` translates to `<h1>Headline 1</h1>`
-- h2: `# Headline 2` translates to `<h2>Headline 2</h2>`
-- h3: `# Headline 3` translates to `<h3>Headline 3</h3>`
-- bold: `**bold**` translates to `<span bold>bold</span>`
-- italics: `**italics**` translates to `<span italics>italics</span>`
-- underline: `__underline__` translates to `<span underline="single">underline</span>`
+-   h1: `# Headline 1` translates to `<h1>Headline 1</h1>`
+-   h2: `# Headline 2` translates to `<h2>Headline 2</h2>`
+-   h3: `# Headline 3` translates to `<h3>Headline 3</h3>`
+-   bold: `**bold**` translates to `<span bold>bold</span>`
+-   italics: `**italics**` translates to `<span italics>italics</span>`
+-   underline: `__underline__` translates to `<span underline="single">underline</span>`
 
-Note: You cannot mix markup and markdown in the same string.  If there are any HTML tags in the string, it will bypass the markdown processing.  This is because markdown newlines have special meaning whereas HTML markup explicitly does not (in most cases).  
+Note: You cannot mix markup and markdown in the same string. If there are any HTML tags in the string, it will bypass the markdown processing. This is because markdown newlines have special meaning whereas HTML markup explicitly does not (in most cases).
 
 ## APIs
 
@@ -292,17 +290,17 @@ Once the package is installed, you can quickly get up and running by using the `
 
 ### `parse`
 
-Functions to build the AST from a string of markup.  This is useful if you want to manipulate the AST before compiling it to ansi codes.
+Functions to build the AST from a string of markup. This is useful if you want to manipulate the AST before compiling it to ansi codes.
 
 The AST structure is as follows:
 
 Node:
 
-- `node` - The type of node. This can be `tag`, `text`, or `root`
-- `name` - The name of the tag
-- `attributes` - The attributes of the tag
-- `children` - The children of the node
-- `text` - The text of the node
+-   `node` - The type of node. This can be `tag`, `text`, or `root`
+-   `name` - The name of the tag
+-   `attributes` - The attributes of the tag
+-   `children` - The children of the node
+-   `text` - The text of the node
 
 ### `compile`
 
@@ -310,13 +308,13 @@ Parameters:
 
 Pass in just a string of markup to compile or an object with options.
 
-- `markup` - The markup string to compile
+-   `markup` - The markup string to compile
 
 **OR** pass in an object with options:
 
-- `options.markup` - The markup string to compile
-- `options.output` - The format to output. This can be either `ansie` or `markup`. The default is `ansie`.  If `markup` then the output will be the pre-compiled markup.
-- `options.theme` - The theme to use when compiling the markup. See themes below for more information.
+-   `options.markup` - The markup string to compile
+-   `options.output` - The format to output. This can be either `ansie` or `markup`. The default is `ansie`. If `markup` then the output will be the pre-compiled markup.
+-   `options.theme` - The theme to use when compiling the markup. See themes below for more information.
 
 ```typescript
 import { compile } from 'ansie';
@@ -336,10 +334,10 @@ console.log(`Hello, ${response}`);
 
 There are different forms of answers that can be provided:
 
-- `text` - a simple text response
-- `password` - a password response
-- `select` - a selection from a list of options
-- `confirm` - a yes/no response (with a default)
+-   `text` - a simple text response
+-   `password` - a password response
+-   `select` - a selection from a list of options
+-   `confirm` - a yes/no response (with a default)
 
 #### `ask.text`
 
@@ -363,9 +361,9 @@ The `multinline` function asks a question and returns a multi-line text response
 If you specify multiline then the user will be presented with a multiline editor to provide a response. Once they save the response, the promise will
 resolve with the text.
 
-| Parameter | Type   | Description                  |
-| --------- | ------ | ---------------------------- |
-| prompt    | string | The question to ask the user |
+| Parameter    | Type   | Description                                        |
+| ------------ | ------ | -------------------------------------------------- |
+| prompt       | string | The question to ask the user                       |
 | defaultValue | string | The default value if nothing is entered (optional) |
 
 #### `ask.select`
@@ -406,20 +404,23 @@ console.log(`Password is ${response}`);
 
 #### `ask.confirm`
 
-The `confirm` function asks a question and returns a boolean response. The user can respond with 'y' or 'n' or press enter to accept the default value. The promise will resolve with the boolean value.  You can also configure the default value and the keys that will be used to confirm or deny the question.
+The `confirm` function asks a question and returns a boolean response. The user can respond with 'y' or 'n' or press enter to accept the default value. The promise will resolve with the boolean value. You can also configure the default value and the keys that will be used to confirm or deny the question.
 
-| Parameter           | Type   | Description                                             |
-| ------------------- | ------ | ------------------------------------------------------- |
-| prompt              | string | The question to ask the user                            |
-| defaultValue        | string | The default value if the user enters nothing (optional) |
-| trueFalse.trueValue | string | The name of the true value (defaults to Yes)            |
+| Parameter            | Type   | Description                                             |
+| -------------------- | ------ | ------------------------------------------------------- |
+| prompt               | string | The question to ask the user                            |
+| defaultValue         | string | The default value if the user enters nothing (optional) |
+| trueFalse.trueValue  | string | The name of the true value (defaults to Yes)            |
 | trueFalse.falseValue | string | The name of the false value (defaults to No)            |
 
 The options object can contain the following properties:
 
 ```typescript
 import { ask } from 'ansie';
-const response = await ask.confirm('Are you sure?', true, { trueValue: 'Positive', falseValue: 'Negative' });
+const response = await ask.confirm('Are you sure?', true, {
+    trueValue: 'Positive',
+    falseValue: 'Negative'
+});
 console.log(`Response is ${response}`);
 ```
 
@@ -429,14 +430,13 @@ You can pass one off themes to the `compile` function to override the default th
 
 #### `themes.get`
 
-This will return the active global theme that is used whenever you call `compile` without specifying a theme.  See [themes](#themes) for more information on themes.
+This will return the active global theme that is used whenever you call `compile` without specifying a theme. See [themes](#themes) for more information on themes.
 
 #### `themes.set`
 
-This will set the active global theme that is used whenever you call `compile` without specifying a theme.  See [themes](#themes) for more information on themes.
+This will set the active global theme that is used whenever you call `compile` without specifying a theme. See [themes](#themes) for more information on themes.
 
 Note that you can pass in a partial description of a theme and it will merge with the existing global theme.
-
 
 #### `themes.reset`
 

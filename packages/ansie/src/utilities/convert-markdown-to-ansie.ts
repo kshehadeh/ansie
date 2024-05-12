@@ -118,7 +118,7 @@ export function containsMultipleTopLevelTags(htmlString: string): boolean {
 }
 
 export function convertMarkdownToAnsie(input: string): string {
-    // Check to see if this uses HTML tags.  If it does, then opt out of 
+    // Check to see if this uses HTML tags.  If it does, then opt out of
     //  doing the markdown parsing as there are too many conflicts with the
     //  markdown parsing and the HTML parsing
     let markup = input;

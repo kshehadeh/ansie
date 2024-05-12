@@ -7,7 +7,11 @@ import type { AnsieStyle } from '../themes';
  * @param format
  * @returns
  */
-export declare function renderTextAttributesStart({ style, attributes, format }: {
+export declare function renderTextAttributesStart({
+    style,
+    attributes,
+    format
+}: {
     style?: AnsieStyle;
     attributes: AnsieNode;
     format?: CompilerFormat;
@@ -18,7 +22,11 @@ export declare function renderTextAttributesStart({ style, attributes, format }:
  * @param format
  * @returns
  */
-export declare function renderTextAttributesEnd({ style, attributes, format }: {
+export declare function renderTextAttributesEnd({
+    style,
+    attributes,
+    format
+}: {
     style?: AnsieStyle;
     attributes: AnsieNode;
     format?: CompilerFormat;

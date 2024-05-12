@@ -6,7 +6,7 @@ export declare enum TerminalStyle {
     italicOff = 23,
     underline = 4,
     doubleunderline = 21,
-    underlineOff = 24,// this reset both underline and doubleunderline
+    underlineOff = 24, // this reset both underline and doubleunderline
     inverse = 7,
     inverseOff = 27,
     hidden = 8,

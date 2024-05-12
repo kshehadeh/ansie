@@ -16,10 +16,18 @@ function _interopNamespaceDefault(e) {
         Object.keys(e).forEach(function (k) {
             if (k !== 'default') {
                 var d = Object.getOwnPropertyDescriptor(e, k);
-                Object.defineProperty(n, k, d.get ? d : {
-                    enumerable: true,
-                    get: function () { return e[k]; }
-                });
+                Object.defineProperty(
+                    n,
+                    k,
+                    d.get
+                        ? d
+                        : {
+                              enumerable: true,
+                              get: function () {
+                                  return e[k];
+                              }
+                          }
+                );
             }
         });
     }
@@ -27,7 +35,7 @@ function _interopNamespaceDefault(e) {
     return Object.freeze(n);
 }
 
-var acorn__namespace = /*#__PURE__*/_interopNamespaceDefault(acorn);
+var acorn__namespace = /*#__PURE__*/ _interopNamespaceDefault(acorn);
 
 /**
  * This file contains all the types used by the parser and compiler.
@@ -46,17 +54,17 @@ var acorn__namespace = /*#__PURE__*/_interopNamespaceDefault(acorn);
  */
 var ValidTags;
 (function (ValidTags) {
-    ValidTags["h1"] = "h1";
-    ValidTags["h2"] = "h2";
-    ValidTags["h3"] = "h3";
-    ValidTags["body"] = "body";
-    ValidTags["span"] = "span";
-    ValidTags["p"] = "p";
-    ValidTags["div"] = "div";
-    ValidTags["text"] = "text";
-    ValidTags["li"] = "li";
-    ValidTags["ul"] = "ul";
-    ValidTags["br"] = "br";
+    ValidTags['h1'] = 'h1';
+    ValidTags['h2'] = 'h2';
+    ValidTags['h3'] = 'h3';
+    ValidTags['body'] = 'body';
+    ValidTags['span'] = 'span';
+    ValidTags['p'] = 'p';
+    ValidTags['div'] = 'div';
+    ValidTags['text'] = 'text';
+    ValidTags['li'] = 'li';
+    ValidTags['ul'] = 'ul';
+    ValidTags['br'] = 'br';
 })(ValidTags || (ValidTags = {}));
 /**
  * @internal
@@ -288,18 +296,18 @@ class AnsieRenderer extends marked.Renderer {
         const result = html
             .split('\n')
             .map(line => {
-            // Remove surrounding html tags and then parse the contents of the inner text between the tags
-            const withoutHtml = line
-                .replace(/^<[^>]+>/, '')
-                .replace(/<\/[^>]+>$/, '');
-            const parsedContent = marked.parse(withoutHtml, {
-                async: false,
-                breaks: false,
-                gfm: true,
-                renderer: new AnsieRenderer(true)
-            });
-            return line.replace(withoutHtml, parsedContent);
-        })
+                // Remove surrounding html tags and then parse the contents of the inner text between the tags
+                const withoutHtml = line
+                    .replace(/^<[^>]+>/, '')
+                    .replace(/<\/[^>]+>$/, '');
+                const parsedContent = marked.parse(withoutHtml, {
+                    async: false,
+                    breaks: false,
+                    gfm: true,
+                    renderer: new AnsieRenderer(true)
+                });
+                return line.replace(withoutHtml, parsedContent);
+            })
             .join('\n');
         return result;
     }
@@ -355,8 +363,7 @@ class AnsieRenderer extends marked.Renderer {
         const titleOrText = title || text;
         if (titleOrText === href) {
             return `🔗 <span fg="blue" underline="single">${href}</span>`;
-        }
-        else {
+        } else {
             return `🔗 ${titleOrText} (<span fg="blue" underline="single">${href}</span>)`;
         }
     }
@@ -364,8 +371,7 @@ class AnsieRenderer extends marked.Renderer {
         const titleOrText = title || text;
         if (titleOrText === href) {
             return `📷 <span fg="blue" underline="single">${href}</span>`;
-        }
-        else {
+        } else {
             return `📷 ${titleOrText} (<span fg="blue" underline="single">${href}</span>)`;
         }
     }
@@ -375,13 +381,14 @@ class AnsieRenderer extends marked.Renderer {
 }
 function containsMultipleTopLevelTags(htmlString) {
     // Match all tags that don't appear nested
-    const topLevelTagPattern = /<(\w+)[^>]*>(?:(?!<\/\1>).)*<\/\1>|<(\w+)[^>]*\/>/g;
+    const topLevelTagPattern =
+        /<(\w+)[^>]*>(?:(?!<\/\1>).)*<\/\1>|<(\w+)[^>]*\/>/g;
     const matches = htmlString.match(topLevelTagPattern);
     // Check if there are multiple top-level tags
     return !!matches && matches.length > 1;
 }
 function convertMarkdownToAnsie(input) {
-    // Check to see if this uses HTML tags.  If it does, then opt out of 
+    // Check to see if this uses HTML tags.  If it does, then opt out of
     //  doing the markdown parsing as there are too many conflicts with the
     //  markdown parsing and the HTML parsing
     let markup = input;
@@ -426,18 +433,20 @@ function parse(input) {
     const preParse = convertMarkdownToAnsie(input);
     // Parse JSX
     try {
-        const parsedJsx = acorn__namespace.Parser.extend(jsx()).parse(preParse, {
-            sourceType: 'module',
-            ecmaVersion: 2020
-        });
+        const parsedJsx = acorn__namespace.Parser.extend(jsx()).parse(
+            preParse,
+            {
+                sourceType: 'module',
+                ecmaVersion: 2020
+            }
+        );
         // Convert to Ansie
         return convertAcornAstToAnsieAst(parsedJsx);
-    }
-    catch (e) {
+    } catch (e) {
         throw new Error(`Error parsing "${input}": ${e.message}`);
     }
 }
-const isJsxNode = (node) => {
+const isJsxNode = node => {
     return node.type.startsWith('JSX');
 };
 /**
@@ -452,31 +461,38 @@ function convertAcornNodeToAnsieNode(node) {
             const tag = tagRaw;
             const validAttributes = TagAttributeMap[tag];
             // Simplify attributes
-            const attributes = node.openingElement.attributes.reduce((acc, att) => ((acc[att.name.name.toString()] =
-                att.value?.value?.toString() || true.toString()),
-                acc), {});
+            const attributes = node.openingElement.attributes.reduce(
+                (acc, att) => (
+                    (acc[att.name.name.toString()] =
+                        att.value?.value?.toString() || true.toString()),
+                    acc
+                ),
+                {}
+            );
             // Validate attributes
-            const invalidAttributes = Object.keys(attributes).filter(attr => !(attr in validAttributes));
+            const invalidAttributes = Object.keys(attributes).filter(
+                attr => !(attr in validAttributes)
+            );
             if (invalidAttributes.length) {
-                throw new Error(`Invalid attributes ${invalidAttributes.join(',')} for tag ${tag}`);
+                throw new Error(
+                    `Invalid attributes ${invalidAttributes.join(',')} for tag ${tag}`
+                );
             }
             return {
                 node: tag,
                 ...attributes,
                 content: node.children
                     // Filter out any non-JSX nodes
-                    .filter((n) => isJsxNode(n))
+                    .filter(n => isJsxNode(n))
                     // Convert to Ansie nodes
                     .map(convertAcornNodeToAnsieNode)
                     // Filter out any that were not processed properly
-                    .filter((n) => !!n)
+                    .filter(n => !!n)
             };
-        }
-        else {
+        } else {
             throw new Error(`Invalid tag ${tagRaw}`);
         }
-    }
-    else if (node.type === 'JSXText') {
+    } else if (node.type === 'JSXText') {
         return {
             node: ValidTags.text,
             value: node.value
@@ -530,10 +546,18 @@ function num(n) {
 }
 
 function getSpacingFromProperties(node, style) {
-    const left = num(node.marginLeft ?? node.margin ?? style?.spacing?.marginLeft ?? 0);
-    const right = num(node.marginRight ?? node.margin ?? style?.spacing?.marginRight ?? 0);
-    const top = num(node.marginTop ?? node.margin ?? style?.spacing?.marginTop ?? 0);
-    const bottom = num(node.marginBottom ?? node.margin ?? style?.spacing?.marginBottom ?? 0);
+    const left = num(
+        node.marginLeft ?? node.margin ?? style?.spacing?.marginLeft ?? 0
+    );
+    const right = num(
+        node.marginRight ?? node.margin ?? style?.spacing?.marginRight ?? 0
+    );
+    const top = num(
+        node.marginTop ?? node.margin ?? style?.spacing?.marginTop ?? 0
+    );
+    const bottom = num(
+        node.marginBottom ?? node.margin ?? style?.spacing?.marginBottom ?? 0
+    );
     const vpre = top ? '\n'.repeat(top) : '';
     const vpost = bottom ? '\n'.repeat(bottom) : '';
     const hpre = left ? ' '.repeat(left) : '';
@@ -553,14 +577,12 @@ function getSpacingFromProperties(node, style) {
 function renderSpaceAttributesStart({ node, format, style }) {
     if (format === 'ansi') {
         return getSpacingFromProperties(node, style).on;
-    }
-    else if (format === 'markup') {
+    } else if (format === 'markup') {
         return Object.entries(node)
             .filter(([key]) => Object.keys(SpaceAttributes).includes(key))
             .map(([key, value]) => `${key}="${value}"`)
             .join(' ');
-    }
-    else {
+    } else {
         return '';
     }
 }
@@ -573,11 +595,9 @@ function renderSpaceAttributesStart({ node, format, style }) {
 function renderSpaceAttributesEnd({ style, attributes, format }) {
     if (format === 'ansi') {
         return getSpacingFromProperties(attributes, style).off;
-    }
-    else if (format === 'markup') {
+    } else if (format === 'markup') {
         return '';
-    }
-    else {
+    } else {
         return '';
     }
 }
@@ -588,63 +608,64 @@ function renderSpaceAttributesEnd({ style, attributes, format }) {
 var TerminalStyle;
 (function (TerminalStyle) {
     // Reset all styles
-    TerminalStyle[TerminalStyle["reset"] = 0] = "reset";
+    TerminalStyle[(TerminalStyle['reset'] = 0)] = 'reset';
     // Text Styles
-    TerminalStyle[TerminalStyle["bold"] = 1] = "bold";
-    TerminalStyle[TerminalStyle["boldOff"] = 22] = "boldOff";
-    TerminalStyle[TerminalStyle["italic"] = 3] = "italic";
-    TerminalStyle[TerminalStyle["italicOff"] = 23] = "italicOff";
-    TerminalStyle[TerminalStyle["underline"] = 4] = "underline";
-    TerminalStyle[TerminalStyle["doubleunderline"] = 21] = "doubleunderline";
-    TerminalStyle[TerminalStyle["underlineOff"] = 24] = "underlineOff";
-    TerminalStyle[TerminalStyle["inverse"] = 7] = "inverse";
-    TerminalStyle[TerminalStyle["inverseOff"] = 27] = "inverseOff";
-    TerminalStyle[TerminalStyle["hidden"] = 8] = "hidden";
-    TerminalStyle[TerminalStyle["hiddenOff"] = 28] = "hiddenOff";
-    TerminalStyle[TerminalStyle["strikethrough"] = 9] = "strikethrough";
-    TerminalStyle[TerminalStyle["strikethroughOff"] = 29] = "strikethroughOff";
+    TerminalStyle[(TerminalStyle['bold'] = 1)] = 'bold';
+    TerminalStyle[(TerminalStyle['boldOff'] = 22)] = 'boldOff';
+    TerminalStyle[(TerminalStyle['italic'] = 3)] = 'italic';
+    TerminalStyle[(TerminalStyle['italicOff'] = 23)] = 'italicOff';
+    TerminalStyle[(TerminalStyle['underline'] = 4)] = 'underline';
+    TerminalStyle[(TerminalStyle['doubleunderline'] = 21)] = 'doubleunderline';
+    TerminalStyle[(TerminalStyle['underlineOff'] = 24)] = 'underlineOff';
+    TerminalStyle[(TerminalStyle['inverse'] = 7)] = 'inverse';
+    TerminalStyle[(TerminalStyle['inverseOff'] = 27)] = 'inverseOff';
+    TerminalStyle[(TerminalStyle['hidden'] = 8)] = 'hidden';
+    TerminalStyle[(TerminalStyle['hiddenOff'] = 28)] = 'hiddenOff';
+    TerminalStyle[(TerminalStyle['strikethrough'] = 9)] = 'strikethrough';
+    TerminalStyle[(TerminalStyle['strikethroughOff'] = 29)] =
+        'strikethroughOff';
     // *** Foreground Colors
-    TerminalStyle[TerminalStyle["fgBlack"] = 30] = "fgBlack";
-    TerminalStyle[TerminalStyle["fgRed"] = 31] = "fgRed";
-    TerminalStyle[TerminalStyle["fgGreen"] = 32] = "fgGreen";
-    TerminalStyle[TerminalStyle["fgYellow"] = 33] = "fgYellow";
-    TerminalStyle[TerminalStyle["fgBlue"] = 34] = "fgBlue";
-    TerminalStyle[TerminalStyle["fgMagenta"] = 35] = "fgMagenta";
-    TerminalStyle[TerminalStyle["fgCyan"] = 36] = "fgCyan";
-    TerminalStyle[TerminalStyle["fgWhite"] = 37] = "fgWhite";
-    TerminalStyle[TerminalStyle["fgBrightred"] = 91] = "fgBrightred";
-    TerminalStyle[TerminalStyle["fgBrightgreen"] = 92] = "fgBrightgreen";
-    TerminalStyle[TerminalStyle["fgBrightyellow"] = 93] = "fgBrightyellow";
-    TerminalStyle[TerminalStyle["fgBrightblue"] = 94] = "fgBrightblue";
-    TerminalStyle[TerminalStyle["fgBrightmagenta"] = 95] = "fgBrightmagenta";
-    TerminalStyle[TerminalStyle["fgBrightcyan"] = 96] = "fgBrightcyan";
-    TerminalStyle[TerminalStyle["fgBrightwhite"] = 97] = "fgBrightwhite";
-    TerminalStyle[TerminalStyle["fgGray"] = 90] = "fgGray";
+    TerminalStyle[(TerminalStyle['fgBlack'] = 30)] = 'fgBlack';
+    TerminalStyle[(TerminalStyle['fgRed'] = 31)] = 'fgRed';
+    TerminalStyle[(TerminalStyle['fgGreen'] = 32)] = 'fgGreen';
+    TerminalStyle[(TerminalStyle['fgYellow'] = 33)] = 'fgYellow';
+    TerminalStyle[(TerminalStyle['fgBlue'] = 34)] = 'fgBlue';
+    TerminalStyle[(TerminalStyle['fgMagenta'] = 35)] = 'fgMagenta';
+    TerminalStyle[(TerminalStyle['fgCyan'] = 36)] = 'fgCyan';
+    TerminalStyle[(TerminalStyle['fgWhite'] = 37)] = 'fgWhite';
+    TerminalStyle[(TerminalStyle['fgBrightred'] = 91)] = 'fgBrightred';
+    TerminalStyle[(TerminalStyle['fgBrightgreen'] = 92)] = 'fgBrightgreen';
+    TerminalStyle[(TerminalStyle['fgBrightyellow'] = 93)] = 'fgBrightyellow';
+    TerminalStyle[(TerminalStyle['fgBrightblue'] = 94)] = 'fgBrightblue';
+    TerminalStyle[(TerminalStyle['fgBrightmagenta'] = 95)] = 'fgBrightmagenta';
+    TerminalStyle[(TerminalStyle['fgBrightcyan'] = 96)] = 'fgBrightcyan';
+    TerminalStyle[(TerminalStyle['fgBrightwhite'] = 97)] = 'fgBrightwhite';
+    TerminalStyle[(TerminalStyle['fgGray'] = 90)] = 'fgGray';
     // Resets foreground color to default
-    TerminalStyle[TerminalStyle["fgDefault"] = 39] = "fgDefault";
+    TerminalStyle[(TerminalStyle['fgDefault'] = 39)] = 'fgDefault';
     // *** Background Colors
-    TerminalStyle[TerminalStyle["bgBlack"] = 40] = "bgBlack";
-    TerminalStyle[TerminalStyle["bgRed"] = 41] = "bgRed";
-    TerminalStyle[TerminalStyle["bgGreen"] = 42] = "bgGreen";
-    TerminalStyle[TerminalStyle["bgYellow"] = 43] = "bgYellow";
-    TerminalStyle[TerminalStyle["bgBlue"] = 44] = "bgBlue";
-    TerminalStyle[TerminalStyle["bgMagenta"] = 45] = "bgMagenta";
-    TerminalStyle[TerminalStyle["bgCyan"] = 46] = "bgCyan";
-    TerminalStyle[TerminalStyle["bgWhite"] = 47] = "bgWhite";
-    TerminalStyle[TerminalStyle["bgBrightred"] = 101] = "bgBrightred";
-    TerminalStyle[TerminalStyle["bgBrightgreen"] = 102] = "bgBrightgreen";
-    TerminalStyle[TerminalStyle["bgBrightyellow"] = 103] = "bgBrightyellow";
-    TerminalStyle[TerminalStyle["bgBrightblue"] = 104] = "bgBrightblue";
-    TerminalStyle[TerminalStyle["bgBrightmagenta"] = 105] = "bgBrightmagenta";
-    TerminalStyle[TerminalStyle["bgBrightcyan"] = 106] = "bgBrightcyan";
-    TerminalStyle[TerminalStyle["bgBrightwhite"] = 107] = "bgBrightwhite";
-    TerminalStyle[TerminalStyle["bgGray"] = 100] = "bgGray";
+    TerminalStyle[(TerminalStyle['bgBlack'] = 40)] = 'bgBlack';
+    TerminalStyle[(TerminalStyle['bgRed'] = 41)] = 'bgRed';
+    TerminalStyle[(TerminalStyle['bgGreen'] = 42)] = 'bgGreen';
+    TerminalStyle[(TerminalStyle['bgYellow'] = 43)] = 'bgYellow';
+    TerminalStyle[(TerminalStyle['bgBlue'] = 44)] = 'bgBlue';
+    TerminalStyle[(TerminalStyle['bgMagenta'] = 45)] = 'bgMagenta';
+    TerminalStyle[(TerminalStyle['bgCyan'] = 46)] = 'bgCyan';
+    TerminalStyle[(TerminalStyle['bgWhite'] = 47)] = 'bgWhite';
+    TerminalStyle[(TerminalStyle['bgBrightred'] = 101)] = 'bgBrightred';
+    TerminalStyle[(TerminalStyle['bgBrightgreen'] = 102)] = 'bgBrightgreen';
+    TerminalStyle[(TerminalStyle['bgBrightyellow'] = 103)] = 'bgBrightyellow';
+    TerminalStyle[(TerminalStyle['bgBrightblue'] = 104)] = 'bgBrightblue';
+    TerminalStyle[(TerminalStyle['bgBrightmagenta'] = 105)] = 'bgBrightmagenta';
+    TerminalStyle[(TerminalStyle['bgBrightcyan'] = 106)] = 'bgBrightcyan';
+    TerminalStyle[(TerminalStyle['bgBrightwhite'] = 107)] = 'bgBrightwhite';
+    TerminalStyle[(TerminalStyle['bgGray'] = 100)] = 'bgGray';
     // Resets background color to default
-    TerminalStyle[TerminalStyle["bgDefault"] = 49] = "bgDefault";
+    TerminalStyle[(TerminalStyle['bgDefault'] = 49)] = 'bgDefault';
     // *** Containers
-    TerminalStyle[TerminalStyle["framed"] = 51] = "framed";
-    TerminalStyle[TerminalStyle["encircled"] = 52] = "encircled";
-    TerminalStyle[TerminalStyle["overline"] = 53] = "overline";
+    TerminalStyle[(TerminalStyle['framed'] = 51)] = 'framed';
+    TerminalStyle[(TerminalStyle['encircled'] = 52)] = 'encircled';
+    TerminalStyle[(TerminalStyle['overline'] = 53)] = 'overline';
 })(TerminalStyle || (TerminalStyle = {}));
 // Given a name or array of names, return the ANSI escape code for that name.
 function escapeCodeFromName(names) {
@@ -688,11 +709,9 @@ function getTextEscapeCodesFromProperties(properties, style) {
     if (underline) {
         if (typeof underline === 'string' && underline === 'single') {
             on.push(TerminalStyle.underline);
-        }
-        else if (typeof underline === 'string' && underline === 'double') {
+        } else if (typeof underline === 'string' && underline === 'double') {
             on.push(TerminalStyle.doubleunderline);
-        }
-        else if (typeof underline === 'boolean' && underline) {
+        } else if (typeof underline === 'boolean' && underline) {
             on.push(TerminalStyle.underline);
         }
         off.push(TerminalStyle.underlineOff);
@@ -709,8 +728,7 @@ function getTextEscapeCodesFromProperties(properties, style) {
 function colorToTerminalStyle(color, foreground) {
     if (foreground) {
         return TerminalStyle[`fg${toTitleCase(color)}`];
-    }
-    else {
+    } else {
         return TerminalStyle[`bg${toTitleCase(color)}`];
     }
 }
@@ -724,8 +742,7 @@ function colorToTerminalStyle(color, foreground) {
 function renderTextAttributesStart({ style, attributes, format = 'ansi' }) {
     if (format === 'ansi') {
         return getTextEscapeCodesFromProperties(attributes, style).on;
-    }
-    else if (format === 'markup') {
+    } else if (format === 'markup') {
         return Object.entries(attributes)
             .filter(([key]) => isAttribute(key))
             .map(([key, value]) => `${key}="${value}"`)
@@ -741,8 +758,7 @@ function renderTextAttributesStart({ style, attributes, format = 'ansi' }) {
 function renderTextAttributesEnd({ style, attributes, format = 'ansi' }) {
     if (format === 'ansi') {
         return getTextEscapeCodesFromProperties(attributes, style).off;
-    }
-    else if (format === 'markup') {
+    } else if (format === 'markup') {
         return '';
     }
 }
@@ -761,22 +777,27 @@ function renderNodeAsMarkupEnd(node) {
 class BlockTextNodeImpl extends AnsieNodeImpl {
     renderStart({ stack, format }) {
         if (format === 'ansi') {
-            return (renderSpaceAttributesStart({
-                node: this._raw,
-                format,
-                style: this._style
-            }) +
+            return (
+                renderSpaceAttributesStart({
+                    node: this._raw,
+                    format,
+                    style: this._style
+                }) +
                 renderTextAttributesStart({
                     style: this._style,
                     attributes: this._raw,
                     format
-                }));
-        }
-        else if (format === 'markup') {
+                })
+            );
+        } else if (format === 'markup') {
             return renderNodeAsMarkupStart(this._raw);
-        }
-        else {
-            throw new CompilerError(`Invalid format: ${format}`, this._raw, stack, false);
+        } else {
+            throw new CompilerError(
+                `Invalid format: ${format}`,
+                this._raw,
+                stack,
+                false
+            );
         }
     }
     renderEnd({ stack, format = 'ansi' }) {
@@ -790,12 +811,15 @@ class BlockTextNodeImpl extends AnsieNodeImpl {
                 format,
                 style: this._style
             })}`;
-        }
-        else if (format === 'markup') {
+        } else if (format === 'markup') {
             return renderNodeAsMarkupEnd(this._raw);
-        }
-        else {
-            throw new CompilerError(`Invalid format: ${format}`, this._raw, stack, false);
+        } else {
+            throw new CompilerError(
+                `Invalid format: ${format}`,
+                this._raw,
+                stack,
+                false
+            );
         }
     }
 }
@@ -805,11 +829,15 @@ class BreakNodeImpl extends AnsieNodeImpl {
     renderStart({ stack, format }) {
         if (format === 'ansi') {
             return '\n'.repeat(this._style?.spacing?.marginBottom || 1);
-        }
-        else if (format === 'markup') {
+        } else if (format === 'markup') {
             return '<br/>';
         }
-        throw new CompilerError(`Invalid format: ${format}`, this._raw, stack, false);
+        throw new CompilerError(
+            `Invalid format: ${format}`,
+            this._raw,
+            stack,
+            false
+        );
     }
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     renderEnd() {
@@ -890,7 +918,10 @@ class RawTextMutator {
         const leftPattern = options.left ? `^${whiteSpacePattern}+` : '';
         const rightPattern = options.right ? `${whiteSpacePattern}+$` : '';
         const pattern = new RegExp(`${leftPattern}|${rightPattern}`, 'g');
-        this._str = this._str.replace(pattern, options.replaceWithSingleSpace ? ' ' : '');
+        this._str = this._str.replace(
+            pattern,
+            options.replaceWithSingleSpace ? ' ' : ''
+        );
         return this;
     }
     toString() {
@@ -903,16 +934,15 @@ class RawTextNodeImpl extends AnsieNodeImpl {
         const text = this.attr('value') ?? '';
         if (format === 'markup') {
             return text;
-        }
-        else {
+        } else {
             return new RawTextMutator(text)
                 .replaceEmoji()
                 .trimSpaces({
-                left: true,
-                right: true,
-                allowNewLines: false,
-                replaceWithSingleSpace: true
-            })
+                    left: true,
+                    right: true,
+                    allowNewLines: false,
+                    replaceWithSingleSpace: true
+                })
                 .toString();
         }
     }
@@ -935,25 +965,21 @@ function getListItemFromProperties(node, style) {
 function renderListAttributesStart({ node, style, format = 'ansi' }) {
     if (format === 'ansi') {
         return getListItemFromProperties(node, style).on;
-    }
-    else if (format === 'markup') {
+    } else if (format === 'markup') {
         return Object.entries(node)
             .filter(([key]) => Object.keys(ListAttributes).includes(key))
             .map(([key, value]) => `${key}="${value}"`)
             .join(' ');
-    }
-    else {
+    } else {
         return '';
     }
 }
 function renderListAttributesEnd({ node, style, format = 'ansi' }) {
     if (format === 'ansi') {
         return getListItemFromProperties(node, style).off;
-    }
-    else if (format === 'markup') {
+    } else if (format === 'markup') {
         return '';
-    }
-    else {
+    } else {
         return '';
     }
 }
@@ -961,11 +987,12 @@ function renderListAttributesEnd({ node, style, format = 'ansi' }) {
 class ListItemNodeImpl extends AnsieNodeImpl {
     renderStart({ stack, format }) {
         if (format === 'ansi') {
-            return (renderSpaceAttributesStart({
-                node: this._raw,
-                format,
-                style: this._style
-            }) +
+            return (
+                renderSpaceAttributesStart({
+                    node: this._raw,
+                    format,
+                    style: this._style
+                }) +
                 renderListAttributesStart({
                     node: this._raw,
                     format,
@@ -975,20 +1002,26 @@ class ListItemNodeImpl extends AnsieNodeImpl {
                     attributes: this._raw,
                     format,
                     style: this._style
-                }));
-        }
-        else if (format === 'markup') {
+                })
+            );
+        } else if (format === 'markup') {
             return renderNodeAsMarkupStart(this._raw);
         }
-        throw new CompilerError(`Invalid format: ${format}`, this._raw, stack, false);
+        throw new CompilerError(
+            `Invalid format: ${format}`,
+            this._raw,
+            stack,
+            false
+        );
     }
     renderEnd({ format = 'ansi' }) {
         if (format === 'ansi') {
-            return (renderTextAttributesEnd({
-                style: this._style,
-                attributes: this._raw,
-                format
-            }) +
+            return (
+                renderTextAttributesEnd({
+                    style: this._style,
+                    attributes: this._raw,
+                    format
+                }) +
                 renderListAttributesEnd({
                     node: this._raw,
                     format,
@@ -998,12 +1031,11 @@ class ListItemNodeImpl extends AnsieNodeImpl {
                     attributes: this._raw,
                     format,
                     style: this._style
-                }));
-        }
-        else if (format === 'markup') {
+                })
+            );
+        } else if (format === 'markup') {
             return renderNodeAsMarkupEnd(this._raw);
-        }
-        else {
+        } else {
             return '';
         }
     }
@@ -1016,11 +1048,15 @@ class ListNodeImpl extends AnsieNodeImpl {
                 format,
                 style: this._style
             });
-        }
-        else if (format === 'markup') {
+        } else if (format === 'markup') {
             return renderNodeAsMarkupStart(this._raw);
         }
-        throw new CompilerError(`Invalid format: ${format}`, this._raw, stack, false);
+        throw new CompilerError(
+            `Invalid format: ${format}`,
+            this._raw,
+            stack,
+            false
+        );
     }
     renderEnd({ format = 'ansi' }) {
         if (format === 'ansi') {
@@ -1029,11 +1065,9 @@ class ListNodeImpl extends AnsieNodeImpl {
                 format,
                 style: this._style
             });
-        }
-        else if (format === 'markup') {
+        } else if (format === 'markup') {
             return renderNodeAsMarkupEnd(this._raw);
-        }
-        else {
+        } else {
             return '';
         }
     }
@@ -1042,22 +1076,27 @@ class ListNodeImpl extends AnsieNodeImpl {
 class InlineTextNodeImpl extends AnsieNodeImpl {
     renderStart({ stack, format }) {
         if (format === 'ansi') {
-            return (renderSpaceAttributesStart({
-                node: this._raw,
-                format,
-                style: this._style
-            }) +
+            return (
+                renderSpaceAttributesStart({
+                    node: this._raw,
+                    format,
+                    style: this._style
+                }) +
                 renderTextAttributesStart({
                     style: this._style,
                     attributes: this._raw,
                     format
-                }));
-        }
-        else if (format === 'markup') {
+                })
+            );
+        } else if (format === 'markup') {
             return renderNodeAsMarkupStart(this._raw);
-        }
-        else {
-            throw new CompilerError(`Invalid format: ${format}`, this._raw, stack, false);
+        } else {
+            throw new CompilerError(
+                `Invalid format: ${format}`,
+                this._raw,
+                stack,
+                false
+            );
         }
     }
     renderEnd({ stack, format = 'ansi' }) {
@@ -1071,12 +1110,15 @@ class InlineTextNodeImpl extends AnsieNodeImpl {
                 format,
                 style: this._style
             })}`;
-        }
-        else if (format === 'markup') {
+        } else if (format === 'markup') {
             return renderNodeAsMarkupEnd(this._raw);
-        }
-        else {
-            throw new CompilerError(`Invalid format: ${format}`, this._raw, stack, false);
+        } else {
+            throw new CompilerError(
+                `Invalid format: ${format}`,
+                this._raw,
+                stack,
+                false
+            );
         }
     }
 }
@@ -1133,7 +1175,12 @@ class Compiler {
             case ValidTags.ul:
                 return new ListNodeImpl(raw, this._theme.ul || {});
             default:
-                throw new CompilerError(`Invalid node type: ${raw.node}`, raw, this._stack, true);
+                throw new CompilerError(
+                    `Invalid node type: ${raw.node}`,
+                    raw,
+                    this._stack,
+                    true
+                );
         }
     }
     _push({ state, format = 'ansi' }) {
@@ -1151,14 +1198,17 @@ class Compiler {
             strings.push(this._push({ state: node, format }));
             if (node.content) {
                 if (Array.isArray(node.content)) {
-                    node.content.forEach(node => strings.push(this._compileNode({ node, theme, format })));
-                }
-                else {
-                    strings.push(this._compileNode({
-                        node: node.content,
-                        theme,
-                        format
-                    }));
+                    node.content.forEach(node =>
+                        strings.push(this._compileNode({ node, theme, format }))
+                    );
+                } else {
+                    strings.push(
+                        this._compileNode({
+                            node: node.content,
+                            theme,
+                            format
+                        })
+                    );
                 }
             }
             const n = this._pop({ format });
@@ -1166,8 +1216,7 @@ class Compiler {
                 strings.push(n);
             }
             return strings.join('');
-        }
-        catch (e) {
+        } catch (e) {
             if (e instanceof CompilerError) {
                 console.error(e.toString());
                 if (!e.continue) {
@@ -1367,14 +1416,13 @@ setGlobalTheme(defaultTheme);
  * @param optionsOrMarkup Options or the markup to compile (with default options)
  * @returns
  */
-var compile = (optionsOrMarkup) => {
+var compile = optionsOrMarkup => {
     let theme = themes.get();
     let markup = '';
     let output = 'ansi';
     if (typeof optionsOrMarkup === 'string') {
         markup = optionsOrMarkup;
-    }
-    else {
+    } else {
         markup = optionsOrMarkup.markup;
         theme = optionsOrMarkup.theme ?? theme;
         output = optionsOrMarkup.output ?? 'ansi';
@@ -1383,8 +1431,7 @@ var compile = (optionsOrMarkup) => {
     if (ast) {
         const compiler = new Compiler(ast, theme);
         return compiler.compile({ format: output, theme });
-    }
-    else {
+    } else {
         return '';
     }
 };
@@ -1423,30 +1470,31 @@ var editor = core.createPrompt((config, done) => {
     const prefix = core.usePrefix({ isLoading, theme });
     function startEditor(rl) {
         rl.pause();
-        externalEditor.editAsync(value, 
-        // Note: The bind call isn't strictly required. But we need it for our mocks to work as expected.
-        node_async_hooks.AsyncResource.bind(async (error, answer) => {
-            rl.resume();
-            if (error) {
-                setError(error.toString());
-            }
-            else {
-                setStatus('loading');
-                const isValid = await validate(answer);
-                if (isValid === true) {
-                    setError(undefined);
-                    setStatus('done');
-                    done(answer);
+        externalEditor.editAsync(
+            value,
+            // Note: The bind call isn't strictly required. But we need it for our mocks to work as expected.
+            node_async_hooks.AsyncResource.bind(async (error, answer) => {
+                rl.resume();
+                if (error) {
+                    setError(error.toString());
+                } else {
+                    setStatus('loading');
+                    const isValid = await validate(answer);
+                    if (isValid === true) {
+                        setError(undefined);
+                        setStatus('done');
+                        done(answer);
+                    } else {
+                        setValue(answer);
+                        setError(isValid || 'You must provide a valid value');
+                        setStatus('pending');
+                    }
                 }
-                else {
-                    setValue(answer);
-                    setError(isValid || 'You must provide a valid value');
-                    setStatus('pending');
-                }
+            }),
+            {
+                postfix: config.postfix || '.txt'
             }
-        }), {
-            postfix: config.postfix || '.txt'
-        });
+        );
     }
     core.useEffect(rl => {
         if (!waitForUseInput) {
@@ -1460,8 +1508,7 @@ var editor = core.createPrompt((config, done) => {
         }
         if (key.name === 'e') {
             startEditor(rl);
-        }
-        else {
+        } else {
             if (core.isEnterKey(key) && hasDefault) {
                 done(value);
             }
@@ -1471,14 +1518,14 @@ var editor = core.createPrompt((config, done) => {
     let helpTip = '';
     if (status === 'loading') {
         helpTip = theme.style.help('Received');
-    }
-    else if (status === 'pending') {
+    } else if (status === 'pending') {
         const enterKey = theme.style.key('enter');
         const eKey = theme.style.key('e');
         if (hasDefault) {
-            helpTip = theme.style.help(`Press ${eKey} to begin editing or ${enterKey} to use default('${value}').`);
-        }
-        else {
+            helpTip = theme.style.help(
+                `Press ${eKey} to begin editing or ${enterKey} to use default('${value}').`
+            );
+        } else {
             helpTip = theme.style.help(`Press ${eKey} to begin editing.`);
         }
     }
@@ -1490,11 +1537,13 @@ var editor = core.createPrompt((config, done) => {
 });
 
 var confirm = core.createPrompt((config, done) => {
-    const { short: trueShort = 'Y', long: trueLong = 'Yes' } = config.trueValue || {};
-    const { short: falseShort = 'N', long: falseLong = 'No' } = config.falseValue || {};
+    const { short: trueShort = 'Y', long: trueLong = 'Yes' } =
+        config.trueValue || {};
+    const { short: falseShort = 'N', long: falseLong = 'No' } =
+        config.falseValue || {};
     const trueRegExp = new RegExp(`^(${trueShort}|${trueLong})$`, 'i');
     const falseRegExp = new RegExp(`^(${falseShort}|${falseLong})$`, 'i');
-    const { transformer = (answer) => (answer ? trueLong : falseLong) } = config;
+    const { transformer = answer => (answer ? trueLong : falseLong) } = config;
     const [status, setStatus] = core.useState('pending');
     const [value, setValue] = core.useState('');
     const theme = core.makeTheme(config.theme);
@@ -1502,15 +1551,12 @@ var confirm = core.createPrompt((config, done) => {
     core.useKeypress((key, rl) => {
         if (core.isEnterKey(key)) {
             let answer = config.default !== false;
-            if (trueRegExp.test(value))
-                answer = true;
-            else if (falseRegExp.test(value))
-                answer = false;
+            if (trueRegExp.test(value)) answer = true;
+            else if (falseRegExp.test(value)) answer = false;
             setValue(transformer(answer));
             setStatus('done');
             done(answer);
-        }
-        else {
+        } else {
             setValue(rl.line);
         }
     });
@@ -1518,11 +1564,12 @@ var confirm = core.createPrompt((config, done) => {
     let defaultValue = '';
     if (status === 'done') {
         formattedValue = theme.style.answer(value);
-    }
-    else {
-        defaultValue = ` ${theme.style.defaultAnswer(config.default === false
-            ? `${trueShort.toLowerCase()}/${falseShort.toUpperCase()}`
-            : `${trueShort.toUpperCase()}/${falseShort.toLowerCase()}`)}`;
+    } else {
+        defaultValue = ` ${theme.style.defaultAnswer(
+            config.default === false
+                ? `${trueShort.toLowerCase()}/${falseShort.toUpperCase()}`
+                : `${trueShort.toUpperCase()}/${falseShort.toLowerCase()}`
+        )}`;
     }
     const message = theme.style.message(config.message);
     return `${prefix} ${message}${defaultValue} ${formattedValue}`;
@@ -1535,17 +1582,20 @@ var index = {
     confirm: askYesNo,
     multiline: askMultilineText
 };
-const promptTheme = themes.build({
-    p: {
-        spacing: {
-            margin: 0,
-            marginTop: 0,
-            marginBottom: 0,
-            marginLeft: 0,
-            marginRight: 0
+const promptTheme = themes.build(
+    {
+        p: {
+            spacing: {
+                margin: 0,
+                marginTop: 0,
+                marginBottom: 0,
+                marginLeft: 0,
+                marginRight: 0
+            }
         }
-    }
-}, themes.get());
+    },
+    themes.get()
+);
 function compileForPrompt(prompt) {
     const compiledPrompt = compile({ markup: prompt, theme: promptTheme });
     // Remove any newlines at the beginning and end

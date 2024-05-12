@@ -14,17 +14,17 @@
  * will help us avoid typos and make it easier to refactor later.
  */
 export declare enum ValidTags {
-    'h1' = "h1",
-    'h2' = "h2",
-    'h3' = "h3",
-    'body' = "body",
-    'span' = "span",
-    'p' = "p",
-    'div' = "div",
-    'text' = "text",
-    'li' = "li",
-    'ul' = "ul",
-    'br' = "br"
+    'h1' = 'h1',
+    'h2' = 'h2',
+    'h3' = 'h3',
+    'body' = 'body',
+    'span' = 'span',
+    'p' = 'p',
+    'div' = 'div',
+    'text' = 'text',
+    'li' = 'li',
+    'ul' = 'ul',
+    'br' = 'br'
 }
 export declare const TextAttributes: {
     fg: string[];

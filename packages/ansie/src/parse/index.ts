@@ -82,7 +82,6 @@ export default function parse(input: string): Ast | null {
 
         // Convert to Ansie
         return convertAcornAstToAnsieAst(parsedJsx);
-
     } catch (e) {
         throw new Error(`Error parsing "${input}": ${(e as Error).message}`);
     }

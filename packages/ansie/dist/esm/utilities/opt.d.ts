@@ -3,4 +3,6 @@
  * @param o
  * @returns
  */
-export declare function opt(o?: Record<string, unknown>): Record<string, unknown>;
+export declare function opt(
+    o?: Record<string, unknown>
+): Record<string, unknown>;

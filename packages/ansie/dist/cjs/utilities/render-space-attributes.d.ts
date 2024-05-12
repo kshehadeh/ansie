@@ -7,7 +7,11 @@ import type { AnsieStyle } from '../themes';
  * @param format
  * @returns
  */
-export declare function renderSpaceAttributesStart({ node, format, style }: {
+export declare function renderSpaceAttributesStart({
+    node,
+    format,
+    style
+}: {
     node: SpaceNodeBase;
     format: CompilerFormat;
     style?: AnsieStyle;
@@ -18,7 +22,11 @@ export declare function renderSpaceAttributesStart({ node, format, style }: {
  * @param format
  * @returns
  */
-export declare function renderSpaceAttributesEnd({ style, attributes, format }: {
+export declare function renderSpaceAttributesEnd({
+    style,
+    attributes,
+    format
+}: {
     attributes: AnsieNode;
     style?: AnsieStyle;
     format: CompilerFormat;
