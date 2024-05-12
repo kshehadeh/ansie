@@ -17,10 +17,12 @@
     "build:watch": "rollup -c -w"
   },
   "dependencies": {
-    "ansie": "0.8.2"
+    "ansie": "0.8.2",
+    "inquirer": "^9.2.20"
   },
   "devDependencies": {
     "@rollup/plugin-typescript": "^11.1.6",
+    "@types/inquirer": "^9.0.7",
     "tsx": "^4.7.2"
   }
 }
