@@ -10,7 +10,4 @@ import type { AnsieNode } from '../compile/types';
  * let result = getLastNodeOfTypeFromStack('bold', stack);
  * // result will be the last node of type 'bold' in the stack
  */
-export declare function getLastNodeOfTypeFromStack<T extends AnsieNode['node']>(
-    nodeType: T,
-    stack: AnsieNode[]
-): AnsieNode | null;
+export declare function getLastNodeOfTypeFromStack<T extends AnsieNode['node']>(nodeType: T, stack: AnsieNode[]): AnsieNode | null;

@@ -6,25 +6,11 @@ declare const _default: {
     multiline: typeof askMultilineText;
 };
 export default _default;
-declare function askMultilineText(
-    prompt: string,
-    defaultValue?: string
-): Promise<string>;
-declare function askSingleLineText(
-    prompt: string,
-    defaultValue?: string
-): Promise<string>;
-declare function askSelect(
-    prompt: string,
-    choices: string[],
-    defaultValue?: string
-): Promise<string>;
+declare function askMultilineText(prompt: string, defaultValue?: string): Promise<string>;
+declare function askSingleLineText(prompt: string, defaultValue?: string): Promise<string>;
+declare function askSelect(prompt: string, choices: string[], defaultValue?: string): Promise<string>;
 declare function askPassword(prompt: string, mask?: string): Promise<string>;
-declare function askYesNo(
-    prompt: string,
-    defaulValue: boolean,
-    trueFalse?: {
-        trueValue: string;
-        falseValue: string;
-    }
-): Promise<boolean>;
+declare function askYesNo(prompt: string, defaulValue: boolean, trueFalse?: {
+    trueValue: string;
+    falseValue: string;
+}): Promise<boolean>;

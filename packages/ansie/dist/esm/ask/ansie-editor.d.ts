@@ -8,5 +8,5 @@ type EditorConfig = {
     validate?: (value: string) => boolean | string | Promise<string | boolean>;
     theme?: PartialDeep<Theme>;
 };
-declare const _default: import('@inquirer/type').Prompt<string, EditorConfig>;
+declare const _default: import("@inquirer/type").Prompt<string, EditorConfig>;
 export default _default;

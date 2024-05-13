@@ -5,6 +5,4 @@ import type { AnsieStyle } from '../themes';
  * @param style
  * @returns
  */
-export declare function buildAttributesFromStyle(
-    style: AnsieStyle
-): Record<string, string | number | boolean | undefined>;
+export declare function buildAttributesFromStyle(style: AnsieStyle): Record<string, string | number | boolean | undefined>;

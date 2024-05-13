@@ -55,7 +55,4 @@ declare function resetGlobalTheme(): void;
  * @returns
  */
 declare function getGlobalTheme(): AnsieTheme;
-declare function buildTheme(
-    themeFragment: Partial<AnsieTheme>,
-    originTheme: AnsieTheme
-): AnsieTheme;
+declare function buildTheme(themeFragment: Partial<AnsieTheme>, originTheme: AnsieTheme): AnsieTheme;

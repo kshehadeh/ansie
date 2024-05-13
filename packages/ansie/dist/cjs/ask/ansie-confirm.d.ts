@@ -14,5 +14,5 @@ type ConfirmConfig = {
     };
     theme?: PartialDeep<Theme>;
 };
-declare const _default: import('@inquirer/type').Prompt<boolean, ConfirmConfig>;
+declare const _default: import("@inquirer/type").Prompt<boolean, ConfirmConfig>;
 export default _default;
