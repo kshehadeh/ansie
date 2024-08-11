@@ -57,7 +57,8 @@ async function askSingleLineText(prompt: string, defaultValue?: string) {
 async function askSelect(
     prompt: string,
     choices: string[],
-    defaultValue: string = ''
+    defaultValue: string = '',
+    loop: boolean = false
 ) {
     if (defaultValue && choices.find(c => c === defaultValue) === undefined) {
         throw new Error('Default value not found in choices');
@@ -73,7 +74,8 @@ async function askSelect(
                   }
                 : { name: compileForPrompt(c), value: c }
         ),
-        default: defaultValue || undefined
+        default: defaultValue || undefined,
+        loop
     });
 }
 
