@@ -4,6 +4,8 @@ import confirm from './ansie-confirm';
 import compile from '@/compile';
 import themes from '@/themes';
 
+const SEPARATOR_LINE = '----';
+
 export default {
     text: askSingleLineText,
     select: askSelect,
@@ -28,6 +30,11 @@ const promptTheme = themes.build(
 );
 
 function compileForPrompt(prompt: string): string {
+    if (prompt === SEPARATOR_LINE) {
+        // This is a separator - don't do any preprocessing
+        return prompt;
+    }
+
     const compiledPrompt = compile({ markup: prompt, theme: promptTheme });
     // Remove any newlines at the beginning and end
     return compiledPrompt.replaceAll(/^\n+|\n+$/g, '');
@@ -58,7 +65,14 @@ async function askSelect(
 
     return select({
         message: compileForPrompt(prompt),
-        choices: choices.map(c => ({ name: compileForPrompt(c), value: c })),
+        choices: choices.map(c =>
+            c === SEPARATOR_LINE
+                ? {
+                      type: 'separator',
+                      separator: '------'
+                  }
+                : { name: compileForPrompt(c), value: c }
+        ),
         default: defaultValue || undefined
     });
 }
