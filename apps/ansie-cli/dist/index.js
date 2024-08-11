@@ -6,7 +6,7 @@ import { parser, compile } from 'ansie';
 
 var name = "ansie-cli";
 var description = "A simple CLI for the ansie library.";
-var version = "0.6.6";
+var version = "0.6.7";
 var type = "module";
 var main = "./dist/index.js";
 var bin = {
@@ -20,7 +20,7 @@ var scripts = {
 	"build:watch": "rollup -c -w"
 };
 var dependencies = {
-	ansie: "0.8.4",
+	ansie: "0.8.5",
 	yargs: "^17.7.2"
 };
 var devDependencies = {
@@ -36,6 +36,7 @@ var pkg = {
 	version: version,
 	type: type,
 	main: main,
+	"private": true,
 	bin: bin,
 	scripts: scripts,
 	dependencies: dependencies,

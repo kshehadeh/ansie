@@ -1568,7 +1568,7 @@ async function askSingleLineText(prompt, defaultValue) {
         default: defaultValue
     });
 }
-async function askSelect(prompt, choices, defaultValue = '') {
+async function askSelect(prompt, choices, defaultValue = '', loop = false) {
     if (defaultValue && choices.find(c => c === defaultValue) === undefined) {
         throw new Error('Default value not found in choices');
     }
@@ -1580,7 +1580,8 @@ async function askSelect(prompt, choices, defaultValue = '') {
                 separator: '------'
             }
             : { name: compileForPrompt(c), value: c }),
-        default: defaultValue || undefined
+        default: defaultValue || undefined,
+        loop
     });
 }
 async function askPassword(prompt, mask = '\u{25CF}') {

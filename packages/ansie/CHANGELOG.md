@@ -1,5 +1,11 @@
 # ansie
 
+## 0.8.6
+
+### Patch Changes
+
+- Add loop option to select
+
 ## 0.8.5
 
 ### Patch Changes

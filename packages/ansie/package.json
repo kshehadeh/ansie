@@ -1,14 +1,14 @@
 {
     "name": "ansie",
     "description": "A simple rendering engine for rich text terminal output with its own markup language.",
-    "version": "0.8.5",
+    "version": "0.8.6",
     "type": "module",
     "main": "./dist/index.js",
     "types": "./dist/esm/index.d.ts",
     "publishConfig": {
         "access": "public",
         "registry": "https://registry.npmjs.org/"
-    },    
+    },
     "exports": {
         ".": {
             "import": "./dist/esm/index.js",
