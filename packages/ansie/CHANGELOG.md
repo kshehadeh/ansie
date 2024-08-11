@@ -1,5 +1,11 @@
 # ansie
 
+## 0.8.5
+
+### Patch Changes
+
+- Add support for separator in ask.select
+
 ## 0.8.4
 
 ### Patch Changes

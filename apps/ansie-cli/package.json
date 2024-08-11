@@ -1,9 +1,10 @@
 {
   "name": "ansie-cli",
   "description": "A simple CLI for the ansie library.",
-  "version": "0.6.6",
+  "version": "0.6.7",
   "type": "module",
   "main": "./dist/index.js",
+  "private": true,
   "bin": {
     "ansie": "./dist/index.js"
   },
@@ -15,7 +16,7 @@
     "build:watch": "rollup -c -w"
   },
   "dependencies": {
-    "ansie": "0.8.4",
+    "ansie": "0.8.5",
     "yargs": "^17.7.2"
   },
   "devDependencies": {

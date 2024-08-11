@@ -1,5 +1,13 @@
 # ansie-kitchen-sink
 
+## 1.2.7
+
+### Patch Changes
+
+- Add support for separator in ask.select
+- Updated dependencies
+  - ansie@0.8.5
+
 ## 1.2.6
 
 ### Patch Changes
