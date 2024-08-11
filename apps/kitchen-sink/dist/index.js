@@ -31,7 +31,7 @@ const stringsToShow = {
         ],
         "Prompts": [
             { id: "Text prompt", tpl: "What is your name?", isPrompt: true, type: "text" },
-            { id: "Select prompt", tpl: "Select a color", type: "select", options: ["red", "green", "blue"], isPrompt: true },
+            { id: "Select prompt", tpl: "Select a color", type: "select", options: ["red", "green", "----", "blue"], isPrompt: true },
             { id: "Password prompt", tpl: "Enter your password", type: "password", isPrompt: true },
             { id: "Confirmation prompt", tpl: "Are you sure?", type: "confirm", default: true, isPrompt: true },
             { id: "Multiline prompt", tpl: "Enter a multiline text", type: "multiline" },

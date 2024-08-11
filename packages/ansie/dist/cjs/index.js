@@ -1528,6 +1528,7 @@ var confirm = core.createPrompt((config, done) => {
     return `${prefix} ${message}${defaultValue} ${formattedValue}`;
 });
 
+const SEPARATOR_LINE = '----';
 var index = {
     text: askSingleLineText,
     select: askSelect,
@@ -1547,6 +1548,10 @@ const promptTheme = themes.build({
     }
 }, themes.get());
 function compileForPrompt(prompt) {
+    if (prompt === SEPARATOR_LINE) {
+        // This is a separator - don't do any preprocessing
+        return prompt;
+    }
     const compiledPrompt = compile({ markup: prompt, theme: promptTheme });
     // Remove any newlines at the beginning and end
     return compiledPrompt.replaceAll(/^\n+|\n+$/g, '');
@@ -1569,7 +1574,12 @@ async function askSelect(prompt, choices, defaultValue = '') {
     }
     return prompts.select({
         message: compileForPrompt(prompt),
-        choices: choices.map(c => ({ name: compileForPrompt(c), value: c })),
+        choices: choices.map(c => c === SEPARATOR_LINE
+            ? {
+                type: 'separator',
+                separator: '------'
+            }
+            : { name: compileForPrompt(c), value: c }),
         default: defaultValue || undefined
     });
 }
