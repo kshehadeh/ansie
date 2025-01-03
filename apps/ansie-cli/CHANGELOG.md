@@ -1,5 +1,12 @@
 # ansie-cli
 
+## 0.6.9
+
+### Patch Changes
+
+- Updated dependencies
+  - ansie@0.9.0
+
 ## 0.6.8
 
 ### Patch Changes

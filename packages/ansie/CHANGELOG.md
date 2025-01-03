@@ -1,5 +1,11 @@
 # ansie
 
+## 0.9.0
+
+### Minor Changes
+
+- Added support for name/value pairs in ask.select
+
 ## 0.8.6
 
 ### Patch Changes

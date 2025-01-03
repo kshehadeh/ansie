@@ -1572,14 +1572,12 @@ async function askSelect(prompt, choices, defaultValue = '', loop = false) {
     if (defaultValue && choices.find(c => c === defaultValue) === undefined) {
         throw new Error('Default value not found in choices');
     }
+    const processedChoices = choices.map(c => typeof c === 'string'
+        ? { name: compileForPrompt(c), value: c }
+        : { name: compileForPrompt(c.name), value: c.value });
     return prompts.select({
         message: compileForPrompt(prompt),
-        choices: choices.map(c => c === SEPARATOR_LINE
-            ? {
-                type: 'separator',
-                separator: '------'
-            }
-            : { name: compileForPrompt(c), value: c }),
+        choices: processedChoices,
         default: defaultValue || undefined,
         loop
     });
