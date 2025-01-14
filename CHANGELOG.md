@@ -1,5 +1,11 @@
 # ansie
 
+## 1.0.0
+
+### Major Changes
+
+- First major version for ansie
+
 ## 0.9.0
 
 ### Minor Changes

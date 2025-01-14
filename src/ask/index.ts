@@ -1,4 +1,4 @@
-import { input, password, select } from '@inquirer/prompts';
+import { input, password, select, search } from '@inquirer/prompts';
 import editor from './ansie-editor';
 import confirm from './ansie-confirm';
 import compile from '@/compile';
@@ -8,10 +8,12 @@ const SEPARATOR_LINE = '----';
 
 export default {
     text: askSingleLineText,
+    selectEx: askSelectEx,
     select: askSelect,
     password: askPassword,
     confirm: askYesNo,
-    multiline: askMultilineText
+    multiline: askMultilineText,
+    search: askSearch
 };
 
 const promptTheme = themes.build(
@@ -54,28 +56,6 @@ async function askSingleLineText(prompt: string, defaultValue?: string) {
     });
 }
 
-async function askSelect(
-    prompt: string,
-    choices: string[] | { name: string; value: string }[],
-    defaultValue: string = '',
-    loop: boolean = false
-) {
-    if (defaultValue && choices.find(c => c === defaultValue) === undefined) {
-        throw new Error('Default value not found in choices');
-    }
-    const processedChoices = choices.map(c =>
-        typeof c === 'string'
-            ? { name: compileForPrompt(c), value: c }
-            : { name: compileForPrompt(c.name), value: c.value }
-    );
-    return select({
-        message: compileForPrompt(prompt),
-        choices: processedChoices,
-        default: defaultValue || undefined,
-        loop
-    });
-}
-
 async function askPassword(prompt: string, mask: string = '\u{25CF}') {
     return password({
         message: compileForPrompt(prompt),
@@ -104,4 +84,61 @@ async function askYesNo(
             long: tf.falseValue
         }
     });
+}
+
+async function askSearch(
+    prompt: string,
+    searchFn: (
+        term: string | undefined,
+        opt: {
+            signal: AbortSignal;
+        }
+    ) => ReturnType<Parameters<typeof search<string | undefined>>[0]['source']>
+): Promise<string | undefined> {
+    return search<string | undefined>({
+        message: compileForPrompt(prompt),
+        source: searchFn
+    });
+}
+
+async function askSelectEx(
+    prompt: string,
+    choices: { name: string; value: string }[],
+    defaultValue: string = '',
+    loop: boolean = false
+) {
+    if (
+        defaultValue &&
+        choices.find(c => c.value === defaultValue) === undefined
+    ) {
+        throw new Error('Default value not found in choices');
+    }
+
+    return select({
+        message: compileForPrompt(prompt),
+        choices: choices.map(c =>
+            c.value === SEPARATOR_LINE
+                ? {
+                      type: 'separator',
+                      separator: '------'
+                  }
+                : { name: compileForPrompt(c.name), value: c.value }
+        ),
+        default: defaultValue || undefined,
+        loop
+    });
+}
+
+async function askSelect(
+    prompt: string,
+    choices: string[],
+    defaultValue: string = '',
+    loop: boolean = false
+) {
+    return askSelectEx(
+        prompt,
+        choices.map(c => ({ name: c, value: c })),
+        defaultValue,
+        loop
+    );
 }

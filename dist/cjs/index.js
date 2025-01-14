@@ -1578,10 +1578,12 @@ var confirm = core.createPrompt((config, done) => {
 const SEPARATOR_LINE = '----';
 var index = {
     text: askSingleLineText,
+    selectEx: askSelectEx,
     select: askSelect,
     password: askPassword,
     confirm: askYesNo,
-    multiline: askMultilineText
+    multiline: askMultilineText,
+    search: askSearch
 };
 const promptTheme = themes.build(
     {
@@ -1618,22 +1620,6 @@ async function askSingleLineText(prompt, defaultValue) {
         default: defaultValue
     });
 }
-async function askSelect(prompt, choices, defaultValue = '', loop = false) {
-    if (defaultValue && choices.find(c => c === defaultValue) === undefined) {
-        throw new Error('Default value not found in choices');
-    }
-    const processedChoices = choices.map(c =>
-        typeof c === 'string'
-            ? { name: compileForPrompt(c), value: c }
-            : { name: compileForPrompt(c.name), value: c.value }
-    );
-    return prompts.select({
-        message: compileForPrompt(prompt),
-        choices: processedChoices,
-        default: defaultValue || undefined,
-        loop
-    });
-}
 async function askPassword(prompt, mask = '\u{25CF}') {
     return prompts.password({
         message: compileForPrompt(prompt),
@@ -1654,6 +1640,32 @@ async function askYesNo(prompt, defaulValue, trueFalse) {
             long: tf.falseValue
         }
     });
+}
+async function askSearch(prompt, searchFn) {
+    return prompts.search({
+        message: compileForPrompt(prompt),
+        source: searchFn
+    });
+}
+async function askSelectEx(prompt, choices, defaultValue = '', loop = false) {
+    if (defaultValue &&
+        choices.find(c => c.value === defaultValue) === undefined) {
+        throw new Error('Default value not found in choices');
+    }
+    return prompts.select({
+        message: compileForPrompt(prompt),
+        choices: choices.map(c => c.value === SEPARATOR_LINE
+            ? {
+                type: 'separator',
+                separator: '------'
+            }
+            : { name: compileForPrompt(c.name), value: c.value }),
+        default: defaultValue || undefined,
+        loop
+    });
+}
+async function askSelect(prompt, choices, defaultValue = '', loop = false) {
+    return askSelectEx(prompt, choices.map(c => ({ name: c, value: c })), defaultValue, loop);
 }
 
 exports.ask = index;

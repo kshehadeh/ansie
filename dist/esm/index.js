@@ -3,7 +3,7 @@ import * as acorn from 'acorn';
 import jsx from 'acorn-jsx';
 import util from 'util';
 import { merge } from 'ts-deepmerge';
-import { input, select, password } from '@inquirer/prompts';
+import { input, password, search, select } from '@inquirer/prompts';
 import { AsyncResource } from 'node:async_hooks';
 import { editAsync } from 'external-editor';
 import {
@@ -1554,10 +1554,12 @@ var confirm = createPrompt((config, done) => {
 const SEPARATOR_LINE = '----';
 var index = {
     text: askSingleLineText,
+    selectEx: askSelectEx,
     select: askSelect,
     password: askPassword,
     confirm: askYesNo,
-    multiline: askMultilineText
+    multiline: askMultilineText,
+    search: askSearch
 };
 const promptTheme = themes.build(
     {
