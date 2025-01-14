@@ -17,7 +17,7 @@ pre-commit:
             run: bunx prettier -w {staged_files} && git add {staged_files}
         eslint:
             glob: '*.{js,ts,jsx,tsx}'
-            run: bun run lint -- {staged_files}
+            run: bun run lint
         tsc:
             glob: '*.{ts,tsx}'
-            run: bunx tsc --noEmit --skipLibCheck {staged_files}
+            run: bunx tsc --noEmit --skipLibCheck
