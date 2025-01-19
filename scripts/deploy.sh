@@ -1,14 +1,21 @@
 #! /bin/bash
 
-# Check for required environment variables
-if [ -z "$GIT_EMAIL" ]; then
-  echo "❌ GIT_EMAIL is not set. Please set GIT_EMAIL."
-  exit 1
+# Check if git config for email and name is set
+if [ -z "$(git config --global user.email)" ]; then
+  # Check for required environment variables
+  if [ -z "$GIT_EMAIL" ]; then
+    echo "❌ GIT_EMAIL is not set. Please set GIT_EMAIL."
+    exit 1
+  fi
 fi
 
-if [ -z "$GIT_NAME" ]; then
-  echo "❌ GIT_NAME is not set. Please set GIT_NAME."
-  exit 1
+# Check if git config for name is set
+if [ -z "$(git config --global user.name)" ]; then
+  # Check for required environment variables
+  if [ -z "$GIT_NAME" ]; then
+    echo "❌ GIT_NAME is not set. Please set GIT_NAME."
+    exit 1
+  fi
 fi
 
 if [ -z "$NPM_TOKEN" ]; then
@@ -16,9 +23,14 @@ if [ -z "$NPM_TOKEN" ]; then
   exit 1
 fi
 
-if [ -z "$GIT_COMMIT_TOKEN" ]; then 
-    echo "❌ GIT_COMMIT_TOKEN is not set. Please set GIT_COMMIT_TOKEN."
-    exit 1
+# Check if github token is set
+if [ -z "$GITHUB_TOKEN" ]; then 
+  if [ -z "$GIT_COMMIT_TOKEN" ]; then 
+      echo "❌ GIT_COMMIT_TOKEN is not set. Please set GIT_COMMIT_TOKEN."
+      exit 1
+  fi
+else
+  GIT_COMMIT_TOKEN=$GITHUB_TOKEN
 fi
 
 # Make sure we're on the master branch
