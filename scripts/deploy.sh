@@ -44,7 +44,7 @@ if [ -z "$(git config --global user.email)" ]; then
     echo "🎯 Setting github config user"
     git config --global user.email "${GIT_EMAIL}"
     git config --global user.name "${GIT_NAME}"  
-    git remote set-url origin https://x-access-token:$GIT_COMMIT_TOKEN@github.com/kshehadeh/cmdq
+    git remote set-url origin https://x-access-token:$GIT_COMMIT_TOKEN@github.com/kshehadeh/ansie
 fi
 
 # Setup npmrc publish

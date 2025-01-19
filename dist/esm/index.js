@@ -1,8 +1,8 @@
 import { parse as parse$1, Renderer } from 'marked';
 import * as acorn from 'acorn';
 import jsx from 'acorn-jsx';
-import util from 'util';
 import { merge } from 'ts-deepmerge';
+import util from 'util';
 import { input, password, search, select } from '@inquirer/prompts';
 import { AsyncResource } from 'node:async_hooks';
 import { editAsync } from 'external-editor';
@@ -1653,4 +1653,4 @@ async function askSelect(prompt, choices, defaultValue = '', loop = false) {
     );
 }
 
-export { index as ask, index$1 as console, parse as parser };
+export { index as ask, compile, index$1 as console, parse as parser, themes };

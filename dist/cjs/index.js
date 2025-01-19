@@ -3,8 +3,8 @@
 var marked = require('marked');
 var acorn = require('acorn');
 var jsx = require('acorn-jsx');
-var util = require('util');
 var tsDeepmerge = require('ts-deepmerge');
+var util = require('util');
 var prompts = require('@inquirer/prompts');
 var node_async_hooks = require('node:async_hooks');
 var externalEditor = require('external-editor');
@@ -1678,5 +1678,7 @@ async function askSelect(prompt, choices, defaultValue = '', loop = false) {
 }
 
 exports.ask = index;
+exports.compile = compile;
 exports.console = index$1;
 exports.parser = parse;
+exports.themes = themes;
