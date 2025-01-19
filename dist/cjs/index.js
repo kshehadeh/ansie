@@ -1648,24 +1648,33 @@ async function askSearch(prompt, searchFn) {
     });
 }
 async function askSelectEx(prompt, choices, defaultValue = '', loop = false) {
-    if (defaultValue &&
-        choices.find(c => c.value === defaultValue) === undefined) {
+    if (
+        defaultValue &&
+        choices.find(c => c.value === defaultValue) === undefined
+    ) {
         throw new Error('Default value not found in choices');
     }
     return prompts.select({
         message: compileForPrompt(prompt),
-        choices: choices.map(c => c.value === SEPARATOR_LINE
-            ? {
-                type: 'separator',
-                separator: '------'
-            }
-            : { name: compileForPrompt(c.name), value: c.value }),
+        choices: choices.map(c =>
+            c.value === SEPARATOR_LINE
+                ? {
+                      type: 'separator',
+                      separator: '------'
+                  }
+                : { name: compileForPrompt(c.name), value: c.value }
+        ),
         default: defaultValue || undefined,
         loop
     });
 }
 async function askSelect(prompt, choices, defaultValue = '', loop = false) {
-    return askSelectEx(prompt, choices.map(c => ({ name: c, value: c })), defaultValue, loop);
+    return askSelectEx(
+        prompt,
+        choices.map(c => ({ name: c, value: c })),
+        defaultValue,
+        loop
+    );
 }
 
 exports.ask = index;
