@@ -1,0 +1,30 @@
+name: Deploy
+
+on:
+    push:
+        branches:
+            - main
+
+jobs:
+    deploy:
+        runs-on: ubuntu-latest
+        env:
+            NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+            GIT_EMAIL: ${{ vars.GIT_EMAIL }}
+            GIT_NAME: ${{ vars.GIT_NAME }}
+            GIT_COMMIT_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+        permissions:
+            contents: write
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v2
+
+            - name: Set up Node.js
+              uses: actions/setup-node@v2
+              with:
+                  node-version: '20'
+
+            - name: Run deploy script
+              run: npm run deploy
