@@ -1,22 +1,22 @@
 import {
     renderNodeAsMarkupEnd,
     renderNodeAsMarkupStart
-} from '../../utilities/render-node-as-markup';
+} from '@/utilities/render-node-as-markup';
 import {
     renderSpaceAttributesEnd,
     renderSpaceAttributesStart
-} from '../../utilities/render-space-attributes';
+} from '@/utilities/render-space-attributes';
 import {
     renderTextAttributesEnd,
     renderTextAttributesStart
-} from '../../utilities/render-text-attributes';
-import { CompilerError, type CompilerFormat } from '../types';
+} from '@/utilities/render-text-attributes';
+import { CompilerError, type CompilerFormat } from '@/compile/types';
 import {
     AnsieNodeImpl,
     type TextNodeBase,
     type SpaceNodeBase,
     type AnsieNode
-} from '../types';
+} from '@/compile/types';
 
 export class InlineTextNodeImpl
     extends AnsieNodeImpl

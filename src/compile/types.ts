@@ -1,4 +1,4 @@
-import type { AnsieStyle } from '../themes';
+import type { AnsieStyle } from '@/themes';
 
 /**
  * This file contains all the types used by the parser and compiler.

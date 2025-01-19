@@ -5,14 +5,13 @@
         "types": ["bun-types", "jest"],
         "target": "ESNext",
         "moduleDetection": "force",
+        "declaration": true,
         "jsx": "react-jsx", // support JSX
         "allowJs": true, // allow importing `.js` from `.ts`
-        "outDir": "./dist",
         // Bundler mode
         "moduleResolution": "bundler",
-        "declaration": true,
         "resolveJsonModule": true,
-        "noEmit": true,
+        "noEmit": false,
         // Best practices
         "strict": true,
         "stripInternal": true,
@@ -30,12 +29,5 @@
             "@/*": ["./src/*"]
         }
     },
-    "include": ["./src/**/*"],
-    "exclude": [
-        "./node_modules/**/*",
-        "./dist/**/*",
-        "./scripts/**/*",
-        "./configs/**/*",
-        "./tests/**/*"
-    ]
+    "include": ["./src/**/*"]
 }

@@ -1,7 +1,7 @@
 import parse from '../parse';
 import type { CompilerFormat } from './types';
 import { Compiler } from './Compiler';
-import themes, { AnsieTheme } from '../themes';
+import themes, { AnsieTheme } from '@/themes';
 
 /**
  * Compiles the markup into a string.
