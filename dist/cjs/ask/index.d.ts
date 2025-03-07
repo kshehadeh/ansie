@@ -1,4 +1,3 @@
-/// <reference types="node" />
 import { search } from '@inquirer/prompts';
 declare const _default: {
     text: typeof askSingleLineText;
@@ -36,15 +35,15 @@ declare function askSearch(
         }
     ) => ReturnType<Parameters<typeof search<string | undefined>>[0]['source']>
 ): Promise<string | undefined>;
-declare function askSelectEx(
+declare function askSelectEx<T = string>(
     prompt: string,
     choices: {
         name: string;
-        value: string;
+        value: T;
     }[],
-    defaultValue?: string,
+    defaultValue?: T,
     loop?: boolean
-): Promise<string | undefined>;
+): Promise<T | undefined>;
 declare function askSelect(
     prompt: string,
     choices: string[],

@@ -1623,7 +1623,7 @@ async function askSearch(prompt, searchFn) {
         source: searchFn
     });
 }
-async function askSelectEx(prompt, choices, defaultValue = '', loop = false) {
+async function askSelectEx(prompt, choices, defaultValue, loop = false) {
     if (
         defaultValue &&
         choices.find(c => c.value === defaultValue) === undefined
