@@ -101,10 +101,10 @@ async function askSearch(
     });
 }
 
-async function askSelectEx(
+async function askSelectEx<T = string>(
     prompt: string,
-    choices: { name: string; value: string }[],
-    defaultValue: string = '',
+    choices: { name: string; value: T }[],
+    defaultValue?: T,
     loop: boolean = false
 ) {
     if (
