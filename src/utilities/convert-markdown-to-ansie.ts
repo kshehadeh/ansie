@@ -59,7 +59,8 @@ class AnsieRenderer extends Renderer {
         return checkbox.checked ? '[x]' : '[ ]';
     }
     paragraph(paragraph: Tokens.Paragraph): string {
-        return this.simplified ? paragraph.text : `<p>${paragraph.text}</p>`;
+        const content = this.parser.parseInline(paragraph.tokens);
+        return this.simplified ? content : `<p>${content}</p>`;
     }
     table(): string {
         return '';
